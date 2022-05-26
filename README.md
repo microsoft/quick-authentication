@@ -1,14 +1,10 @@
-# Project
+# Microsoft Quick Authentication
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+Quick Authentication is a simple way for you to let your users sign up and sign in to your website using a Microsoft Account (MSA). You are likely familiar with similar offerings from other providers (e.g., “Sign in with ________”) and this offering provides that same capability to connect with people who use Microsoft products and cloud services, such as Outlook, OneDrive, Xbox LIVE, and Microsoft 365.
 
-As the maintainer of this project, please make a few updates:
+Backed by Microsoft’s robust Microsoft Account (MSA) service, Quick Authentication enables you to drop a small snippet of HTML (or JavaScript) into your site to create a sign-in button or prompt for MSA holders. When they click to sign in, our code will securely authenticate them and provide the necessary details to you to sign them in (or register them for a new account).
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+Microsoft Quick Authentication is a cross-browser solution, but delivers an enhanced user experience in Microsoft Edge when the user’s browser profile is an MSA. These Edge users—which includes users who have signed into Windows with their MSA—are shown a personalized sign in prompt that incorporates their account information.
 
 ## Contributing
 
