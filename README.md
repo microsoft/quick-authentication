@@ -6,6 +6,14 @@ Backed by Microsoft’s robust Microsoft Account (MSA) service, Quick Authentica
 
 Microsoft Quick Authentication is a cross-browser solution, but delivers an enhanced user experience in Microsoft Edge when the user’s browser profile is an MSA. These Edge users—which includes users who have signed into Windows with their MSA—are shown a personalized sign in prompt that incorporates their account information.
 
+# Sample Code
+
+We have put together a collection of demos that you can use to jumpstart your integration of Microsoft Quick Authentication:
+
+* [Markup-based Configuration](./demos/quick_auth_markup.html)
+* [JavaScript-based Configuration](./demos/quick_auth_js.html)
+* [Custom Integration](./demos/quick_auth_custom.html)
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a

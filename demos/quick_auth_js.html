@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Microsoft Auth sign-in with Javascript</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .signout-button {
+      background-color: #008CBA;
+      border: 1px solid black;
+      border-radius: 4px;
+      padding: 4px 32px;
+      color: white;
+      cursor: pointer;
+      transition-duration: 0.4s;
+    }
+
+    .signout-button:hover {
+      background-color: white;
+      color: #008CBA;
+    }
+
+    .signout-button:active {
+      background-color: #EEEEEE;
+      color: #008CBA;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- msauth SDK. Keep a single instance of top level page of your website -->
+  <script src="https://edge-auth.microsoft.com/js/ms_auth_client.js" async defer></script>
+  <!-- This id will be replaced with a sign-in button using Javascript below -->
+  <div id="ms-auth-button-holder"></div>
+  <button id="sign-out-button" class="signout-button hidden">Sign out</button>
+  <div id="signed-in-content" class="hidden">
+    <div>
+      <strong>User name: </strong><span id="user-name"></span>
+    </div>
+    <div>
+      <strong>Email: </strong><span id="email"></span>
+    </div>
+    <div>
+      <strong>id: </strong><span id="account-id"></span>
+    </div>
+    <div>
+      <img id="profile-image" src="" style="padding: 10px; width:100px; height:100px;" />
+    </div>
+  </div>
+  </div>
+  <script>
+    let signedInAccountInfo = null;
+    function hideElement(elementId) {
+      const elem = document.getElementById(elementId);
+      if (elem)
+        elem.classList.add('hidden');
+    }
+    function showElement(elementId) {
+      const elem = document.getElementById(elementId);
+      if (elem)
+        elem.classList.remove('hidden');
+    }
+    function showSignedInContent() {
+      showElement('signed-in-content');
+      showElement('sign-out-button')
+      hideElement('ms-auth-button-holder');
+    }
+    function showSignedOutContent() {
+      hideElement('signed-in-content');
+      hideElement('sign-out-button');
+      showElement('ms-auth-button-holder');
+    }
+    function handleMicrosoftSignInResponse(accountInfo) {
+      if (!accountInfo)
+        return;
+      signedInAccountInfo = accountInfo;
+      document.getElementById('user-name').innerHTML = accountInfo.fullName;
+      document.getElementById('email').innerHTML = accountInfo.username;
+      document.getElementById('account-id').innerHTML = accountInfo.id;
+      document.getElementById('profile-image').src = accountInfo.photoUrl;
+      showSignedInContent();
+    }
+    function signOut() {
+      ms.auth.signOut(signedInAccountInfo, function (result) {
+        if (result.result) {
+          signedInAccountInfo = null;
+          showSignedOutContent();
+        }
+      });
+    }
+    document.getElementById('sign-out-button').addEventListener('click', signOut);
+    window.addEventListener('load', function () {
+      // Replace client_id, with app-id for application you registered in https://portal.azure.com.
+      // Add other parameters are appropriate.
+      // Call `initialize` function only once.
+      ms.auth.initialize({
+        client_id: 'da83df46-4cf9-4b9c-8df7-ad10bbea9793',
+        callback: handleMicrosoftSignInResponse,
+      });
+      // This is using default options. Added options as appropriate.
+      const buttonConfig = {};
+      ms.auth.renderSignInButton(document.getElementById('ms-auth-button-holder'), buttonConfig);
+    });
+  </script>
+</body>
+
+</html>
