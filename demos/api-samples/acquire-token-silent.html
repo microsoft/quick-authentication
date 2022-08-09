@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    <h1><a href="./">Microsoft Quick Authentication samples</a></h1>
+    <h1><a href="../">Microsoft Quick Authentication samples</a></h1>
     <h2>Get MSAL account token silently example</h2>
 
     <div id="sample">
@@ -34,7 +34,7 @@
         const result = ms.auth.initialize({
           client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
           callback: userAuthenticated,
-          login_uri: "/demos/blank.html",
+          login_uri: "./",
         });
         if (result.result !== "success") {
           console.error("ms.auth.initialize failed: ", result);
