@@ -63,5 +63,5 @@
   // Update the login uri.
   const msAuthInitializeDiv = document.getElementById('ms-auth-initialize');
   if (msAuthInitializeDiv)
-    msAuthInitializeDiv.dataset.login_uri = window.location.origin + '/blank.html';
+    msAuthInitializeDiv.dataset.login_uri = './';
 })();
