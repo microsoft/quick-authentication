@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
+    <link rel="stylesheet" href="common.css" />
+    <title>Microsoft Quick Authentication demo</title>
+  </head>
+  <body>
+    <h1><a href="./">Microsoft Quick Authentication samples</a></h1>
+    <h2>Prompt example</h2>
+
+    <div id="sample">
+      <div class="prompt-notification"></div>
+      <div class="user-info"></div>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
+    ></script>
+    <script>
+      // This sample demonstrates how to programmatically display and
+      // control the enhanced Microsoft Edge sign-in prompt.
+      //
+      // This prompt only works with Microsoft Edge and if the user
+      // has an MSA account which is used to sign-in to Microsoft Edge.
+      //
+      // When those conditions are met, the sign-in experience is much
+      // more integrated in Microsoft Edge and the ms.auth.prompt method
+      // can be used to display the prompt when you want.
+      //
+      // Make sure to sign-out first for this sample to work.
+      // You can use the sign-out.html sample to do this.
+      window.onload = function () {
+        const result = ms.auth.initialize({
+          client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
+          callback: userAuthenticated,
+          login_uri: "/demos/blank.html",
+        });
+        if (result.result !== "success") {
+          console.error("ms.auth.initialize failed: ", result);
+        } else {
+          // As soon as the page loads and the library is initialized,
+          // we ask for the prompt to be displayed.
+          ms.auth.prompt("right", (notification) => {
+            const outputEl = document.querySelector(".prompt-notification");
+            const reason = notification.reason;
+
+            if (notification.type === "display" && !notification.displayed) {
+              switch (reason) {
+                case "another_prompt_running":
+                  outputEl.textContent = "Prompt not displayed: there's already another prompt";
+                  break;
+                case "browser_not_supported":
+                  outputEl.textContent = "Prompt not displayed: prompt is not supported in this browser";
+                  break;
+                case "in_cooldown_period":
+                  outputEl.textContent = "Prompt not displayed: prompt cooldown period";
+                  break;
+                case "non_msa_profile":
+                  outputEl.textContent = "Prompt not displayed: user does not have an MSA account";
+                  break;
+                case "unknown":
+                  outputEl.textContent = "Prompt not displayed: unknown error";
+                  break;
+              }
+            } else if (notification.type === "display" && notification.displayed) {
+              outputEl.textContent = "Prompt displayed";
+            } else if (notification.type === "skipped") {
+              switch (reason) {
+                case "user_cancel":
+                  outputEl.textContent = "Prompt skipped: the user canceled the prompt";
+                  break;
+                case "tap_outside":
+                  outputEl.textContent = "Prompt skipped: the user tapped outside the prompt";
+                  break;
+                case "unknown":
+                  outputEl.textContent = "Prompt skipped: Unknown error";
+                  break;
+              }
+            } else if (notification.type === "dismissed") {
+              switch (reason) {
+                case "credential_returned":
+                  outputEl.textContent = "Prompt dismissed: Got sign-in credentials";
+                  break;
+                case "cancel_called":
+                  outputEl.textContent = "Prompt dismissed: ms.auth.cancel called";
+                  break;
+              }
+            }
+          });
+        }
+      };
+
+      function userAuthenticated(accountInfo) {
+        console.log(accountInfo);
+
+        document.querySelector(".user-info").innerHTML = `
+          <p>User's avatar: <img src="${accountInfo.photoUrl}" alt="User avatar"></p>
+          <p>User's full name: <span>${accountInfo.fullName}</span></p>
+          <p>User's email address or phone number: <span>${accountInfo.username}</span></p>
+          <p>User's unique ID: <span>${accountInfo.id}</span></p>
+          `;
+      }
+    </script>
+  </body>
+</html>

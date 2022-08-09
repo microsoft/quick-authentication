@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
+    <link rel="stylesheet" href="common.css" />
+    <title>Microsoft Quick Authentication demo</title>
+  </head>
+  <body>
+    <h1><a href="./">Microsoft Quick Authentication samples</a></h1>
+    <h2>Start sign-in example</h2>
+
+    <div id="sample">
+      <button class="custom-button">Sign-in</button>
+      <div class="user-info"></div>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
+    ></script>
+    <script>
+      // This sample demonstrates how to programmatically start
+      // the sign-in flow, with your own button.
+      window.onload = function () {
+        const result = ms.auth.initialize({
+          client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
+          callback: userAuthenticated,
+          login_uri: "/demos/blank.html",
+        });
+        if (result.result !== "success") {
+          console.error("ms.auth.initialize failed: ", result);
+        } else {
+          document
+            .querySelector(".custom-button")
+            .addEventListener("click", () => {
+              // Once the sign-in flow succeeds, the callback
+              // defined during the initialization of the library
+              // will be executed.
+              ms.auth.startSignIn();
+            });
+        }
+      };
+
+      function userAuthenticated(accountInfo) {
+        console.log(accountInfo);
+
+        document.querySelector(".user-info").innerHTML = `
+          <p>User's avatar: <img src="${accountInfo.photoUrl}" alt="User avatar"></p>
+          <p>User's full name: <span>${accountInfo.fullName}</span></p>
+          <p>User's email address or phone number: <span>${accountInfo.username}</span></p>
+          <p>User's unique ID: <span>${accountInfo.id}</span></p>
+          `;
+      }
+    </script>
+  </body>
+</html>

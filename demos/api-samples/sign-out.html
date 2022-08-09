@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
+    <link rel="stylesheet" href="common.css" />
+    <title>Microsoft Quick Authentication demo</title>
+  </head>
+  <body>
+    <h1><a href="./">Microsoft Quick Authentication samples</a></h1>
+    <h2>Sign-out example</h2>
+
+    <div id="sample">
+      <!-- 
+        This sample uses HTML to init the library and render the 
+        sign-in button, and on sign-in displays a custom sign-out
+        button to demonstrate using the ms.auth.signOut method
+        to sign the current user out.
+       -->
+      <div
+        id="ms-auth-initialize"
+        data-client_id="da83df46-4cf9-4b9c-8df7-ad10bbea9793"
+        data-callback="userAuthenticated"
+        data-login_uri="/demos/blank.html"
+      ></div>
+      <div class="ms-auth-button"></div>
+      <div class="user-info"></div>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
+    ></script>
+    <script>
+      let currentAccountInfo = null;
+
+      function signOut() {
+        if (!currentAccountInfo) {
+          return;
+        }
+
+        ms.auth.signOut(currentAccountInfo.username, (result) => {
+          if (result.result) {
+            currentAccountInfo = null;
+            document.querySelector(".user-info").innerHTML = "";
+          } else {
+            console.error("Sign out failed, error: ", result.error);
+          }
+        });
+      }
+
+      function userAuthenticated(accountInfo) {
+        console.log(accountInfo);
+
+        currentAccountInfo = accountInfo;
+
+        document.querySelector(".user-info").innerHTML = `
+          <p>User's avatar: <img src="${accountInfo.photoUrl}" alt="User avatar"></p>
+          <p>User's full name: <span>${accountInfo.fullName}</span></p>
+          <p>User's email address or phone number: <span>${accountInfo.username}</span></p>
+          <p>User's unique ID: <span>${accountInfo.id}</span></p>
+          <p><button class="custom-button sign-out" onclick="signOut()">Sign out!</button></p>
+          `;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
+    <link rel="stylesheet" href="common.css" />
+    <title>Microsoft Quick Authentication demo</title>
+    <style>
+      #sign-in-button-placeholder {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><a href="./">Microsoft Quick Authentication samples</a></h1>
+    <h2>Customized sign-in button example</h2>
+
+    <div id="sample">
+      <div id="sign-in-button-placeholder">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="user-info"></div>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
+    ></script>
+    <script>
+      // This sample demonstrates how to customize the look and feel
+      // of the  sign-in button with JavaScript.
+      window.onload = function () {
+        const result = ms.auth.initialize({
+          client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
+          callback: userAuthenticated,
+          login_uri: "/demos/blank.html",
+        });
+        if (result.result !== "success") {
+          console.error("ms.auth.initialize failed: ", result);
+        } else {
+          ms.auth.renderSignInButton(
+            document.querySelectorAll("#sign-in-button-placeholder span")[0],
+            {
+              // Either "standard" or "icon"
+              type: "standard",
+              // Either "dark" or "light"
+              theme: "dark",
+              // "small", "medium" or "large"
+              size: "medium",
+              // "signin_with", "signup_with", "continue_with", or "signin"
+              text: "signin_with",
+              // "rectangle", "rounded", or "pill"
+              shape: "rectangular",
+              // Number in CSS pixels, between 200 and 600
+              width: 400,
+              // Number in CSS pixels, between 24 and 100
+              height: 50,
+              // Either "left" or "center"
+              logo_alignment: "left",
+            }
+          );
+
+          // Multiple buttons can co-exist on the page, with different
+          // configurations.
+          ms.auth.renderSignInButton(
+            document.querySelectorAll("#sign-in-button-placeholder span")[1],
+            {
+              type: "icon",
+              theme: "light",
+            }
+          );
+
+          ms.auth.renderSignInButton(
+            document.querySelectorAll("#sign-in-button-placeholder span")[2],
+            {
+              text: "continue_with",
+              shape: "pill",
+              width: 200,
+              height: 24,
+              logo_alignment: "center",
+            }
+          );
+        }
+      };
+
+      function userAuthenticated(accountInfo) {
+        console.log(accountInfo);
+
+        document.querySelector(".user-info").innerHTML = `
+          <p>User's avatar: <img src="${accountInfo.photoUrl}" alt="User avatar"></p>
+          <p>User's full name: <span>${accountInfo.fullName}</span></p>
+          <p>User's email address or phone number: <span>${accountInfo.username}</span></p>
+          <p>User's unique ID: <span>${accountInfo.id}</span></p>
+          `;
+      }
+    </script>
+  </body>
+</html>
