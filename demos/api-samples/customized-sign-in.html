@@ -39,8 +39,7 @@
       window.onload = function () {
         const result = ms.auth.initialize({
           client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
-          callback: userAuthenticated,
-          login_uri: "./",
+          callback: userAuthenticated
         });
         if (result.result !== "success") {
           console.error("ms.auth.initialize failed: ", result);

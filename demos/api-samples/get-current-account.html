@@ -30,8 +30,7 @@
       window.onload = function () {
         const result = ms.auth.initialize({
           client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
-          callback: userAuthenticated,
-          login_uri: "./",
+          callback: userAuthenticated
         });
         if (result.result !== "success") {
           console.error("ms.auth.initialize failed: ", result);
@@ -41,7 +40,14 @@
             {}
           );
 
-          ms.auth.startGetCurrentAccount(() => {});
+          ms.auth.startGetCurrentAccount(accountInfo => {
+            if (!accountInfo) {
+              console.log("The user is not signed in yet, can't get the current account");
+            } else {
+              console.log("The user is already signed in, display the account information");
+              userAuthenticated(accountInfo);
+            }
+          });
         }
       };
 
