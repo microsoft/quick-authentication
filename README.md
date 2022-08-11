@@ -8,7 +8,7 @@ Backed by Microsoft’s robust Microsoft Account (MSA) service, **Microsoft Quic
 
 ## Documentation
 
-To learn more about **Microsoft Quick Authentication**, see [Sign in Microsoft account users to a single-page app (SPA) with Microsoft Quick Authentication](https://docs.microsoft.com/azure/active-directory/develop/quick-authentication-how-to).
+To learn more about **Microsoft Quick Authentication**, see [Sign in Microsoft account users to a single-page app (SPA) with Microsoft Quick Authentication](./docs/quick-authentication-how-to.md).
 
 ## Sample Code
 
