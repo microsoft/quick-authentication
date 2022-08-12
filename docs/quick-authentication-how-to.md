@@ -2,8 +2,7 @@
 
 Microsoft Quick Authentication is a lightweight JavaScript library that makes it easier to add **Sign in with Microsoft** support to a single-page app (SPA). Quick Authentication uses the  Microsoft Authentication Library for JavaScript (MSAL.js) to handle authentication and authorization for users with personal Microsoft accounts from Outlook, OneDrive, Xbox Live, and Microsoft 365.
 
-> [!IMPORTANT]
-> Microsoft Quick Authentication [!INCLUDE [PREVIEW BOILERPLATE](https://github.com/MicrosoftDocs/azure-docs/blob/main/includes/active-directory-develop-preview.md)]
+> Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
 
@@ -13,13 +12,13 @@ All browsers support a configurable sign-in button and prompt provided by Quick 
 
 - **Standard sign-in experience** - Quick Authentication shows the _standard_ sign-in button and prompt to users not signed in to Microsoft Edge or that are using a another browser.
 
-    :::image type="content" source="media/large.png" alt-text="Standard sign-in button showing the Sign in with Microsoft text label":::
+  ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
 
-- **Enhanced sign-in experience** (Microsoft Edge _only_) - Microsoft Edge users who've signed-in to the browser with their personal Microsoft account are shown a personalized sign-in button and prompt (also customizable).
+- **Enhanced sign-in experience** (Microsoft Edge desktop platforms _only_) - Microsoft Edge users who've signed-in to the browser with their personal Microsoft account are shown a personalized sign-in button and prompt (also customizable).
 
-    In this public preview, [Microsoft Edge Beta](https://www.microsoftedgeinsider.com/download/beta) is required for the enhanced experience.
+    In this public preview, [Microsoft Edge](https://www.microsoft.com/en-us/edge?r=1) is required for the enhanced experience.
 
-    :::image type="content" source="media/large-known.png" alt-text="Enhanced sign-in button showing personalized text label":::
+  ![Enhanced sign-in button showing personalized text label](./media/large-known.png)
 
 ## Browser support
 
@@ -27,11 +26,11 @@ Unless otherwise noted, browser compatibility applies only to the two most recen
 
 | Browser             | Standard <br/>sign-in experience                                      | Enhanced <br/>sign-in experience                                      |
 |---------------------:|:----------------------------------------------------------------------:|:----------------------------------------------------------------------:|
-| Firefox             | :::image type="icon" source="media/common/yes.png" border="false"::: | :::image type="icon" source="media/common/no.png" border="false":::  |
-| Google Chrome       | :::image type="icon" source="media/common/yes.png" border="false"::: | :::image type="icon" source="media/common/no.png" border="false":::  |
-| Microsoft Edge      | :::image type="icon" source="media/common/yes.png" border="false"::: | :::image type="icon" source="media/common/no.png" border="false":::  |
-| Microsoft Edge Beta | :::image type="icon" source="media/common/yes.png" border="false"::: | :::image type="icon" source="media/common/yes.png" border="false"::: |
-| Safari              | :::image type="icon" source="media/common/yes.png" border="false"::: | :::image type="icon" source="media/common/no.png" border="false":::  |
+| Firefox             | ![yes](./media/common/yes.png) | ![no](./media/common/no.png)  |
+| Google Chrome       | ![yes](./media/common/yes.png) | ![no](./media/common/no.png)  |
+| Microsoft Edge (Windows, Mac, Linux)      | ![yes](./media/common/yes.png) | ![yes](./media/common/yes.png)  |
+| Microsoft Edge (Other platforms)     | ![yes](./media/common/yes.png) | ![no](./media/common/no.png)  |
+| Safari              | ![yes](./media/common/yes.png) | ![no](./media/common/no.png)  |
 
 ## Register your application
 
@@ -149,7 +148,7 @@ Use this approach if you don't have the ability to modify the application's HTML
 
     You'll need to identify the DOM node that you want the library to insert the button into. If DOM node is `null` or `undefined` because it wasn't found, then this API will throw exception.
 
-    Quick Authentication allows you to [customize the look and feel of the button](./quick-authentication-reference.md) to better align with your application's design. We'll discuss more about customizing the look and feel of the button, below.
+    Quick Authentication allows you to [customize the look and feel of the button](./quick-authentication-reference.md#customizing-the-sign-in-button) to better align with your application's design. We'll discuss more about customizing the look and feel of the button, below.
 
 ## Responding to authentication events
 
@@ -204,7 +203,7 @@ function accountCallback(account_info) {
 ms.auth.startGetCurrentAccount(accountCallback);
 ```
 
-When called, `startGetCurrentAccount()` will trigger the callback and pass in a value. If the user is signed-in, the argument will be an AccountInfo object (see [above](#responding-to-authentication-events)). If the user isn't signed-in, the argument will be `null`.
+When called, `startGetCurrentAccount()` will trigger the callback and pass in a value. If the user is signed-in, the argument will be an [AccountInfo](./quick-authentication-reference.md#data-type-accountinfo) object. If the user isn't signed-in, the argument will be `null`.
 
 ## Customizing the Quick Authentication experience
 
@@ -286,7 +285,7 @@ Call these methods in the following order to get an access token:
 
 To help in troubleshooting and debugging errors in your apps that use Microsoft Quick Authentication, enable event logging.
 
-To enable Quick Authentication event logging, add the `autoLogEvents` query parameter when you include the _ms\_auth\_client.min.js_ script.
+To enable Quick Authentication event logging, add the [`autoLogEvents`](./quick-authentication-reference.md#logging-with-autologevents) query parameter when you include the _ms\_auth\_client.min.js_ script.
 
 ```html
 <!-- Enable logging by adding "autoLogEvents" query param -->
@@ -295,7 +294,7 @@ To enable Quick Authentication event logging, add the `autoLogEvents` query para
         ></script>
 ```
 
-To also enable logging for MSAL.js, add the `logMsalEvents` query parameter in addition to `autoLogEvents`:
+To also enable logging for MSAL.js, add the [`logMsalEvents`](./quick-authentication-reference.md#msal-logging-with-logmsalevents) query parameter in addition to `autoLogEvents`:
 
 ```html
 <!-- Enable MSAL.js logging by adding both "autoLogEvents" and "logMsalEvents" query params -->

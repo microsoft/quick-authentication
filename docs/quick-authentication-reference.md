@@ -4,8 +4,7 @@ These settings and APIs allow you to customize the appearance and behavior of th
 
 For information about how to use Quick Authentication, see the [Sign in Microsoft account users to a single-page app (SPA) with Microsoft Quick Authentication](./quick-authentication-how-to.md).
 
-> [!IMPORTANT]
-> Microsoft Quick Authentication [!INCLUDE [PREVIEW BOILERPLATE](https://github.com/MicrosoftDocs/azure-docs/blob/main/includes/active-directory-develop-preview.md)]
+> Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## Logging with autoLogEvents
 
@@ -14,6 +13,20 @@ The `autoLogEvents` query parameter supports these log level values:
 - `0`: Log only error events.
 - `1`: Log only error and warning events.
 - `2`: Log error, warning and information events.
+
+## MSAL Logging with logMsalEvents
+
+Quick Authentication is built on top of [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser). MSAL.js logging to console can also be enabled using `logMsalEvents` query parameter.
+
+The `logMsalEvents` query parameter supports MSAL [log levels](https://azuread.github.io/microsoft-authentication-library-for-js/ref/enums/_azure_msal_common.loglevel.html):
+
+- `0`: Error.
+- `1`: Warning.
+- `2`: Info
+- `3`: Verbose.
+- `4`: Trace.
+
+`autoLogEvents` needs to be set (can be any value) for `logMsalEvents` take effect.
 
 ## Customizing the sign-in prompt
 
@@ -49,7 +62,7 @@ Whether to close the prompt when a user moves focus out of the prompt.
 
 ### `prompt_position`
 
-Controls the rendering location of the prompt in Microsoft Edge. Choosing "right" will anchor it to the user's avatar button.
+Controls the rendering location of the prompt in Microsoft Edge. Choosing "right" will anchor it to the user's Edge profile's avatar button.
 
 ## Customizing the sign-in button
 
