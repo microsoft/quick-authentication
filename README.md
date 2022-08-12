@@ -14,7 +14,7 @@ To learn more about **Microsoft Quick Authentication**, see [Sign in Microsoft a
 
 This repository contains a collection of demos that you can use to start your integration of **Microsoft Quick Authentication**.
 
-[Click here to access the live demos](https://microsoft.github.io/quick-authentication/demos/), or browse the source code in the [demos folder](./demos).
+[Click here to access the live demos](https://quickauth.azurewebsites.net/), or browse the source code in the [demos folder](./demos).
 
 ## Contributing
 

@@ -63,5 +63,5 @@
   // Update the login uri.
   const msAuthInitializeDiv = document.getElementById('ms-auth-initialize');
   if (msAuthInitializeDiv)
-    // msAuthInitializeDiv.dataset.login_uri = 'https://microsoft.github.io/quick-authentication/demos/blank.html';
+    msAuthInitializeDiv.dataset.login_uri = 'https://quickauth.azurewebsites.net/blank.html';
 })();

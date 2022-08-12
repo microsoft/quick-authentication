@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/dccfcfb7-2bc4-41ee-8a4d-96f2f9ec964f/microsoft.web/sites/subscriptions/dccfcfb7-2bc4-41ee-8a4d-96f2f9ec964f/resourceGroups/IdentityDemos/providers/Microsoft.Web/sites/QuickAuth",
+  "appService.deploySubpath": "demos"
+}
