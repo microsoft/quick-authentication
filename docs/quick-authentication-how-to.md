@@ -20,6 +20,8 @@ All browsers support a configurable sign-in button and prompt provided by Quick 
 
   ![Enhanced sign-in button showing personalized text label](./media/large-known.png)
 
+  Here's an example of sign-in prompt in MSA profile in Edge: ![Enhanced sign-in prompt](./media/signin-prompt.png)
+
 ## Browser support
 
 Unless otherwise noted, browser compatibility applies only to the two most recent (current and previous) stable supported versions of the specified browser.
