@@ -42,6 +42,7 @@ code {
   margin: 1rem 0 0 0;
   align-self: stretch;
   border-radius: .25rem;
+  word-break: break-all;
 }
 
 .user-info:empty {

@@ -157,18 +157,19 @@ Use this approach if you don't have the ability to modify the application's HTML
 When an authentication event occurs, the Quick Authentication library calls the `callback` function you specified in the configuration, passing in an [AccountInfo](./quick-authentication-reference.md#data-type-accountinfo) object containing the user's account details as a parameter:
 
 ```javascript
-function myCallback(account_info) {
-  console.log(account_info);
+function myCallback(sign_in_account_info) {
+  console.log(sign_in_account_info);
   // Your sign in/up logic
 }
 ```
 
-The AccountInfo object includes the following properties:
+The [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinaccountinfo) object includes the following properties:
 
 - `fullName` - the user's full name
 - `username` - the user's email address or phone number
 - `photoUrl` - a base64-encoded dataURI representing the user's avatar
 - `id` - a GUID that is unique across all Microsoft accounts
+- `idToken` - [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 

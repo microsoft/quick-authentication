@@ -132,7 +132,7 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 |-------------------------|:------------------------------------------------------------------------------|:-----------------------------:|----------|-------------------------------------------------------------------------------------------------------|
 | `client_id`             | **Application (client) ID**                                                   | (no default value)            | Yes      | See [Register your application](quick-authentication-how-to.md#register-your-application).   |
 | `login_uri`             | **Redirect URI**                                                              | _https://<domain>/blank.html_ | No       | See [Register your application](quick-authentication-how-to.md#register-your-application).                                                                                                      |
-| `callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [AccountInfo](#data-type-accountinfo) object. |
+| `callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [SignInAccountInfo](#data-type-signinaccountinfo) object. |
 | `auto_prompt`           | `true` or `false`                                                             | `true`                        | No       |                                                                                                       |
 | `auto_sign_in`          | `true` or `false`                                                             | `false`                       | No       |                                                                                                       |
 | `context`               | "signin"<br/> "signup"<br/> "use"                                             | "signin"                      | No       |                                                                                                       |
@@ -148,6 +148,19 @@ This data type contains following values.
 | `username` | User's email or phone number |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
 | `id` | a GUID that is unique across all Microsoft accounts |
+
+We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
+
+## Data Type: SignInAccountInfo
+
+This data type contains all the fields of [AccountInfo](#data-type-accountinfo) and a new field `idToken`.
+| Property | Description |
+|----------|---------|
+| `fullName` | User's full name |
+| `username` | User's email or phone number |
+| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
+| `id` | a GUID that is unique across all Microsoft accounts |
+| `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process |
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
