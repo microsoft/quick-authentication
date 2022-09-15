@@ -1,0 +1,6 @@
+framework module MSQASignIn {
+  umbrella header "MSQASignIn.h"
+
+  export *
+  module * { export * }
+}
