@@ -166,6 +166,8 @@ function myCallback(sign_in_account_info) {
 The [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinaccountinfo) object includes the following properties:
 
 - `fullName` - the user's full name
+- `surname` - the user's surname
+- `givenName` - the user's given name
 - `username` - the user's email address or phone number
 - `photoUrl` - a base64-encoded dataURI representing the user's avatar
 - `id` - a GUID that is unique across all Microsoft accounts
