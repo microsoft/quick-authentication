@@ -145,6 +145,8 @@ This data type contains following values.
 | Property | Description |
 |----------|---------|
 | `fullName` | User's full name |
+| `surname` | User's surname |
+| `givenName` | User's given name |
 | `username` | User's email or phone number |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
 | `id` | a GUID that is unique across all Microsoft accounts |
