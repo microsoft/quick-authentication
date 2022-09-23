@@ -169,8 +169,10 @@ The [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinacco
 - `surname` - the user's surname
 - `givenName` - the user's given name
 - `username` - the user's email address or phone number
+- `email` - the user's email
 - `photoUrl` - a base64-encoded dataURI representing the user's avatar
 - `id` - a GUID that is unique across all Microsoft accounts
+- `homeAccountId` - the user's home account identifier which is used by MSAL
 - `idToken` - [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
@@ -180,7 +182,7 @@ We recommend using the `id` as a key, rather than the email address, because an 
 Use `ms.auth.signOut()` to sign out a user:
 
 ```javascript
-ms.auth.signOut(username, function (result) {
+ms.auth.signOut(homeAccountId, function (result) {
   if (result.result) {
     // Finish the logout process in your application.
   } else {
@@ -189,7 +191,7 @@ ms.auth.signOut(username, function (result) {
 });
 ```
 
-You'll need to pass in `username` field of `AccountInfo` object you received as part of the authentication event and a callback to receive the result of the `signOut()` call. The argument returned to the callback will be an object with the following structure:
+You'll need to pass in `homeAccountId` field of `AccountInfo` object you received as part of the authentication event and a callback to receive the result of the `signOut()` call. The argument returned to the callback will be an object with the following structure:
 
 - `result` - `true` if the user was signed out, `false` if not
 - `error` - if `result==false`, will be an object with a `message` property explaining the error
