@@ -1,42 +1,43 @@
 # Sign-in users with a Microsoft Account to Android apps using Microsoft Quick Authentication
 
 
-On Anrdoid, Microsoft Quick Authentication offers a library that makes it easier to add **Sign in with Microsoft** support to native apps. Quick Authentication uses the  Microsoft Authentication Library for JavaScript (MSAL for Android) to handle authentication and authorization for users with personal Microsoft accounts from Outlook, OneDrive, Xbox Live, and Microsoft 365.
+On Android, Microsoft Quick Authentication offers a library that makes it easier to add **Sign in with Microsoft** support to native apps. Quick Authentication uses the Microsoft Authentication Library for JavaScript (MSAL for Android) to handle authentication and authorization for users with personal Microsoft accounts from Outlook, OneDrive, Xbox Live, and Microsoft 365.
 
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
-[**TODO**]
+Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your application that will take the user through to sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
 
-## API summary
+To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
+- First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
+- Declare a dependency on the Quick Authentication SDK. 
+- Add an intent filter for Quick Authentication to your app manifest. 
+- Create a Quick Authentication sign-in client object ([MSQASignInClient](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInClient.html)) with the proper configuration.
+- Add an Quick Authentication sign-in button somewhere in your application's layout xml.
+- Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
 
-[**TODO**] consider moving somewhere else
+Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with Quick Authentication for the web:
 
-We expose the following APIs of [MSQASignInClient](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInClient.html)  that offered to the developers. Refer to 
-- signIn() - Starts the process of signing in the user with MSA.
-- signOut() - Signs the user out of this mobile.
-- getCurrentAccount() - gets the current account info for the user. It will return [AccountInfo]().
-- acquireTokenSilent() - Perform acquire token silent call.
-- acquireToken() - Perform acquire token interactively, will pop-up web UI.
-- create() - Create [MSQASignInClient](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInClient.html) instance object.
-- setLogLevel() - Set the log level for diagnostic purpose.
-- setEnableLogcatLog() - Set whether to allow android logcat logging, by default, the sdk disables it.
-setExternalLogger() - Set the custom logger.
+[**TODO**: capture and insert image from actual phone]
+
+  ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
+
+Note that at this time, the personalization of the user experience available with Quick Authentication for the web is not available to Android native apps. However, your users will still be able to sign-in using the button shown above, and benefit from SSO in some circumstances.
 
 ## Registering your application
-If you have already registered an application for a single-page application, you can reuse the same application registration. To find that registration go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration on the list. This will open a page describing your application registration.
+If you have already registered a single-page web application, you can reuse the same application registration. To find that registration go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration in the list. This will open a page describing your application registration.
 
  If you have not yet registered an application or wish to use a new registration, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register your application.
 
-Now that you have already created a application registration, you extend it to Android as follow. On the Azure page describing your app registration:
-1. Click on the "Authentication" tab on the left of that page
-3. Click on "Add Platform"
-4. Select "Android"
-5. Enter the package name. Your app's Package Name can be found in the Android Manifest.
-6. Using the command line indicated under the "Signature hash" section, generate a signature hash
-7. Click "Configure"
+Now that you have created a application registration, you can extend it to Android as follows. On the Azure page describing your app registration:
+1. Open the *Authentication* tab on the left of that page
+3. Click *Add Platform*
+4. Select *Android*
+5. Enter the package name. Your app's package name can be found in the Android Manifest for your app.
+6. Using the command line indicated under the *Signature hash* section, generate a signature hash
+7. Click *Configure*
 
-**TODO:** [Screen shot]
+[**TODO:** Add screen shots to list above]
 
 ## Declaring a dependency on Quick Authentication
 Add the following to your app's `build.gradle`
@@ -55,24 +56,21 @@ maven {
 ## Creating a configuration file 
 The configuration file is necessary to initialize the Quick Authentication SDK and underlying MSAL library. Details on this file can be found here: [MSAL Configuration](https://docs.microsoft.com/azure/active-directory/develop/msal-configuration)
 
-It is a JSON file which can be obtained from the Azure Portal. Go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration on the list. This opens the page for your application registration. Click on *"Authentication"* on the left bar".
+It is a JSON file which can be obtained from the Azure Portal with a few additions. Go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration in the list. On the page for your application registration, click *Authentication* on the left bar".
 
  ![msal configuration page](./media/msal-configuration.png)
 
-
-In the Authentication page, click the View button on the row of your redirect URL to open this page:
+In the Authentication page, click the *View* button for your redirect URL to open this page:
 
  ![Android configuration page](./media/android-configuration.png)
 
 Copy the MSAL Configuration JSON script and make the following edits:
 
-- Enter the redirect URI. You can get your app's redirect URI from the Azure Application registration page. For more information on common redirect uri issues please refer to [this FAQ](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/MSAL-FAQ#redirect-uri-issues).
-
+- Enter the redirect URI. You can get your app's redirect URI from the Azure application registration page. For more information on common redirect URI issues please refer to [this FAQ](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/MSAL-FAQ#redirect-uri-issues).
  - Below the redirect URI please paste:
  ``` java
  "account_mode" : "SINGLE",
  ```
-
 Your configuration JSON script should resemble this example:
 ```json 
 {
@@ -93,10 +91,10 @@ Your configuration JSON script should resemble this example:
 }
 ```
 
-Then, save this JSON as a "raw" resource file in your project resources. You will be able to refer to this using the generated resource identifier. You will need it to initialize [MSQASignInClient](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInClient.html)
+Then, save this JSON script as a "raw" resource file in your project resources. You will be able to refer to it using the generated resource identifier. You will need it to initialize [MSQASignInClient](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInClient.html)
 
 ## Configuring an intent filter
-Next, configure an intent filder in the Android Manifest for your application, using the same redirect URI you used in the Configuration JSON script:
+Next, configure an intent filter in the Android Manifest for your application, using the same redirect URI you used for the Configuration JSON script above:
 ```xml
 <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
     <intent-filter>
@@ -111,28 +109,17 @@ Next, configure an intent filder in the Android Manifest for your application, u
 </activity>
 ```
 ## Creating MSQASignInClient
-
-`MSQASignInClient` is the main object in the Quick Authentication SDK. It gives you access to all functionality. To create it, you must first create a instance of `MSQASignInOptions`, which holds the specific options you want to use for `MSQASignInClient`. The options are described below and set by "setter" methods that can chained in the manner showed in the example below:
+`MSQASignInClient` is the main object in the Quick Authentication SDK. It gives you access to all functionality. To create it, you must first create a instance of `MSQASignInOptions`, which holds specific options you want to use to create `MSQASignInClient`. The example below creates an instance of `MSQASignInOptions` holding the JSON configuration file you created above. Put this code in your sign-in activity's `onCreate` method.
 ```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
         .setConfigResourceId(R.raw.auth_config_single_account)
-        .setEnableLogcatLog(true)
-        .setLogLevel(LogLevel.VERBOSE)
-        .setExternalLogger((logLevel, message) -> {
-            // get log message here
-            ```
-        })
         .build();
 ```
-
 | Option setter | Description |
 |---|---|
-| setConfigResourceId(int configResourceId) |	The resource id is the configuration file which you have created in section [Create a configuration file](). |
-| setEnableLogcatLog(boolean enableLogcatLog)	| True: enable the Android logcat logging. <br>False: disable the Android logcat logging. |
-| setExternalLogger(@NonNull  ILogger externalLogger)	| Configures external logging to configure a callback that the sdk will use to pass each log message. |
-setLogLevel(@LogLevel int logLevel) | Sets the log level for diagnostic purpose. By default, the sdk enables the verbose level logging. |
-|build() |	Returns an newly created instance of MSQASignInOptions |
+| setConfigResourceId |	Sets the resource id of the configuration file you created in section [Create a configuration file](). |
 
+Other options can be used, for example to configure logging. Refer to the [reference documentation](./quick-authentication-android-reference.md) [**TODO** or section on Logging below?] for additional options. 
 
 Then to create `MSQASignClient`, use its static `Create` method:
 ```java
@@ -172,55 +159,6 @@ MSQASignInClient.create(context,
                 // handle error
             }
         });
-```
-## Configuring logging
-**[TODO]** consider moving to reference
-
-To facilitate debugging you have the following options to configure logging using the following methods of `MSQASignInClient`
-
-### Method: setLogLevel
-```java
-public static void setLogLevel(@LogLevel int logLevel);
-```
-Sets the log level for diagnostic purpose. By default, the sdk sets the logging level to 'verbose'.
-| Parameters | Description | 
-|--|--|
-| logLevel| Log level int enum |
-
-Code example:
-```java
-MSQASignInClient.setLogLevel(LogLevel.VERBOSE);
-```
-### Method: setEnableLogcatLog
-```java
-public static void setEnableLogcatLog(boolean enableLogcatLog);
-```
-Enables or disables Android logcat logging. By default, the sdk disables it.
-Parameters | Description |
-|--|--|
-|enableLogcatLog | If true, enables Android logcat logging.
-
-Code example:  
-```java
-MSQASignInClient.setEnableLogcatLog(true);
-```
-### Method: setExternalLogger
-Configures external logging by providing a callback that the sdk will use to pass each log message.
-```java
-public static void setExternalLogger(@NonNull ILogger externalLogger);
-```
-|Parameters| Description|
-|--|--|
-| externalLogger| The reference to the ILogger that can output the logs to the designated places.
-
-Code example:  
-```java
-MSQASignInClient.setExternalLogger(new ILogger() {
-    @Override
-    public void log(@NonNull int logLevel, @Nullable String message) {
-	  // handle log message
-    }
-});
 ```
 
 ## Using a Sign-in Button
@@ -287,7 +225,7 @@ The returned `AccountInfo` interface, returned by the listener, provides the fol
 
 
 ## Signing out
-You can request to sign the user out using the following mehtod of MSQASignInClient
+You can request to sign the user out using the following method of MSQASignInClient
 
 ```java
 void signOut(@NonNull OnCompleteListener<Boolean> listener);
@@ -314,3 +252,28 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
     }
 });
 ```
+
+Use these as follows
+## Logging
+To facilitate debugging you have the following options to configure logging using "setter" methods of `MSQASignInOptionsBuilder` that can chained in the manner showed in the example below when creating an instance of `MSQASignInOptions`:
+```java
+MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
+        .setConfigResourceId(R.raw.auth_config_single_account)
+        .setEnableLogcatLog(true)
+        .setLogLevel(LogLevel.VERBOSE)
+        .setExternalLogger((logLevel, message) -> {
+            // get log message here
+            ```
+        })
+        .build();
+```
+
+| Option setter | Description |
+|---|---|
+setLogLevel(@LogLevel int logLevel) | Sets the log level for diagnostic purpose. By default, the sdk enables the verbose level logging. |
+| setEnableLogcatLog(boolean enableLogcatLog)	| True: enable the Android logcat logging. <br>False: disable the Android logcat logging. |
+| setExternalLogger(@NonNull  ILogger externalLogger)	| Configures external logging to configure a callback that the sdk will use to pass each log message. |
+
+## Next steps
+
+For more details about prompt configuration and API reference, see [Microsoft Quick Authentication configuration](./quick-authentication-android-reference.md).
