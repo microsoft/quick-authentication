@@ -253,12 +253,12 @@ public void setSignInCallback (
 ```
 | Parameters | Description |
 |--|--|
-| @NonNull  activity| Activity that is used as the parent activity for launching sign page.
-|@NoNull client| A sign-in client object, provides sign-in, sign-out etc.
-|@NoNull listener|  A callback to be invoked when sign-in completed, canceled or failed.
-|Returns| none
+| @NonNull  activity | Activity that is used as the parent activity for launching sign page.
+| @NoNull client | A sign-in client object, provides sign-in, sign-out etc.
+| @NoNull listener |  A callback to be invoked when sign-in completed, canceled or failed.
+| Returns | none
 
-If sign-in success, listener will be invoked, and first parameter will return account info and error parameter will be null. If is failed, listener will be invoked, accountInfo will be null and error will contain error information.
+If sign-in succeeds, `listener` will be invoked, and first parameter will return the account info and the `error` parameter will be null. If it fails, `accountInfo` will be null and `error` will contain the error.
 
 Code example:
 ```
@@ -274,4 +274,43 @@ signInButton.setSignInCallback(activity, client,
                 }
             }
         });
+```
+The returned `AccountInfo` interface, returned by the listener, provides the following methods for getting at the returned user account information:
+
+| Method | Description
+|--|--|
+| @Nullable String getFullName() | full name |
+| @Nullable String getUsername() | user email or phone |
+| @Nullable String getId() | Unique account/user id |
+| @Nullable String getIdToken() | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process|
+| @Nullable String getBase64Photo() | User account picture (jpeg, png, etc.) as a base64 encoded string.
+
+
+## Signing out
+You can request to sign the user out using the following mehtod of MSQASignInClient
+
+```
+void signOut(@NonNull OnCompleteListener<Boolean> listener);
+```
+
+| Parameters | Description |
+|--|--|
+| @NonNull listener | A callback to be invoked when sign out finishes and will return sign-out result.|
+| Returns | none |
+
+If sign-out succeeds, `listener` will be invoked and the first parameter will return true, the second parameter will return null. If it fails, the first parameter will be false and `error` will contain the error.
+
+Code example:
+```
+signInClient.signOut(new OnCompleteListener<Boolean>() {
+    @Override
+    public void onComplete(@Nullable Boolean signOutSuccess,
+                           @Nullable MSQAException error) {
+        if (signOutSuccess) {
+            // sign out success
+        } else {
+            // handle error
+        }
+    }
+});
 ```
