@@ -40,13 +40,13 @@ Now that you have already created a application registration, you extend it to A
 
 ## Declaring a dependency on Quick Authentication
 Add the following to your app's `build.gradle`
-```
+```java
 dependencies {
     implementation 'com.microsoft.quickauth:signin:1.0.0'
 }
 ```
 And add the following to the *repositories* section in your `build.gradle`
-```
+```java
 mavenCentral()
 maven { 
     url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
@@ -69,12 +69,12 @@ Copy the MSAL Configuration JSON script and make the following edits:
 - Enter the redirect URI. You can get your app's redirect URI from the Azure Application registration page. For more information on common redirect uri issues please refer to [this FAQ](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/MSAL-FAQ#redirect-uri-issues).
 
  - Below the redirect URI please paste:
- ```
+ ``` java
  "account_mode" : "SINGLE",
  ```
 
 Your configuration JSON script should resemble this example:
-```
+```json 
 {
   "client_id": "<YOUR_CLIENT_ID>",
   "authorization_user_agent": "DEFAULT",
@@ -97,7 +97,7 @@ Then, save this JSON as a "raw" resource file in your project resources. You wil
 
 ## Configuring an intent filter
 Next, configure an intent filder in the Android Manifest for your application, using the same redirect URI you used in the Configuration JSON script:
-```
+```xml
 <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
     <intent-filter>
         <action android:name="android.intent.action.VIEW" />
@@ -113,7 +113,7 @@ Next, configure an intent filder in the Android Manifest for your application, u
 ## Creating MSQASignInClient
 
 `MSQASignInClient` is the main object in the Quick Authentication SDK. It gives you access to all functionality. To create it, you must first create a instance of `MSQASignInOptions`, which holds the specific options you want to use for `MSQASignInClient`. The options are described below and set by "setter" methods that can chained in the manner showed in the example below:
-```
+```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
         .setConfigResourceId(R.raw.auth_config_single_account)
         .setEnableLogcatLog(true)
@@ -135,7 +135,7 @@ setLogLevel(@LogLevel int logLevel) | Sets the log level for diagnostic purpose.
 
 
 Then to create `MSQASignClient`, use its static `Create` method:
-```
+```java
 public static void create(@NonNull Context context,
                           @NonNull MQASignInOptions options,
                           @NonNull ClientCreatedListener listener);
@@ -151,7 +151,7 @@ Note that if the "raw" resource file does not exist, listener’s onError will g
 If the creation completes successfully, `listener.onCreated` will get called and return the newly created instance of `MSQASignInClient`.
 
 Here is an example of calling the `create` method:
-```
+```java
 MSQASignInClient.create(context,
         new MQASignInOptions.Builder()
                 .setConfigResourceId(R.raw.auth_config_single_account)
@@ -179,7 +179,7 @@ MSQASignInClient.create(context,
 To facilitate debugging you have the following options to configure logging using the following methods of `MSQASignInClient`
 
 ### Method: setLogLevel
-```
+```java
 public static void setLogLevel(@LogLevel int logLevel);
 ```
 Sets the log level for diagnostic purpose. By default, the sdk sets the logging level to 'verbose'.
@@ -188,11 +188,11 @@ Sets the log level for diagnostic purpose. By default, the sdk sets the logging 
 | logLevel| Log level int enum |
 
 Code example:
-```
+```java
 MSQASignInClient.setLogLevel(LogLevel.VERBOSE);
 ```
 ### Method: setEnableLogcatLog
-```
+```java
 public static void setEnableLogcatLog(boolean enableLogcatLog);
 ```
 Enables or disables Android logcat logging. By default, the sdk disables it.
@@ -201,12 +201,12 @@ Parameters | Description |
 |enableLogcatLog | If true, enables Android logcat logging.
 
 Code example:  
-```
+```java
 MSQASignInClient.setEnableLogcatLog(true);
 ```
 ### Method: setExternalLogger
 Configures external logging by providing a callback that the sdk will use to pass each log message.
-```
+```java
 public static void setExternalLogger(@NonNull ILogger externalLogger);
 ```
 |Parameters| Description|
@@ -214,7 +214,7 @@ public static void setExternalLogger(@NonNull ILogger externalLogger);
 | externalLogger| The reference to the ILogger that can output the logs to the designated places.
 
 Code example:  
-```
+```java
 MSQASignInClient.setExternalLogger(new ILogger() {
     @Override
     public void log(@NonNull int logLevel, @Nullable String message) {
@@ -226,7 +226,7 @@ MSQASignInClient.setExternalLogger(new ILogger() {
 ## Using a Sign-in Button
 The easiest way to implement the sign-in flow with Quick Authentication is to use a pre-build Sign-in Button. Simply insert the following in your application's layout xml in the desired place: 
 
-```
+```java
 <com.microsoft.quick.auth.signin.view.MSQASignInButton
   android:id="@+id/sign_in_button"
 ```
@@ -238,14 +238,14 @@ The look and feel of this button can be modified in a variety of ways by either 
 
 To programmatically set specific attributes on the button or to set the callback to be called when sign-in completes (see next section), you will need to retrieve the `MSQASignInButton` view object. The easiest is to assign an id to your button in the layout xml and find its view by id as follows:
 
-```
+```java
 MSQASignInButton signInButton = findViewById(R.id.sign_in_button);/>
 ```
 
 ## Handling the authentication events
 As described above, the Sign-in Button is functional and clicking it will run the sign-in user experience. However, in your application you need a way to know that sign-in completed successfully and to retreive properties of the account, such as username, email address, full name, and photo. The following method of [MSQASignInButton](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/view/MSQASignInButton.html) allows to set that callback:
 
-```
+```java
 public void setSignInCallback (
         @NonNull Activity activity,
         @NonNull MSQASignInClient client,
@@ -261,7 +261,7 @@ public void setSignInCallback (
 If sign-in succeeds, `listener` will be invoked, and first parameter will return the account info and the `error` parameter will be null. If it fails, `accountInfo` will be null and `error` will contain the error.
 
 Code example:
-```
+```java
 signInButton.setSignInCallback(activity, client,
         new OnCompleteListener<AccountInfo>() {
             @Override
@@ -289,7 +289,7 @@ The returned `AccountInfo` interface, returned by the listener, provides the fol
 ## Signing out
 You can request to sign the user out using the following mehtod of MSQASignInClient
 
-```
+```java
 void signOut(@NonNull OnCompleteListener<Boolean> listener);
 ```
 
@@ -301,7 +301,7 @@ void signOut(@NonNull OnCompleteListener<Boolean> listener);
 If sign-out succeeds, `listener` will be invoked and the first parameter will return true, the second parameter will return null. If it fails, the first parameter will be false and `error` will contain the error.
 
 Code example:
-```
+```java
 signInClient.signOut(new OnCompleteListener<Boolean>() {
     @Override
     public void onComplete(@Nullable Boolean signOutSuccess,
