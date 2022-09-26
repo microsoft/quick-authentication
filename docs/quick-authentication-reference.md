@@ -148,7 +148,7 @@ This data type contains following values.
 | `surname` | User's surname |
 | `givenName` | User's given name |
 | `username` | User's email or phone number |
-| `email` | User's email |
+| `email` | User's email address |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
 | `id` | a GUID that is unique across all Microsoft accounts |
 | `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
@@ -164,7 +164,7 @@ This data type contains all the fields of [AccountInfo](#data-type-accountinfo) 
 | `surname` | the user's surname |
 | `givenName` | the user's given name |
 | `username` | User's email or phone number |
-| `email` | User's email |
+| `email` | User's email address |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
 | `id` | a GUID that is unique across all Microsoft accounts |
 | `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |

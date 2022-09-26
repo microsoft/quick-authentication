@@ -169,7 +169,7 @@ The [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinacco
 - `surname` - the user's surname
 - `givenName` - the user's given name
 - `username` - the user's email address or phone number
-- `email` - the user's email
+- `email` - the user's email address
 - `photoUrl` - a base64-encoded dataURI representing the user's avatar
 - `id` - a GUID that is unique across all Microsoft accounts
 - `homeAccountId` - the user's home account identifier which is used by MSAL
