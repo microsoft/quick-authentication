@@ -109,7 +109,7 @@ Next, configure an intent filter in the Android Manifest for your application, u
 </activity>
 ```
 ## Creating MSQASignInClient
-`MSQASignInClient` is the main object in the Quick Authentication SDK. It gives you access to all functionality. To create it, you must first create a instance of `MSQASignInOptions`, which holds specific options you want to use to create `MSQASignInClient`. The example below creates an instance of `MSQASignInOptions` holding the JSON configuration file you created above. Put this code in your sign-in activity's `onCreate` method.
+`MSQASignInClient` is the main object in the Quick Authentication SDK. It gives you access to all functionality. To create it, you must first create a instance of [MSQASignInOptions](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInOptions.html), which holds specific options you want to use to create `MSQASignInClient`. The example below creates an instance of `MSQASignInOptions` holding the JSON configuration file you created above. Put this code in your sign-in activity's `onCreate` method.
 ```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
         .setConfigResourceId(R.raw.auth_config_single_account)
@@ -142,11 +142,6 @@ Here is an example of calling the `create` method:
 MSQASignInClient.create(context,
         new MQASignInOptions.Builder()
                 .setConfigResourceId(R.raw.auth_config_single_account)
-                .setEnableLogcatLog(true)
-                .setLogLevel(LogLevel.VERBOSE)
-                .setExternalLogger((logLevel, message) -> {
-                    // get log message in this
-                })
                 .build(),
         new ClientCreatedListener() {
             @Override
@@ -255,7 +250,7 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
 
 Use these as follows
 ## Logging
-To facilitate debugging you have the following options to configure logging using "setter" methods of `MSQASignInOptionsBuilder` that can chained in the manner showed in the example below when creating an instance of `MSQASignInOptions`:
+To facilitate debugging you have the following options to configure logging using "setter" methods of [MSQASignInOptions.Builder](https://stunning-meme-25a77e8c.pages.github.io/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html) that can chained in the manner showed in the example below when creating an instance of `MSQASignInOptions`:
 ```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
         .setConfigResourceId(R.raw.auth_config_single_account)
