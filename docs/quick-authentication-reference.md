@@ -148,8 +148,10 @@ This data type contains following values.
 | `surname` | User's surname |
 | `givenName` | User's given name |
 | `username` | User's email or phone number |
+| `email` | User's email address |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
 | `id` | a GUID that is unique across all Microsoft accounts |
+| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
@@ -162,8 +164,10 @@ This data type contains all the fields of [AccountInfo](#data-type-accountinfo) 
 | `surname` | the user's surname |
 | `givenName` | the user's given name |
 | `username` | User's email or phone number |
+| `email` | User's email address |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
 | `id` | a GUID that is unique across all Microsoft accounts |
+| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
 | `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process |
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
@@ -248,7 +252,7 @@ If the second argument (`options`) isn't set, then it uses default values mentio
 `ms.auth.signOut` is used to sign out a user. See the following code example for understanding usage of this method:
 
 ```javascript
-ms.auth.signOut(username, function (result) {
+ms.auth.signOut(homeAccountId, function (result) {
   if (result.result) {
     // Finish the logout process in your website.
   } else {
@@ -257,7 +261,7 @@ ms.auth.signOut(username, function (result) {
 });
 ```
 
-You'll need to pass in `username` field of [AccountInfo](#data-type-accountinfo) object you received as part of the authentication event and a callback to receive the result of the `signOut()` call. The argument returned to the callback will be an object with the following structure:
+You'll need to pass in `homeAccountId` field of [AccountInfo](#data-type-accountinfo) object you received as part of the authentication event and a callback to receive the result of the `signOut()` call. The argument returned to the callback will be an object with the following structure:
 
 - `result` - `true` if the user was signed out, `false` if not
 - `error` - if `result==false`, will be an object with a `message` property explaining the error
@@ -265,7 +269,9 @@ You'll need to pass in `username` field of [AccountInfo](#data-type-accountinfo)
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
 
 If the `callback` isn't a valid function, then also this API will throw exception.
-If `username` isn't found, the `callback` will be called with `{result: 'failure', error: 'username not found'}`.
+If `homeAccountId` isn't found, the `callback` will be called with `{result: 'failure', error: 'account identifier not found'}`.
+
+Note, for the moment there is a fallback. `username` can also be passed instead of `homeAccountId` to this API. But that will be removed in future revisions.
 
 ## Method: ms.auth.startSignIn
 
@@ -385,21 +391,23 @@ MSAL.js provides functionality for fetching tokens. Quick Authentication exposes
 `ms.auth.getMSALAccount` method can be used to get MSAL account info, which is needed to fetch MSAL token. See the following code example for understanding usage of this method:
 
 ```javascript
-const msalAccount = ms.auth.getMSALAccount(accountInfo.username);
+const msalAccount = ms.auth.getMSALAccount(accountInfo.homeAccountId);
 if (msalAccount) {
   // Use the MSAL account.
 } else {
-  console.log(`No MSAL account exists for ${accountInfo.username}`);
+  console.log(`No MSAL account exists for ${accountInfo.homeAccountId}`);
 }
 ```
 
-`username` is the username field in [AccountInfo](#data-type-accountinfo), which was returned to the callback after a successful sign-in.
+`homeAccountId` is the homeAccountId field in [AccountInfo](#data-type-accountinfo), which was returned to the callback after a successful sign-in.
 
-If it succeeds, the API will return the [MSAL account information](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) corresponding to the username.
+If it succeeds, the API will return the [MSAL account information](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) corresponding to the `homeAccountId`.
 
 If the account can't be found, `null` will be returned.
 
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+
+Note, for the moment there is a fallback. `username` can also be passed instead of `homeAccountId` to this API. But that will be removed in future revisions.
 
 ## Method: ms.auth.acquireTokenSilent
 
@@ -414,7 +422,7 @@ function tokenFetchResponse(response) {
 
 const request = {
   scopes: ["User.Read"],
-  account: ms.auth.getMSALAccount(accountInfo.username),
+  account: ms.auth.getMSALAccount(accountInfo.homeAccountId),
 }
 if (!request.account) {
   console.log('Silent token fetch failed: Account not found');
@@ -446,7 +454,7 @@ function tokenFetchResponse(response) {
 
 const request = {
   scopes: ["Mail.Read"],
-  account: ms.auth.getMSALAccount(accountInfo.username),
+  account: ms.auth.getMSALAccount(accountInfo.homeAccountId),
 }
 if (request.account) {
   ms.auth.acquireTokenSilent(request).then(tokenFetchResponse).catch(err => {

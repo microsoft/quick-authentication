@@ -40,7 +40,7 @@
           return;
         }
 
-        ms.auth.signOut(currentAccountInfo.username, (result) => {
+        ms.auth.signOut(currentAccountInfo.homeAccountId, (result) => {
           if (result.result) {
             currentAccountInfo = null;
             document.querySelector(".user-info").innerHTML = "";
@@ -61,7 +61,9 @@
           <p>User's given name: <span>${accountInfo.givenName}</span></p>
           <p>User's surname: <span>${accountInfo.surname}</span></p>
           <p>User's email address or phone number: <span>${accountInfo.username}</span></p>
+          <p>User's email address: <span>${accountInfo.email}</span></p>
           <p>User's unique ID: <span>${accountInfo.id}</span></p>
+          <p>User's home account ID: <span>${accountInfo.homeAccountId}</span></p>
           <p><button class="custom-button sign-out" onclick="signOut()">Sign out!</button></p>
           `;
       }

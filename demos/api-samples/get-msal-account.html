@@ -56,9 +56,9 @@
         console.log(signInAccountInfo);
 
         // Retrieve the MSAL account.
-        const msalAccount = ms.auth.getMSALAccount(signInAccountInfo.username);
+        const msalAccount = ms.auth.getMSALAccount(signInAccountInfo.homeAccountId);
         if (!msalAccount) {
-          console.log(`No MSAL account exists for ${signInAccountInfo.username}`);
+          console.log(`No MSAL account exists for ${signInAccountInfo.homeAccountId}`);
         }
 
         document.querySelector(".user-info").innerHTML = `
@@ -71,7 +71,9 @@
           <p>User's email address or phone number: <span>${
             signInAccountInfo.username
           }</span></p>
+          <p>User's email: <span>${signInAccountInfo.email}</span></p>
           <p>User's unique ID: <span>${signInAccountInfo.id}</span></p>
+          <p>User's home account ID: <span>${signInAccountInfo.homeAccountId}</span></p>
           <p>ID Token: <span>${signInAccountInfo.idToken}</span></p>
           <p>User's MSAL account: <span>${formatMSALObject(msalAccount)}</span></p>
           `;
