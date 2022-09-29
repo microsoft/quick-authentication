@@ -1,0 +1,11 @@
+com.microsoft.quickauth.signin
+com.microsoft.quickauth.signin.callback
+com.microsoft.quickauth.signin.error
+com.microsoft.quickauth.signin.internal
+com.microsoft.quickauth.signin.internal.entity
+com.microsoft.quickauth.signin.internal.http
+com.microsoft.quickauth.signin.internal.metric
+com.microsoft.quickauth.signin.internal.signinclient
+com.microsoft.quickauth.signin.internal.util
+com.microsoft.quickauth.signin.logger
+com.microsoft.quickauth.signin.view
