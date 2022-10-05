@@ -1,20 +1,21 @@
 # Sign-in users with a Microsoft Account to Android apps using Microsoft Quick Authentication
 
 
-On Android, Microsoft Quick Authentication offers a library that makes it easier to add **Sign in with Microsoft** support to native apps. Quick Authentication uses the Microsoft Authentication Library (MSAL) for Android to handle authentication and authorization for users with personal Microsoft accounts from Outlook, OneDrive, Xbox Live, and Microsoft 365.
+On Android, Microsoft Quick Authentication offers a library that makes it easier to add **Sign in with Microsoft** support to native apps. Quick Authentication uses the Microsoft Authentication Library (MSAL) for Android to handle authentication and authorization for users with personal Microsoft accounts.
 
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
-Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your application that will take the user through to sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
+Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your Android application that will take the user through to sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
 
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
 - First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
 - Declare a dependency on the Quick Authentication SDK. 
 - Add an intent filter for Quick Authentication to your app manifest. 
 - Create a Quick Authentication sign-in client object ([MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html)) with the proper configuration.
-- Add an Quick Authentication sign-in button somewhere in your application's layout xml.
+- Add an Quick Authentication sign-in button somewhere in your application's layout xml or instantiate it programmatically.
 - Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
+- Implement the callback to integrate the user account with your identity system.
 
 Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with Quick Authentication for the web:
 
