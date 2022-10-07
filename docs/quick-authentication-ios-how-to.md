@@ -49,20 +49,161 @@ $ pod init & pod ‘MicrosoftQuickAuth’
 $ pod install
 ```
 
-# Configurating your application
+## Configuring your application
 Create a `MSQAConfiguration` object to set the client ID the application used, and the scopes includes “User.Read” by default. 
 
-```
+```objectivec
 #import <MSQA/MSQASignIn.h>
 
 MSQAConfiguration *config = [[MSQAConfiguration alloc]
       initWithClientID:@"YOUR_IOS_CLIENT_ID"];
 ```
 and initialize the MSQASignIn as below:
-```
+```objectivec
 NSError *error = nil;
 MSQASignIn *msSignIn = [[MSQASignIn alloc] initWithConfiguration:config
                                                            error:&error];
 ```                                                           
-The error will not be nil if an error occurred, e.g., the passed client ID is nil. All the methods of MSQASignIn should be called from UI thread. If you call other functions, e.g., fetch the token, before configuring MSQASignIn, the completionBlock will be invoked asynchronously on UI thread.
-Also, if the client ID is an invalid one, the later signing-in or acquiring token action will fail and the authentication page looks like below:
+If an error accured, the `error` parameter will be not nil and report the error details.
+
+If the client ID is invalid, a later attempt to signing-in or acquire an access token will fail. The error will be reported to the user as follows:
+
+![Mobile unauthorized error](media/mobile-unauthorized-client.png)
+
+## Configuring MSAL {**TODO** find better section title?]}
+Because Microsoft Quick Auth SDK builds on top of MSAL library, we need to make the following MSAL configurations:
+1.	Add a new keychain group, named com.microsoft.adalcache, to your project Capabilities:
+![Add a Keychain Group](media/keychain-group.png))
+ 
+2.	Add your application’s redirect URL scheme to your Info.plist file:
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>msauth.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+        </array>
+    </dict>
+</array>
+```
+
+3.	Add LSApplicationQueriesSchemes to Info.plist ([**TODO**] verify). This will allow making call to Microsoft Authenticator if installed. Note that scheme “msauthv3” is needed when compiling your app with Xcode 11 or later.
+```xml
+<key>LSApplicationQueriesSchemes</key> 
+<array> 
+  <string>msauthv2</string> 
+  <string>msauthv3</string> 
+</array>
+```
+
+4.	To handle the sign-in callback, override ([**TODO** "define"?]) the following AppDelegate method to call `MSQASignIn`’s handleURL:
+```objectivec
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+      return [_msSignIn
+              handleURL:url
+      sourceApplication:
+          options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+}
+```
+[**TODO** explain the above better] 
+[**TODO** is the code above improvperly indented?] 
+
+## Adding a sign-in button to your application
+Microsoft Quick Authentication allows you to add a fully functional sign-in button directly to your application. To do that, add a `MSQASignInButton` to a storyboard or XIB file. Create a new view and set the custom class as MSQASignInButton:
+
+![Custom Class](media/custom-class.png))
+ 
+This will generate a sign-in button in your application as follows:
+
+![Sign-in button](media/mobile-sign-in-button.png)
+
+Alternatively, you can also add the button programmatically at runtime:
+```
+- (void)viewDidLoad {
+  [super viewDidLoad];
+
+  CGRect buttonFrame = CGRectMake(10, 280, 100, 30);
+  MSQASignInButton *button =
+      [[MSQASignInButton alloc] initWithFrame:buttonFrame];
+  [self.view addSubview:button];
+}
+```
+
+## Customizing the appearance of the button
+To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
+
+| Properties |  Description | Values | Default value |
+| -- | -- | -- | -- |
+| type | The button type | kMSQASignInButtonTypeStandard<br> kMSQASignInButtonTypeIcon|kMSQASignInButtonTypeStandard | 
+| theme | The button visual theme | kMSQASignInButtonThemeDark<br>  kMSQASignInButtonThemeLight |	kMSQASignInButtonThemeDark |
+| size | Predefined sizes. If width or height are specified, they override this setting.<br> **large**: width: 280px, height: 42px, textSize: 16px, iconSize: 20px<br> **medium**: width: 280px, height: 36px, textSize: 14px, iconSize: 16px<br> **small**: width: 280px, height: 28px, textSize: 12px, iconSize: 12px | kMSQASignInButtonSizeSmall<br> kMSQASignInButtonSizeMedium<br> kMSQASignInButtonSizeLarge | kMSQASignInButtonSizeLarge |
+| text |	Button text	| kMSQASignInButtonTextSignInWith<br> kMSQASignInButtonTextSignUpWith <br> kMSQASignInButtonTextSignIn<br> kMSQASignInButtonTextContinueWith | kMSQASignInButtonTextSignInWith |
+| shape | Shape of button corners. | kMSQASignInButtonShapeRectangular<br> kMSQASignInButtonShapePill<br>kMSQASignInButtonShapeRounded |kMSQASignInButtonShapeRectangular |
+| logoAlignment | Where the Microsoft logo should be in the button | kMSQASignInButtonLogoLeft<br> kMSQASignInButtonLogoCenter | kMSQASignInButtonLogoLeft |
+
+[**TODO** can I set these properties declaratively in the storyboard or XIB?]
+
+Example code:
+```objectivec
+msSignInButton.theme = kMSQASignInButtonThemeDark;
+msSignInButton.type = kMSQASignInButtonTypeStandard;
+```
+[**TODO** how do I retrieve a button defined declaratively in the storyboard or the XIB file?]
+
+## Getting a call back after the user has signed-in
+To get a call back after the user has completed the sign-in flow, you can set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
+
+```objectivec
+[msSignButton setSignInCompletionBlock:^(MSQAAccountData *_Nullable account,
+                                         NSError *_Nullable error) {
+  if (account) {
+    // Use account
+  }
+  if (error) {
+    // Handle errors, e.g., not initialized.
+    NSLog(@"%@", error.localizedDescription);
+  }
+}];
+```
+
+On success, the completion block will be invoke with the `MSQAAccountData` containing the following information:
+
+```objectivec
+@interface MSQAAccountData : NSObject <NSCopying> 
+
+// MSA user's full name.
+@property(nonatomic, readonly) NSString *fullName;
+
+// MSA user's email address or phone.
+@property(nonatomic, readonly) NSString *userName;
+
+// CID for MSA account.
+@property(nonatomic, readonly) NSString *userId;
+
+// The user profile photo in Base64 encoded, will be nil if none.
+@property(nonatomic, readonly, nullable) NSString *base64Photo;
+
+// MSA account id token.
+@property(nonatomic, readonly, nullable) NSString *idToken;
+
+@end
+```
+[**TODO** Add surname, given name, etc.]
+
+## Handling sign out
+In the 3P application, you can connect the button to a method in the ViewController and call signOut:
+```objectivec
+- (IBAction)signOut:(id)sender {
+  [_msSignIn
+      signOutWithCompletionBlock:^(NSError *_Nullable error) {
+        if (error)
+          NSLog(@"Error:%@", error.description);
+      }];
+}
+```
+
+
+
