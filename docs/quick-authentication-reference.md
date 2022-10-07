@@ -180,7 +180,7 @@ This data type contains the following:
 | `errorCode` | A short string classifying the error |
 | `errorMessage` | A longer string explaining more details about the error |
 
-For example, if user cancels dialog in sign-in flow, they will get the following error info object.
+For example, if user cancels out of the sign-in flow, they will get the following error info object.
 
 ```javascript
 {

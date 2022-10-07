@@ -186,7 +186,7 @@ We recommend using the `id` as a key, rather than the email address, because an 
 
 The callback on sign-in failure comes through for attempts to sign-in with a) button b) sign-in prompt c) [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin) API.
 
-As an example of [SignInErrorInfo](./quick-authentication-reference.md#data-type-signinerrorinfo), if user cancels dialog in sign-in flow, they will get the following error info object.
+As an example of [SignInErrorInfo](./quick-authentication-reference.md#data-type-signinerrorinfo), if user cancels out of the sign-in flow, they will get the following error info object.
 ```javascript
 {
  errorCode: 'user_cancelled',
