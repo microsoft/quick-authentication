@@ -6,14 +6,14 @@ On Android, Microsoft Quick Authentication offers a library that makes it easier
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
-Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your Android application that will take the user through to sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
+Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your Android application that will take the user through the sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
 
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
 - First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
 - Declare a dependency on the Quick Authentication SDK. 
 - Add an intent filter for Quick Authentication to your app manifest. 
 - Create a Quick Authentication sign-in client object ([MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html)) with the proper configuration.
-- Add an Quick Authentication sign-in button somewhere in your application's layout xml or instantiate it programmatically.
+- Add a Quick Authentication sign-in button somewhere in your application's layout xml or instantiate it programmatically.
 - Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
 - Implement the callback to integrate the user account with your identity system.
 
@@ -30,7 +30,7 @@ If you have already registered a single-page web application, you can reuse the 
 
  If you have not yet registered an application or wish to use a new registration, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register your application.
 
-Now that you have created a application registration, you can extend it to Android as follows. On the Azure page describing your app registration:
+Now that you have created an application registration, you can extend it to Android as follows. On the Azure page describing your app registration:
 1. Open the *Authentication* tab on the left of that page
 3. Click *Add Platform*
 4. Select *Android*
@@ -251,7 +251,7 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
 
 Use these as follows
 ## Logging
-To facilitate debugging you have the following options to configure logging using "setter" methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html) that can chained in the manner showed in the example below when creating an instance of `MSQASignInOptions`:
+To facilitate debugging you have the following options to configure logging using "setter" methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html) that can be chained in the manner showed in the example below when creating an instance of `MSQASignInOptions`:
 ```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
         .setConfigResourceId(R.raw.auth_config_single_account)
