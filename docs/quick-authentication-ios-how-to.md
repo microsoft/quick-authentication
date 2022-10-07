@@ -1,20 +1,20 @@
 # Sign-in users with a Microsoft Account to iOS apps using Microsoft Quick Authentication
 
 
-On iOS, Microsoft Quick Authentication offers a library that makes it easier to add **Sign in with Microsoft** support to native apps. Quick Authentication uses the Microsoft Authentication Library (MSAL) for iOS to handle authentication and authorization for users with personal Microsoft accounts.
+On iOS, Microsoft Quick Authentication offers a library that makes it easy to add **Sign in with Microsoft** support to native apps. Quick Authentication uses the Microsoft Authentication Library (MSAL) for iOS to handle authentication and authorization for users with personal Microsoft accounts.
 
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
-Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your iOS application that will take the user through to sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
+Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your iOS application that will take the user through the sign-in workflow with a personal Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information.
 
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
-- First register your application for iOS on Azure (you can reuse the same Azure registration as for your web site). 
-- Install Microsoft Quick Authentication SDK and import the required header files in your application.
-- Create a Quick Authentication sign-in client object (`MSQASignIn`) with the proper configuration.
-- Add an Quick Authentication sign-in button somewhere in your application storyboard or XIB file.
-- Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
-- Implement the callback to integrate the user account to your own identity system.
+1. First register your application for iOS on Azure (you can reuse the same Azure registration that you created for your web site). 
+2. Install Microsoft Quick Authentication SDK and import the required header files in your application.
+3. Create a Quick Authentication sign-in client object (`MSQASignIn`) with the proper configuration.
+4. Add an Quick Authentication sign-in button somewhere in your application storyboard or XIB file.
+5. Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
+6. Implement the callback to integrate the user account with your own identity system.
 
 Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with Quick Authentication for the web:
 
@@ -27,7 +27,7 @@ Note that at this time, the personalization of the user experience available wit
 ## Registering your application
 If you have already registered a single-page web or an Android application, you can reuse the same application registration. To find that registration go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration in the list. This will open a page describing your application registration.
 
- If you have not yet registered an application or wish to use a new registration, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register your application.
+ If you have not yet registered an application or wish to use a new registration, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
 
 Now that you have created a application registration, you can extend it to iOS as follows. On the Azure page describing your app registration:
 1. Open the *Authentication* tab on the left of that page
@@ -39,18 +39,19 @@ Now that you have created a application registration, you can extend it to iOS a
 [**TODO:** Add screen shots to list above]
 
 ## Installing Microsoft Quick Authentication SDK
-1. Install CocoaPods following the instruction in the [Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
+To install the Microsoft quick Authentication SDK in your development environment, proceed as follow:
+1. Install CocoaPods following the instructions in the [Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
 2. Create a Podfile for your application and add the dependency on Microsoft Quick Authentication:
-```
+```bash
 $ pod init & pod ‘MicrosoftQuickAuth’
 ```
 3. Install the dependency:
-```
+```bash
 $ pod install
 ```
 
 ## Configuring your application
-Create a `MSQAConfiguration` object to set the client ID the application used, and the scopes includes “User.Read” by default. 
+Create a `MSQAConfiguration` object to set the client ID for your application, which you will find in the Azure registration for your application. 
 
 ```objectivec
 #import <MSQA/MSQASignIn.h>
@@ -58,20 +59,22 @@ Create a `MSQAConfiguration` object to set the client ID the application used, a
 MSQAConfiguration *config = [[MSQAConfiguration alloc]
       initWithClientID:@"YOUR_IOS_CLIENT_ID"];
 ```
-and initialize the MSQASignIn as below:
+and initialize a new instance of `MSQASignIn` as follows:
 ```objectivec
 NSError *error = nil;
 MSQASignIn *msSignIn = [[MSQASignIn alloc] initWithConfiguration:config
                                                            error:&error];
 ```                                                           
-If an error accured, the `error` parameter will be not nil and report the error details.
+If an error accured, the `config` parameter will be nil and the `error` parameter will contain the error details.
 
-If the client ID is invalid, a later attempt to signing-in or acquire an access token will fail. The error will be reported to the user as follows:
+If the client ID is invalid, a later attempt to sign-in or acquire an access token will fail. The error will be reported to the user as follows:
 
 ![Mobile unauthorized error](media/mobile-unauthorized-client.png)
 
-## Configuring MSAL {**TODO** find better section title?]}
-Because Microsoft Quick Auth SDK builds on top of MSAL library, we need to make the following MSAL configurations:
+[**TODO** is the completion block invoked in that case?]
+
+## Configuring MSAL [**TODO** find better section title?]
+Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to make the following MSAL configurations:
 1.	Add a new keychain group, named com.microsoft.adalcache, to your project Capabilities:
 ![Add a Keychain Group](media/keychain-group.png))
  
@@ -88,7 +91,7 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, we need to make 
 </array>
 ```
 
-3.	Add LSApplicationQueriesSchemes to Info.plist ([**TODO**] verify). This will allow making call to Microsoft Authenticator if installed. Note that scheme “msauthv3” is needed when compiling your app with Xcode 11 or later.
+3.	Add LSApplicationQueriesSchemes to Info.plist ([**TODO** verify]). This will allow making calls [**TODO** better wording?] to Microsoft Authenticator if installed. Note that scheme “msauthv3” is needed when compiling your app with Xcode 11 or later.
 ```xml
 <key>LSApplicationQueriesSchemes</key> 
 <array> 
@@ -97,7 +100,8 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, we need to make 
 </array>
 ```
 
-4.	To handle the sign-in callback, override ([**TODO** "define"?]) the following AppDelegate method to call `MSQASignIn`’s handleURL:
+4.	To handle the sign-in callback, implement the following AppDelegate method to call `MSQASignIn`’s `handleURL`:
+[**TODO** need to explain better]
 ```objectivec
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
@@ -108,20 +112,23 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, we need to make 
           options[UIApplicationOpenURLOptionsSourceApplicationKey]];
 }
 ```
-[**TODO** explain the above better] 
-[**TODO** is the code above improvperly indented?] 
+
+[**TODO** is the code above improperly indented?] 
 
 ## Adding a sign-in button to your application
-Microsoft Quick Authentication allows you to add a fully functional sign-in button directly to your application. To do that, add a `MSQASignInButton` to a storyboard or XIB file. Create a new view and set the custom class as MSQASignInButton:
+Microsoft Quick Authentication allows you to add a fully functional sign-in button to your application. To do that, add a `MSQASignInButton` to a storyboard or XIB file. First create a new view and set the custom class as `MSQASignInButton`.
+[**TODO** need better steps here]:
 
-![Custom Class](media/custom-class.png))
+![Custom Class](media/custom-class.png)
  
+[**TODO** then what? show example of actually adding the button to the storyboard or the XIB file]
+
 This will generate a sign-in button in your application as follows:
 
 ![Sign-in button](media/mobile-sign-in-button.png)
 
-Alternatively, you can also add the button programmatically at runtime:
-```
+Alternatively, you can also add the button programmatically at runtime with the following code:
+```objectivec
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -133,6 +140,8 @@ Alternatively, you can also add the button programmatically at runtime:
 ```
 
 ## Customizing the appearance of the button
+[**TODO** move to the reference guide]
+
 To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
 
 | Properties |  Description | Values | Default value |
@@ -154,7 +163,7 @@ msSignInButton.type = kMSQASignInButtonTypeStandard;
 [**TODO** how do I retrieve a button defined declaratively in the storyboard or the XIB file?]
 
 ## Getting a call back after the user has signed-in
-To get a call back after the user has completed the sign-in flow, you can set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
+To get a callback after the user has completed the sign-in flow - or an error has occurred -, set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
 
 ```objectivec
 [msSignButton setSignInCompletionBlock:^(MSQAAccountData *_Nullable account,
@@ -169,7 +178,7 @@ To get a call back after the user has completed the sign-in flow, you can set th
 }];
 ```
 
-On success, the completion block will be invoke with the `MSQAAccountData` containing the following information:
+On success, the completion block will be invoked with the `MSQAAccountData` containing the following information:
 
 ```objectivec
 @interface MSQAAccountData : NSObject <NSCopying> 
@@ -194,7 +203,7 @@ On success, the completion block will be invoke with the `MSQAAccountData` conta
 [**TODO** Add surname, given name, etc.]
 
 ## Handling sign out
-In the 3P application, you can connect the button to a method in the ViewController and call signOut:
+In your application, you can connect a button to a method in the ViewController and call signOut [**TODO** be clearer on where to put that code]:
 ```objectivec
 - (IBAction)signOut:(id)sender {
   [_msSignIn
