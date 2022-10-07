@@ -71,8 +71,19 @@
           });
       }
 
-      function userAuthenticated(accountInfo) {
+      function userAuthenticated(accountInfo, errorInfo) {
         console.log(accountInfo);
+        if (!accountInfo) {
+          console.log("Sign in failed with error: ", errorInfo);
+          document.querySelector(".user-info").innerHTML = `
+            <div class='error-info'>
+              <p><span>Sign in failed:</span></p>
+              <p>errorCode: <span>${errorInfo.errorCode}</span></p>
+              <p>errorMessage: <span>${errorInfo.errorMessage}</span></p>
+            </div>
+          `;
+          return;
+        }
 
         // Retrieve the MSAL account.
         msalAccount = ms.auth.getMSALAccount(accountInfo.homeAccountId);

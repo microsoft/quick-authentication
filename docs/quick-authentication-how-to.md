@@ -154,12 +154,19 @@ Use this approach if you don't have the ability to modify the application's HTML
 
 ## Responding to authentication events
 
-When an authentication event occurs, the Quick Authentication library calls the `callback` function you specified in the configuration, passing in an [AccountInfo](./quick-authentication-reference.md#data-type-accountinfo) object containing the user's account details as a parameter:
+When an authentication event occurs, the Quick Authentication library calls the `callback` function you specified in the configuration, passing in an [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinaccountinfo) object containing the user's account details as a parameter. If sign-in fails, then [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinaccountinfo) will be `null` and the second argument [SignInErrorInfo](./quick-authentication-reference.md#data-type-signinerrorinfo) will contain details about the error. If sign-in succeeds, [SignInErrorInfo](./quick-authentication-reference.md#data-type-signinerrorinfo) will be `null`.
 
 ```javascript
-function myCallback(sign_in_account_info) {
-  console.log(sign_in_account_info);
-  // Your sign in/up logic
+function myCallback(signInAccountInfo, signInErrorInfo) {
+  console.log(signInAccountInfo);
+  if (!signInAccountInfo) {
+    // Sign in failed. signInErrorInfo will be non-null.
+    const errorCode = signInErrorInfo.errorCode; // Short string.
+    const errorMessage = signInErrorInfo.errorMessage; // Longer string.
+    console.log(`sign in failed: errorCode: ${errorCode}, errorMessage: ${errorMessage}`);
+    return;
+  }
+  // Sign-in succeeded. Use signInAccountInfo in sign in/up logic.
 }
 ```
 
@@ -176,6 +183,16 @@ The [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinacco
 - `idToken` - [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
+
+The callback on sign-in failure come through for attempts to sign-in with a) button b) sign-in prompt c) `ms.auth.startSignIn` API.
+
+As an example of [SignInErrorInfo](./quick-authentication-reference.md#data-type-signinerrorinfo), if user cancels dialog in sign-in flow, they will get the following error info object.
+```javascript
+{
+ errorCode: 'user_cancelled',
+ errorMessage: 'User cancelled the flow'
+}
+```
 
 ## Signing out
 
