@@ -447,7 +447,7 @@ If user selects "Use another Microsoft Account", then during redirection, accoun
    - `client_secret` field is the value from your [application's registration](#add-a-secret-in-application-registration).
 - Your request needs to set the following fields:
     - `client_id`
-    - `scope`: Example "openid profile User.Read". This should be url encoded.
+    - `scope`: Example "openid profile User.Read offline_access". This should be url encoded.
     - `code`: The code which was obtained in the POST as mentioned above.
     - `redirect_uri`: The redirect URI which [was registered](#add-redirect-uri-in-application-registration).
     - `grant_type`: Use value `authorization_code`.
