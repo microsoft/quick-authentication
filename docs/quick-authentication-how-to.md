@@ -45,7 +45,9 @@ Use the following settings for your app registration. **Bold text** in the table
 | **Name**                    | `SPA with Quick Auth`                                                  | Suggested value. You can change the app name at any time. |
 | **Supported account types** | **Personal Microsoft Accounts Only**                                   | Required value for Microsoft Quick Authentication.        |
 | **Platform type**           | **Single-Page Application**                                            | Required value for Microsoft Quick Authentication.        |
-| **Redirect URI**            | `http://localhost:<port>/blank.html` or `https://<your-tenant-id>/blank.html` | Recommended for Microsoft Quick Authentication.           |
+| **Redirect URI for Single-Page application (SPA)**      | `http://localhost:<port>/blank.html` or `https://<your-tenant-id>/blank.html` | Recommended for Microsoft Quick Authentication.           |
+
+Redirect flow will need additional steps. Check [this section](#enabling-application-for-redirection) for more details.
 
 ## Add the Quick Authentication script
 
@@ -76,13 +78,13 @@ If you have access to adjust your application's HTML, this approach offers a dec
     <div id="ms-auth-initialize"
          data-client_id="<your application client ID>"
          data-callback="<your callback function>"
-         data-login_uri="<your application redirect URI>">
+         data-login_uri="<your application's Single-page application (SPA) redirect URI>">
     </div>
     ```
 
     - Set `data-client_id` to the Application (client) ID of the application registration.
     - Set `data-callback` to the name of the JavaScript function you'd like called when a user is authenticated
-    - Set `data-login_uri` to the redirect URI you entered in your application registration in the Azure portal. If this value isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
+    - Set `data-login_uri` to the redirect URI for Single-page application (SPA) you entered in your application registration in the Azure portal. If this value isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
     - `data-callback` should be a string, which represents a function, which is present in JavaScript on the web-page. Else initialization will fail.
 
     You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
@@ -110,7 +112,7 @@ Use this approach if you don't have the ability to modify the application's HTML
       const result = ms.auth.initialize({
         client_id: '<your application client ID>',
         callback: <your callback function>,
-        login_uri: '<your application redirect URI>',
+        login_uri: '<your application's Single-page application (SPA) redirect URI>',
         cancel_on_tap_outside: false
       });
       if (result.result == 'success') {
@@ -326,6 +328,139 @@ To also enable logging for MSAL.js, add the [`logMsalEvents`](./quick-authentica
         src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js?autoLogEvents=1&logMsalEvents=4"
         ></script>
 ```
+
+## Redirect mode
+
+### Enabling application for redirection
+
+#### Add redirect URI in application registration
+
+- In "Authentication" tab of your application's registration, click "Add a platform".
+- Then select "Web".
+- Then add a Redirect URI.
+
+#### Add a secret in application registration
+
+- In "Certificates & secrets" tab of your application's registration, click "New client secret".
+- Add the secret and then keep a copy of the "Value" field.
+- This secret in "Value" field will be used later from your server to handle redirection flow.
+
+#### Configuring application for redirection in quick authentication
+
+In quick authentication configuration:
+
+- `redirect_uri` needs to be set to redirect URI added in [this step](#add-redirect-uri-in-application-registration).
+- `ux_mode` needs to be set to `'redirect'`.
+
+Here's how to do it in HTML initialization:
+
+```html
+<div id="ms-auth-initialize"
+  data-client_id="<your application client ID>"
+  data-callback="<your callback function>"
+  data-login_uri="<your application's Single-page application (SPA) redirect URI>"
+  data-redirect_uri="<your application's Web redirect URI>"
+  data-ux_mode="redirect">
+</div>
+```
+
+Here's how to do it in Javascript initialization:
+
+```javascript
+window.onload = function () {
+  const result = ms.auth.initialize({
+    client_id: '<your application client ID>',
+    callback: <your callback function>,
+    login_uri: '<your application's Single-page application (SPA) redirect URI>',
+    redirect_uri: '<your application's Web redirect URI>', // Needed for redirect.
+    ux_mode: 'redirect', // Needed for redirect.
+    cancel_on_tap_outside: false
+  });
+  if (result.result == 'success') {
+    // Proceed.
+  } else {
+    // Initialization failed.
+    console.error('ms.auth.initialize failed: ', result);
+  }
+};
+```
+
+### Optional properties for redirect mode
+
+#### redirect_state
+
+This is a optional string value, which can be configured using any of the following approaches:
+- `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
+- `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
+- Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.
+
+####  redirect_allow_account_selection
+
+This optional boolean value can be configured using any of the following approaches:
+- `redirect_allow_account_selection` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
+- `data-redirect_allow_account_selection` property in HTML `id="ms_auth_initialize"`.
+
+The property is used only for MSA profile in Edge. Only when it's true, sign-in button's dropdown is shown in redirect mode.
+
+![Edge MSA profile button dropdown](./media/edge-msa-profile-drop-down.png)
+
+If user selects "Use another Microsoft Account", then during redirection, account picker will be shown by MSA server.
+
+![MSA account picker](./media/msa-account-picker.png)
+
+### Sign-in prompt in redirect mode
+
+- Sign-in prompt is not affected by redirect mode.
+- It keeps working in MSA profile in Edge and calls the Javascript callback on sign-in success / failure.
+
+### Sign-in button in redirect mode
+
+- On clicking on sign-in button, the Javascript callback is not called.
+- Quick authentication does a full page redirection to MSA server. Check [this section](#redirect-mode-flow-of-control) for more details.
+
+### `ms.auth.startSignIn` in redirect mode
+
+- On calling [ms.auth.startSignIn](quick-authentication-reference.md#method-msauthstartsignin), the Javascript callback is not called.
+- Quick authentication does a full page redirection to MSA server. Check [this section](#redirect-mode-flow-of-control) for more details.
+
+### Redirect mode flow of control
+
+- On clicking button or calling [ms.auth.startSignIn](quick-authentication-reference.md#method-msauthstartsignin), quick authentication does a full page redirection to MSA server to give user the opportunity to sign-in.
+- If user sign-in succeeds, then MSA server sends a `POST` request to the `redirect_uri` specified by [quick authentication configuration](#configuring-application-for-redirection-in-quick-authentication).
+- This POST request contains following JSON:
+
+  ```javascript
+  {
+    code: 'code-as-string-sent-by-msa-server'
+    state: 'redirect_state-which-was-specified'
+  }
+  ```
+- `state` will not be sent if it was not specified using [redirect_state](#redirect_state).
+- Your application's server code serving the `redirect_uri` should use the `code` to complete [rest of the flow](#your-server-completing-the-flow-to-get-user-profile-info).
+
+### Your server completing the flow to get user profile info
+
+#### Fetch access token by exchanging code
+
+- If `state` was sent, ensure that it matches the expectation.
+- Make a request to fetch access token using client secret as [documented here](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-access-token-with-a-client_secret).
+   - `client_secret` field is the value from your [application's registration](#add-a-secret-in-application-registration).
+- Your request needs to set the following fields:
+    - `client_id`
+    - `scope`: Example "openid profile User.Read". This should be url encoded.
+    - `code`: The code which was obtained in the POST as mentioned above.
+    - `redirect_uri`: The redirect URI which [was registered](#add-redirect-uri-in-application-registration).
+    - `grant_type`: Use value `authorization_code`.
+    - `client_secret`: The "Value" field of [secret](#add-a-secret-in-application-registration) from your application registration.
+- If the call succeeds, it will return a successful response like [this](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow#successful-response-2).
+
+#### Fetch more info using graph API
+
+Use the access token to call [GET USER API](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http) to get user information.
+
+#### Fetch image using graph API
+
+Use the access token to call [photo API](https://learn.microsoft.com/en-us/graph/api/profilephoto-get?view=graph-rest-1.0) to get photo of the user.
 
 ## Troubleshoot specific errors
 
