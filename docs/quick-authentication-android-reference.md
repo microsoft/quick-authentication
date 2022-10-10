@@ -259,7 +259,7 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
 ```
 
 ## MSQASignInClient method: getCurrentAccount
-This method returns the account the user is currently sign-in with, if any.
+This method returns the account the user is currently signed-in with, if any.
 
 ```java
 void getCurrentAccount (

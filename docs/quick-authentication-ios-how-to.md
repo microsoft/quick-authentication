@@ -180,6 +180,8 @@ To get a callback after the user has completed the sign-in flow - or an error ha
 
 On success, the completion block will be invoked with the `MSQAAccountData` containing the following information:
 
+[**TODO** consistency: MSQAAccountData in iOS and MSQAAccountInfo in Android]
+
 ```objectivec
 @interface MSQAAccountData : NSObject <NSCopying> 
 
