@@ -19,7 +19,7 @@ To enable Quick Authentication in your application, you will need to follow thes
 
 Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with Quick Authentication for the web:
 
-[**TODO**: capture and insert image from actual phone]
+[**TODO**: capture and insert image from actual phone: TEST CHANGE!!]
 
   ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
 
