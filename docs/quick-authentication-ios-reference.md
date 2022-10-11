@@ -1,4 +1,4 @@
-#Microsoft Quick Authentication for iOS configuration and Objective-C API reference
+# Microsoft Quick Authentication for iOS configuration and Objective-C API reference
 
 These settings and APIs allow you to customize the appearance and behavior of the UI provided by Microsoft Quick Authentication and to invoke functionality provided by MSAL for iOS, such as signing out or requesting an access token for user information in the Microsoft Graph.
 
@@ -6,16 +6,98 @@ For information about how to use Quick Authentication for iOS, see [Sign-in user
 
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
-## Creating and configuring MSQASignIn
+## Creating a sign-in button
+Refer to the [how to guide](quick-authentication-ios-how-to.md#adding-a-sign-in-button-to-your-application) to learn how to create a sign-in button declaratively in a storyboard or XIB file.
 
-[**TODO** consitency: MSQASignIn in iOS and MSQASignInClient is Android]
+You can also create the sign-in button programmatically using: 
+```objectivec
+- (instancetype)initWithFrame:(CGRect)frame
+```
+or to customize the appearance of the button during creation:
+```objectivec
+- (nullable instancetype)initWithCoder:(NSCoder*)coder
+```
 
-<br>
-<br>
+[**TODO** describe NSCoder]
+ ## Customizing the appearance of the sign-in button
+To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
+
+| Properties |  Description | Values | Default value |
+| -- | -- | -- | -- |
+| type | The button type | kMSQASignInButtonTypeStandard<br> kMSQASignInButtonTypeIcon|kMSQASignInButtonTypeStandard | 
+| theme | The button visual theme | kMSQASignInButtonThemeDark<br>  kMSQASignInButtonThemeLight |	kMSQASignInButtonThemeDark |
+| size | Predefined sizes. If width or height are specified, they override this setting.<br> **large**: width: 280px, height: 42px, textSize: 16px, iconSize: 20px<br> **medium**: width: 280px, height: 36px, textSize: 14px, iconSize: 16px<br> **small**: width: 280px, height: 28px, textSize: 12px, iconSize: 12px | kMSQASignInButtonSizeSmall<br> kMSQASignInButtonSizeMedium<br> kMSQASignInButtonSizeLarge | kMSQASignInButtonSizeLarge |
+| text |	Button text	| kMSQASignInButtonTextSignInWith<br> kMSQASignInButtonTextSignUpWith <br> kMSQASignInButtonTextSignIn<br> kMSQASignInButtonTextContinueWith | kMSQASignInButtonTextSignInWith |
+| shape | Shape of button corners. | kMSQASignInButtonShapeRectangular<br> kMSQASignInButtonShapePill<br>kMSQASignInButtonShapeRounded |kMSQASignInButtonShapeRectangular |
+| logoAlignment | Where the Microsoft logo should be in the button | kMSQASignInButtonLogoLeft<br> kMSQASignInButtonLogoCenter | kMSQASignInButtonLogoLeft |
+
+[**TODO** can I set these properties declaratively in the storyboard or XIB?]
+
+Example code:
+```objectivec
+msSignInButton.theme = kMSQASignInButtonThemeDark;
+msSignInButton.type = kMSQASignInButtonTypeStandard;
+```
+[**TODO** how do I retrieve a button defined declaratively in the storyboard or the XIB file?]
 
 
-## MSQAAccountData
-On success, the completion block will be invoked with the `MSQAAccountData` containing the following information:
+## MSQASignIn Methods
+The following methods of `MSQASignIn` offer programatic triggering of the sign-in flow and additional functionality. Note that these methods are asynchronous and internally dispatch their work to another thread. As a result, they can be called on the main thread and their completion block will be called back asynchronously on the same thread. 
+
+| Method | Description |
+|--|--|
+| initWithConfiguration() | Initialize the MSQASignIn object. |
+| signInWithCompletionBlock() | Starts the process of signing in the user with an MSA. |
+| signOutWithCompletionBlock() | Signs the user out of this application. |
+| getCurrentAccountWithCompletionBlock() | gets the current [AccountData](#AccountData) for the user. |
+| acquireTokenSilentWithParameter() | Attempts to acquire an access token silently (with no user interaction). |
+| acquireTokenWithParameters() | Acquires an access token interactively, will pop-up web UI. | |
+
+## MSQASignIn method: initWithConfiguration
+Initializes the MSQASignIn object, through which you can utilize most of Microsoft Quick Authentication functionality.
+```objectivec
+- (instancetype)initWithConfiguration:(MSQAConfiguration *)configuration
+                                error:(NSError *_Nullable *_Nullable)error;
+```
+where `MSQAConfiguration` is defined as: 
+
+```objectivec
+/// The class represents the configuration for the `MSQASignIn`.
+@interface MSQAConfiguration : NSObject
+
+/// The client ID of the app from the Microsoft developer portal.
+@property(nonatomic, readonly) NSString *clientID;
+
+/// The permissions you want to include in the access token to be fetched.
+@property(nonatomic, readonly) NSArray<NSString *> *scopes;
+
+/// Unavailable, use `initWithClientID`.
+/// :nodoc:
++ (instancetype)new NS_UNAVAILABLE;
+
+/// Unavailable, use `initWithClientID`.
+/// :nodoc
+- (instancetype)init NS_UNAVAILABLE;
+
+/// Initialize `MSQAConfiguration` class.
+/// @param clientID The client ID of the app from the Microsoft developer
+/// portal.
+- (instancetype)initWithClientID:(NSString *)clientID;
+
+@end
+```
+
+## MSQACompletionBlock and MSQAAccountData
+
+`MSQASignIn` methods that return account information do so by invoking an `MSQACompletionBlock` 
+
+with `MSQACompletionBlock` defined as
+```objectivec
+typedef void (^MSQACompletionBlock)(MSQAAccountData *_Nullable account,
+                                    NSError *_Nullable error);
+```
+
+with the `MSQAAccountData` argument containing the following information:
 
 [**TODO** consistency: MSQAAccountData in iOS and MSQAAccountInfo in Android]
 
@@ -39,29 +121,12 @@ On success, the completion block will be invoked with the `MSQAAccountData` cont
 
 @end
 ```
-
-## MSQASignIn Methods
-The following methods of `MSQASignIn` offer programatic triggering of the sign-in flow and additional functionality. Note that these methods are asynchronous and internally dispatch their work to another thread. As a result, they can be called on the main thread and their completion block will be called back asynchronously on the same thread. 
-
-| Method | Description |
-|--|--|
-| signIn() | Starts the process of signing in the user with MSA. |
-| signOut() | Signs the user out of this application. |
-| getCurrentAccountWithCompletionBlock() | gets the current [AccountData](#AccountData) for the user. |
-| acquireTokenSilent() | Perform acquire token silent call. |
-| acquireToken() | Acquires an access token interactively, will pop-up web UI. |
-
 ## MSQASignIn method: getCurrentAccountWithCompletionBlock
 This method returns the account the user is currently signed-in with, if any, through the callback. 
 ```objectivec
 - (void)getCurrentAccountWithCompletionBlock:(MSQACompletionBlock)completionBlock;
 ```
 
-with `MSQACompletionBlock` defined as
-```objectivec
-typedef void (^MSQACompletionBlock)(MSQAAccountData *_Nullable account,
-                                    NSError *_Nullable error);
-```
 | Parameters | Description | 
 | -- | -- | 
 | completionBlock | callback invoked when the operation is complete or an error occurred. |
@@ -85,11 +150,6 @@ Interactively signs-in the user into your site and returns the account asynchron
 ```objectivec
 - (void)signInWithViewController:(UIViewController *)controller
                  completionBlock:(MSQACompletionBlock)completionBlock;
-```
-with `MSQACompletionBlock` defined as
-```objectivec
-typedef void (^MSQACompletionBlock)(MSQAAccountData *_Nullable account,
-                                    NSError *_Nullable error);
 ```
 | Parameters | Description |
 | -- | -- | 
@@ -118,6 +178,22 @@ Code example (Objective-C):
     }];
 ```
 
+## MSQASignIn method: signOutWithCompletionBlock
+Signs the user out  [**TODO** be clearer on where to put that code]:
+```objectivec
+- signOutWithCompletionBlock:^(NSError *_Nullable error);
+```
+Example code (Objective-C): 
+```objectivec
+- (IBAction)signOut:(id)sender {
+  [_msSignIn
+      signOutWithCompletionBlock:^(NSError *_Nullable error) {
+        if (error)
+          NSLog(@"Error:%@", error.description);
+      }];
+}
+```
+
 ## MSQASignIn method: acquireTokenWithParameters:completionBlock
 Acquires an access token to access additional account information about the user stored in the Microsoft Graph, using interactive authentication if necessary.
 
@@ -130,8 +206,11 @@ Acquires an access token to access additional account information about the user
 | Parameters | Description | 
 | -- | -- |
 | parameters | Contains the parameters used to fetch the token |
-| completionBlock | The completion block that will be called with the account information if the operation completed [**TODO** this needs to return a token, not account data] and NSError if error happens.
-Returns: none
+| completionBlock | The completion block that will be called on completion or on failure [**TODO** this needs to return a token, not account data].
+| completionBlock | callback invoked when the operation is complete or an error occurred. |
+| &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
+| &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
+
 Code example (Objective-C):
 ``` objectivec
 MSQASilentTokenParameters *parameters =
@@ -166,16 +245,25 @@ MSQASilentTokenParameters *parameters =
   }}];
 ```
 
-3.6.4	- acquireTokenSilentWithParameters:completionBlock
+## MSQASIgnIn method: acquireTokenSilentWithParameters:completionBlock
+Attempt to acquires an access token to access additional account information about the user without interaction with the user. Fails if it is not possible.
+```objectivec
 - (void) acquireTokenSilentWithParameters:(MSQASilentTokenParameters *)
                                            parameters
                      completionBlock:(MSQACompletionBlock)completionBlock;
-Acquire a token silently for a provided identifier.
-Parameters:
-parameters - MSQASilentTokenParameters represents the parameters used to fetch the token.
-completionBlock  - The completion block that will be called with MSQAAccountData and NSError if error happens.
-Returns: none
-Here’s an example of snippet in Objective-C:
+```
+[**TODO** what is the proper way to indent the code above?]
+
+| Parameter | Description |
+| -- | -- |
+| parameters | MSQASilentTokenParameters represents the parameters used to fetch the token. |
+| completionBlock | The completion block that will be called on completion or on failure.
+| completionBlock | callback invoked when the operation is complete or an error occurred. |
+| &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
+| &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
+
+Code exampl (Objective-C):
+```objectivec
 MSQASilentTokenParameters *parameters =
     [[MSQASilentTokenParameters alloc] initWithScopes:@[ @"User.Read" ]];
 
@@ -187,13 +275,18 @@ MSQASilentTokenParameters *parameters =
                          // Check the error
                        }
                      }];
-3.7	LOGGING
-MSQALogger represents the logger, which adopts the singleton pattern. Using MSQALogger.sharedInstance to access the instance of it.
-3.7.1	Set log level
-Change the log level by setting the logLevel  property, the default log level is MSQALogLevelInfo.
+```
+##	Logging
+`MSQALogger` is a singleton object representing the logger. Use `MSQALogger`. `sharedInstance` to access the shared instance.
+
+### Setting the logging level
+   
+Set the log level by setting the `logLevel` property of `MSQALogger`, the default log level is `MSQALogLevelInfo`.
+```objectivec
 @property(atomic) MSQALogLevel logLevel;
-MSQALogLevel is defined as:
-/// Represents the priority of the logging message.
+```
+With MSQALogLevel defined as:
+```objectivec
 typedef NS_ENUM(NSInteger, MSQALogLevel) {
   /** Disable all logging */
   MSQALogLevelNothing,
@@ -213,13 +306,22 @@ typedef NS_ENUM(NSInteger, MSQALogLevel) {
   /** API tracing */
   MSQALogLevelLast = MSQALogLevelVerbose,
 };
+```
 
-3.7.2	Set the callback
-The logging messages will be passed through the callback that’s set by
+### Setting the logging callback
+
+The logging messages will be passed through the callback that can be set on `MSQALogger` using `setLogCallback`
+```objectivec
 - (void)setLogCallback:(MSQALogCallback)callback; 
-The MSQALogCallback is defined as:
+```
+With MSQALogCallback defined as:
+```objectivec
 typedef void (^MSQALogCallback)(MSQALogLevel level,
                                 NSString *_Nullable message);
-3.7.3	Enable MSAL logging
-As the Quick Auth SDK builds on top of MSAL for iOS, we can enable its logging and receive the messages through the same callback above, meanwhile, it will share the same log level too. The default setting is disabled. Setting the property enableMSALLogging can make this change, and it’s defined as:
+```
+
+### Enable MSAL logging
+As the Microsoft Quick Authentication SDK builds on top of MSAL for iOS, you can enable logging in MSAL and receive the messages through the same callback as above, at the same log level. MSAL logging is disabled by default. Use `MSQALogger`'s property `enableMSALLogging`:
+```
 @property(atomic) BOOL enableMSALLogging;
+```

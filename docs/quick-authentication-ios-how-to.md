@@ -50,7 +50,7 @@ $ pod init & pod ‘MicrosoftQuickAuth’
 $ pod install
 ```
 
-## Configuring your application
+## Initializing your application
 Create a `MSQAConfiguration` object to set the client ID for your application, which you will find in the Azure registration for your application. 
 
 ```objectivec
@@ -62,7 +62,7 @@ MSQAConfiguration *config = [[MSQAConfiguration alloc]
 and initialize a new instance of `MSQASignIn` as follows:
 ```objectivec
 NSError *error = nil;
-MSQASignIn *msSignIn = [[MSQASignIn alloc] initWithConfiguration:config
+MSQASignIn *_msSignIn = [[MSQASignIn alloc] initWithConfiguration:config
                                                            error:&error];
 ```                                                           
 If an error accured, the `config` parameter will be nil and the `error` parameter will contain the error details.
@@ -73,7 +73,9 @@ If the client ID is invalid, a later attempt to sign-in or acquire an access tok
 
 [**TODO** is the completion block invoked in that case?]
 
-## Configuring MSAL [**TODO** find better section title?]
+## Configuring MSAL 
+[**TODO** find better section title?]
+
 Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to make the following MSAL configurations:
 1.	Add a new keychain group, named com.microsoft.adalcache, to your project Capabilities:
 ![Add a Keychain Group](media/keychain-group.png))
@@ -138,29 +140,7 @@ Alternatively, you can also add the button programmatically at runtime with the 
   [self.view addSubview:button];
 }
 ```
-
-## Customizing the appearance of the button
-[**TODO** move to the reference guide]
-
-To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
-
-| Properties |  Description | Values | Default value |
-| -- | -- | -- | -- |
-| type | The button type | kMSQASignInButtonTypeStandard<br> kMSQASignInButtonTypeIcon|kMSQASignInButtonTypeStandard | 
-| theme | The button visual theme | kMSQASignInButtonThemeDark<br>  kMSQASignInButtonThemeLight |	kMSQASignInButtonThemeDark |
-| size | Predefined sizes. If width or height are specified, they override this setting.<br> **large**: width: 280px, height: 42px, textSize: 16px, iconSize: 20px<br> **medium**: width: 280px, height: 36px, textSize: 14px, iconSize: 16px<br> **small**: width: 280px, height: 28px, textSize: 12px, iconSize: 12px | kMSQASignInButtonSizeSmall<br> kMSQASignInButtonSizeMedium<br> kMSQASignInButtonSizeLarge | kMSQASignInButtonSizeLarge |
-| text |	Button text	| kMSQASignInButtonTextSignInWith<br> kMSQASignInButtonTextSignUpWith <br> kMSQASignInButtonTextSignIn<br> kMSQASignInButtonTextContinueWith | kMSQASignInButtonTextSignInWith |
-| shape | Shape of button corners. | kMSQASignInButtonShapeRectangular<br> kMSQASignInButtonShapePill<br>kMSQASignInButtonShapeRounded |kMSQASignInButtonShapeRectangular |
-| logoAlignment | Where the Microsoft logo should be in the button | kMSQASignInButtonLogoLeft<br> kMSQASignInButtonLogoCenter | kMSQASignInButtonLogoLeft |
-
-[**TODO** can I set these properties declaratively in the storyboard or XIB?]
-
-Example code:
-```objectivec
-msSignInButton.theme = kMSQASignInButtonThemeDark;
-msSignInButton.type = kMSQASignInButtonTypeStandard;
-```
-[**TODO** how do I retrieve a button defined declaratively in the storyboard or the XIB file?]
+It is possible to customize the appearance of the button. Refer to the [reference guide](quick-authentication-ios-reference.md#customizing-the-appearance-of-the-sign-in-button) for details.
 
 ## Getting a call back after the user has signed-in
 To get a callback after the user has completed the sign-in flow - or an error has occurred -, set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
@@ -205,7 +185,7 @@ On success, the completion block will be invoked with the `MSQAAccountData` cont
 [**TODO** Add surname, given name, etc.]
 
 ## Handling sign out
-In your application, you can connect a button to a method in the ViewController and call signOut [**TODO** be clearer on where to put that code]:
+To allow the user to sign out, in your application, connect a button to a method in the `ViewController` (called `signOut` in the example below) and call `MSQASignIn`'s method `signOutWithCompletionBlock`:
 ```objectivec
 - (IBAction)signOut:(id)sender {
   [_msSignIn
@@ -215,6 +195,3 @@ In your application, you can connect a button to a method in the ViewController 
       }];
 }
 ```
-
-
-
