@@ -10,7 +10,7 @@ To enable Quick Authentication, you first add a reference to the library in a `<
 
 All browsers support a configurable sign-in button and prompt provided by Quick Authentication called the _standard sign-in experience_. Microsoft Edge supports an _enhanced sign-in experience_, which is also configurable.
 
-- **Standard sign-in experience** - Quick Authentication shows the _standard_ sign-in button and prompt to users not signed in to Microsoft Edge or that are using a another browser.
+- **Standard sign-in experience** - Quick Authentication shows the _standard_ sign-in button and prompt to users not signed in to Microsoft Edge or that are using another browser.
 
   ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
 
@@ -85,7 +85,7 @@ If you have access to adjust your application's HTML, this approach offers a dec
     - Set `data-login_uri` to the redirect URI you entered in your application registration in the Azure portal. If this value isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
     - `data-callback` should be a string, which represents a function, which is present in JavaScript on the web-page. Else initialization will fail.
 
-    You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
+    You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that below.
 
 1. Inject the sign-in button
 
@@ -133,7 +133,7 @@ Use this approach if you don't have the ability to modify the application's HTML
     - Initialization was called more than once. Here API returns `{result: 'failure', reason: 'Library already initialized'}`.
     - `callback` isn't a valid function or `client_id` isn't set. In these cases, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
 
-    You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
+    You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that below.
 
     [Quick Authentication can be configured](./quick-authentication-reference.md) to allow more control over the behavior of the library.
 
@@ -150,7 +150,7 @@ Use this approach if you don't have the ability to modify the application's HTML
 
     You'll need to identify the DOM node that you want the library to insert the button into. If DOM node is `null` or `undefined` because it wasn't found, then this API will throw exception.
 
-    Quick Authentication allows you to [customize the look and feel of the button](./quick-authentication-reference.md#customizing-the-sign-in-button) to better align with your application's design. We'll discuss more about customizing the look and feel of the button, below.
+    Quick Authentication allows you to [customize the look and feel of the button](./quick-authentication-reference.md#customizing-the-sign-in-button) to better align with your application's design. We'll discuss more about customizing the look and feel of the button below.
 
 ## Responding to authentication events
 
@@ -210,7 +210,7 @@ When called, `startGetCurrentAccount()` will trigger the callback and pass in a 
 
 ## Customizing the Quick Authentication experience
 
-To fully control your users' authentication experience, build and maintain your own button to trigger the sign-in flow.
+To fully control your users authentication experience, build and maintain your own button to trigger the sign-in flow.
 
 ### Start the sign-in process
 
