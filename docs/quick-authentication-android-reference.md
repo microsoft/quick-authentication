@@ -193,7 +193,7 @@ The following methods of [MSQASignInClient](hhttps://microsoft.github.io/quick-a
 |--|--|
 | signIn() | Starts the process of signing in the user with MSA. |
 | signOut() | Signs the user out of this application. |
-| getCurrentAccount() | gets the current [AccountInfo](#AccountInfo) for the user. |
+| getCurrentAccount() | Gets the current [AccountInfo](#AccountInfo) for the user. |
 | acquireTokenSilent() | Perform acquire token silent call. |
 | acquireToken() | Acquires an access token interactively, will pop-up web UI. |
 | create() | Static method to create an [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html) instance object. |
@@ -266,6 +266,7 @@ void getCurrentAccount (
                 @NonNull Activity activity,
                 @NonNull OnCompleteListener <AccountInfo> listener);
 ```
+[**TODO** activity was removed as parameter, update]
 
 | Parameter | Description |
 | -- | -- |
@@ -290,7 +291,6 @@ signInClient.getCurrentAccount(activity,
             }
         });
 ```
-
 ## MSQASignInClient method: acquireToken
 This method acquires an access token interactively. A UI flow will be presented to the user to consent to the request.
 

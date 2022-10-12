@@ -140,7 +140,7 @@ Code example (Objective-C):
   if (account) {
     // Use account
   }
-  if (error) {
+  else if (error) {
     // Handle the error
   }
 }];
@@ -162,14 +162,13 @@ Code example (Objective-C):
 ```objectivec
 [_msSignIn
     signInWithViewController:(UIViewController *)controller
-                 completionBlock: ^(
-               MSQAAccountData *account, NSError *error) {
+             completionBlock: ^(MSQAAccountData *account, NSError *error) {
       if (account == nil)
         return;
 
       NSString *fullName = account.fullName; // "John Doe"
       NSString *userName = account.userName; // JohnDoe@hotmail.com
-    NSData *data = [[NSData alloc]
+      NSData *data = [[NSData alloc]
         initWithBase64EncodedString:_accountData.base64Photo
                             options:
                               NSDataBase64DecodingIgnoreUnknownCharacters];

@@ -6,7 +6,7 @@ On Android, Microsoft Quick Authentication offers a library that makes it easier
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
-Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your Android application that will take the user through the sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional account information. **[TODO** mention Microsoft Graph here?]
+Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your Android application that will take the user through the sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional user/account information accessible via the [Microsoft Graph APIs](https://learn.microsoft.com/en-us/graph/overview#whats-in-microsoft-graph)
 
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
 - First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
@@ -17,7 +17,7 @@ To enable Quick Authentication in your application, you will need to follow thes
 - Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
 - Implement the callback to integrate the user account with your identity system.
 
-Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with Quick Authentication for the web:
+Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with [Quick Authentication for the web](quick-authentication-how-to.md):
 
 [**TODO**: capture and insert image from actual phone]
 
@@ -55,7 +55,7 @@ maven {
 }
 ```
 ## Creating a configuration file 
-The configuration file is necessary to initialize the Quick Authentication SDK and underlying MSAL library. Details on this file can be found here: [MSAL Configuration](https://docs.microsoft.com/azure/active-directory/develop/msal-configuration)
+The configuration file is necessary to initialize the Quick Authentication SDK and underlying MSAL library. Details on this file can be found here: [MSAL Configuration](https://docs.microsoft.com/azure/active-directory/develop/msal-configuration).
 
 It is a JSON file which can be obtained from the Azure Portal with a few additions. Go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration in the list. On the page for your application registration, click *Authentication* on the left bar".
 
@@ -65,10 +65,7 @@ In the Authentication page, click the *View* button for your redirect URL to ope
 
  ![Android configuration page](./media/android-configuration.png)
 
-Copy the MSAL Configuration JSON script and make the following edits:
-
-- Enter the redirect URI. You can get your app's redirect URI from the Azure application registration page. For more information on common redirect URI issues please refer to [this FAQ](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/MSAL-FAQ#redirect-uri-issues).
- - Below the redirect URI please paste:
+Copy the MSAL Configuration JSON script and below `redirect_uri` please add the following line:
  ``` java
  "account_mode" : "SINGLE",
  ```
@@ -92,7 +89,7 @@ Your configuration JSON script should resemble this example:
 }
 ```
 
-Then, save this JSON script as a "raw" resource file in your project resources. You will be able to refer to it using the generated resource identifier. You will need it to initialize [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html)
+Then, save this JSON script as a "raw" resource file in your project resources. You will be able to refer to it using the generated resource identifier. You will need it to initialize [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html).
 
 ## Configuring an intent filter
 Next, configure an intent filter in the Android Manifest for your application, using the same redirect URI you used for the Configuration JSON script above:
