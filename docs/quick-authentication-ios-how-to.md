@@ -16,7 +16,7 @@ To enable Quick Authentication in your application, you will need to follow thes
 5. Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
 6. Implement the callback to integrate the user account with your own identity system.
 
-Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with Quick Authentication for the web:
+Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable with Quick Authentication for the web:
 
 [**TODO**: capture and insert image from actual phone]
 
@@ -29,7 +29,7 @@ If you have already registered a single-page web or an Android application, you 
 
  If you have not yet registered an application or wish to use a new registration, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
 
-Now that you have created a application registration, you can extend it to iOS as follows. On the Azure page describing your app registration:
+Now that you have created an application registration, you can extend it to iOS as follows. On the Azure page describing your app registration:
 1. Open the *Authentication* tab on the left of that page
 3. Click *Add Platform*
 4. Select *iOS / MacOS*
