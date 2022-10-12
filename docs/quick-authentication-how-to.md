@@ -331,7 +331,7 @@ To also enable logging for MSAL.js, add the [`logMsalEvents`](./quick-authentica
 
 ## Redirect mode
 
-### Enabling application for redirection
+### Enabling your application for redirection
 
 #### Add redirect URI in application registration
 
@@ -438,7 +438,7 @@ If user selects "Use another Microsoft Account", then during redirection, accoun
 - `state` will not be sent if it was not specified using [redirect_state](#redirect_state).
 - Your application's server code serving the `redirect_uri` should use the `code` to complete [rest of the flow](#your-server-completing-the-flow-to-get-user-profile-info).
 
-### Your server completing the flow to get user profile info
+### Completing the flow on your server to get user profile info
 
 #### Fetch access token by exchanging code
 

@@ -310,6 +310,8 @@ Successful authentications will be routed into the [callback](#callback) defined
 
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
 
+In [redirect flow](./quick-authentication-how-to.md#msauthstartsignin-in-redirect-mode), the callback will not be called. Instead a full page redirection flow to MSA server will start.
+
 ## Method: ms.auth.startGetCurrentAccount
 
 `ms.auth.startGetCurrentAccount` can be used to determine if the current user signed-in. See the following code example for understanding usage of this method:
