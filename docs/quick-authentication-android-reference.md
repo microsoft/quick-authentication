@@ -47,12 +47,12 @@ MSQASignInClient.create(context,
 ```
 
 ## Logging
-To facilitate debugging you the following options are available to configure logging, using the following methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html). 
+To facilitate debugging the following options are available to configure logging, using the following methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html). 
 
 ```java
 public static void setLogLevel(@LogLevel int logLevel);
 ```
-Sets the log level for diagnostic purpose. By default, the sdk sets the logging level to 'verbose'.
+Sets the log level for diagnostic purposes. By default, the sdk sets the logging level to 'verbose'.
 | Parameter | Description | 
 |--|--|
 | logLevel| Log level int enum |
@@ -89,7 +89,7 @@ MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
 ## Sign-in button customization
 [MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) provides attributes and APIs to customize the button style. 
 
-### Customizing the button stype using parameters in the layout xml
+### Customizing the buttons type using parameters in the layout xml
 You can customize the look and feel of the sign-in button by using the following parameters on the `com.microsoft.quick.auth.signin.view.MSQASignInButton` element in your application's layout xml:
 
 
@@ -199,7 +199,7 @@ The following methods of [MSQASignInClient](hhttps://microsoft.github.io/quick-a
 | create() | Static method to create an [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html) instance object. |
 
 ## MSQASignInClient method: signIn
-This method allows to request sign-in programatically instead of or inaddition to having the button do it automatically. This will trigger the same user experience workflow as the user clikcing the sign-in button.
+This method allows to request sign-in programatically instead of or in addition to having the button do it automatically. This will trigger the same user experience workflow as the user clikcing the sign-in button.
 
 ```java
 void signIn(@NonNull Activity activity
