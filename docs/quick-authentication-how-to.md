@@ -78,30 +78,30 @@ If you have access to adjust your application's HTML, this approach offers a dec
 
 ### 1. Configure the library
 
-    Add the configuration `div` to your page:
+Add the configuration `div` to your page:
 
-    ```html
-    <div id="ms-auth-initialize"
-         data-client_id="<your application client ID>"
-         data-callback="<your callback function>"
-         data-login_uri="<your application's Single-page application (SPA) redirect URI>">
-    </div>
-    ```
+```html
+<div id="ms-auth-initialize"
+      data-client_id="<your application client ID>"
+      data-callback="<your callback function>"
+      data-login_uri="<your application's Single-page application (SPA) redirect URI>">
+</div>
+```
 
-    - Set `data-client_id` to the Application (client) ID of the application registration.
-    - Set `data-callback` to the name of the JavaScript function you'd like called when a user is authenticated
-    - Set `data-login_uri` to the redirect URI for Single-page application (SPA) you entered in your application registration in the Azure portal. If this value isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
-    - `data-callback` should be a string, which represents a function, which is present in JavaScript on the web-page. Else initialization will fail.
+- Set `data-client_id` to the Application (client) ID of the application registration.
+- Set `data-callback` to the name of the JavaScript function you'd like called when a user is authenticated
+- Set `data-login_uri` to the redirect URI for Single-page application (SPA) you entered in your application registration in the Azure portal. If this value isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
+- `data-callback` should be a string, which represents a function, which is present in JavaScript on the web-page. Else initialization will fail.
 
-    You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
+You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
 
 ### 2. Inject the sign-in button
 
-    Place a `div` in your authentication component to indicate where Quick Authentication should render the button:
+Place a `div` in your authentication component to indicate where Quick Authentication should render the button:
 
-    ```html
-    <div class="ms-auth-button"></div>
-    ```
+```html
+<div class="ms-auth-button"></div>
+```
 
 For details about modifying the sign-in button's appearance and the prompt's appearance and behavior, see the [Quick Authentication library reference](./quick-authentication-reference.md).
 
@@ -111,54 +111,54 @@ Use this approach if you don't have the ability to modify the application's HTML
 
 ### 1. Configure the library
 
-    Configuration of the Quick Authentication library can safely happen when the page has finished loading, by calling `ms.auth.initialize` and passing it a configuration object:
+Configuration of the Quick Authentication library can safely happen when the page has finished loading, by calling `ms.auth.initialize` and passing it a configuration object:
 
-    ```javascript
-    window.onload = function () {
-      const result = ms.auth.initialize({
-        client_id: '<your application client ID>',
-        callback: <your callback function>,
-        login_uri: '<your application's Single-page application (SPA) redirect URI>',
-        cancel_on_tap_outside: false
-      });
-      if (result.result == 'success') {
-        // Proceed.
-      } else {
-        // Initialization failed.
-        console.error('ms.auth.initialize failed: ', result);
-      }
-    };
-    ```
+```javascript
+window.onload = function () {
+  const result = ms.auth.initialize({
+    client_id: '<your application client ID>',
+    callback: <your callback function>,
+    login_uri: '<your application's Single-page application (SPA) redirect URI>',
+    cancel_on_tap_outside: false
+  });
+  if (result.result == 'success') {
+    // Proceed.
+  } else {
+    // Initialization failed.
+    console.error('ms.auth.initialize failed: ', result);
+  }
+};
+```
 
-    - Set `client_id` to the Application (client) ID of the application registration.
-    - Set `callback` to the name of the JavaScript function you'd like called when a user is authenticated.
-    - Set `login_uri` to the redirect URI you entered in your application registration in the Azure portal. If this property isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
+- Set `client_id` to the Application (client) ID of the application registration.
+- Set `callback` to the name of the JavaScript function you'd like called when a user is authenticated.
+- Set `login_uri` to the redirect URI you entered in your application registration in the Azure portal. If this property isn't set, then for application https://abc.com, Quick Authentication library will use https://abc.com/blank.html as the default.
 
-    If `ms.auth.initialize` succeeds, it returns `{result: 'success'}`. If `ms.auth.initialize` fails, it returns `{result: 'failure', reason: <string-explaining-why-it-failed>}`.
+If `ms.auth.initialize` succeeds, it returns `{result: 'success'}`. If `ms.auth.initialize` fails, it returns `{result: 'failure', reason: <string-explaining-why-it-failed>}`.
 
-    The following are some possible reasons for failure:
+The following are some possible reasons for failure:
 
-    - Initialization was called more than once. Here API returns `{result: 'failure', reason: 'Library already initialized'}`.
-    - `callback` isn't a valid function or `client_id` isn't set. In these cases, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
+- Initialization was called more than once. Here API returns `{result: 'failure', reason: 'Library already initialized'}`.
+- `callback` isn't a valid function or `client_id` isn't set. In these cases, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
 
-    You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
+You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
 
-    [Quick Authentication can be configured](./quick-authentication-reference.md) to allow more control over the behavior of the library.
+[Quick Authentication can be configured](./quick-authentication-reference.md) to allow more control over the behavior of the library.
 
 ### 2. Inject the button
 
-    To render a sign-in button, call the following JavaScript just after initializing the library (shown above):
+To render a sign-in button, call the following JavaScript just after initializing the library (shown above):
 
-    ```javascript
-    ms.auth.renderSignInButton(
-      document.getElementById('<id of parent element>'),
-      {} // Using default options.
-    );
-    ```
+```javascript
+ms.auth.renderSignInButton(
+  document.getElementById('<id of parent element>'),
+  {} // Using default options.
+);
+```
 
-    You'll need to identify the DOM node that you want the library to insert the button into. If DOM node is `null` or `undefined` because it wasn't found, then this API will throw exception.
+You'll need to identify the DOM node that you want the library to insert the button into. If DOM node is `null` or `undefined` because it wasn't found, then this API will throw exception.
 
-    Quick Authentication allows you to [customize the look and feel of the button](./quick-authentication-reference.md#customizing-the-sign-in-button) to better align with your application's design. We'll discuss more about customizing the look and feel of the button, below.
+Quick Authentication allows you to [customize the look and feel of the button](./quick-authentication-reference.md#customizing-the-sign-in-button) to better align with your application's design. We'll discuss more about customizing the look and feel of the button, below.
 
 ## Responding to authentication events
 
@@ -361,7 +361,7 @@ Your server needs to handle the POST request and fetch user account information.
 
 In quick authentication configuration:
 
-- `redirect_uri` needs to be set to redirect URI added in [this step](#add-redirect-uri-in-application-registration).
+- `redirect_uri` needs to be set to redirect URI added in [this step](#1-add-redirect-uri-in-application-registration).
 - `ux_mode` needs to be set to `'redirect'`.
 
 Here's how to do it in HTML initialization:
@@ -419,7 +419,7 @@ window.onload = function () {
 ### Redirect mode flow of control
 
 - On clicking button or calling [ms.auth.startSignIn](quick-authentication-reference.md#method-msauthstartsignin), quick authentication does a full page redirection to MSA server to give user the opportunity to sign-in.
-- If user sign-in succeeds, then MSA server sends a `POST` request to the `redirect_uri` specified by [quick authentication configuration](#configuring-application-for-redirection-in-quick-authentication).
+- If user sign-in succeeds, then MSA server sends a `POST` request to the `redirect_uri` specified by [quick authentication configuration](#3-configure-application-for-redirection-in-quick-authentication).
 - This POST request contains following JSON:
 
   ```javascript
@@ -428,8 +428,8 @@ window.onload = function () {
     state: 'redirect_state-which-was-specified'
   }
   ```
-- `state` will not be sent if it was not specified using [redirect_state](#redirect_state).
-- Your application's server code serving the `redirect_uri` should use the `code` to complete [rest of the flow](#your-server-completing-the-flow-to-get-user-profile-info).
+- `state` will not be sent if it was not specified using [redirect_state](./quick-authentication-reference.md#redirect_state).
+- Your application's server code serving the `redirect_uri` should use the `code` to complete [rest of the flow](#completing-the-flow-on-your-server-to-get-user-profile-info).
 
 ### Completing the flow on your server to get user profile info
 
@@ -437,14 +437,14 @@ window.onload = function () {
 
 - If `state` was sent, ensure that it matches the expectation.
 - Make a request to fetch access token using client secret as [documented here](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-access-token-with-a-client_secret).
-   - `client_secret` field is the value from your [application's registration](#add-a-secret-in-application-registration).
+   - `client_secret` field is the value from your [application's registration](#2-add-a-secret-in-application-registration).
 - Your request needs to set the following fields:
     - `client_id`
     - `scope`: Example "openid profile User.Read offline_access". This should be url encoded.
     - `code`: The code which was obtained in the POST as mentioned above.
-    - `redirect_uri`: The redirect URI which [was registered](#add-redirect-uri-in-application-registration).
+    - `redirect_uri`: The redirect URI which [was registered](#1-add-redirect-uri-in-application-registration).
     - `grant_type`: Use value `authorization_code`.
-    - `client_secret`: The "Value" field of [secret](#add-a-secret-in-application-registration) from your application registration.
+    - `client_secret`: The "Value" field of [secret](#2-add-a-secret-in-application-registration) from your application registration.
 
 Here's a sample:
 ```http
