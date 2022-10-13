@@ -17,7 +17,7 @@ public static void create​(@NonNull android.content.Context context,
 
 |Parameter|Description|
 | -- | -- |
-| context | Your application context. Cannot be null. [**TODO** expand on where to find context]
+| context | Application's Context. The sdk requires the application context to be passed in PublicClientApplication. Cannot be null.
 | signInOptions | A configuration object for client initialization.
 | listener | A [ClientCreatedListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/ClientCreatedListener.html) defining callbacks to be invoked when the object is successfully created and when an error occurred. Cannot be null.
 
@@ -184,7 +184,9 @@ signInButton.setSignInCallback(activity, client,
 | @Nullable String getId() | CID for MSA.| 
 | @Nullable String getIdToken() | MSA account id token. |
 | @Nullable String getBase64Photo() | User jpeg / png, etc. as base64 encoded string. |
-| [**TODO** sync with web]
+| @Nullable String getGivenName() | User given name. |
+| @Nullable String getSurname() | User surname. |
+| @Nullable String getEmail() | User email. |
 
 ## MSQASignInClient methods
 The following methods of [MSQASignInClient](hhttps://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html) offer programatic triggering of the sign-in flow and additional functionality.
@@ -262,15 +264,11 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
 This method returns the account the user is currently signed-in with, if any.
 
 ```java
-void getCurrentAccount (
-                @NonNull Activity activity,
-                @NonNull OnCompleteListener <AccountInfo> listener);
+void getCurrentAccount (@NonNull OnCompleteListener <AccountInfo> listener);
 ```
-[**TODO** activity was removed as parameter, update]
 
 | Parameter | Description |
 | -- | -- |
-| @NonNull activity | Activity that is used as the parent activity of getting the current account |
 | @NonNull listener | An [OnCompleteListner](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked on completion and will return the [AccountInfo](#AccountInfo) for the current account if one is retrieved. |
 | Returns | none | 
 
