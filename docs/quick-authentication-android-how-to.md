@@ -10,7 +10,7 @@ Microsoft Quick Authentication allows you to easily add a fully functioning sign
 
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
 - First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
-- Declare a dependency on the Quick Authentication SDK. 
+- Declare a dependency on the Quick Authentication SDK. **TODO: Jingjing: Add info on how to use AAR file**
 - Add an intent filter for Quick Authentication to your app manifest. 
 - Create a Quick Authentication sign-in client object ([MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html)) with the proper configuration.
 - Add a Quick Authentication sign-in button somewhere in your application's layout xml or instantiate it programmatically.
@@ -54,6 +54,7 @@ Now that you have created an application registration, you can extend it to Andr
 ![Click Configuration](./media/android-click-configure.png)
 
 ## Declaring a dependency on Quick Authentication
+**TODO: Jingjing: Add comment on how to use AAR file.**
 Add the following to your app's `build.gradle`
 ```java
 dependencies {
@@ -128,9 +129,9 @@ MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
 ```
 | Option setter | Description |
 |---|---|
-| setConfigResourceId |	Sets the resource id of the configuration file you created in section [Create a configuration file](). |
+| setConfigResourceId |	Sets the resource id of the configuration file you created in section [Create a configuration file](#creating-a-configuration-file). |
 
-Other options can be used, for example to configure logging. Refer to the [reference documentation](./quick-authentication-android-reference.md) [**TODO** or section on Logging below?] for additional options. 
+Other options can be used, for example to configure logging. Refer to the [reference documentation](./quick-authentication-android-reference.md#logging) for additional options. 
 
 Then to create `MSQASignClient`, use its static `Create` method:
 ```java
@@ -172,22 +173,22 @@ The easiest way to implement the sign-in flow with Quick Authentication is to us
 
 ```java
 <com.microsoft.quick.auth.signin.view.MSQASignInButton
-  android:id="@+id/sign_in_button"
+  android:id="@+id/sign_in_button" />
 ```
 This will create a fully functional button looking like this:
 
 ![Large Sign-in button](./media/large.png)
 
-The look and feel of this button can be modified in a variety of ways by either specifying attributes in the xml above or programmatically. Look at the [reference documentation](./quick-authentication-android-reference.md) for a more detailed description.
+The look and feel of this button can be modified in a variety of ways by either specifying attributes in the xml above or programmatically. Look at the [reference documentation](./quick-authentication-android-reference.md#sign-in-button-customization) for a more detailed description.
 
 To programmatically set specific attributes on the button or to set the callback to be called when sign-in completes (see next section), you will need to retrieve the `MSQASignInButton` view object. The easiest is to assign an id to your button in the layout xml and find its view by id as follows:
 
 ```java
-MSQASignInButton signInButton = findViewById(R.id.sign_in_button);/>
+MSQASignInButton signInButton = findViewById(R.id.sign_in_button);
 ```
 
 ## Handling the authentication events
-As described above, the Sign-in Button is functional and clicking it will run the sign-in user experience. However, in your application you need a way to know that sign-in completed successfully and to retreive properties of the account, such as username, email address, full name, and photo. The following method of [MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) allows to set that callback:
+As described above, the Sign-in Button is functional and clicking it will run the sign-in user experience. However, in your application you need a way to know that sign-in completed successfully and to retrieve properties of the account, such as username, email address, full name, given name, surname, unique id, idtoken and photo. The following method of [MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) allows to set that callback:
 
 ```java
 public void setSignInCallback (
@@ -225,6 +226,8 @@ The returned `AccountInfo` interface, returned by the listener, provides the fol
 |--|--|
 | @Nullable String getFullName() | full name |
 | @Nullable String getUsername() | user email or phone |
+| @Nullable String getGivenName() | user given name |
+| @Nullable String getSurname() | user surname |
 | @Nullable String getId() | Unique account/user id |
 | @Nullable String getIdToken() | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process|
 | @Nullable String getBase64Photo() | User account picture (jpeg, png, etc.) as a base64 encoded string.
@@ -269,7 +272,6 @@ MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
         .setLogLevel(LogLevel.VERBOSE)
         .setExternalLogger((logLevel, message) -> {
             // get log message here
-            ```
         })
         .build();
 ```
@@ -282,4 +284,4 @@ setLogLevel(@LogLevel int logLevel) | Sets the log level for diagnostic purpose.
 
 ## Next steps
 
-For more details about prompt configuration and API reference, see [Microsoft Quick Authentication configuration](./quick-authentication-android-reference.md).
+For more details about button configuration and API reference, see [Microsoft Quick Authentication for Android configuration and Java API reference](./quick-authentication-android-reference.md).
