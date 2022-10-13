@@ -143,7 +143,7 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 | `redirect_uri`          | **Redirect URI for Web**                                                      | (no default value)            | Yes if `ux_mode == 'redirect'`, else No |  Check [this section](./quick-authentication-how-to.md#add-redirect-uri-in-application-registration) for more info. |
 | `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state) |
 
-### redirect_state
+### `redirect_state`
 
 This is a optional string value which can be configured using any of the following approaches:
 - `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
