@@ -97,6 +97,17 @@
 
       function userAuthenticated(signInAccountInfo) {
         console.log(signInAccountInfo);
+        if (!signInAccountInfo) {
+          console.log("Sign in failed with error: ", errorInfo);
+          document.querySelector(".user-info").innerHTML = `
+            <div class='error-info'>
+              <p><span>Sign in failed:</span></p>
+              <p>errorCode: <span>${errorInfo.errorCode}</span></p>
+              <p>errorMessage: <span>${errorInfo.errorMessage}</span></p>
+            </div>
+          `;
+          return;
+        }
 
         document.querySelector(".user-info").innerHTML = `
           <p>User's avatar: <img src="${signInAccountInfo.photoUrl}" alt="User avatar"></p>

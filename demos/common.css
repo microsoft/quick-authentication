@@ -32,6 +32,10 @@ code {
   display: none;
 }
 
+.make-invisible {
+  display: none;
+}
+
 .user-info {
   background: #fff5;
   padding: 1rem;
@@ -43,6 +47,10 @@ code {
   align-self: stretch;
   border-radius: .25rem;
   word-break: break-all;
+}
+
+.error-info {
+  align-items: left;
 }
 
 .user-info:empty {
