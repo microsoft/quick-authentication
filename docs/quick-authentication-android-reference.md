@@ -97,7 +97,7 @@ You can customize the look and feel of the sign-in button by using the following
 |--|--|--|--|
 | msqa_button_type |The button type, either a simple icon or a standard button with text.  |	icon <br> standard | standard |
 | msqa_ button_theme | The button visual theme. | light <br> dark |dark |
-| msqa_ button_size	| Predefined sizes. If width or height are specified, they override this setting. <br> **large**: width: 280px, height: 42px,textSize: 16px, iconSize: 20px<br> **medium**: width: 280px, height: 36px, textSize: 14px, iconSize: 16px <br> **small**: width: 280px, height: 28px, textSize: 12px, iconSize: 12px	| small <br>medium<br>large | large 
+| msqa_ button_size	| Predefined sizes. If width or height are specified, they override this setting. <br>**Large**:<br>&nbsp; width: 280px<br>&nbsp; height: 42px<br>&nbsp; textSize: 16px<br>&nbsp; iconSize: 20px<br> **Medium**:<br>&nbsp; width: 280px<br>&nbsp; height: 36px<br>&nbsp; textSize: 14px<br>&nbsp; iconSize: 16px<br> **Small**:<br>&nbsp; width: 280px<br>&nbsp; height: 28px<br>&nbsp; textSize: 12px<br>&nbsp; iconSize: 12px 	| small <br>medium<br>large | large 
 | msqa_button_text | The text shown in the button.	| signin_with<br>signup_with<br>signin<br>continue_with |	signin_with<br> |
 | msqa_button_shape	| The shape of the button. | rectangular<br>pill<br>rounded | rectangular |
 | msqa_button_logo_alignment| Where the Microsoft logo should be in the button. |	left<br>center | left
@@ -277,17 +277,17 @@ If there is no current sign-in, [OnCompleteListener](https://microsoft.github.io
 Code example:
 ```java
 signInClient.getCurrentAccount(activity,
-        new OnCompleteListener<AccountInfo>() {
-            @Override
-            public void onComplete(@Nullable AccountInfo accountInfo,
-                                   @Nullable MSQAException error) {
-                if (accountInfo != null) {
-                    // use account
-                } else {
-                    // handle error
-                }
+    new OnCompleteListener<AccountInfo>() {
+        @Override
+        public void onComplete(@Nullable AccountInfo accountInfo,
+                               @Nullable MSQAException error) {
+            if (accountInfo != null) {
+                // use account
+            } else {
+                // handle error
             }
-        });
+        }
+    });
 ```
 ## MSQASignInClient method: acquireToken
 This method acquires an access token interactively. A UI flow will be presented to the user to consent to the request.

@@ -18,7 +18,10 @@ or to customize the appearance of the button during creation:
 - (nullable instancetype)initWithCoder:(NSCoder*)coder
 ```
 
-[**TODO** describe NSCoder]
+[**TODO**: Minggang, can developers used the version of this method with NSCoder. If yes, please describe NSCoder]
+
+[**TODO**: Minggang, please add code example or reference to the demo sample code]
+
  ## Customizing the appearance of the sign-in button
 To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
 
@@ -26,7 +29,7 @@ To customize the appearance of the button, you can set the following properties 
 | -- | -- | -- | -- |
 | type | The button type | kMSQASignInButtonTypeStandard<br> kMSQASignInButtonTypeIcon|kMSQASignInButtonTypeStandard | 
 | theme | The button visual theme | kMSQASignInButtonThemeDark<br>  kMSQASignInButtonThemeLight |	kMSQASignInButtonThemeDark |
-| size | Predefined sizes. If width or height are specified, they override this setting.<br> **large**: width: 280px, height: 42px, textSize: 16px, iconSize: 20px<br> **medium**: width: 280px, height: 36px, textSize: 14px, iconSize: 16px<br> **small**: width: 280px, height: 28px, textSize: 12px, iconSize: 12px | kMSQASignInButtonSizeSmall<br> kMSQASignInButtonSizeMedium<br> kMSQASignInButtonSizeLarge | kMSQASignInButtonSizeLarge |
+| size | Predefined sizes. If width or height are specified, they override this setting.<br> **Large**:<br>&nbsp; width: 280px<br>&nbsp; height: 42px<br>&nbsp; textSize: 16px<br>&nbsp; iconSize: 20px<br> **Medium**:<br>&nbsp; width: 280px<br>&nbsp; height: 36px<br>&nbsp; textSize: 14px<br>&nbsp; iconSize: 16px<br> **Small**:<br>&nbsp; width: 280px<br>&nbsp; height: 28px<br>&nbsp; textSize: 12px<br>&nbsp; iconSize: 12px | kMSQASignInButtonSizeSmall<br> kMSQASignInButtonSizeMedium<br> kMSQASignInButtonSizeLarge | kMSQASignInButtonSizeLarge |
 | text |	Button text	| kMSQASignInButtonTextSignInWith<br> kMSQASignInButtonTextSignUpWith <br> kMSQASignInButtonTextSignIn<br> kMSQASignInButtonTextContinueWith | kMSQASignInButtonTextSignInWith |
 | shape | Shape of button corners. | kMSQASignInButtonShapeRectangular<br> kMSQASignInButtonShapePill<br>kMSQASignInButtonShapeRounded |kMSQASignInButtonShapeRectangular |
 | logoAlignment | Where the Microsoft logo should be in the button | kMSQASignInButtonLogoLeft<br> kMSQASignInButtonLogoCenter | kMSQASignInButtonLogoLeft |
@@ -53,7 +56,7 @@ The following methods of `MSQASignIn` offer programatic triggering of the sign-i
 | acquireTokenSilentWithParameter() | Attempts to acquire an access token silently (with no user interaction). |
 | acquireTokenWithParameters() | Acquires an access token interactively, will pop-up web UI. | |
 
-## MSQASignIn method: initWithConfiguration
+### MSQASignIn method: initWithConfiguration
 Initializes the MSQASignIn object, through which you can utilize most of Microsoft Quick Authentication functionality.
 ```objectivec
 - (instancetype)initWithConfiguration:(MSQAConfiguration *)configuration
@@ -87,7 +90,9 @@ where `MSQAConfiguration` is defined as:
 @end
 ```
 
-## MSQACompletionBlock and MSQAAccountData
+### MSQACompletionBlock and MSQAAccountData
+
+[**TODO** consistency: MSQAAccountData in iOS and MSQAAccountInfo in Android - Minggang: use MSQAAccountInfo everywhere once you have changed the code]
 
 `MSQASignIn` methods that return account information do so by invoking an `MSQACompletionBlock` 
 
@@ -96,10 +101,7 @@ with `MSQACompletionBlock` defined as
 typedef void (^MSQACompletionBlock)(MSQAAccountData *_Nullable account,
                                     NSError *_Nullable error);
 ```
-
 with the `MSQAAccountData` argument containing the following information:
-
-[**TODO** consistency: MSQAAccountData in iOS and MSQAAccountInfo in Android]
 
 ```objectivec
 @interface MSQAAccountData : NSObject <NSCopying> 
@@ -119,9 +121,18 @@ with the `MSQAAccountData` argument containing the following information:
 // MSA account id token.
 @property(nonatomic, readonly, nullable) NSString *idToken;
 
+/// MSA user's surname.
+@property(nonatomic, readonly, nullable) NSString *surname;
+
+/// MSA user's given name.
+@property(nonatomic, readonly, nullable) NSString *givenName;
+
+/// MSA user's email.
+@property(nonatomic, readonly, nullable) NSString *email;
+
 @end
 ```
-## MSQASignIn method: getCurrentAccountWithCompletionBlock
+### MSQASignIn method: getCurrentAccountWithCompletionBlock
 This method returns the account the user is currently signed-in with, if any, through the callback. 
 ```objectivec
 - (void)getCurrentAccountWithCompletionBlock:(MSQACompletionBlock)completionBlock;
@@ -145,7 +156,7 @@ Code example (Objective-C):
   }
 }];
 ```
-## MSQASignIn method: signInWithViewController:completionBlock
+### MSQASignIn method: signInWithViewController:completionBlock
 Interactively signs-in the user into your site and returns the account asynchronously through the callback.
 ```objectivec
 - (void)signInWithViewController:(UIViewController *)controller
@@ -173,11 +184,11 @@ Code example (Objective-C):
                             options:
                               NSDataBase64DecodingIgnoreUnknownCharacters];
       NSImage *photo = [UIImage imageWithData:data];
-     // Use these values in UX.
+      // Use these values in UX.
     }];
 ```
 
-## MSQASignIn method: signOutWithCompletionBlock
+### MSQASignIn method: signOutWithCompletionBlock
 Signs the user out  [**TODO** be clearer on where to put that code]:
 ```objectivec
 - signOutWithCompletionBlock:^(NSError *_Nullable error);
@@ -193,7 +204,7 @@ Example code (Objective-C):
 }
 ```
 
-## MSQASignIn method: acquireTokenWithParameters:completionBlock
+### MSQASignIn method: acquireTokenWithParameters:completionBlock
 Acquires an access token to access additional account information about the user stored in the Microsoft Graph, using interactive authentication if necessary.
 
 ```objectivec
@@ -205,7 +216,7 @@ Acquires an access token to access additional account information about the user
 | Parameters | Description | 
 | -- | -- |
 | parameters | Contains the parameters used to fetch the token |
-| completionBlock | The completion block that will be called on completion or on failure [**TODO** this needs to return a token, not account data].
+| completionBlock | The completion block that will be called on completion or on failure [**TODO** Minggang: this needs to return a token, not account data].
 | completionBlock | callback invoked when the operation is complete or an error occurred. |
 | &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
 | &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
@@ -255,8 +266,8 @@ Attempt to acquires an access token to access additional account information abo
 
 | Parameter | Description |
 | -- | -- |
-| parameters | MSQASilentTokenParameters represents the parameters used to fetch the token. |
-| completionBlock | The completion block that will be called on completion or on failure.
+| parameters | Contains the parameters used to fetch the token. |
+| completionBlock | The completion block that will be called on completion or on failure [**TODO** Minggang: this needs to return a token, not account data].
 | completionBlock | callback invoked when the operation is complete or an error occurred. |
 | &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
 | &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
@@ -320,7 +331,7 @@ typedef void (^MSQALogCallback)(MSQALogLevel level,
 ```
 
 ### Enable MSAL logging
-As the Microsoft Quick Authentication SDK builds on top of MSAL for iOS, you can enable logging in MSAL and receive the messages through the same callback as above, at the same log level. MSAL logging is disabled by default. Use `MSQALogger`'s property `enableMSALLogging`:
+As the Microsoft Quick Authentication SDK builds on top of [MSAL for iOS](https://github.com/AzureAD/microsoft-authentication-library-for-objc), you can enable logging in MSAL and receive the messages through the same callback as above, at the same log level. MSAL logging is disabled by default. Use `MSQALogger`'s property `enableMSALLogging`:
 ```
 @property(atomic) BOOL enableMSALLogging;
 ```
