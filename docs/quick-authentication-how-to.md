@@ -6,9 +6,15 @@ Microsoft Quick Authentication is a lightweight JavaScript library that makes it
 
 ## How it works
 
-To enable Quick Authentication, you first add a reference to the library in a `<script>` element, then an HTML or JavaScript snippet that displays the sign-in button on the page. When a user selects the button, they're presented with a sign-in prompt. You can configure both the button and the prompt.
+To enable Quick Authentication, you first add a reference to the library in a `<script>` element, then an HTML or JavaScript snippet that displays the sign-in button on the page.
+
+By default, when a user clicks on the button, it opens a popup. You can configure the button. After user enters their credentials in the popup, they get user sign-in information in a JavaScript callback present in their web page. This is called the "popup" mode.
+
+It is also possible to configure your application for [redirect mode](#redirect-mode). In this case, when a user clicks on the button, there is full page redirection to MSA sign-in page. After user enters credentials successfully on MSA sign-in page, there is `POST` to your server, as opposed to a call to your Javascript callback. Your server needs to use information present in `POST` and do additional work to get user account information. Check [this section](#redirect-mode) for more details.
 
 All browsers support a configurable sign-in button and prompt provided by Quick Authentication called the _standard sign-in experience_. Microsoft Edge supports an _enhanced sign-in experience_, which is also configurable.
+
+In _enhanced sign-in experience_, the sign-in process is completed without the user needing to explicitly enter their credentials.
 
 - **Standard sign-in experience** - Quick Authentication shows the _standard_ sign-in button and prompt to users not signed in to Microsoft Edge or that are using a another browser.
 
@@ -70,7 +76,7 @@ There are two ways to add Quick Authentication to your app:
 
 If you have access to adjust your application's HTML, this approach offers a declarative way to configure Quick Authentication.
 
-1. Configure the library
+### 1. Configure the library
 
     Add the configuration `div` to your page:
 
@@ -89,7 +95,7 @@ If you have access to adjust your application's HTML, this approach offers a dec
 
     You'll need to write JavaScript code to receive the authentication event and handle completing the registration and sign-in processes. We'll discuss how to do that, below.
 
-1. Inject the sign-in button
+### 2. Inject the sign-in button
 
     Place a `div` in your authentication component to indicate where Quick Authentication should render the button:
 
@@ -103,7 +109,7 @@ For details about modifying the sign-in button's appearance and the prompt's app
 
 Use this approach if you don't have the ability to modify the application's HTML.
 
-1. Configure the library
+### 1. Configure the library
 
     Configuration of the Quick Authentication library can safely happen when the page has finished loading, by calling `ms.auth.initialize` and passing it a configuration object:
 
@@ -139,7 +145,7 @@ Use this approach if you don't have the ability to modify the application's HTML
 
     [Quick Authentication can be configured](./quick-authentication-reference.md) to allow more control over the behavior of the library.
 
-1. Inject the button
+### 2. Inject the button
 
     To render a sign-in button, call the following JavaScript just after initializing the library (shown above):
 
@@ -331,21 +337,27 @@ To also enable logging for MSAL.js, add the [`logMsalEvents`](./quick-authentica
 
 ## Redirect mode
 
+In redirect mode, on clicking button or calling [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin), quick authentication does a full page redirection to MSA sign-in page.
+
+If this MSA webpage sign-in is successful, it sends a POST request to your server, as opposed to calling Javascript callback for your web application.
+
+Your server needs to handle the POST request and fetch user account information. Check [this](#redirect-mode-flow-of-control) and [this](#completing-the-flow-on-your-server-to-get-user-profile-info) section below for more information.
+
 ### Enabling your application for redirection
 
-#### Add redirect URI in application registration
+#### 1. Add redirect URI in application registration
 
 - In "Authentication" tab of your application's registration, click "Add a platform".
 - Then select "Web".
 - Then add a Redirect URI.
 
-#### Add a secret in application registration
+#### 2. Add a secret in application registration
 
 - In "Certificates & secrets" tab of your application's registration, click "New client secret".
 - Add the secret and then keep a copy of the "Value" field.
 - This secret in "Value" field will be used later from your server to handle redirection flow.
 
-#### Configuring application for redirection in quick authentication
+#### 3. Configure application for redirection in quick authentication
 
 In quick authentication configuration:
 
@@ -387,26 +399,7 @@ window.onload = function () {
 
 ### Optional properties for redirect mode
 
-#### redirect_state
-
-This is a optional string value, which can be configured using any of the following approaches:
-- `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
-- `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
-- Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.
-
-####  redirect_allow_account_selection
-
-This optional boolean value can be configured using any of the following approaches:
-- `redirect_allow_account_selection` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
-- `data-redirect_allow_account_selection` property in HTML `id="ms_auth_initialize"`.
-
-The property is used only for MSA profile in Edge. Only when it's true, sign-in button's dropdown is shown in redirect mode.
-
-![Edge MSA profile button dropdown](./media/edge-msa-profile-drop-down.png)
-
-If user selects "Use another Microsoft Account", then during redirection, account picker will be shown by MSA server.
-
-![MSA account picker](./media/msa-account-picker.png)
+[redirect_state](./quick-authentication-reference.md#redirect_state) is an optional property.
 
 ### Sign-in prompt in redirect mode
 
@@ -440,7 +433,7 @@ If user selects "Use another Microsoft Account", then during redirection, accoun
 
 ### Completing the flow on your server to get user profile info
 
-#### Fetch access token by exchanging code
+#### 1. Fetch access token by exchanging code
 
 - If `state` was sent, ensure that it matches the expectation.
 - Make a request to fetch access token using client secret as [documented here](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-access-token-with-a-client_secret).
@@ -452,13 +445,29 @@ If user selects "Use another Microsoft Account", then during redirection, accoun
     - `redirect_uri`: The redirect URI which [was registered](#add-redirect-uri-in-application-registration).
     - `grant_type`: Use value `authorization_code`.
     - `client_secret`: The "Value" field of [secret](#add-a-secret-in-application-registration) from your application registration.
+
+Here's a sample:
+```http
+// Line breaks for legibility only
+
+POST /consumers/oauth2/v2.0/token HTTP/1.1
+Host: https://login.microsoftonline.com
+Content-Type: application/x-www-form-urlencoded
+
+client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+&scope=openid%20profile%20User.Read%20offline_access
+&code=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq3n8b2JRLk4OxVXr...
+&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+&grant_type=authorization_code
+&client_secret=JqQX2PNo9bpM0uEihUPzyrh    // NOTE: Only required for web apps. This secret needs to be URL-Encoded.
+```
 - If the call succeeds, it will return a successful response like [this](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow#successful-response-2).
 
-#### Fetch more info using graph API
+#### 2. Fetch more info using graph API
 
 Use the access token to call [GET USER API](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http) to get user information.
 
-#### Fetch image using graph API
+#### 3. Fetch image using graph API
 
 Use the access token to call [photo API](https://learn.microsoft.com/en-us/graph/api/profilephoto-get?view=graph-rest-1.0) to get photo of the user.
 

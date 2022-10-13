@@ -141,8 +141,14 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 | `locale`                | `Language ID` strings in [table below](#supported-locales). e.g., `"en-US"`, `"fr-FR"`, etc. | `"en-US"`      | No       | Check `Language ID` column in [this table](#supported-locales) for possible values.                   |
 | `ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
 | `redirect_uri`          | **Redirect URI for Web**                                                      | (no default value)            | Yes if `ux_mode == 'redirect'`, else No |  Check [this section](./quick-authentication-how-to.md#add-redirect-uri-in-application-registration) for more info. |
-| `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API |
-| `redirect_allow_account_selection` | `true` or `false`                                                  | `false`                       | No       | Only used if `ux_mode == 'redirect'`. If `true` then button in MSA profile will show a dropdown allowing user to "Use another Microsoft account" than the one used in MSA profile. Check [this section](./quick-authentication-how-to.md#redirect_allow_account_selection) for more info.|
+| `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state) |
+
+### redirect_state
+
+This is a optional string value which can be configured using any of the following approaches:
+- `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
+- `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
+- Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.
 
 ## Data Type: AccountInfo
 
@@ -225,7 +231,7 @@ The following are some possible reasons for failure:
 
 - Initialization was called more than once. Here API returns `{result: 'failure', reason: 'Library already initialized'}`.
 - `callback` isn't a valid function or `client_id` isn't set. In these cases, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
-- If `ux_mode == 'redirect'` and `redirect_uri` is a valid non-empty string. In this case, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
+- If `ux_mode == 'redirect'` and `redirect_uri` is an `null`, `undefined` or empty string, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
 
 `ms.auth.initialize` or div ["ms-auth-initialize"](quick-authentication-how-to.md#option-1-add-sign-in-button-via-html) is needed to initialize Microsoft Quick Authentication library.
 
@@ -502,7 +508,7 @@ If `ux_mode == 'redirect'` then `ms.auth.setRedirectState` can be called to set 
 ms.auth.setRedirectState('some-unique-string-that-is-known-by-your-server');
 ```
 
-Check [this section](./quick-authentication-how-to.md#redirect_state) for more info on redirect state.
+Check [this section](#redirect_state) for more info on redirect state.
 
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
 
