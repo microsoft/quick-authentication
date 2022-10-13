@@ -141,11 +141,11 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 | `locale`                | `Language ID` strings in [table below](#supported-locales). e.g., `"en-US"`, `"fr-FR"`, etc. | `"en-US"`      | No       | Check `Language ID` column in [this table](#supported-locales) for possible values.                   |
 | `ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
 | `redirect_uri`          | **Redirect URI for Web**                                                      | (no default value)            | Yes if `ux_mode == 'redirect'`, else No |  Check [this section](./quick-authentication-how-to.md#1-add-redirect-uri-in-application-registration) for more info. |
-| `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state) |
+| `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state). |
 
 ### `redirect_state`
 
-This is a optional string value which can be configured using any of the following approaches:
+This is an optional string value which can be configured using any of the following approaches:
 - `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
 - `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
 - Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.

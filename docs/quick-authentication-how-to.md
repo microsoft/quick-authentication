@@ -10,7 +10,7 @@ To enable Quick Authentication, you first add a reference to the library in a `<
 
 By default, when a user clicks on the button, it opens a popup. You can configure the button. After user enters their credentials in the popup, they get user sign-in information in a JavaScript callback present in their web page. This is called the "popup" mode.
 
-It is also possible to configure your application for [redirect mode](#redirect-mode). In this case, when a user clicks on the button, there is full page redirection to MSA sign-in page. After user enters credentials successfully on MSA sign-in page, there is `POST` to your server, as opposed to a call to your Javascript callback. Your server needs to use information present in `POST` and do additional work to get user account information. Check [this section](#redirect-mode) for more details.
+It is also possible to configure your application for [redirect mode](#redirect-mode). In this case, when a user clicks on the button, there is full page redirection to MSA sign-in page. After user enters credentials successfully on MSA sign-in page, there is a `POST` to your server, as opposed to a call to your Javascript callback. Your server needs to use information present in `POST` and do additional work to get user account information. Check [this section](#redirect-mode) for more details.
 
 All browsers support a configurable sign-in button and prompt provided by Quick Authentication called the _standard sign-in experience_. Microsoft Edge supports an _enhanced sign-in experience_, which is also configurable.
 
