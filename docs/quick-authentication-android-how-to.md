@@ -19,9 +19,7 @@ To enable Quick Authentication in your application, you will need to follow thes
 
 Quick Authentication will show a fully functioning sign-in button, looking as follows in its default form, and customizable like with [Quick Authentication for the web](quick-authentication-how-to.md):
 
-[**TODO**: capture and insert image from actual phone]
-
-  ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
+  ![Standard sign-in button showing the Sign in with Microsoft text label](./media/android-sign-in-button.png)
 
 Note that at this time, the personalization of the user experience available with Quick Authentication for the web is not available to Android native apps. However, your users will still be able to sign-in using the button shown above, and benefit from SSO in some circumstances.
 
@@ -32,13 +30,28 @@ If you have already registered a single-page web application, you can reuse the 
 
 Now that you have created an application registration, you can extend it to Android as follows. On the Azure page describing your app registration:
 1. Open the *Authentication* tab on the left of that page
-3. Click *Add Platform*
-4. Select *Android*
-5. Enter the package name. Your app's package name can be found in the Android Manifest for your app.
-6. Using the command line indicated under the *Signature hash* section, generate a signature hash
-7. Click *Configure*
 
-[**TODO:** Add screen shots to list above]
+![Open Authentication](./media/android-open-authentication.png)
+
+2. Click *Add Platform*
+
+![Click Add Platform](./media/android-add-platform.png)
+
+3. Select *Android*
+
+![Select Android Platform](./media/android-select-android-platform.png)
+
+4. Enter the package name. Your app's package name can be found in the Android Manifest for your app.
+
+![Enter Package Name](./media/android-enter-package-name.png)
+
+5. Using the command line indicated under the *Signature hash* section, generate a signature hash
+
+![Enter Signature Hash](./media/android-enter-signature-hash.png)
+
+6. Click *Configure*
+
+![Click Configuration](./media/android-click-configure.png)
 
 ## Declaring a dependency on Quick Authentication
 Add the following to your app's `build.gradle`
@@ -127,7 +140,7 @@ public static void create(@NonNull Context context,
 ```
 | Parameters | Description
 |---|---|
-| @NonNull context | Application's context. Cannot be null. [TODO] more details.
+| @NonNull context | Application's Context. The sdk requires the application context to be passed in PublicClientApplication. Cannot be null.
 | @NonNull signInOptions | The option object you created above.
 | @NonNull listener | `ClientCreatedListener` is a callback to be invoked when the client object is successfully created. Cannot be null.
 | Returned value | none
