@@ -29,7 +29,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// The class reprensents the configuration for the `MSQASignIn`.
+/// The class represents the configuration for the `MSQASignIn`.
 @interface MSQAConfiguration : NSObject
 
 /// The client ID of the app from the Microsoft developer portal.

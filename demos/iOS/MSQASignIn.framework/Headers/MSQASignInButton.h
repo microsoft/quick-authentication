@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, MSQASignInButtonSize) {
 typedef NS_ENUM(NSInteger, MSQASignInButtonText) {
   kMSQASignInButtonTextSignInWith = 0,
   kMSQASignInButtonTextSignUpWith = 1,
-  kMSQASignInButtonTextContimueWith = 2,
+  kMSQASignInButtonTextContinueWith = 2,
   kMSQASignInButtonTextSignIn = 3
 };
 

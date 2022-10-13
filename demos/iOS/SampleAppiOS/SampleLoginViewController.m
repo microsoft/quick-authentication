@@ -237,7 +237,7 @@
   UIAlertController *alertController = [UIAlertController
       alertControllerWithTitle:title
                        message:nil
-                preferredStyle:UIAlertControllerStyleActionSheet];
+                preferredStyle:UIAlertControllerStyleAlert];
   [alertController setValue:viewController forKey:@"contentViewController"];
   [alertController
       addAction:[UIAlertAction actionWithTitle:@"Done"

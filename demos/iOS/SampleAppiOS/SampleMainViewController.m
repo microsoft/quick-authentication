@@ -76,14 +76,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   _nameLabel.text =
-      [NSString stringWithFormat:@"Welcome, %@", _accountData.userName];
+      [NSString stringWithFormat:@"Welcome, %@ %@", _accountData.givenName,
+                                 _accountData.surname];
   _fullNameLabel.text =
-      [NSString stringWithFormat:@"Full name: %@", _accountData.fullName];
+      [NSString stringWithFormat:@"Email: %@", _accountData.email];
   _idLabel.text = [NSString stringWithFormat:@"Id: %@", _accountData.userId];
 
-  if (_accountData.photo) {
+  if (_accountData.base64Photo) {
     NSData *data = [[NSData alloc]
-        initWithBase64EncodedString:_accountData.photo
+        initWithBase64EncodedString:_accountData.base64Photo
                             options:
                                 NSDataBase64DecodingIgnoreUnknownCharacters];
     [self setUserPhoto:[UIImage imageWithData:data]];
@@ -135,7 +136,7 @@
                  MSQAAccountData *_Nullable account, NSError *_Nullable error) {
     if (account) {
       NSString *message =
-          [NSString stringWithFormat:@"FullName: %@\nEmail: %@",
+          [NSString stringWithFormat:@"Full name: %@\nUser name: %@",
                                      account.fullName, account.userName];
       [self showAlertWithMessage:message];
       return;
@@ -145,10 +146,10 @@
 }
 
 - (void)showAlertWithMessage:(NSString *)message {
-  UIAlertController *controller = [UIAlertController
-      alertControllerWithTitle:@"Current account"
-                       message:message
-                preferredStyle:UIAlertControllerStyleActionSheet];
+  UIAlertController *controller =
+      [UIAlertController alertControllerWithTitle:@"Current account"
+                                          message:message
+                                   preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *action =
       [UIAlertAction actionWithTitle:@"OK"
                                style:UIAlertActionStyleDefault

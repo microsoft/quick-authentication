@@ -25,18 +25,18 @@
 //
 //------------------------------------------------------------------------------
 
-// TODO(minggang): Add to include MSQASignIn.h header.
+#import "MSQASignIn.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MSQASignIn ()
 
-- (instancetype)initWithConfiguration:(MSQAConfiguration *)configuration
-                                error:(NSError *_Nullable *_Nullable)error;
+- (void)signInByButtonWithViewController:(UIViewController *)controller
+                         completionBlock:(MSQACompletionBlock)completionBlock;
 
-- (void)signInWithViewController:(UIViewController *)controller
-                 completionBlock:(void (^)(MQAAccountData *account,
-                                           NSError *error))completionBlock;
+- (void)signInInternalWithViewController:(UIViewController *)controller
+                         completionBlock:(MSQACompletionBlock)completionBlock;
 
 @end
 
-NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_END

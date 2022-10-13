@@ -26,16 +26,55 @@
 //------------------------------------------------------------------------------
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MSQAPhotoFetcher : NSObject
+/// Represents the priority of the logging message.
+typedef NS_ENUM(NSInteger, MSQALogLevel) {
+  /** Disable all logging */
+  MSQALogLevelNothing,
 
-+ (instancetype)fetchPhotoWithToken:(NSString *)token
-                    completionBlock:
-                        (void (^)(NSString *_Nullable photo,
-                                  NSError *_Nullable error))completionBlock;
+  /** Default level, prints out information only when errors occur */
+  MSQALogLevelError,
+
+  /** Warnings only */
+  MSQALogLevelWarning,
+
+  /** Library entry points, with parameters and various keychain operations */
+  MSQALogLevelInfo,
+
+  /** API tracing */
+  MSQALogLevelVerbose,
+
+  /** API tracing */
+  MSQALogLevelLast = MSQALogLevelVerbose,
+};
+
+/// Represents the callback of the `MSQALogger`.
+typedef void (^MSQALogCallback)(MSQALogLevel level,
+                                NSString *_Nullable message);
+
+/// Represents the logger used by `MSQASignIn`.
+@interface MSQALogger : NSObject
+
++ (instancetype)new NS_UNAVAILABLE;
+
++ (instancetype)init NS_UNAVAILABLE;
+
+/// The property used to access the singleton instance of `MSQALogger`.
+@property(class, nonatomic, readonly) MSQALogger *sharedInstance;
+
+/// The minimum log level for messages to be passed onto the log
+/// callback, changing the level will apply to all instances of `MSQASignIn`.
+/// Default value is `MSQALogLevelInfo`.
+@property(atomic) MSQALogLevel logLevel;
+
+/// Enables the logging from MSAL.
+@property(atomic) BOOL enableMSALLogging;
+
+/// Sets the callback for the logger.
+/// @param callback `MSQALogCallback` callback that is called when logging.
+- (void)setLogCallback:(MSQALogCallback)callback;
 
 @end
 

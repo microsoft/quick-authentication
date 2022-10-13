@@ -26,19 +26,19 @@
 //------------------------------------------------------------------------------
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Represents the parameter used when acquiring the token silently.
-@interface MSQASilentTokenParameters : NSObject
+typedef void (^UserInfoFetcherCompletionBlock)(NSError *_Nullable error);
 
-/// Permissions you want to include in the token to be received.
-@property(nonnull, readonly, nonatomic) NSArray<NSString *> *scopes;
+@class MSQAAccountData;
 
-/// Initialize the `MSQASilentTokenParameters` object.
-/// - Parameter scopes: Permissions you want to include in the access token
-/// received.
-- (instancetype)initWithScopes:(NSArray<NSString *> *)scopes;
+@interface MSQAUserInfoFetcher : NSObject
+
++ (instancetype)fetchUserInfoWithAccount:(MSQAAccountData *)account
+                         completionBlock:
+                             (UserInfoFetcherCompletionBlock)completionBlock;
 
 @end
 

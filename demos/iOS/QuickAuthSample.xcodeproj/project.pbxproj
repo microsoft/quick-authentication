@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2903637E28F802BA00142C95 /* SampleLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2903637D28F802BA00142C95 /* SampleLoginView.xib */; };
 		29B01E4028D32F8100F315D0 /* MSQASignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B01E3F28D32F8100F315D0 /* MSQASignIn.framework */; };
 		29B01E4128D3300F00F315D0 /* MSQASignIn.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 29B01E3F28D32F8100F315D0 /* MSQASignIn.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC431560E5435B383BBA0BB /* Pods_QuickAuthSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0030CD9F5EAEF51B8E54F5 /* Pods_QuickAuthSample.framework */; };
 		D62CF4821E9593ED006C0217 /* SampleMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62CF4811E9593ED006C0217 /* SampleMainViewController.m */; };
 		D62CF4851E9593FB006C0217 /* SampleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62CF4841E9593FB006C0217 /* SampleLoginViewController.m */; };
 		D62CF4871E9594B2006C0217 /* SampleMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62CF4861E9594B2006C0217 /* SampleMainView.xib */; };
-		D62CF4891E9594C5006C0217 /* SampleLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D62CF4881E9594C5006C0217 /* SampleLoginView.xib */; };
 		D6AEBD6D1E92DBB300C31082 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AEBD6C1E92DBB300C31082 /* main.m */; };
 		D6AEBD701E92DBB300C31082 /* SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AEBD6F1E92DBB300C31082 /* SampleAppDelegate.m */; };
 		D6AEBD781E92DBB300C31082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6AEBD771E92DBB300C31082 /* Assets.xcassets */; };
@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		1F4E7F9A08A5E9E912BD6799 /* Pods-QuickAuthSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickAuthSample.release.xcconfig"; path = "Target Support Files/Pods-QuickAuthSample/Pods-QuickAuthSample.release.xcconfig"; sourceTree = "<group>"; };
+		2903637D28F802BA00142C95 /* SampleLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleLoginView.xib; sourceTree = "<group>"; };
 		29A71ECE28BF55A800A449D9 /* Pods_MSQASignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MSQASignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A9926228BF538800C2F474 /* Pods_MSQASignIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MSQASignIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B01E3F28D32F8100F315D0 /* MSQASignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MSQASignIn.framework; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		D62CF4831E9593FB006C0217 /* SampleLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleLoginViewController.h; sourceTree = "<group>"; };
 		D62CF4841E9593FB006C0217 /* SampleLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleLoginViewController.m; sourceTree = "<group>"; };
 		D62CF4861E9594B2006C0217 /* SampleMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleMainView.xib; sourceTree = "<group>"; };
-		D62CF4881E9594C5006C0217 /* SampleLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SampleLoginView.xib; path = ../SampleLoginView.xib; sourceTree = "<group>"; };
 		D6AEBD681E92DBB300C31082 /* QuickAuthSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickAuthSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6AEBD6C1E92DBB300C31082 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6AEBD6E1E92DBB300C31082 /* SampleAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleAppDelegate.h; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 				D6AEBD6B1E92DBB300C31082 /* Supporting Files */,
 				D62CF4831E9593FB006C0217 /* SampleLoginViewController.h */,
 				D62CF4841E9593FB006C0217 /* SampleLoginViewController.m */,
-				D62CF4881E9594C5006C0217 /* SampleLoginView.xib */,
+				2903637D28F802BA00142C95 /* SampleLoginView.xib */,
 				D62CF4801E9593ED006C0217 /* SampleMainViewController.h */,
 				D62CF4811E9593ED006C0217 /* SampleMainViewController.m */,
 				D62CF4861E9594B2006C0217 /* SampleMainView.xib */,
@@ -215,9 +215,9 @@
 			files = (
 				D6AEBD7B1E92DBB300C31082 /* LaunchScreen.storyboard in Resources */,
 				D62CF4871E9594B2006C0217 /* SampleMainView.xib in Resources */,
+				2903637E28F802BA00142C95 /* SampleLoginView.xib in Resources */,
 				D6AEBD781E92DBB300C31082 /* Assets.xcassets in Resources */,
 				D6B88B171EA55F3C00A2374B /* no_photo.png in Resources */,
-				D62CF4891E9594C5006C0217 /* SampleLoginView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

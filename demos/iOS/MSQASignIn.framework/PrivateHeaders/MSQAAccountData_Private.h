@@ -39,7 +39,13 @@ NS_ASSUME_NONNULL_BEGIN
                          idToken:(nullable NSString *)idToken
                      accessToken:(nullable NSString *)accessToken;
 
-- (void)setPhoto:(NSString *)photo;
+- (void)setBase64Photo:(NSString *)base64Photo;
+
+- (void)setSurname:(NSString *)surname;
+
+- (void)setGivenName:(NSString *)givenName;
+
+- (void)setEmail:(NSString *)email;
 
 @end
 

@@ -98,6 +98,10 @@ typedef MSALWebviewParameters MSQAWebviewParameters;
 
 // TODO(minggang): This declaration will be removed and use the one
 // in MSQASignIn_Private.h.
+
+/// Starts to sign user in.
+/// @param controller The view controller to present the authentication page.
+/// @param completionBlock The block that is called on completion.
 - (void)signInWithViewController:(UIViewController *)controller
                  completionBlock:(MSQACompletionBlock)completionBlock;
 

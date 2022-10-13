@@ -6,27 +6,27 @@
 	<dict>
 		<key>Headers/MSQAAccountData.h</key>
 		<data>
-		mwCD2Rw/1ncL933xopkB4b0J+xg=
+		G0SIX3jZhkKGkHlxy6kUmZRW2EY=
 		</data>
 		<key>Headers/MSQAConfiguration.h</key>
 		<data>
-		wJCEoIu8nJYEcREybHlldfeFas4=
+		F2ufQ8tvg//naErmfeFHsJbpSpE=
 		</data>
 		<key>Headers/MSQASignIn.h</key>
 		<data>
-		+sq5+JLuXtp7psFrJMF9u9DCBlQ=
+		o1oaOKYe5StcYH6pMdrJz51KO1s=
 		</data>
 		<key>Headers/MSQASignInButton.h</key>
 		<data>
-		+LFpHHLQOlDZnNHGP3s1PvkfWo4=
+		W00VuF1CPXWZjgGB8w/wIM3v6Ec=
 		</data>
 		<key>Headers/MSQASilentTokenParameters.h</key>
 		<data>
-		ve76qnQaLu0JQvc7nfCre5soFjQ=
+		x6ST6Tm9vUTHUHPkjGcgLblTY8o=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		l3oB6YwEBWp79HTcU/W43A9nmn4=
+		YPZF7sxCRt79rlw07Bw7YQ1h1cA=
 		</data>
 		<key>Microsoft-Brand-12.png</key>
 		<data>
@@ -70,15 +70,19 @@
 		</data>
 		<key>PrivateHeaders/MSQAAccountData_Private.h</key>
 		<data>
-		7mZNmOE9CzMaYDjsgacAzGb09gc=
+		WmKgjGSdq/l+VlXdILxsFuR4x9k=
 		</data>
-		<key>PrivateHeaders/MSQAPhotoFetcher.h</key>
+		<key>PrivateHeaders/MSQALogger.h</key>
 		<data>
-		d90fAy0M3T4itOQpNYUygENUJcg=
+		sTGo4wa5XpQAdCSQTa+ROWLMqJo=
 		</data>
 		<key>PrivateHeaders/MSQASignIn_Private.h</key>
 		<data>
-		D3xCXPlPAkTSKOfnip/h1qnmPmY=
+		+sXgn8TvweLqUKvpRLm6x+ypoXc=
+		</data>
+		<key>PrivateHeaders/MSQAUserInfoFetcher.h</key>
+		<data>
+		caDkcsog9jyE1zfYLWVjGmbjWGg=
 		</data>
 		<key>SegoeUI-SemiBold.ttf</key>
 		<data>
@@ -91,35 +95,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZKmgBeQBCqttu1TRYBHTwzwaixbqiraCMc1XxeSjzaI=
+			akglv/OW7BRW6RH0NfC9DxP588Nl+ygfeE4r/n5nCII=
 			</data>
 		</dict>
 		<key>Headers/MSQAConfiguration.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xKmWfvAB2X8biZ3zEfgPIvikXH39jFuB0iK4eD8oXIQ=
+			FZOb01WSRX5Gi0/PQoNGypyVSMHhoLSJD07Ivs7eiM8=
 			</data>
 		</dict>
 		<key>Headers/MSQASignIn.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1fluOMhA0N5DM9XOJ+tekGlGFlQmgEide+ALsE7M1z0=
+			QanOM0/aBfmXRzUbNASrcr515Cmzh5K4ZH8xJrI2QsQ=
 			</data>
 		</dict>
 		<key>Headers/MSQASignInButton.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jrhZLVdomAtpE+soRlsmBBegQh8YoEwBL7BTHe7lYMY=
+			S5H1AzYucw/MVAYzzu3pL3P/XzjGbMHHU0cZi7Mg41I=
 			</data>
 		</dict>
 		<key>Headers/MSQASilentTokenParameters.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			68qdYGHr1VDHl3kGIhkOkUB4x7N9HFz07E9Y8mwuP30=
+			IvKrxLITCQnuu9GguerJxy85EvwJbRrJPoewBjzH1UA=
 			</data>
 		</dict>
 		<key>Microsoft-Brand-12.png</key>
@@ -196,21 +200,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YTqVltOWOaTpDkTbxGMeFlec3778HvZURR3J7kU/a70=
+			EbuHTph4i4DU9xMflXSyzx+nl+8kMJ4KQJa4fHsS6JA=
 			</data>
 		</dict>
-		<key>PrivateHeaders/MSQAPhotoFetcher.h</key>
+		<key>PrivateHeaders/MSQALogger.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EE+heB0Ljg0MxBIGGTSX9pZ4ciiKBZTGfrIai683VHI=
+			k7kOSGj09szN1u+2815cq0gRWA7m0o91KcOb1Bmj6Oc=
 			</data>
 		</dict>
 		<key>PrivateHeaders/MSQASignIn_Private.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7h2EdOkNXDb6bYGb8DBvjDBUdconjzOPnLsWHysFdro=
+			TDLF4TJKLuvZaUkKBXLRce1e82CK1ARSvcZ4Uixs6/A=
+			</data>
+		</dict>
+		<key>PrivateHeaders/MSQAUserInfoFetcher.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MNdXS4CTIc1p0fIjcQmESmkgV/YO+ibvx97gd2pAQYE=
 			</data>
 		</dict>
 		<key>SegoeUI-SemiBold.ttf</key>
