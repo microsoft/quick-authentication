@@ -13,14 +13,10 @@ You can also create the sign-in button programmatically using:
 ```objectivec
 - (instancetype)initWithFrame:(CGRect)frame
 ```
-or to customize the appearance of the button during creation:
-```objectivec
-- (nullable instancetype)initWithCoder:(NSCoder*)coder
+Code example (Objective-C):
 ```
-
-[**TODO**: Minggang, can developers used the version of this method with NSCoder. If yes, please describe NSCoder]
-
-[**TODO**: Minggang, please add code example or reference to the demo sample code]
+MSQASignInButton* msSignInButton = [[MSQASignInButton alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+```
 
  ## Customizing the appearance of the sign-in button
 To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
@@ -34,14 +30,13 @@ To customize the appearance of the button, you can set the following properties 
 | shape | Shape of button corners. | kMSQASignInButtonShapeRectangular<br> kMSQASignInButtonShapePill<br>kMSQASignInButtonShapeRounded |kMSQASignInButtonShapeRectangular |
 | logoAlignment | Where the Microsoft logo should be in the button | kMSQASignInButtonLogoLeft<br> kMSQASignInButtonLogoCenter | kMSQASignInButtonLogoLeft |
 
-[**TODO**: Minggang: Can I set these properties declaratively in the storyboard or XIB?]
-
 Example code:
 ```objectivec
 msSignInButton.theme = kMSQASignInButtonThemeDark;
 msSignInButton.type = kMSQASignInButtonTypeStandard;
 ```
-[**TODO**: Minggang: How do I retrieve a button defined declaratively in the storyboard or the XIB file?]
+
+You can connect the button to a `IBOutlet MSQASignInButton*` member in your ViewController.
 
 ## MSQASignIn Methods
 The following methods of `MSQASignIn` offer programmatic triggering of the sign-in flow and additional functionality. Note that these methods are asynchronous and internally dispatch their work to another thread. As a result, they can be called on the main thread and their completion block will be called back asynchronously on the same thread. 
@@ -51,7 +46,7 @@ The following methods of `MSQASignIn` offer programmatic triggering of the sign-
 | initWithConfiguration() | Initialize the MSQASignIn object. |
 | signInWithCompletionBlock() | Starts the process of signing in the user with an MSA. |
 | signOutWithCompletionBlock() | Signs the user out of this application. |
-| getCurrentAccountWithCompletionBlock() | gets the current [MSQAAccountData](#msqacompletionblock-and-msqaaccountdata) for the user. |
+| getCurrentAccountWithCompletionBlock() | gets the current [MSQAAccountInfo](#msqacompletionblock-and-msqaaccountinfo) for the user. |
 | acquireTokenSilentWithParameter() | Attempts to acquire an access token silently (with no user interaction). |
 | acquireTokenWithParameters() | Acquires an access token interactively, will pop-up web UI. | |
 
@@ -89,21 +84,19 @@ where `MSQAConfiguration` is defined as:
 @end
 ```
 
-### MSQACompletionBlock and MSQAAccountData
-
-[**TODO** consistency: MSQAAccountData in iOS and MSQAAccountInfo in Android - Minggang: use MSQAAccountInfo everywhere once you have changed the code]
+### MSQACompletionBlock and MSQAAccountInfo
 
 `MSQASignIn` methods that return account information do so by invoking an `MSQACompletionBlock` 
 
-with `MSQACompletionBlock` defined as
+with `MSQAAccountInfo` defined as
 ```objectivec
-typedef void (^MSQACompletionBlock)(MSQAAccountData *_Nullable account,
+typedef void (^MSQACompletionBlock)(MSQAAccountInfo *_Nullable account,
                                     NSError *_Nullable error);
 ```
-with the `MSQAAccountData` argument containing the following information:
+with the `MSQAAccountInfo` argument containing the following information:
 
 ```objectivec
-@interface MSQAAccountData : NSObject <NSCopying> 
+@interface MSQAAccountInfo : NSObject <NSCopying> 
 
 // MSA user's full name.
 @property(nonatomic, readonly) NSString *fullName;
@@ -146,7 +139,7 @@ This method returns the account the user is currently signed-in with, if any, th
 Code example (Objective-C):
 ```objectivec
 [_msSignIn getCurrentAccountWithCompletionBlock:^(
-               MSQAAccountData *_Nullable account, NSError *_Nullable error) {
+               MSQAAccountInfo *_Nullable account, NSError *_Nullable error) {
   if (account) {
     // Use account
   }
@@ -172,7 +165,7 @@ Code example (Objective-C):
 ```objectivec
 [_msSignIn
     signInWithViewController:(UIViewController *)controller
-             completionBlock: ^(MSQAAccountData *account, NSError *error) {
+             completionBlock: ^(MSQAAccountInfo *account, NSError *error) {
       if (account == nil)
         return;
 
@@ -188,11 +181,11 @@ Code example (Objective-C):
 ```
 
 ### MSQASignIn method: signOutWithCompletionBlock
-Signs the user out  [**TODO**: Christian: Be clearer on where to put that code]:
+Add a sign-out button to your app and connect the button to a method in your ViewController that calls:
 ```objectivec
 - signOutWithCompletionBlock:^(NSError *_Nullable error);
 ```
-Example code (Objective-C): 
+For example, use an `IBAction` and the code (Objective-C): 
 ```objectivec
 - (IBAction)signOut:(id)sender {
   [_msSignIn
@@ -203,20 +196,59 @@ Example code (Objective-C):
 }
 ```
 
+### MSQATokenCompletionBlock and MSQATokenResult
+
+`MSQASignIn` methods that return token information do so by invoking an `MSQATokenCompletionBlock` 
+
+with `MSQATokenResult` defined as
+```objectivec
+typedef void (^MSQATokenCompletionBlock)(MSQATokenResult *_Nullable tokenResult,
+                                         NSError *_Nullable error);
+```
+with the `MSQATokenResult` argument containing the following information:
+```objectivec
+@interface MSQATokenResult : NSObject
+
+/// The access token.
+@property(nonatomic, readonly, nonnull) NSString *accessToken;
+
+/// The authorization header for the specific authentication scheme . For
+/// instance “Bearer …” or “Pop …”.
+@property(nonatomic, readonly, nonnull) NSString *authorizationHeader;
+
+/// The authentication scheme for the tokens issued. For instance “Bearer ” or
+/// “Pop”.
+@property(nonatomic, readonly, nonnull) NSString *authorizationScheme;
+
+/// The time that the access token returned in the Token property ceases to be
+/// valid.
+@property(nonatomic, readonly, nonnull) NSDate *expiresOn;
+
+/// An identifier for the tenant that the token was acquired from. This property
+/// will be nil if tenant information is not returned by the service.
+@property(nonatomic, readonly, nullable) NSString *tenantId;
+
+/// The scope values returned from the service.
+@property(nonatomic, readonly, nonnull) NSArray<NSString *> *scopes;
+
+/// The correlation ID of the request.
+@property(nonatomic, readonly, nullable) NSUUID *correlationId;
+
+@end
+```
 ### MSQASignIn method: acquireTokenWithParameters:completionBlock
 Acquires an access token to access additional account information about the user stored in the Microsoft Graph, using interactive authentication if necessary.
 
 ```objectivec
 - (void)acquireTokenWithParameters:(MSQAInteractiveTokenParameters *)
                                    parameters
-                   completionBlock:(MSQACompletionBlock)completionBlock;
+                   completionBlock:(MSQATokenCompletionBlock)completionBlock;
 ```
 
 | Parameters | Description | 
 | -- | -- |
 | parameters | Contains the parameters used to fetch the token |
-| completionBlock | The completion block that will be called on completion or on failure [**TODO** Minggang: this needs to return a token, not account data].
-| completionBlock | callback invoked when the operation is complete or an error occurred. |
+| completionBlock | The completion block that will be called on completion or on failure
 | &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
 | &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
 
@@ -226,7 +258,7 @@ MSQASilentTokenParameters *parameters =
     [[MSQASilentTokenParameters alloc] initWithScopes:@[ @"User.Read" ]];
 [_msSignIn
     acquireTokenSilentWithParameters:parameters
-                     completionBlock:^(MSQAAccountData *account, NSError *error) {
+                     completionBlock:^(MSQATokenResult *token, NSError *error) {
   if (error) {
     MSQAWebviewParameters *webParameters = [[MSQAWebviewParameters alloc]
         initWithAuthPresentationViewController:self];
@@ -236,38 +268,30 @@ MSQASilentTokenParameters *parameters =
           webviewParameters:webParameters];
 
     [_msSignIn acquireTokenWithParameters: params
-                    completionBlock:^(MSQAAccountData *account, NSError 
+                    completionBlock:^(MSQATokenResult *token, NSError 
                                       *error) {
                      if (!error) {
-                       NSString *userId = account.userId;
-                       NSString *idToken = account.idToken;
+                       NSString *accessToken = token.accessToken;
                      } else {
                        // Check the error
                      }
                    }];
   } else {
-    // You'll want to get the account identifier to
-    // retrieve and reuse the account
-    // for later acquireToken calls
-    NSString *userId = account.userId;
-    NSString *idToken = account.idToken;
+    NSString *accessToken = token.accessToken;
   }}];
 ```
-[**TODO**: Minggang: Fix the code sample after returning type different that MSQAAccountData]
 
-## MSQASIgnIn method: acquireTokenSilentWithParameters:completionBlock
+### MSQASIgnIn method: acquireTokenSilentWithParameters:completionBlock
 Attempt to acquires an access token to access additional account information about the user without interaction with the user. Fails if it is not possible.
 ```objectivec
-- (void) acquireTokenSilentWithParameters:(MSQASilentTokenParameters *)
-                                           parameters
-                     completionBlock:(MSQACompletionBlock)completionBlock;
+- (void) acquireTokenSilentWithParameters:(MSQASilentTokenParameters *)parameters
+                          completionBlock:(MSQATokenCompletionBlock)completionBlock;
 ```
-[**TODO**: Minggang: What is the proper way to indent the code above?]
 
 | Parameter | Description |
 | -- | -- |
 | parameters | Contains the parameters used to fetch the token. |
-| completionBlock | The completion block that will be called on completion or on failure [**TODO** Minggang: this needs to return a token, not account data].
+| completionBlock | The completion block that will be called on completion or on failure.
 | completionBlock | callback invoked when the operation is complete or an error occurred. |
 | &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
 | &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
@@ -278,7 +302,7 @@ MSQASilentTokenParameters *parameters =
     [[MSQASilentTokenParameters alloc] initWithScopes:@[ @"User.Read" ]];
 
 [_msSignIn acquireTokenWithParameters:parameters
-                      completionBlock:^(MSQAAccountData *account, NSError *error) {
+                      completionBlock:^(MSQATokenResult *token, NSError *error) {
                        if (!error) {
                          // Use access token.
                        } else {
@@ -286,8 +310,6 @@ MSQASilentTokenParameters *parameters =
                        }
                      }];
 ```
-
-[**TODO**: Minggang: Fix the code sample after returning type different that MSQAAccountData]
 
 ##	Logging
 `MSQALogger` is a singleton object representing the logger. Use `MSQALogger`. `sharedInstance` to access the shared instance.
