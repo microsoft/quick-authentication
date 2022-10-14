@@ -157,7 +157,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#acquireToken(android.app.Activity,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireToken</a></span>&#8203;(android.app.Activity&nbsp;activity,
             java.lang.String[]&nbsp;scopes,
-            <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a>&gt;&nbsp;completeListener)</code></th>
+            <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a>&gt;&nbsp;completeListener)</code></th>
 <td class="colLast">
 <div class="block">Acquire token interactively, will pop-up webUI.</div>
 </td>
@@ -165,7 +165,7 @@ extends java.lang.Object</pre>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#acquireTokenSilent(java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireTokenSilent</a></span>&#8203;(java.lang.String[]&nbsp;scopes,
-                  <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a>&gt;&nbsp;completeListener)</code></th>
+                  <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a>&gt;&nbsp;completeListener)</code></th>
 <td class="colLast">
 <div class="block">Perform acquire token silent call.</div>
 </td>
@@ -182,8 +182,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentAccount(android.app.Activity,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount</a></span>&#8203;(android.app.Activity&nbsp;activity,
-                 <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentAccount(com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount</a></span>&#8203;(<a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</code></th>
 <td class="colLast">
 <div class="block">Gets the current account.</div>
 </td>
@@ -212,7 +211,7 @@ extends java.lang.Object</pre>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#signIn(android.app.Activity,com.microsoft.quickauth.signin.callback.OnCompleteListener)">signIn</a></span>&#8203;(android.app.Activity&nbsp;activity,
-      <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</code></th>
+      <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</code></th>
 <td class="colLast">
 <div class="block">Allows a user to sign in to your application with one of their accounts.</div>
 </td>
@@ -325,7 +324,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;void&nbsp;signIn&#8203;(@NonNull
                    android.app.Activity&nbsp;activity,
                    @NonNull
-                   <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</pre>
+                   <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</pre>
 <div class="block">Allows a user to sign in to your application with one of their accounts. This method may only
  be called once: once a user is signed in, they must first be signed out before another user may
  sign in.</div>
@@ -333,7 +332,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>activity</code> - Activity that is used as the parent activity for launching sign in page.</dd>
 <dd><code>completeListener</code> - A callback to be invoked when sign in success and will return sign in
-     account info <a href="AccountInfo.html" title="interface in com.microsoft.quickauth.signin"><code>AccountInfo</code></a>.</dd>
+     account info <a href="MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin"><code>MSQAAccountInfo</code></a>.</dd>
 </dl>
 </li>
 </ul>
@@ -353,23 +352,20 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="getCurrentAccount(android.app.Activity,com.microsoft.quickauth.signin.callback.OnCompleteListener)">
+<a id="getCurrentAccount(com.microsoft.quickauth.signin.callback.OnCompleteListener)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCurrentAccount</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;getCurrentAccount&#8203;(@NonNull
-                              android.app.Activity&nbsp;activity,
-                              @NonNull
-                              <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</pre>
+                              <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</pre>
 <div class="block">Gets the current account. This method must be called whenever the application is resumed or
  prior to running a scheduled background operation.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>activity</code> - Activity that is used as the parent activity for get sign account</dd>
 <dd><code>completeListener</code> - A callback to be invoked when complete and will return sign in account
-     info <a href="AccountInfo.html" title="interface in com.microsoft.quickauth.signin"><code>AccountInfo</code></a> if success</dd>
+     info <a href="MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin"><code>MSQAAccountInfo</code></a> if success</dd>
 </dl>
 </li>
 </ul>
@@ -384,7 +380,7 @@ extends java.lang.Object</pre>
                          @NonNull
                          java.lang.String[]&nbsp;scopes,
                          @NonNull
-                         <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a>&gt;&nbsp;completeListener)</pre>
+                         <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a>&gt;&nbsp;completeListener)</pre>
 <div class="block">Acquire token interactively, will pop-up webUI. Interactive flow will skip the cache lookup.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -404,7 +400,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">public&nbsp;void&nbsp;acquireTokenSilent&#8203;(@NonNull
                                java.lang.String[]&nbsp;scopes,
                                @NonNull
-                               <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a>&gt;&nbsp;completeListener)</pre>
+                               <a href="callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a>&gt;&nbsp;completeListener)</pre>
 <div class="block">Perform acquire token silent call. If there is a valid access token in the cache, the sdk will
  return the access token; If no valid access token exists, the sdk will try to find a refresh
  token and use the refresh token to get a new access token. If refresh token does not exist or

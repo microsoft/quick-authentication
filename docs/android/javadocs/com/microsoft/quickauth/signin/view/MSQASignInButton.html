@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -266,40 +266,47 @@ extends android.widget.LinearLayout</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#regardViewAsButton(android.view.View)">regardViewAsButton</a></span>&#8203;(android.view.View&nbsp;view)</code></th>
+<td class="colLast">
+<div class="block">This method will set a <code>View.AccessibilityDelegate</code> on giving view.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setButtonLogoAlignment(int)">setButtonLogoAlignment</a></span>&#8203;(int&nbsp;logoAlignment)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setButtonShape(int)">setButtonShape</a></span>&#8203;(int&nbsp;shape)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setButtonSize(int)">setButtonSize</a></span>&#8203;(int&nbsp;size)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setButtonText(int)">setButtonText</a></span>&#8203;(int&nbsp;text)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setButtonTheme(int)">setButtonTheme</a></span>&#8203;(int&nbsp;colorTheme)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setButtonType(int)">setButtonType</a></span>&#8203;(int&nbsp;type)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setSignInCallback(android.app.Activity,com.microsoft.quickauth.signin.MSQASignInClient,com.microsoft.quickauth.signin.callback.OnCompleteListener)">setSignInCallback</a></span>&#8203;(android.app.Activity&nbsp;activity,
                  <a href="../MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a>&nbsp;client,
-                 <a href="../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;onCompleteListener)</code></th>
+                 <a href="../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;onCompleteListener)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -410,7 +417,7 @@ extends android.widget.LinearLayout</pre>
                               @NonNull
                               <a href="../MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a>&nbsp;client,
                               @NonNull
-                              <a href="../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;onCompleteListener)</pre>
+                              <a href="../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;onCompleteListener)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>activity</code> - Activity that is used as the parent activity for launching sign in page.</dd>
@@ -467,10 +474,25 @@ extends android.widget.LinearLayout</pre>
 <a id="setButtonType(int)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>setButtonType</h4>
 <pre class="methodSignature">public&nbsp;<a href="MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a>&nbsp;setButtonType&#8203;(int&nbsp;type)</pre>
+</li>
+</ul>
+<a id="regardViewAsButton(android.view.View)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>regardViewAsButton</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;regardViewAsButton&#8203;(@Nullable
+                               android.view.View&nbsp;view)</pre>
+<div class="block">This method will set a <code>View.AccessibilityDelegate</code> on giving view.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>view</code> - the view to override a11y class to a Button, normally an <code>TextView</code></dd>
+</dl>
 </li>
 </ul>
 </li>
