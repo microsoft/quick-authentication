@@ -33,11 +33,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.azuresamples.quickauthandroidapp.util.ByteCodeUtil;
 import com.azuresamples.quickauthandroidapp.view.SignInButtonSettingPop;
-import com.microsoft.quickauth.signin.AccountInfo;
 import com.microsoft.quickauth.signin.ClientCreatedListener;
+import com.microsoft.quickauth.signin.MSQAAccountInfo;
 import com.microsoft.quickauth.signin.MSQASignInClient;
 import com.microsoft.quickauth.signin.MSQASignInOptions;
-import com.microsoft.quickauth.signin.TokenResult;
+import com.microsoft.quickauth.signin.MSQATokenResult;
 import com.microsoft.quickauth.signin.error.MSQAException;
 import com.microsoft.quickauth.signin.error.MSQAUiRequiredException;
 import com.microsoft.quickauth.signin.logger.LogLevel;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
           if (mSignInClient == null) return;
           mTokenResult.setText("");
           mSignInClient.acquireTokenSilent(
-                  mScopes,
+              mScopes,
               (iTokenResult, error) -> {
                 /**
                  * If acquireTokenSilent() returns an error that requires an interaction
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         this, mScopes, (tokenResult, error) -> updateTokenResult(tokenResult, error));
   }
 
-  private void uploadSignInfo(AccountInfo accountInfo, Exception error) {
+  private void uploadSignInfo(MSQAAccountInfo accountInfo, Exception error) {
     if (accountInfo != null) {
       mUserPhoto.setImageBitmap(ByteCodeUtil.base64ToBitmap(accountInfo.getBase64Photo()));
       String userInfo =
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         });
   }
 
-  private void updateTokenResult(TokenResult tokenResult, Exception error) {
+  private void updateTokenResult(MSQATokenResult tokenResult, Exception error) {
     mTokenResult.setText(
         tokenResult != null
             ? tokenResult.getAccessToken()
