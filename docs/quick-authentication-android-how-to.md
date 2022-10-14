@@ -10,7 +10,7 @@ Microsoft Quick Authentication allows you to easily add a fully functioning sign
 
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
 - First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
-- Declare a dependency on the Quick Authentication SDK. **TODO: Jingjing: Add info on how to use AAR file**
+- Declare a dependency on the Quick Authentication SDK.
 - Add an intent filter for Quick Authentication to your app manifest. 
 - Create a Quick Authentication sign-in client object ([MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html)) with the proper configuration.
 - Add a Quick Authentication sign-in button somewhere in your application's layout xml or instantiate it programmatically.
@@ -54,14 +54,24 @@ Now that you have created an application registration, you can extend it to Andr
 ![Click Configuration](./media/android-click-configure.png)
 
 ## Declaring a dependency on Quick Authentication
-**TODO: Jingjing: Add comment on how to use AAR file.**
-Add the following to your app's `build.gradle`
+1. Copy [SDK AAR File](https://github.com/microsoft/quick-authentication/tree/main/demos/android/library) into your app's libs folder.
+2. Add the following to your app's `build.gradle`
 ```java
+android {
+    ...
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
 dependencies {
-    implementation 'com.microsoft.quickauth:signin:1.0.0'
+    ...
+    implementation "com.microsoft.identity.client:msal:3.0.2"
+    implementation(name: 'quickauth-1.0.0', ext: 'aar')
 }
 ```
-And add the following to the *repositories* section in your `build.gradle`
+3. Add the following to the *repositories* section in your `build.gradle`
 ```java
 mavenCentral()
 maven { 
@@ -194,7 +204,7 @@ As described above, the Sign-in Button is functional and clicking it will run th
 public void setSignInCallback (
         @NonNull Activity activity,
         @NonNull MSQASignInClient client,
-        @NonNull OnCompleteListener <AccountInfo> onCompleteListener);
+        @NonNull OnCompleteListener <MSQAAccountInfo> onCompleteListener);
 ```
 | Parameters | Description |
 |--|--|
@@ -208,9 +218,9 @@ If sign-in succeeds, `listener` will be invoked, and first parameter will return
 Code example:
 ```java
 signInButton.setSignInCallback(activity, client,
-        new OnCompleteListener<AccountInfo>() {
+        new OnCompleteListener<MSQAAccountInfo>() {
             @Override
-            public void onComplete(@Nullable AccountInfo accountInfo,
+            public void onComplete(@Nullable MSQAAccountInfo accountInfo,
                                    @Nullable MSQAException error) {
                 if (accountInfo != null) {
                     // successful sign-in: use account
@@ -220,7 +230,7 @@ signInButton.setSignInCallback(activity, client,
             }
         });
 ```
-The returned `AccountInfo` interface, returned by the listener, provides the following methods for getting at the returned user account information:
+The returned `MSQAAccountInfo` interface, returned by the listener, provides the following methods for getting at the returned user account information:
 
 | Method | Description
 |--|--|
