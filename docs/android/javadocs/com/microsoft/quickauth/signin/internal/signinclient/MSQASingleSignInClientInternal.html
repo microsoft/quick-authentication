@@ -199,35 +199,34 @@ extends <a href="MSALSingleClientWrapper.html" title="class in com.microsoft.qui
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentAccount(android.app.Activity,com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,boolean,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount</a></span>&#8203;(android.app.Activity&nbsp;activity,
-                 com.microsoft.identity.client.IAccount&nbsp;iAccount,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCurrentAccount(com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount</a></span>&#8203;(com.microsoft.identity.client.IAccount&nbsp;iAccount,
                  java.lang.String[]&nbsp;scopes,
-                 boolean&nbsp;silentTokenErrorRetry,
-                 <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</code></th>
+                 <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUserId(com.microsoft.identity.client.IAuthenticationResult)">getUserId</a></span>&#8203;(com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult)</code></th>
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUserInfo(com.microsoft.identity.client.IAuthenticationResult,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getUserInfo</a></span>&#8203;(com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult,
+           <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUserInfo(com.microsoft.identity.client.IAuthenticationResult,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getUserInfo</a></span>&#8203;(com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult,
-           <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getUserPhoto(com.microsoft.identity.client.IAuthenticationResult)">getUserPhoto</a></span>&#8203;(com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#signIn(android.app.Activity,com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">signIn</a></span>&#8203;(android.app.Activity&nbsp;activity,
       com.microsoft.identity.client.IAccount&nbsp;iAccount,
       java.lang.String[]&nbsp;scopes,
-      <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</code></th>
+      <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateUserInfoWithGraph(com.microsoft.quickauth.signin.internal.entity.MSQAAccountInfoInternal,com.microsoft.identity.client.IAuthenticationResult)">updateUserInfoWithGraph</a></span>&#8203;(<a href="../entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a>&nbsp;account,
+                       com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -293,24 +292,21 @@ extends <a href="MSALSingleClientWrapper.html" title="class in com.microsoft.qui
                    @NonNull
                    java.lang.String[]&nbsp;scopes,
                    @NonNull
-                   <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</pre>
+                   <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</pre>
 </li>
 </ul>
-<a id="getCurrentAccount(android.app.Activity,com.microsoft.identity.client.IAccount,java.lang.String[],boolean,com.microsoft.quickauth.signin.callback.OnCompleteListener)">
+<a id="getCurrentAccount(com.microsoft.identity.client.IAccount,java.lang.String[],com.microsoft.quickauth.signin.callback.OnCompleteListener)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCurrentAccount</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;getCurrentAccount&#8203;(@NonNull
-                              android.app.Activity&nbsp;activity,
-                              @Nullable
+<pre class="methodSignature">public&nbsp;void&nbsp;getCurrentAccount&#8203;(@Nullable
                               com.microsoft.identity.client.IAccount&nbsp;iAccount,
                               @NonNull
                               java.lang.String[]&nbsp;scopes,
-                              boolean&nbsp;silentTokenErrorRetry,
                               @NonNull
-                              <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</pre>
+                              <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</pre>
 </li>
 </ul>
 <a id="acquireToken(android.app.Activity,java.lang.String[],com.microsoft.identity.client.IAccount,com.microsoft.quickauth.signin.callback.OnCompleteListener)">
@@ -352,7 +348,7 @@ extends <a href="MSALSingleClientWrapper.html" title="class in com.microsoft.qui
 <pre class="methodSignature">public&nbsp;void&nbsp;getUserInfo&#8203;(@NonNull
                         com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult,
                         @NonNull
-                        <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a>&gt;&nbsp;completeListener)</pre>
+                        <a href="../../callback/OnCompleteListener.html" title="interface in com.microsoft.quickauth.signin.callback">OnCompleteListener</a>&lt;<a href="../../MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a>&gt;&nbsp;completeListener)</pre>
 </li>
 </ul>
 <a id="getUserPhoto(com.microsoft.identity.client.IAuthenticationResult)">
@@ -366,15 +362,16 @@ public&nbsp;java.lang.String&nbsp;getUserPhoto&#8203;(@NonNull
                                      com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult)</pre>
 </li>
 </ul>
-<a id="getUserId(com.microsoft.identity.client.IAuthenticationResult)">
+<a id="updateUserInfoWithGraph(com.microsoft.quickauth.signin.internal.entity.MSQAAccountInfoInternal,com.microsoft.identity.client.IAuthenticationResult)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getUserId</h4>
+<h4>updateUserInfoWithGraph</h4>
 <pre class="methodSignature">@WorkerThread
-public&nbsp;java.lang.String&nbsp;getUserId&#8203;(@NonNull
-                                  com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult)</pre>
+public&nbsp;void&nbsp;updateUserInfoWithGraph&#8203;(<a href="../entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a>&nbsp;account,
+                                    @NonNull
+                                    com.microsoft.identity.client.IAuthenticationResult&nbsp;tokenResult)</pre>
 </li>
 </ul>
 </li>

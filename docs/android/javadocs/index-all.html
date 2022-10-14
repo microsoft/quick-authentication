@@ -96,8 +96,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">A</h2>
 <dl>
-<dt><a href="com/microsoft/quickauth/signin/AccountInfo.html" title="interface in com.microsoft.quickauth.signin"><span class="typeNameLink">AccountInfo</span></a> - Interface in <a href="com/microsoft/quickauth/signin/package-summary.html">com.microsoft.quickauth.signin</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetricEvent.html#ACQUIRE_TOKEN">ACQUIRE_TOKEN</a></span> - Static variable in annotation type com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetricEvent.html" title="annotation in com.microsoft.quickauth.signin.internal.metric">MSQAMetricEvent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetricEvent.html#ACQUIRE_TOKEN_SILENT">ACQUIRE_TOKEN_SILENT</a></span> - Static variable in annotation type com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetricEvent.html" title="annotation in com.microsoft.quickauth.signin.internal.metric">MSQAMetricEvent</a></dt>
@@ -108,7 +106,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#acquireToken(android.app.Activity,java.lang.String%5B%5D,com.microsoft.identity.client.IAccount,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireToken(Activity, String[], IAccount, OnCompleteListener&lt;IAuthenticationResult&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#acquireToken(android.app.Activity,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireToken(Activity, String[], OnCompleteListener&lt;TokenResult&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#acquireToken(android.app.Activity,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireToken(Activity, String[], OnCompleteListener&lt;MSQATokenResult&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
 <dd>
 <div class="block">Acquire token interactively, will pop-up webUI.</div>
 </dd>
@@ -118,7 +116,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#acquireTokenSilent(com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireTokenSilent(IAccount, String[], OnCompleteListener&lt;IAuthenticationResult&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#acquireTokenSilent(java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireTokenSilent(String[], OnCompleteListener&lt;TokenResult&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#acquireTokenSilent(java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">acquireTokenSilent(String[], OnCompleteListener&lt;MSQATokenResult&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
 <dd>
 <div class="block">Perform acquire token silent call.</div>
 </dd>
@@ -267,25 +265,25 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getAccessToken()">getAccessToken()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getAccessToken()">getAccessToken()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getAccessToken()">getAccessToken()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getAccount(com.microsoft.identity.client.IAuthenticationResult)">getAccount(IAuthenticationResult)</a></span> - Static method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getAuthenticationScheme()">getAuthenticationScheme()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getAuthenticationScheme()">getAuthenticationScheme()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getAuthenticationScheme()">getAuthenticationScheme()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>
 <div class="block">Gets the authentication scheme (Bearer, PoP, etc)....</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getAuthorizationHeader()">getAuthorizationHeader()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getAuthorizationHeader()">getAuthorizationHeader()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getAuthorizationHeader()">getAuthorizationHeader()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>
 <div class="block">Gets the fully-formed Authorization header value.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/AccountInfo.html#getBase64Photo()">getBase64Photo()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getBase64Photo()">getBase64Photo()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getBase64Photo()">getBase64Photo()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html#getComments()">getComments()</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric.MetricEvent</a></dt>
 <dd>&nbsp;</dd>
@@ -295,7 +293,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getCorrelationId()">getCorrelationId()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getCorrelationId()">getCorrelationId()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getCorrelationId()">getCorrelationId()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>
 <div class="block">Gets the correlation id used during the acquire token request.</div>
 </dd>
@@ -305,9 +303,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html#getCurrentAccount()">getCurrentAccount()</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSALSingleClientWrapper</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#getCurrentAccount(android.app.Activity,com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,boolean,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount(Activity, IAccount, String[], boolean, OnCompleteListener&lt;AccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#getCurrentAccount(com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount(IAccount, String[], OnCompleteListener&lt;MSQAAccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#getCurrentAccount(android.app.Activity,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount(Activity, OnCompleteListener&lt;AccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#getCurrentAccount(com.microsoft.quickauth.signin.callback.OnCompleteListener)">getCurrentAccount(OnCompleteListener&lt;MSQAAccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
 <dd>
 <div class="block">Gets the current account.</div>
 </dd>
@@ -316,6 +314,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html#getCurrentAccountAsync(com.microsoft.identity.client.ISingleAccountPublicClientApplication.CurrentAccountCallback)">getCurrentAccountAsync(ISingleAccountPublicClientApplication.CurrentAccountCallback)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSALSingleClientWrapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html#getDuration()">getDuration()</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric.MetricEvent</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getEmail()">getEmail()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getEmail()">getEmail()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/error/MSQAException.html#getErrorCode()">getErrorCode()</a></span> - Method in exception com.microsoft.quickauth.signin.error.<a href="com/microsoft/quickauth/signin/error/MSQAException.html" title="class in com.microsoft.quickauth.signin.error">MSQAException</a></dt>
 <dd>&nbsp;</dd>
@@ -329,23 +331,27 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getExpiresOn()">getExpiresOn()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getExpiresOn()">getExpiresOn()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getExpiresOn()">getExpiresOn()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInOptions.html#getExternalLogger()">getExternalLogger()</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInOptions.html" title="class in com.microsoft.quickauth.signin">MSQASignInOptions</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/AccountInfo.html#getFullName()">getFullName()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getFullName()">getFullName()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getFullName()">getFullName()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getGivenName()">getGivenName()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getGivenName()">getGivenName()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/http/MSQAHttpRequest.html#getHeader()">getHeader()</a></span> - Method in class com.microsoft.quickauth.signin.internal.http.<a href="com/microsoft/quickauth/signin/internal/http/MSQAHttpRequest.html" title="class in com.microsoft.quickauth.signin.internal.http">MSQAHttpRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/AccountInfo.html#getId()">getId()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getId()">getId()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/AccountInfo.html#getIdToken()">getIdToken()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getId()">getId()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getIdToken()">getIdToken()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getIdToken()">getIdToken()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/MSQALogger.html#getInstance()">getInstance()</a></span> - Static method in class com.microsoft.quickauth.signin.internal.<a href="com/microsoft/quickauth/signin/internal/MSQALogger.html" title="class in com.microsoft.quickauth.signin.internal">MSQALogger</a></dt>
 <dd>&nbsp;</dd>
@@ -373,7 +379,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getScope()">getScope()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getScope()">getScope()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getScope()">getScope()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.html#getSessionId()">getSessionId()</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric</a></dt>
 <dd>&nbsp;</dd>
@@ -381,21 +387,23 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/error/MSQAException.html#getSuppressedException()">getSuppressedException()</a></span> - Method in exception com.microsoft.quickauth.signin.error.<a href="com/microsoft/quickauth/signin/error/MSQAException.html" title="class in com.microsoft.quickauth.signin.error">MSQAException</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getSurname()">getSurname()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getSurname()">getSurname()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#getTenantId()">getTenantId()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/TokenResult.html#getTenantId()">getTenantId()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin">TokenResult</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQATokenResult.html#getTenantId()">getTenantId()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin">MSQATokenResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html#getTimestamp()">getTimestamp()</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric.MetricEvent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/http/MSQAHttpRequest.html#getUrl()">getUrl()</a></span> - Method in class com.microsoft.quickauth.signin.internal.http.<a href="com/microsoft/quickauth/signin/internal/http/MSQAHttpRequest.html" title="class in com.microsoft.quickauth.signin.internal.http">MSQAHttpRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#getUserId(com.microsoft.identity.client.IAuthenticationResult)">getUserId(IAuthenticationResult)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#getUserInfo(com.microsoft.identity.client.IAuthenticationResult,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getUserInfo(IAuthenticationResult, OnCompleteListener&lt;AccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/AccountInfo.html#getUserName()">getUserName()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/AccountInfo.html" title="interface in com.microsoft.quickauth.signin">AccountInfo</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#getUserInfo(com.microsoft.identity.client.IAuthenticationResult,com.microsoft.quickauth.signin.callback.OnCompleteListener)">getUserInfo(IAuthenticationResult, OnCompleteListener&lt;MSQAAccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#getUserName()">getUserName()</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html#getUserName()">getUserName()</a></span> - Method in interface com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin">MSQAAccountInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#getUserPhoto(com.microsoft.identity.client.IAuthenticationResult)">getUserPhoto(IAuthenticationResult)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
 <dd>&nbsp;</dd>
@@ -511,6 +519,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html" title="class in com.microsoft.quickauth.signin.internal.signinclient"><span class="typeNameLink">MSALSingleClientWrapper</span></a> - Class in <a href="com/microsoft/quickauth/signin/internal/signinclient/package-summary.html">com.microsoft.quickauth.signin.internal.signinclient</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html#%3Cinit%3E(com.microsoft.identity.client.ISingleAccountPublicClientApplication)">MSALSingleClientWrapper(ISingleAccountPublicClientApplication)</a></span> - Constructor for class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSALSingleClientWrapper.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSALSingleClientWrapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/microsoft/quickauth/signin/MSQAAccountInfo.html" title="interface in com.microsoft.quickauth.signin"><span class="typeNameLink">MSQAAccountInfo</span></a> - Interface in <a href="com/microsoft/quickauth/signin/package-summary.html">com.microsoft.quickauth.signin</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity"><span class="typeNameLink">MSQAAccountInfoInternal</span></a> - Class in <a href="com/microsoft/quickauth/signin/internal/entity/package-summary.html">com.microsoft.quickauth.signin.internal.entity</a></dt>
 <dd>&nbsp;</dd>
@@ -644,6 +654,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><a href="com/microsoft/quickauth/signin/internal/util/MSQATaskExecutor.html" title="class in com.microsoft.quickauth.signin.internal.util"><span class="typeNameLink">MSQATaskExecutor</span></a> - Class in <a href="com/microsoft/quickauth/signin/internal/util/package-summary.html">com.microsoft.quickauth.signin.internal.util</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/microsoft/quickauth/signin/MSQATokenResult.html" title="interface in com.microsoft.quickauth.signin"><span class="typeNameLink">MSQATokenResult</span></a> - Interface in <a href="com/microsoft/quickauth/signin/package-summary.html">com.microsoft.quickauth.signin</a></dt>
+<dd>
+<div class="block">Information about account token.</div>
+</dd>
 <dt><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity"><span class="typeNameLink">MSQATokenResultInternal</span></a> - Class in <a href="com/microsoft/quickauth/signin/internal/entity/package-summary.html">com.microsoft.quickauth.signin.internal.entity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html#%3Cinit%3E(com.microsoft.identity.client.IAuthenticationResult)">MSQATokenResultInternal(IAuthenticationResult)</a></span> - Constructor for class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQATokenResultInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQATokenResultInternal</a></dt>
@@ -758,6 +772,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/view/ButtonShape.html#RECTANGULAR">RECTANGULAR</a></span> - Static variable in annotation type com.microsoft.quickauth.signin.view.<a href="com/microsoft/quickauth/signin/view/ButtonShape.html" title="annotation in com.microsoft.quickauth.signin.view">ButtonShape</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/view/MSQASignInButton.html#regardViewAsButton(android.view.View)">regardViewAsButton(View)</a></span> - Method in class com.microsoft.quickauth.signin.view.<a href="com/microsoft/quickauth/signin/view/MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></dt>
+<dd>
+<div class="block">This method will set a <code>View.AccessibilityDelegate</code> on giving view.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/view/ButtonShape.html#ROUNDED">ROUNDED</a></span> - Static variable in annotation type com.microsoft.quickauth.signin.view.<a href="com/microsoft/quickauth/signin/view/ButtonShape.html" title="annotation in com.microsoft.quickauth.signin.view">ButtonShape</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -790,6 +808,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html#setDuration(long)">setDuration(long)</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric.MetricEvent</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#setEmail(java.lang.String)">setEmail(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/MSQALogger.html#setEnableLogcatLog(boolean)">setEnableLogcatLog(boolean)</a></span> - Method in class com.microsoft.quickauth.signin.internal.<a href="com/microsoft/quickauth/signin/internal/MSQALogger.html" title="class in com.microsoft.quickauth.signin.internal">MSQALogger</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#setEnableLogcatLog(boolean)">setEnableLogcatLog(boolean)</a></span> - Static method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
@@ -814,6 +834,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  message.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#setFullName(java.lang.String)">setFullName(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#setGivenName(java.lang.String)">setGivenName(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#setId(java.lang.String)">setId(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
 <dd>&nbsp;</dd>
@@ -845,9 +867,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.html#setSessionId(java.lang.String)">setSessionId(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/view/MSQASignInButton.html#setSignInCallback(android.app.Activity,com.microsoft.quickauth.signin.MSQASignInClient,com.microsoft.quickauth.signin.callback.OnCompleteListener)">setSignInCallback(Activity, MSQASignInClient, OnCompleteListener&lt;AccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.view.<a href="com/microsoft/quickauth/signin/view/MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/view/MSQASignInButton.html#setSignInCallback(android.app.Activity,com.microsoft.quickauth.signin.MSQASignInClient,com.microsoft.quickauth.signin.callback.OnCompleteListener)">setSignInCallback(Activity, MSQASignInClient, OnCompleteListener&lt;MSQAAccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.view.<a href="com/microsoft/quickauth/signin/view/MSQASignInButton.html" title="class in com.microsoft.quickauth.signin.view">MSQASignInButton</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/error/MSQAException.html#setSuppressedException(java.lang.Exception)">setSuppressedException(Exception)</a></span> - Method in exception com.microsoft.quickauth.signin.error.<a href="com/microsoft/quickauth/signin/error/MSQAException.html" title="class in com.microsoft.quickauth.signin.error">MSQAException</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html#setSurname(java.lang.String)">setSurname(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.entity.<a href="com/microsoft/quickauth/signin/internal/entity/MSQAAccountInfoInternal.html" title="class in com.microsoft.quickauth.signin.internal.entity">MSQAAccountInfoInternal</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html#setTimestamp(java.lang.String)">setTimestamp(String)</a></span> - Method in class com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetric.MetricEvent.html" title="class in com.microsoft.quickauth.signin.internal.metric">MSQAMetric.MetricEvent</a></dt>
 <dd>&nbsp;</dd>
@@ -867,9 +891,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetricEvent.html#SIGN_OUT">SIGN_OUT</a></span> - Static variable in annotation type com.microsoft.quickauth.signin.internal.metric.<a href="com/microsoft/quickauth/signin/internal/metric/MSQAMetricEvent.html" title="annotation in com.microsoft.quickauth.signin.internal.metric">MSQAMetricEvent</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#signIn(android.app.Activity,com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">signIn(Activity, IAccount, String[], OnCompleteListener&lt;AccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#signIn(android.app.Activity,com.microsoft.identity.client.IAccount,java.lang.String%5B%5D,com.microsoft.quickauth.signin.callback.OnCompleteListener)">signIn(Activity, IAccount, String[], OnCompleteListener&lt;MSQAAccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#signIn(android.app.Activity,com.microsoft.quickauth.signin.callback.OnCompleteListener)">signIn(Activity, OnCompleteListener&lt;AccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/MSQASignInClient.html#signIn(android.app.Activity,com.microsoft.quickauth.signin.callback.OnCompleteListener)">signIn(Activity, OnCompleteListener&lt;MSQAAccountInfo&gt;)</a></span> - Method in class com.microsoft.quickauth.signin.<a href="com/microsoft/quickauth/signin/MSQASignInClient.html" title="class in com.microsoft.quickauth.signin">MSQASignInClient</a></dt>
 <dd>
 <div class="block">Allows a user to sign in to your application with one of their accounts.</div>
 </dd>
@@ -907,10 +931,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">T</h2>
 <dl>
-<dt><a href="com/microsoft/quickauth/signin/TokenResult.html" title="interface in com.microsoft.quickauth.signin"><span class="typeNameLink">TokenResult</span></a> - Interface in <a href="com/microsoft/quickauth/signin/package-summary.html">com.microsoft.quickauth.signin</a></dt>
-<dd>
-<div class="block">Information about account token.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/http/MSQAHttpMethod.html#TRACE">TRACE</a></span> - Static variable in annotation type com.microsoft.quickauth.signin.internal.http.<a href="com/microsoft/quickauth/signin/internal/http/MSQAHttpMethod.html" title="annotation in com.microsoft.quickauth.signin.internal.http">MSQAHttpMethod</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -923,6 +943,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Unknown error.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html#updateUserInfoWithGraph(com.microsoft.quickauth.signin.internal.entity.MSQAAccountInfoInternal,com.microsoft.identity.client.IAuthenticationResult)">updateUserInfoWithGraph(MSQAAccountInfoInternal, IAuthenticationResult)</a></span> - Method in class com.microsoft.quickauth.signin.internal.signinclient.<a href="com/microsoft/quickauth/signin/internal/signinclient/MSQASingleSignInClientInternal.html" title="class in com.microsoft.quickauth.signin.internal.signinclient">MSQASingleSignInClientInternal</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/microsoft/quickauth/signin/error/MSQAErrorString.html#USER_CANCEL_ERROR">USER_CANCEL_ERROR</a></span> - Static variable in class com.microsoft.quickauth.signin.error.<a href="com/microsoft/quickauth/signin/error/MSQAErrorString.html" title="class in com.microsoft.quickauth.signin.error">MSQAErrorString</a></dt>
 <dd>
 <div class="block">User cancel error</div>
