@@ -10,11 +10,11 @@ To enable Quick Authentication, you first add a reference to the library in a `<
 
 By default, when a user clicks on the button, it opens a popup. You can configure the button. After user enters their credentials in the popup, they get user sign-in information in a JavaScript callback present in their web page. This is called the "popup" mode.
 
-It is also possible to configure your application for [redirect mode](#redirect-mode). In this case, when a user clicks on the button, there is full page redirection to MSA sign-in page. After user enters credentials successfully on MSA sign-in page, there is a `POST` to your server, as opposed to a call to your Javascript callback. Your server needs to use information present in `POST` and do additional work to get user account information. Check [this section](#redirect-mode) for more details.
+It is also possible to configure your application for [redirect mode](#redirect-mode). In this case, when a user clicks on the button, there is full page redirection to the MSA sign-in page. After user enters credentials successfully on the MSA sign-in page, a `POST` request will be sent to your server, as opposed to a call to your Javascript callback. Your server needs to use information present in `POST` request and do additional work to get user account information. Check [this section](#redirect-mode) for more details.
 
 All browsers support a configurable sign-in button and prompt provided by Quick Authentication called the _standard sign-in experience_. Microsoft Edge supports an _enhanced sign-in experience_, which is also configurable.
 
-In _enhanced sign-in experience_, the sign-in process is completed without the user needing to explicitly enter their credentials.
+In the _enhanced sign-in experience_, the sign-in process is completed without the user needing to explicitly enter their credentials.
 
 - **Standard sign-in experience** - Quick Authentication shows the _standard_ sign-in button and prompt to users not signed in to Microsoft Edge or that are using a another browser.
 
@@ -339,7 +339,7 @@ To also enable logging for MSAL.js, add the [`logMsalEvents`](./quick-authentica
 
 In redirect mode, on clicking button or calling [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin), quick authentication does a full page redirection to MSA sign-in page.
 
-If this MSA webpage sign-in is successful, it sends a POST request to your server, as opposed to calling Javascript callback for your web application.
+If this MSA webpage sign-in is successful, a POST request will be sent to your server, as opposed to calling Javascript callback for your web application.
 
 Your server needs to handle the POST request and fetch user account information. Check [this](#redirect-mode-flow-of-control) and [this](#completing-the-flow-on-your-server-to-get-user-profile-info) section below for more information.
 
