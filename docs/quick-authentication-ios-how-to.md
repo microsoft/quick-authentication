@@ -73,7 +73,7 @@ NSError *error = nil;
 MSQASignIn *msSignIn = [[MSQASignIn alloc] initWithConfiguration:config
                                                            error:&error];
 ```                                                           
-If an error accured, the `config` parameter will be nil and the `error` parameter will contain the error details.
+If an error accured, `msSignIn` returned will be nil and the `error` parameter will contain the error details.
 
 If the client ID is invalid, a later attempt to sign-in or acquire an access token will fail. The error will be reported to the user as follows:
 
@@ -151,7 +151,7 @@ Alternatively, you can also add the button programmatically at runtime with the 
 It is possible to customize the appearance of the button. Refer to the [reference guide](quick-authentication-ios-reference.md#customizing-the-appearance-of-the-sign-in-button) for details.
 
 ## Getting a call back after the user has signed-in
-To get a callback after the user has completed the sign-in flow - or an error has occurred -, set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
+To get a callback after the user has completed the sign-in flow, or an error has occurred, set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
 
 ```objectivec
 [msSignButton setSignInCompletionBlock:^(MSQAAccountData *_Nullable account,
@@ -198,7 +198,6 @@ On success, the completion block will be invoked with the `MSQAAccountData` cont
 
 @end
 ```
-[**TODO** Add surname, given name, etc.]
 
 ## Handling sign out
 To allow the user to sign out, in your application, connect a button to a method in the `ViewController` (called `signOut` in the example below) and call `MSQASignIn`'s method `signOutWithCompletionBlock`:

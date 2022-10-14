@@ -34,25 +34,24 @@ To customize the appearance of the button, you can set the following properties 
 | shape | Shape of button corners. | kMSQASignInButtonShapeRectangular<br> kMSQASignInButtonShapePill<br>kMSQASignInButtonShapeRounded |kMSQASignInButtonShapeRectangular |
 | logoAlignment | Where the Microsoft logo should be in the button | kMSQASignInButtonLogoLeft<br> kMSQASignInButtonLogoCenter | kMSQASignInButtonLogoLeft |
 
-[**TODO** can I set these properties declaratively in the storyboard or XIB?]
+[**TODO**: Minggang: Can I set these properties declaratively in the storyboard or XIB?]
 
 Example code:
 ```objectivec
 msSignInButton.theme = kMSQASignInButtonThemeDark;
 msSignInButton.type = kMSQASignInButtonTypeStandard;
 ```
-[**TODO** how do I retrieve a button defined declaratively in the storyboard or the XIB file?]
-
+[**TODO**: Minggang: How do I retrieve a button defined declaratively in the storyboard or the XIB file?]
 
 ## MSQASignIn Methods
-The following methods of `MSQASignIn` offer programatic triggering of the sign-in flow and additional functionality. Note that these methods are asynchronous and internally dispatch their work to another thread. As a result, they can be called on the main thread and their completion block will be called back asynchronously on the same thread. 
+The following methods of `MSQASignIn` offer programmatic triggering of the sign-in flow and additional functionality. Note that these methods are asynchronous and internally dispatch their work to another thread. As a result, they can be called on the main thread and their completion block will be called back asynchronously on the same thread. 
 
 | Method | Description |
 |--|--|
 | initWithConfiguration() | Initialize the MSQASignIn object. |
 | signInWithCompletionBlock() | Starts the process of signing in the user with an MSA. |
 | signOutWithCompletionBlock() | Signs the user out of this application. |
-| getCurrentAccountWithCompletionBlock() | gets the current [AccountData](#AccountData) for the user. |
+| getCurrentAccountWithCompletionBlock() | gets the current [MSQAAccountData](#msqacompletionblock-and-msqaaccountdata) for the user. |
 | acquireTokenSilentWithParameter() | Attempts to acquire an access token silently (with no user interaction). |
 | acquireTokenWithParameters() | Acquires an access token interactively, will pop-up web UI. | |
 
@@ -189,7 +188,7 @@ Code example (Objective-C):
 ```
 
 ### MSQASignIn method: signOutWithCompletionBlock
-Signs the user out  [**TODO** be clearer on where to put that code]:
+Signs the user out  [**TODO**: Christian: Be clearer on where to put that code]:
 ```objectivec
 - signOutWithCompletionBlock:^(NSError *_Nullable error);
 ```
@@ -254,6 +253,7 @@ MSQASilentTokenParameters *parameters =
     NSString *idToken = account.idToken;
   }}];
 ```
+[**TODO**: Minggang: Fix the code sample after returning type different that MSQAAccountData]
 
 ## MSQASIgnIn method: acquireTokenSilentWithParameters:completionBlock
 Attempt to acquires an access token to access additional account information about the user without interaction with the user. Fails if it is not possible.
@@ -262,7 +262,7 @@ Attempt to acquires an access token to access additional account information abo
                                            parameters
                      completionBlock:(MSQACompletionBlock)completionBlock;
 ```
-[**TODO** what is the proper way to indent the code above?]
+[**TODO**: Minggang: What is the proper way to indent the code above?]
 
 | Parameter | Description |
 | -- | -- |
@@ -272,7 +272,7 @@ Attempt to acquires an access token to access additional account information abo
 | &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
 | &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
 
-Code exampl (Objective-C):
+Code example (Objective-C):
 ```objectivec
 MSQASilentTokenParameters *parameters =
     [[MSQASilentTokenParameters alloc] initWithScopes:@[ @"User.Read" ]];
@@ -286,6 +286,9 @@ MSQASilentTokenParameters *parameters =
                        }
                      }];
 ```
+
+[**TODO**: Minggang: Fix the code sample after returning type different that MSQAAccountData]
+
 ##	Logging
 `MSQALogger` is a singleton object representing the logger. Use `MSQALogger`. `sharedInstance` to access the shared instance.
 
