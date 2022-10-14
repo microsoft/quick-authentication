@@ -29,32 +29,52 @@ If you have already registered a single-page web or an Android application, you 
 
 Now that you have created an application registration, you can extend it to iOS as follows. On the Azure page describing your app registration:
 
-[**TODO** Minggang: please add one screenshot for each step, similar to what JingJing did in Android guide]
 1. Open the *Authentication* tab on the left of that page
-3. Click *Add Platform*
-4. Select *iOS / MacOS*
-5. Enter your app's Bundle ID, which can be found in XCode in the Info.plist or "Build Settings".
-7. Click *Configure*
+
+  ![iOS Open Authentication](./media/ios-open-authentication.png)
+
+2. Click *Add Platform*
+
+  ![iOS Add Platform](./media/ios-add-platform.png)
+
+3. Select *iOS / MacOS*
+
+  ![iOS select Platform](./media/ios-select-ios-platform.png)
+
+4. Enter your app's Bundle ID, which can be found in XCode in the Info.plist or "Build Settings".
 
   ![iOS Redirect configuration](./media/ios-redirect-configuration.png)
+
+5. Click *Configure*
+
   ![iOS MSAL configuration](./media/ios-msal-configuration.png)
 
 ## Installing Microsoft Quick Authentication SDK
 To install the Microsoft Quick Authentication SDK in your development environment, proceed as follows:
 1. Install CocoaPods following the instructions in the [Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
 2. Create a Podfile for your application and add the dependency on Microsoft Quick Authentication:
-```bash
-  $ pod init & pod 'MicrosoftQuickAuth'
+```
+use_frameworks!
+ 
+target 'your-target-here' do
+  pod 'MSAL'
+  pod 'MicrosoftQuickAuth'
+end
 ```
 3. Install the dependency:
 ```bash
   $ pod install
 ```
 > **IMPORTANT**:
-> the steps above are not yet operational. Currently, we only provide the Quick Authentication SDK for Android as a binary framework. The package is located at [MSQASignIn.framework](../demos/iOS/MSQASignIn.framework). Please proceed as follows:
-> - Install [MSAL for Android](https://github.com/AzureAD/microsoft-authentication-library-for-objc) by running the following command: [**TODO**: Minggang, what else do developers have to do for the following command to instal MSAL?]:
->
->        $ pod install
+> the steps above are not yet operational. Currently, we only provide the Quick Authentication SDK for iOS as a binary framework. The package is located at [MSQASignIn.framework](../demos/iOS/MSQASignIn.framework). Please proceed as follows:
+> - Install [MSAL for iOS](https://github.com/AzureAD/microsoft-authentication-library-for-objc) by adding the following to your `Podfile` and running `pod install`:
+>```
+>    use_frameworks!
+> 
+>    target 'your-target-here' do
+>	   pod 'MSAL'
+>    end
+>```
 > - Follow [these instructions](https://developer.apple.com/library/archive/technotes/tn2435/_index.html#//apple_ref/doc/uid/DTS40017543-CH1-EMBED_SECTION) to embed the Quick Authentication SDK into your application.
 
 
@@ -77,8 +97,6 @@ If an error accured, `msSignIn` returned will be nil and the `error` parameter w
 
 If the client ID is invalid, a later attempt to sign-in or acquire an access token will fail. The error will be reported to the user as follows:
 
-[**TODO**: Minggang, please provide non-blurry image]
-
 ![Mobile unauthorized error](media/mobile-unauthorized-client.png)
 
 ## Configuring the application
@@ -86,7 +104,6 @@ If the client ID is invalid, a later attempt to sign-in or acquire an access tok
 Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to make the following MSAL configurations:
 1.	Add a new keychain group, named com.microsoft.adalcache, to your project Capabilities:
 
-[**TODO**: Minggang, please provide non-blurry image]
 ![Add a Keychain Group](media/keychain-group.png))
  
 2.	Add your application’s redirect URL scheme to your Info.plist file:
@@ -127,15 +144,12 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to
 ## Adding a sign-in button to your application
 Microsoft Quick Authentication allows you to add a fully functional sign-in button to your application. To do that, add a View to your storyboard or XIB file and set its custom class as `MSQASignInButton`.
 
-[**TODO** Minggang: please provide non-blurry image]
 
 ![Custom Class](media/custom-class.png)
 
 This will generate a sign-in button in your application as follows:
 
-[**TODO** Minggang: please provide non-blurry image]
-
-![Sign-in button](media/mobile-sign-in-button.png)
+![Sign-in button](media/ios-sign-in-with.png)
 
 Alternatively, you can also add the button programmatically at runtime with the following code:
 ```objectivec
@@ -154,7 +168,7 @@ It is possible to customize the appearance of the button. Refer to the [referenc
 To get a callback after the user has completed the sign-in flow, or an error has occurred, set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
 
 ```objectivec
-[msSignButton setSignInCompletionBlock:^(MSQAAccountData *_Nullable account,
+[msSignButton setSignInCompletionBlock:^(MSQAAccountInfo *_Nullable account,
                                          NSError *_Nullable error) {
   if (account) {
     // Use account
@@ -165,12 +179,11 @@ To get a callback after the user has completed the sign-in flow, or an error has
   }
 }];
 ```
-[**TODO** consistency: MSQAAccountData in iOS and MSQAAccountInfo in Android - Minggang: use MSQAAccountInfo everywhere once you have changed the code]
 
-On success, the completion block will be invoked with the `MSQAAccountData` containing the following information:
+On success, the completion block will be invoked with the `MSQAAccountInfo` containing the following information:
 
 ```objectivec
-@interface MSQAAccountData : NSObject <NSCopying> 
+@interface MSQAAccountInfo : NSObject <NSCopying> 
 
 // MSA user's full name.
 @property(nonatomic, readonly) NSString *fullName;
