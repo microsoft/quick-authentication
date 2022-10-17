@@ -29,7 +29,7 @@
 #import <UIKit/UIKit.h>
 
 /// This class represents a MSA account.
-@interface MSQAAccountData : NSObject
+@interface MSQAAccountInfo : NSObject
 
 /// MSA user's full name.
 @property(nonatomic, readonly, nullable) NSString *fullName;

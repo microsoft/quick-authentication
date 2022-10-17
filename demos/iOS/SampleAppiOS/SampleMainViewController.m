@@ -27,16 +27,17 @@
 
 #import "SampleMainViewController.h"
 
-#import <MSQASignIn/MSQAAccountData.h>
-#import <MSQASignIn/MSQASignIn.h>
+#import <MSQASignIn/MSQAAccountInfo.h>
+#import <MSQASignIn/MSQASignInClient.h>
 #import <MSQASignIn/MSQASilentTokenParameters.h>
+#import <MSQASignIn/MSQATokenResult.h>
 
 #import "SampleAppDelegate.h"
 #import "SampleLoginViewController.h"
 
 @implementation SampleMainViewController {
-  MSQAAccountData *_accountData;
-  MSQASignIn *_msSignIn;
+  MSQAAccountInfo *_accountInfo;
+  MSQASignInClient *_msSignInClient;
 }
 
 + (instancetype)sharedViewController {
@@ -68,23 +69,23 @@
   _profileImageView.clipsToBounds = YES;
 }
 
-- (void)setAccountInfo:(MSQAAccountData *)accountData
-              msSignIn:(MSQASignIn *)msSignIn {
-  _accountData = accountData;
-  _msSignIn = msSignIn;
+- (void)setAccountInfo:(MSQAAccountInfo *)accountInfo
+        msSignInClient:(MSQASignInClient *)msSignInClient {
+  _accountInfo = accountInfo;
+  _msSignInClient = msSignInClient;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   _nameLabel.text =
-      [NSString stringWithFormat:@"Welcome, %@ %@", _accountData.givenName,
-                                 _accountData.surname];
+      [NSString stringWithFormat:@"Welcome, %@ %@", _accountInfo.givenName,
+                                 _accountInfo.surname];
   _fullNameLabel.text =
-      [NSString stringWithFormat:@"Email: %@", _accountData.email];
-  _idLabel.text = [NSString stringWithFormat:@"Id: %@", _accountData.userId];
+      [NSString stringWithFormat:@"Email: %@", _accountInfo.email];
+  _idLabel.text = [NSString stringWithFormat:@"Id: %@", _accountInfo.userId];
 
-  if (_accountData.base64Photo) {
+  if (_accountInfo.base64Photo) {
     NSData *data = [[NSData alloc]
-        initWithBase64EncodedString:_accountData.base64Photo
+        initWithBase64EncodedString:_accountInfo.base64Photo
                             options:
                                 NSDataBase64DecodingIgnoreUnknownCharacters];
     [self setUserPhoto:[UIImage imageWithData:data]];
@@ -94,7 +95,7 @@
 }
 
 - (IBAction)signOut:(id)sender {
-  [_msSignIn signOutWithCompletionBlock:^(NSError *_Nullable error) {
+  [_msSignInClient signOutWithCompletionBlock:^(NSError *_Nullable error) {
     if (error)
       NSLog(@"Error:%@", error.description);
   }];
@@ -105,13 +106,13 @@
 - (IBAction)fetchTokenSilent:(id)sender {
   MSQASilentTokenParameters *parameters =
       [[MSQASilentTokenParameters alloc] initWithScopes:@[ @"User.Read" ]];
-  [_msSignIn acquireTokenSilentWithParameters:parameters
-                              completionBlock:^(MSQAAccountData *account,
-                                                NSError *error) {
-                                self->_tokenLabel.text =
-                                    [NSString stringWithFormat:@"ID token: %@",
-                                                               account.idToken];
-                              }];
+  [_msSignInClient acquireTokenSilentWithParameters:parameters
+                                    completionBlock:^(MSQATokenResult *token,
+                                                      NSError *error) {
+                                      self->_tokenLabel.text = [NSString
+                                          stringWithFormat:@"Access token: %@",
+                                                           token.accessToken];
+                                    }];
 }
 
 - (IBAction)fetchTokenInteractive:(id)sender {
@@ -122,27 +123,28 @@
              initWithScopes:@[ @"User.Read", @"Calendars.Read" ]
           webviewParameters:webParameters];
 
-  [_msSignIn acquireTokenWithParameters:parameters
-                        completionBlock:^(MSQAAccountData *_Nullable account,
-                                          NSError *_Nullable error) {
-                          self->_tokenLabel.text =
-                              [NSString stringWithFormat:@"ID token: %@",
-                                                         account.idToken];
-                        }];
+  [_msSignInClient
+      acquireTokenWithParameters:parameters
+                 completionBlock:^(MSQATokenResult *_Nullable token,
+                                   NSError *_Nullable error) {
+                   self->_tokenLabel.text = [NSString
+                       stringWithFormat:@"Access token: %@", token.accessToken];
+                 }];
 }
 
 - (IBAction)getCurrentAccount:(id)sender {
-  [_msSignIn getCurrentAccountWithCompletionBlock:^(
-                 MSQAAccountData *_Nullable account, NSError *_Nullable error) {
-    if (account) {
-      NSString *message =
-          [NSString stringWithFormat:@"Full name: %@\nUser name: %@",
-                                     account.fullName, account.userName];
-      [self showAlertWithMessage:message];
-      return;
-    }
-    [self showAlertWithMessage:@"None available account"];
-  }];
+  [_msSignInClient
+      getCurrentAccountWithCompletionBlock:^(MSQAAccountInfo *_Nullable account,
+                                             NSError *_Nullable error) {
+        if (account) {
+          NSString *message =
+              [NSString stringWithFormat:@"Full name: %@\nUser name: %@",
+                                         account.fullName, account.userName];
+          [self showAlertWithMessage:message];
+          return;
+        }
+        [self showAlertWithMessage:@"None available account"];
+      }];
 }
 
 - (void)showAlertWithMessage:(NSString *)message {

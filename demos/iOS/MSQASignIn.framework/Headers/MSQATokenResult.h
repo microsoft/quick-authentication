@@ -25,27 +25,38 @@
 //
 //------------------------------------------------------------------------------
 
-#import "MSQAAccountData.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MSQAAccountData ()
+/// This class represents the result for acquiring a token.
+@interface MSQATokenResult : NSObject
 
-@property(nonatomic, readonly, nullable) NSString *accessToken;
+/// The access token.
+@property(nonatomic, readonly, nonnull) NSString *accessToken;
 
-- (instancetype)initWithFullName:(NSString *)fullName
-                        userName:(NSString *)userName
-                          userId:(NSString *)userId
-                         idToken:(nullable NSString *)idToken
-                     accessToken:(nullable NSString *)accessToken;
+/// The authorization header for the specific authentication scheme. For
+/// instance “Bearer …” or “Pop …”.
+@property(nonatomic, readonly, nonnull) NSString *authorizationHeader;
 
-- (void)setBase64Photo:(NSString *)base64Photo;
+/// The authentication scheme for the tokens issued. For instance “Bearer ” or
+/// “Pop”.
+@property(nonatomic, readonly, nonnull) NSString *authorizationScheme;
 
-- (void)setSurname:(NSString *)surname;
+/// The time that the access token returned in the Token property ceases to be
+/// valid.
+@property(nonatomic, readonly, nonnull) NSDate *expiresOn;
 
-- (void)setGivenName:(NSString *)givenName;
+/// An identifier for the tenant that the token was acquired from. This property
+/// will be nil if tenant information is not returned by the service.
+@property(nonatomic, readonly, nullable) NSString *tenantId;
 
-- (void)setEmail:(NSString *)email;
+/// The scope values returned from the service.
+@property(nonatomic, readonly, nonnull) NSArray<NSString *> *scopes;
+
+/// The correlation ID of the request.
+@property(nonatomic, readonly, nullable) NSUUID *correlationId;
 
 @end
 
