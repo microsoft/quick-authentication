@@ -146,7 +146,7 @@ This method of [MSQASignInButton](https://microsoft.github.io/quick-authenticati
 public void setSignInCallback (
         @NonNull Activity activity,
         @NonNull MSQASignInClient client,
-        @NonNull OnCompleteListener <AccountInfo> onCompleteListener);
+        @NonNull OnCompleteListener <MSQAAccountInfo> onCompleteListener);
 ```
 
 | Parameter | Description |
@@ -156,16 +156,16 @@ public void setSignInCallback (
 | @NoNull listener |  An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign-in completed, canceled or failed. |
 | Returns | none |
 
-If sign-in succeeds, `listener` will be invoked, its first parameter will return the [AccountInfo](#accountinfo) and its `error` parameter will be null. If sign-in fails, `listener` will be invoked with the `accountInfo` parameter being null and `error` will contain the error information.
+If sign-in succeeds, `listener` will be invoked, its first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) and its `error` parameter will be null. If sign-in fails, `listener` will be invoked with the `accountInfo` parameter being null and `error` will contain the error information.
 
 Code example:  
 ```java
 MSQASignInButton signInButton = findViewById(R.id.sign_in_button);
 
 signInButton.setSignInCallback(activity, client,
-        new OnCompleteListener<AccountInfo>() {
+        new OnCompleteListener<MSQAAccountInfo>() {
             @Override
-            public void onComplete(@Nullable AccountInfo accountInfo,
+            public void onComplete(@Nullable MSQAAccountInfo accountInfo,
                                    @Nullable MSQAException error) {
                 if (accountInfo != null) {
                     // success: use account
@@ -176,8 +176,8 @@ signInButton.setSignInCallback(activity, client,
         });
 ```
 
-## AccountInfo
-`AccountInfo` defines an interface for getting user account information.
+## MSQAAccountInfo
+`MSQAAccountInfo` defines an interface for getting user account information.
 
 | Method | Description |
 | -- | -- |
@@ -197,7 +197,7 @@ The following methods of [MSQASignInClient](https://microsoft.github.io/quick-au
 |--|--|
 | signIn() | Starts the process of signing in the user with MSA. |
 | signOut() | Signs the user out of this application. |
-| getCurrentAccount() | Gets the current [AccountInfo](#AccountInfo) for the user. |
+| getCurrentAccount() | Gets the current [MSQAAccountInfo](#MSQAAccountInfo) for the user. |
 | acquireTokenSilent() | Perform acquire token silent call. |
 | acquireToken() | Acquires an access token interactively, will pop-up web UI. |
 | create() | Static method to create an [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html) instance object. |
@@ -207,22 +207,21 @@ This method allows to request sign-in programmatically instead of or in addition
 
 ```java
 void signIn(@NonNull Activity activity
-            @NonNull OnCompleteListener<AccountInfo> listener);
+            @NonNull OnCompleteListener<MSQAAccountInfo> listener);
 ```
 | Parameter | Description | 
 | -- | -- |
 | activity | The activity that will be used as the parent activity of the sign in activity. |
-| @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign in finishes, is cancelled or fails. It will return the [AccountInfo](#accountinfo) if successful. If it fails, its `accountInfo` parameter will be null and `error` will contain error info.|
+| @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign in finishes, is cancelled or fails. It will return the [MSQAAccountInfo](#MSQAAccountInfo) if successful. If it fails, its `accountInfo` parameter will be null and `error` will contain error info.|
 | Returns | none |
 
-**TODO: Jingjing please confirm**
 If multiple sign-in requests are made one after the other they will queue up. Once a sign-in sequence is finished next sign-in request in queue will get handled.
 
 Code example:  
 ```java
-mSignInClient.signIn(activity, new OnCompleteListener<AccountInfo>() {
+mSignInClient.signIn(activity, new OnCompleteListener<MSQAAccountInfo>() {
     @Override
-    public void onComplete(@Nullable AccountInfo accountInfo,
+    public void onComplete(@Nullable MSQAAccountInfo accountInfo,
                            @Nullable MSQAException error) {
         if (accountInfo != null) {
             // success: use account
@@ -266,22 +265,22 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
 This method returns the account the user is currently signed-in with, if any.
 
 ```java
-void getCurrentAccount (@NonNull OnCompleteListener <AccountInfo> listener);
+void getCurrentAccount (@NonNull OnCompleteListener <MSQAAccountInfo> listener);
 ```
 
 | Parameter | Description |
 | -- | -- |
-| @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked on completion and will return the [AccountInfo](#AccountInfo) for the current account if one is retrieved. |
+| @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked on completion and will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account if one is retrieved. |
 | Returns | none | 
 
-If there is no current sign-in, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first and second parameters both null. If sign-out succeeds, the first parameter will return the [AccountInfo](#AccountInfo) for the current account. The second parameter will return null.
+If there is no current sign-in, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first and second parameters both null. If sign-out succeeds, the first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account. The second parameter will return null.
 
 Code example:
 ```java
 signInClient.getCurrentAccount(activity,
-    new OnCompleteListener<AccountInfo>() {
+    new OnCompleteListener<MSQAAccountInfo>() {
         @Override
-        public void onComplete(@Nullable AccountInfo accountInfo,
+        public void onComplete(@Nullable MSQAAccountInfo accountInfo,
                                @Nullable MSQAException error) {
             if (accountInfo != null) {
                 // use account
@@ -298,7 +297,7 @@ This method acquires an access token interactively. A UI flow will be presented 
 void acquireToken (
         @NonNull Activity activity,
         @NonNull List<String> scopes,
-        @NonNull OnCompleteListener<TokenResult> listener);
+        @NonNull OnCompleteListener<MSQATokenResult> listener);
 ```
 | Parameter | Description |
 | -- | -- |  
@@ -309,7 +308,7 @@ void acquireToken (
 
 If the `scopes` array is empty, then `listener` will be called with a non-null error.
 If there is no account in the cache, then `listener` will be called with non-null error.
-If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [TokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/TokenResult.html), and its second parameter returning null.
+If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
 
 See next section for a code example.
 
@@ -319,7 +318,7 @@ This method attempts to acquire an access token silently, i.e., without presenti
 ```
 void acquireTokenSilent (
                 @NonNull List <String> scopes,
-                @NonNull OnCompleteListener <TokenResult> listener);
+                @NonNull OnCompleteListener <MSQATokenResult> listener);
 ```
 
 | Parameter | Description | 
@@ -330,16 +329,16 @@ void acquireTokenSilent (
 
 If the `scopes` array is empty, then `listener` will be called with a non-null error. 
 If there is no account in the cache, then `listener` will be called with a non-null error.
-If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [TokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/TokenResult.html), and its second parameter returning null.
+If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
 If a refresh token does not exist or fails the refresh, then an error is returned.
 
 Code example:
 ```java
 List<String> scopes = new ArrayList<>();
 scopes.add("Mail.Read");
-OnCompleteListener<TokenResult> tokenResultListener = new OnCompleteListener<TokenResult>() {
+OnCompleteListener<MSQATokenResult> tokenResultListener = new OnCompleteListener<MSQATokenResult>() {
     @Override
-    public void onComplete(@Nullable TokenResult token,
+    public void onComplete(@Nullable MSQATokenResult token,
                            @Nullable MSQAException error) {
         if (token != null) {
             // success: use token
@@ -349,9 +348,9 @@ OnCompleteListener<TokenResult> tokenResultListener = new OnCompleteListener<Tok
     }
 };
 mSignInClient.acquireTokenSilent(scopes,
-        new OnCompleteListener<TokenResult>() {
+        new OnCompleteListener<MSQATokenResult>() {
             @Override
-            public void onComplete(@Nullable TokenResult token,
+            public void onComplete(@Nullable MSQATokenResult token,
                                    @Nullable MSQAException error) {
                 if (token != null) {
                     // success: use token
