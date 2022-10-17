@@ -252,7 +252,7 @@ void signOut(@NonNull OnCompleteListener<Boolean> listener);
 
 | Parameters | Description |
 |--|--|
-| @NonNull listener | A callback to be invoked when sign out finishes and will return sign-out result.|
+| @NonNull listener | A callback to be invoked when sign out finishes and will return the sign-out result.|
 | Returns | none |
 
 If sign-out succeeds, `listener` will be invoked and the first parameter will return true, the second parameter will return null. If it fails, the first parameter will be false and `error` will contain the error.

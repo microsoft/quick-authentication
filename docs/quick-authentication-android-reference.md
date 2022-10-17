@@ -28,7 +28,7 @@ The [MSQASignInOptions](https://microsoft.github.io/quick-authentication/docs/an
 ```java
 public MSQASignInOptions build()
 ```
-And a set of "setter" methods can be used to set configuration option on [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html)
+And a set of "setter" methods can be used to set configuration options on [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html)
 
 Code example:
 ```
