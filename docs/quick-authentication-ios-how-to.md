@@ -11,7 +11,7 @@ Microsoft Quick Authentication allows you to easily add a fully functioning sign
 To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
 1. First register your application for iOS on Azure (you can reuse the same Azure registration that you created for your web site). 
 2. Install Microsoft Quick Authentication SDK and import the required header files in your application.
-3. Create a Quick Authentication sign-in client object (`MSQASignIn`) with the proper configuration.
+3. Create a Quick Authentication sign-in client object (`MSQASignInClient`) with the proper configuration.
 4. Add an Quick Authentication sign-in button somewhere in your application storyboard or XIB file.
 5. Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
 6. Implement the callback to integrate the user account with your own identity system.
@@ -82,18 +82,18 @@ end
 Create a `MSQAConfiguration` object to set the client ID for your application, which you will find in the Azure registration for your application. 
 
 ```objectivec
-#import <MSQA/MSQASignIn.h>
+#import <MSQA/MSQASignInClient.h>
 
 MSQAConfiguration *config = [[MSQAConfiguration alloc]
       initWithClientID:@"YOUR_IOS_CLIENT_ID"];
 ```
-and initialize a new instance of `MSQASignIn` as follows:
+and initialize a new instance of `MSQASignInClient` as follows:
 ```objectivec
 NSError *error = nil;
-MSQASignIn *msSignIn = [[MSQASignIn alloc] initWithConfiguration:config
-                                                           error:&error];
+MSQASignInClient *msSignInClient = [[MSQASignInClient alloc] initWithConfiguration:config
+                                                                             error:&error];
 ```                                                           
-If an error accured, `msSignIn` returned will be nil and the `error` parameter will contain the error details.
+If an error occured, `msSignInClient` returned will be nil and the `error` parameter will contain the error details.
 
 If the client ID is invalid, a later attempt to sign-in or acquire an access token will fail. The error will be reported to the user as follows:
 
@@ -128,13 +128,13 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to
 </array>
 ```
 
-4.	To handle the sign-in callback, implement the following AppDelegate method to call `MSQASignIn`’s `handleURL` to open a resource specified by the URL, and returns `YES` if the `MSQASignIn` successfully handled the request
+4.	To handle the sign-in callback, implement the following AppDelegate method to call `MSQASignInClient`’s `handleURL` to open a resource specified by the URL, and returns `YES` if the `MSQASignInClient` successfully handled the request
 
 ```objectivec
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-      return [_msSignIn
+      return [_msSignInClient
               handleURL:url
       sourceApplication:
           options[UIApplicationOpenURLOptionsSourceApplicationKey]];
@@ -213,10 +213,10 @@ On success, the completion block will be invoked with the `MSQAAccountInfo` cont
 ```
 
 ## Handling sign out
-To allow the user to sign out, in your application, connect a button to a method in the `ViewController` (called `signOut` in the example below) and call `MSQASignIn`'s method `signOutWithCompletionBlock`:
+To allow the user to sign out, in your application, connect a button to a method in the `ViewController` (called `signOut` in the example below) and call `MSQASignInClient`'s method `signOutWithCompletionBlock`:
 ```objectivec
 - (IBAction)signOut:(id)sender {
-  [_msSignIn
+  [_msSignInClient
       signOutWithCompletionBlock:^(NSError *_Nullable error) {
         if (error)
           NSLog(@"Error:%@", error.description);
