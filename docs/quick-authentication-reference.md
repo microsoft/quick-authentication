@@ -131,13 +131,24 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 | Property                | Value(s)                                                                      | Default value                 | Required | More info                                                                                           |
 |-------------------------|:------------------------------------------------------------------------------|:-----------------------------:|----------|-------------------------------------------------------------------------------------------------------|
 | `client_id`             | **Application (client) ID**                                                   | (no default value)            | Yes      | See [Register your application](quick-authentication-how-to.md#register-your-application).   |
-| `login_uri`             | **Redirect URI**                                                              | _https://<domain>/blank.html_ | No       | See [Register your application](quick-authentication-how-to.md#register-your-application).                                                                                                      |
-| `callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [SignInAccountInfo](#data-type-signinaccountinfo) object. |
+| `login_uri`             | **Redirect URI for Single-page application**                                  | _https://&lt;domain&gt;/blank.html_ | No       | See [Register your application](quick-authentication-how-to.md#register-your-application). This URI is used when `ux_mode = 'popup'`.|
+| `callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [SignInAccountInfo](#data-type-signinaccountinfo) object. <br/> On sign-in failure, it is called with second argument [SignInErrorInfo](#data-type-signinerrorinfo) containing the error. |
 | `auto_prompt`           | `true` or `false`                                                             | `true`                        | No       |                                                                                                       |
 | `auto_sign_in`          | `true` or `false`                                                             | `false`                       | No       |                                                                                                       |
 | `context`               | "signin"<br/> "signup"<br/> "use"                                             | "signin"                      | No       |                                                                                                       |
 | `cancel_on_tap_outside` | `true` or `false`                                                             | `true`                        | No       |                                                                                                       |
 | `prompt_position`       | "left"<br/> "center"<br/> "right"                                             | "left"                        | No       |                                                                                                       |
+| `locale`                | `Language ID` strings in [table below](#supported-locales). e.g., `"en-US"`, `"fr-FR"`, etc. | `"en-US"`      | No       | Check `Language ID` column in [this table](#supported-locales) for possible values.                   |
+| `ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
+| `redirect_uri`          | **Redirect URI for Web**                                                      | (no default value)            | Yes if `ux_mode == 'redirect'`, else No |  Check [this section](./quick-authentication-how-to.md#1-add-redirect-uri-in-application-registration) for more info. |
+| `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state). |
+
+### `redirect_state`
+
+This is an optional string value which can be configured using any of the following approaches:
+- `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
+- `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
+- Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.
 
 ## Data Type: AccountInfo
 
@@ -172,6 +183,23 @@ This data type contains all the fields of [AccountInfo](#data-type-accountinfo) 
 
 We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
+## Data Type: SignInErrorInfo
+
+This data type contains the following:
+| Property | Description |
+|----------|---------|
+| `errorCode` | A short string classifying the error |
+| `errorMessage` | A longer string explaining more details about the error |
+
+For example, if user cancels out of the sign-in flow, they will get the following error info object.
+
+```javascript
+{
+ errorCode: 'user_cancelled',
+ errorMessage: 'User cancelled the flow'
+}
+```
+
 ## Method: ms.auth.initialize
 
 `ms.auth.initialize` is called to initialize Microsoft Quick Authentication library. It takes [InitConfiguration](#data-type-initconfiguration) object as argument. The following code example shows usage in `onload` function:
@@ -203,6 +231,7 @@ The following are some possible reasons for failure:
 
 - Initialization was called more than once. Here API returns `{result: 'failure', reason: 'Library already initialized'}`.
 - `callback` isn't a valid function or `client_id` isn't set. In these cases, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
+- If `ux_mode == 'redirect'` and `redirect_uri` is an `null`, `undefined` or empty string, API returns `{result: 'failure', reason: 'Invalid configuration'}`.
 
 `ms.auth.initialize` or div ["ms-auth-initialize"](quick-authentication-how-to.md#option-1-add-sign-in-button-via-html) is needed to initialize Microsoft Quick Authentication library.
 
@@ -286,6 +315,8 @@ button.addEventListener('click', function() {
 Successful authentications will be routed into the [callback](#callback) defined when initializing the library.
 
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw an exception.
+
+In [redirect flow](./quick-authentication-how-to.md#msauthstartsignin-in-redirect-mode), the callback will not be called. Instead a full page redirection flow to MSA server will start.
 
 ## Method: ms.auth.startGetCurrentAccount
 
@@ -468,3 +499,106 @@ if (request.account) {
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw an exception.
 
 Check [MSAL.js access token fetch documentation](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/acquire-token.md) for more information. Also check [MSAL.js acquireTokenPopup](https://azuread.github.io/microsoft-authentication-library-for-js/ref/classes/_azure_msal_browser.publicclientapplication.html#acquiretokenpopup) API documentation.
+
+## Method: ms.auth.setRedirectState
+
+If `ux_mode == 'redirect'` then `ms.auth.setRedirectState` can be called to set a string which will be used as `state` parameter during redirection.
+
+```javascript
+ms.auth.setRedirectState('some-unique-string-that-is-known-by-your-server');
+```
+
+Check [this section](#redirect_state) for more info on redirect state.
+
+If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+
+## Supported locales
+
+| Language ID      |  Language name                             |
+|------------------|:-------------------------------------------|
+| `af-ZA`          | Afrikaans (South Africa)                   |
+| `am-ET`          | Amharic (Ethiopia)                         |
+| `ar-SA`          | Arabic (Saudi Arabia)                      |
+| `as-IN`          | Assamese (India)                           |
+| `az-Latn-AZ`     | Azerbaijani (Latin, Azerbaijan)            |
+| `bg-BG`          | Bulgarian (Bulgaria)                       |
+| `bn-IN`          | Bangla (India)                             |
+| `bs-Latn-BA`     | Bosnian (Latin, Bosnia and Herzegovina)    |
+| `ca-ES`          | Catalan (Catalan)                          |
+| `ca-ES-valencia` | Valencian (Spain)                          |
+| `cs-CZ`          | Czech (Czech Republic)                     |
+| `cy-GB`          | Welsh (United Kingdom)                     |
+| `da-DK`          | Danish (Denmark)                           |
+| `de-DE`          | German (Germany)                           |
+| `el-GR`          | Greek (Greece)                             |
+| `en-GB`          | English (United Kingdom)                   |
+| `en-US`          | English (United States)                    |
+| `es-ES`          | Spanish (Spain, International Sort)        |
+| `es-MX`          | Spanish (Mexico)                           |
+| `et-EE`          | Estonian (Estonia)                         |
+| `eu-ES`          | Basque (Basque)                            |
+| `fa-IR`          | Persian                                    |
+| `fi-FI`          | Finnish (Finland)                          |
+| `fil-PH`         | Filipino (Philippines)                     |
+| `fr-CA`          | French (Canada)                            |
+| `fr-FR`          | French (France)                            |
+| `ga-IE`          | Irish (Ireland)                            |
+| `gd-GB`          | Scottish Gaelic (United Kingdom)           |
+| `gl-ES`          | Galician (Galician)                        |
+| `gu-IN`          | Gujarati (India)                           |
+| `he-IL`          | Hebrew (Israel)                            |
+| `hi-IN`          | Hindi (India)                              |
+| `hr-HR`          | Croatian (Croatia)                         |
+| `hu-HU`          | Hungarian (Hungary)                        |
+| `hy-AM`          | Armenian (Armenia)                         |
+| `id-ID`          | Indonesian (Indonesia)                     |
+| `is-IS`          | Icelandic (Iceland)                        |
+| `it-IT`          | Italian (Italy)                            |
+| `ja-JP`          | Japanese (Japan)                           |
+| `ka-GE`          | Georgian (Georgia)                         |
+| `kk-KZ`          | Kazakh (Kazakhstan)                        |
+| `km-KH`          | Khmer (Cambodia)                           |
+| `kn-IN`          | Kannada (India)                            |
+| `kok-IN`         | Konkani (India)                            |
+| `ko-KR`          | Korean (Korea)                             |
+| `lb-LU`          | Luxembourgish (Luxembourg)                 |
+| `lo-LA`          | Lao (Laos P.D.R.)                          |
+| `lt-LT`          | Lithuanian (Lithuania)                     |
+| `lv-LV`          | Latvian (Latvia)                           |
+| `mi-NZ`          | Maori (New Zealand)                        |
+| `mk-MK`          | Macedonian (North Macedonia)               |
+| `ml-IN`          | Malayalam (India)                          |
+| `mr-IN`          | Marathi (India)                            |
+| `ms-MY`          | Malay (Malaysia)                           |
+| `mt-MT`          | Maltese (Malta)                            |
+| `nb-NO`          | Norwegian, Bokmål (Norway)                 |
+| `ne-NP`          | Nepali (Nepal)                             |
+| `nl-NL`          | Dutch (Netherlands)                        |
+| `nn-NO`          | Norwegian, Nynorsk (Norway)                |
+| `or-IN`          | Odia                                       |
+| `pa-IN`          | Punjabi (India)                            |
+| `pl-PL`          | Polish (Poland)                            |
+| `pt-BR`          | Portuguese (Brazil)                        |
+| `pt-PT`          | Portuguese (Portugal)                      |
+| `quz-PE`         | Quechua (Peru)                             |
+| `ro-RO`          | Romanian (Romania)                         |
+| `ru-RU`          | Russian (Russia)                           |
+| `sk-SK`          | Slovak (Slovakia)                          |
+| `sl-SI`          | Slovenian (Slovenia)                       |
+| `sq-AL`          | Albanian (Albania)                         |
+| `sr-Cyrl-BA`     | Serbian (Cyrillic, Bosnia and Herzegovina) |
+| `sr-Cyrl-RS`     | Serbian (Cyrillic, Serbia)                 |
+| `sr-Latn-RS`     | Serbian (Latin, Serbia)                    |
+| `sv-SE`          | Swedish (Sweden)                           |
+| `ta-IN`          | Tamil (India)                              |
+| `te-IN`          | Telugu (India)                             |
+| `th-TH`          | Thai (Thailand)                            |
+| `tr-TR`          | Turkish (Turkey)                           |
+| `tt-RU`          | Tatar (Russia)                             |
+| `ug-CN`          | Uyghur (PRC)                               |
+| `uk-UA`          | Ukrainian (Ukraine)                        |
+| `ur-PK`          | Urdu (Islamic Republic of Pakistan)        |
+| `uz-Latn-UZ`     | Uzbek (Latin, Uzbekistan)                  |
+| `vi-VN`          | Vietnamese (Vietnam)                       |
+| `zh-CN`          | Chinese (Simplified, PRC)                  |
+| `zh-TW`          | Chinese (Traditional, Taiwan)              |

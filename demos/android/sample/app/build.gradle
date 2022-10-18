@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.application'
+    id 'com.diffplug.spotless'
+}
+
+spotless {
+    java {
+        target project.fileTree(project.rootDir) {
+            include '**/*.java'
+            exclude '**/quick/auth/**'
+            exclude '**/quick_auth/**'
+        }
+        googleJavaFormat()
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.azuresamples.quickauthandroidapp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../gradle/debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+
+        release {
+            storeFile file("../gradle/debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // libraries for quickauth sdk
+    implementation "com.microsoft.identity.client:msal:${rootProject.ext.msalSDKVersion}"
+    implementation(name: 'quickauth-1.0.0', ext: 'aar')
+
+    // libraries for android
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerviewVersion"
+}

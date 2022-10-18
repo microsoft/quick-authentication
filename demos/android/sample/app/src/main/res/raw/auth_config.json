@@ -1,0 +1,20 @@
+{
+  "client_id": "c4e50099-e6cd-43e4-a7c6-ffb3cebce505",
+  "authorization_user_agent": "DEFAULT",
+  "redirect_uri": "msauth://com.azuresamples.quickauthandroidapp/1wIqXSqBj7w%2Bh11ZifsnqwgyKrY%3D",
+  "account_mode": "SINGLE",
+  "broker_redirect_uri_registered": true,
+  "http": {
+    "connect_timeout": 10000,
+    "read_timeout": 30000
+  },
+  "authorities": [
+    {
+      "type": "AAD",
+      "audience": {
+        "type": "PersonalMicrosoftAccount",
+        "tenant_id": "consumers"
+      }
+    }
+  ]
+}

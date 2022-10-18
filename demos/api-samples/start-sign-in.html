@@ -22,6 +22,17 @@
       src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
     ></script>
     <script>
+      function hideSignInButton() {
+        document
+            .querySelector(".custom-button")
+            .classList.add('make-invisible');
+      }
+
+      function showSignInButton() {
+        document
+            .querySelector(".custom-button")
+            .classList.remove('make-invisible');
+      }
       // This sample demonstrates how to programmatically start
       // the sign-in flow, with your own button.
       window.onload = function () {
@@ -39,12 +50,25 @@
               // defined during the initialization of the library
               // will be executed.
               ms.auth.startSignIn();
+              hideSignInButton();
             });
         }
       };
 
-      function userAuthenticated(signInAccountInfo) {
+      function userAuthenticated(signInAccountInfo, errorInfo) {
         console.log(signInAccountInfo);
+        if (!signInAccountInfo) {
+          showSignInButton();
+          console.log("Sign in failed with error: ", errorInfo);
+          document.querySelector(".user-info").innerHTML = `
+            <div class='error-info'>
+              <p><span>Sign in failed:</span></p>
+              <p>errorCode: <span>${errorInfo.errorCode}</span></p>
+              <p>errorMessage: <span>${errorInfo.errorMessage}</span></p>
+            </div>
+          `;
+          return;
+        }
 
         document.querySelector(".user-info").innerHTML = `
           <p>User's avatar: <img src="${signInAccountInfo.photoUrl}" alt="User avatar"></p>
