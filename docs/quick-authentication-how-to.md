@@ -239,7 +239,7 @@ When called, `startGetCurrentAccount()` will trigger the callback and pass in a 
 
 ## Customizing the Quick Authentication experience
 
-To fully control your users' authentication experience, build and maintain your own button to trigger the sign-in flow.
+To fully control your users authentication experience, build and maintain your own button to trigger the sign-in flow.
 
 ### Start the sign-in process
 
