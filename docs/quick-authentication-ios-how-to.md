@@ -1,5 +1,7 @@
 # Sign-in users with a Microsoft Account to iOS apps using Microsoft Quick Authentication
 
+| [*Getting Started*](./quick-authentication-iOs-how-to.md)| [Reference](./quick-authentication-iOs-reference.md) |
+|--|--|
 
 On iOS, Microsoft Quick Authentication offers a library that makes it easy to add **Sign in with Microsoft** support to your mobile native app. Quick Authentication uses the Microsoft Authentication Library (MSAL) for iOS to handle authentication and authorization for users with personal Microsoft accounts.
 

@@ -1,8 +1,11 @@
 # Microsoft Quick Authentication configuration and JavaScript API reference
 
+| [Getting Started](./quick-authentication-how-to.md)| [*Reference*](./quick-authentication-reference.md) |
+|--|--|
+
 These settings and APIs allow you to customize the appearance and behavior of the UI provided by Microsoft Quick Authentication.
 
-For information about how to use Quick Authentication, see the [Sign in Microsoft account users to a single-page app (SPA) with Microsoft Quick Authentication](./quick-authentication-how-to.md).
+For information about how to use Quick Authentication, see the [Getting Started guide](./quick-authentication-how-to.md).
 
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 

@@ -1,5 +1,8 @@
 # Microsoft Quick Authentication
 
+| [Web](./docs/quick-authentication-how-to.md)| [Android](./docs/quick-authentication-android-how-to.md) | [iOS](./docs/quick-authentication-ios-how-to.md) | [Demo Code](./demos) | [Live Demos](https://quickauth.azurewebsites.net/)
+|--|--|--|--|--|
+
 **Microsoft Quick Authentication** is a simple way for you to let your users sign up and sign in to your website using a Microsoft Account (MSA). You are likely familiar with similar offerings from other providers (e.g., “Sign in with ________”) and this offering provides that same capability to connect with people who use Microsoft products and cloud services, such as Outlook, OneDrive, Xbox LIVE, and Microsoft 365.
 
 Backed by Microsoft’s robust Microsoft Account (MSA) service, **Microsoft Quick Authentication** enables you to drop a small snippet of HTML (or JavaScript) into your site to create a sign-in button or prompt for MSA holders. When they click to sign in, our code will securely authenticate them and provide the necessary details to you to sign them in (or register them for a new account).
@@ -8,7 +11,11 @@ Backed by Microsoft’s robust Microsoft Account (MSA) service, **Microsoft Quic
 
 ## Documentation
 
-To learn more about **Microsoft Quick Authentication**, see [Sign in Microsoft account users to a single-page app (SPA) with Microsoft Quick Authentication](./docs/quick-authentication-how-to.md).
+To learn more about **Microsoft Quick Authentication** for the web, see [Sign in Microsoft account users to a single-page app (SPA) with Microsoft Quick Authentication](./docs/quick-authentication-how-to.md).
+
+To learn more about **Microsoft Quick Authentication** for Android, see [Sign-in users with a Microsoft Account to Android apps using Microsoft Quick Authentication](./docs/quick-authentication-android-how-to.md).
+
+To learn more about **Microsoft Quick Authentication** for iOS, see [Sign-in users with a Microsoft Account to iOS apps using Microsoft Quick Authentication](./docs/quick-authentication-ios-how-to.md).
 
 ## Sample Code
 
