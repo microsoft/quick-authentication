@@ -99,7 +99,7 @@ You can customize the look and feel of the sign-in button using a handful of opt
 
 ### `text`
 
-The `text` property governs the text shown in sign-in button. Other properties affect what is finally shown as mentioned in table below.
+The `text` property governs the text shown in the sign-in button. Other properties affect what is finally shown as mentioned in table below.
 
 | Text            | `standard` button         | `icon` button | `standard` button in Microsoft Edge MSA profile |
 |-----------------|---------------------------|---------------|-------------------------------------------------|
@@ -285,7 +285,7 @@ button.addEventListener('click', function() {
 
 Successful authentications will be routed into the [callback](#callback) defined when initializing the library.
 
-If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw an exception.
 
 ## Method: ms.auth.startGetCurrentAccount
 
@@ -433,7 +433,7 @@ if (!request.account) {
 }
 ```
 
-If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw an exception.
 
 Check [MSAL.js access token fetch documentation](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/acquire-token.md) for more information. Also check [MSAL.js acquireTokenSilent](https://azuread.github.io/microsoft-authentication-library-for-js/ref/classes/_azure_msal_browser.publicclientapplication.html#acquiretokensilent) API documentation.
 
@@ -465,6 +465,6 @@ if (request.account) {
 }
 ```
 
-If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw an exception.
 
 Check [MSAL.js access token fetch documentation](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/acquire-token.md) for more information. Also check [MSAL.js acquireTokenPopup](https://azuread.github.io/microsoft-authentication-library-for-js/ref/classes/_azure_msal_browser.publicclientapplication.html#acquiretokenpopup) API documentation.
