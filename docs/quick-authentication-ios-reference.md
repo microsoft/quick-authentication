@@ -291,7 +291,6 @@ Attempt to acquires an access token to access additional account information abo
 | Parameter | Description |
 | -- | -- |
 | parameters | Contains the parameters used to fetch the token. |
-| completionBlock | The completion block that will be called on completion or on failure.
 | completionBlock | callback invoked when the operation is complete or an error occurred. |
 | &nbsp;&nbsp; token | Returns the token. Nil if no token was retrieved. |
 | &nbsp;&nbsp; error | If an error occurred, returns information about the error, otherwise nil. 
