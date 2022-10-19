@@ -29,7 +29,7 @@ The `logMsalEvents` query parameter supports MSAL [log levels](https://azuread.g
 `autoLogEvents` needs to be set (can be any value) for `logMsalEvents` take effect.
 
 ## Specifying the Quick Authenticaton initialization parameters
-The following parameters can be used to initialize Quick Authentication. They are supplied as data attributes of the `ms_auth_initialize div` in your HTML. You can also choose to supply them programmatically in your Javascript (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
+The following parameters can be used to initialize Quick Authentication. They are supplied as data attributes of the `ms-auth-initialize div` in your HTML. You can also choose to supply them programmatically in your Javascript (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
 
 | Property                     | Value(s)                                                                      | Default value                 | Required | More info                                                                                                   |
 |------------------------------|------------------------------------------------------------------------------|:-----------------------------:|----------|-------------------------------------------------------------------------------------------------------|
@@ -43,7 +43,7 @@ The following parameters can be used to initialize Quick Authentication. They ar
 
 ## Customizing the sign-in prompt
 
-You can customize the setup of the Quick Authentication sign-in prompt using a handful of options. These values are supplied as data attributes of the `ms_auth_initialize div` in your HTML. You can also choose to supply them programmatically in your JavaScript. (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
+You can customize the setup of the Quick Authentication sign-in prompt using a handful of options. These values are supplied as data attributes of the `ms-auth-initialize div` in your HTML. You can also choose to supply them programmatically in your JavaScript. (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
 
 | Property                     | Values                             | Default  | More Info |
 |------------------------------|------------------------------------|----------|-----------|
@@ -137,7 +137,7 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 
 This is an optional string value which can be configured using any of the following approaches:
 - `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
-- `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
+- `data-redirect_state` property in HTML `id="ms-auth-initialize"`.
 - Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.
 
 ## Data Type: AccountInfo
