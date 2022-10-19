@@ -31,56 +31,46 @@ The `logMsalEvents` query parameter supports MSAL [log levels](https://azuread.g
 
 `autoLogEvents` needs to be set (can be any value) for `logMsalEvents` take effect.
 
+## Specifying the Quick Authenticaton initialization parameters
+The following parameters can be used to initialize Quick Authentication. They are supplied as data attributes of the `ms-auth-initialize div` in your HTML. You can also choose to supply them programmatically in your Javascript (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
+
+| Property                     | Value(s)                                                                      | Default value                 | Required | More info                                                                                                   |
+|------------------------------|------------------------------------------------------------------------------|:-----------------------------:|----------|-------------------------------------------------------------------------------------------------------|
+| `data-client_id`             | **Application (client) ID**                                                   | (no default value)            | Yes      | See [Register your application](quick-authentication-how-to.md#register-your-application).   |
+| `data-login_uri`             | **Redirect URI for Single-page application**                                  | _https://&lt;domain&gt;/blank.html_ | Yes if `ux_mode == 'popup'`, else No | See [Register your application](quick-authentication-how-to.md#register-your-application). This URI is used when `ux_mode = 'popup'`.|
+| `data-callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [SignInAccountInfo](#data-type-signinaccountinfo) object. <br/> On sign-in failure, it is called with second argument [SignInErrorInfo](#data-type-signinerrorinfo) containing the error. |
+| `data-locale`                | `Language ID` strings in [table below](#supported-locales). e.g., `"en-US"`, `"fr-FR"`, etc. | `"en-US"`      | No       | Check `Language ID` column in [this table](#supported-locales) for possible values.                   |
+| `data-ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
+| `data-redirect_uri`          | **Redirect URI for Web**                                                      | (no default value)            | Yes if `ux_mode == 'redirect'`, else No |  Check [this section](./quick-authentication-how-to.md#1-add-redirect-uri-in-application-registration) for more info. |
+| `data-redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state). |
+
 ## Customizing the sign-in prompt
 
-You can customize the setup of the Quick Authentication sign-in prompt using a handful of options. These values are supplied as part of the initialization object in your JavaScript or as data attributes in the initialization `div` in your HTML (prefixed with `data-`):
+You can customize the setup of the Quick Authentication sign-in prompt using a handful of options. These values are supplied as data attributes of the `ms-auth-initialize div` in your HTML. You can also choose to supply them programmatically in your JavaScript. (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
 
-| Property                | Values                             | Default  |
-|-------------------------|------------------------------------|----------|
-| `auto_prompt`           | `true` or `false`                  | `true`   |
-| `auto_sign_in`          | `true` or `false`                  | `false`  |
-| `context`               | "signin"<br/> "signup"<br/> "use"  | "signin" |
-| `cancel_on_tap_outside` | `true` or `false`                  | `true`   |
-| `prompt_position`       | "left"<br/> "center"<br/> "right"  | "left"   |
+| Property                     | Values                             | Default  | More Info |
+|------------------------------|------------------------------------|----------|-----------|
+| `data-auto_prompt`           | `true` or `false`                  | `true`   | Controls whether the one-tap prompt should show up. Only shows for MSA profiles in Microsoft Edge.|
+| `data-auto_sign_in`          | `true` or `false`                  | `false`  | Only applicable when `auto_prompt` is `true`. If set to `true`, it will complete the sign-in automatically, without the user needing to do anything.|
+| `data-context`               | "signin"<br/> "signup"<br/> "use"  | "signin" | Defines the text variant to be used in the prompt.<br> - "signin" = "Sign in with Microsoft" (default)<br> - "signup" = "Sign up with Microsoft" <br>- "use" = "Use Microsoft" |
+| `data-cancel_on_tap_outside` | `true` or `false`                  | `true`   | Whether to close the prompt when a user moves focus out of the prompt. |
+| `data-prompt_position`       | "left"<br/> "center"<br/> "right"  | "left"   | Prompt position with respect to the width of the web page |
 
-### `auto_prompt`
-
-Controls whether the one-tap prompt should show up. Only shows for MSA profiles in Microsoft Edge.
-
-### `auto_sign_in`
-
-Only applicable when `auto_prompt` is `true`. If set to `true`, it will complete the sign-in automatically, without the user needing to do anything.
-
-### `context`
-
-Defines the text variant to be used in the prompt.
-
-- "signin" = "Sign in with Microsoft" (default)
-- "signup" = "Sign up with Microsoft"
-- "use" = "Use Microsoft"
-
-### `cancel_on_tap_outside`
-
-Whether to close the prompt when a user moves focus out of the prompt.
-
-### `prompt_position`
-
-Controls the rendering location of the prompt in Microsoft Edge. Choosing "right" will anchor it to the user's Edge profile's avatar button.
 
 ## Customizing the sign-in button
 
-You can customize the look and feel of the sign-in button using a handful of options. These values are supplied as part of the `renderSignInButton()` call in your JavaScript or as data attributes on the button container `div` in your HTML (prefixed with `data-`):
+You can customize the look and feel of the sign-in button using a handful of options. These values are supplied as part of the `renderSignInButton()` call in your JavaScript or as data attributes on the button container `div` in your HTML:
 
-| Property         | Values                                                              | Default       |
-|------------------|---------------------------------------------------------------------|---------------|
-| `type`           | "standard"<br/> "icon"                                              | "standard"    |
-| `theme`          | "dark"<br/> "light"                                                 | "dark"        |
-| `size`           | "small"<br/> "medium"<br/> "large"                                  | "large"       |
-| `text`           | "signin_with"<br/> "signup_with"<br/> "continue_with"<br/> "signin" | "signin_with" |
-| `shape`          | "rectangular"<br/> "rounded"<br/> "pill"                            | "rectangular" |
-| `width`          | number in CSS pixels<br/> 200–600                                   |               |
-| `height`         | number in CSS pixels<br/> 24–100                                    |               |
-| `logo_alignment` | "left"<br/> "center"                                                | "left"        |
+| Property              | Values                                                              | Default       |
+|-----------------------|---------------------------------------------------------------------|---------------|
+| `data-type`           | "standard"<br/> "icon"                                              | "standard"    |
+| `data-theme`          | "dark"<br/> "light"                                                 | "dark"        |
+| `data-size`           | "small"<br/> "medium"<br/> "large"                                  | "large"       |
+| `data-text`           | "signin_with"<br/> "signup_with"<br/> "continue_with"<br/> "signin" | "signin_with" |
+| `data-shape`          | "rectangular"<br/> "rounded"<br/> "pill"                            | "rectangular" |
+| `data-width`          | number in CSS pixels<br/> 200–600                                   |               |
+| `data-height`         | number in CSS pixels<br/> 24–100                                    |               |
+| `data-logo_alignment` | "left"<br/> "center"                                                | "left"        |
 
 ### `type`
 
@@ -150,7 +140,7 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 
 This is an optional string value which can be configured using any of the following approaches:
 - `redirect_state` property of [InitConfiguration](./quick-authentication-reference.md#data-type-initconfiguration).
-- `data-redirect_state` property in HTML `id="ms_auth_initialize"`.
+- `data-redirect_state` property in HTML `id="ms-auth-initialize"`.
 - Using [ms.auth.setRedirectState](./quick-authentication-reference.md#method-msauthsetredirectstate) API.
 
 ## Data Type: AccountInfo
