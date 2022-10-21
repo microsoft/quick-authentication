@@ -27,17 +27,17 @@ To make sure that your domain has fully propagated to Azure AD and is valid on A
 Create a new user with the Global Admin role following the instructions here: [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose your custom domain as the domain part of the user name. 
 
 ## Enrolling in the Microsoft Cloud Partner Program and getting your business verified
-The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. 
+The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. Joining the Microsoft Could Partner Program gives you access to the Partner Center, where you can request verification of your business. 
 
-Verify prerequisites for enrolling on [What is the Microsoft Cloud Partner Program](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) and follow the enrollement instructions starting [here](https://partner.microsoft.com/en-us/dashboard/account/v3/enrollment/introduction/partnership). On the "Welcome to Partner Center" page, click "Sign in" and sign-in as the user you created above, for example, `someone@contoso.org`
+First, double check prerequisites for enrolling on [What is the Microsoft Cloud Partner Program](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account), then follow the enrollement instructions starting [here](https://partner.microsoft.com/en-us/dashboard/account/v3/enrollment/introduction/partnership). On the "Welcome to Partner Center" page, click "Sign in" and sign-in as the user you created above, for example, `somebody@contoso.org`
 
 ![Welcome to Partner Center](./media/Welcome-to-Partner-Center.PNG)
 
-In the page titled "Join a program to unlock new opportunities" chose "Microsoft Cloud Partner Program" and click next. 
+On the page titled "Join a program to unlock new opportunities", choose "Microsoft Cloud Partner Program" and click next. 
 
 ![Join a program to unlock new opportunities](./media/Join-a-program.PNG)
 
-On the next screen, enter your company legal business details on the next screen. The [What is the Microsoft Cloud Partner Program?](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) page provide additional help in the [Getting started](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account#get-started) section. 
+On the next screen, enter your company legal business details. The [What is the Microsoft Cloud Partner Program?](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) page provide additional help in the [Getting started](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account#get-started) section. 
 
 ![Company Information](./media/Company-Information.PNG)
 
@@ -46,7 +46,7 @@ On the next screen, enter your company legal business details on the next screen
 ## Creating your application registration and associating it with an MPN number to attest of business verification
 
 ### Obtain the MPN ID
-The Microsoft Partner Network (NPM) ID can be found by signing-in to the [Microsoft Partner Center dasboard](https://partner.microsoft.com/en-us/dashboard/home) as the Global Admin user you created in your tenant in section [Add a new user](#adding-a-new-user). 
+The Microsoft Partner Network ID (NPM ID), also called Partner ID, can be found by signing-in to the [Microsoft Partner Center dasboard](https://partner.microsoft.com/en-us/dashboard/home) as the Global Admin user you created in your own tenant in section [Add a new user](#adding-a-new-user). 
 
 ![Partner Center dashboard](./media/mpc-dashboard.PNG)
 
@@ -54,7 +54,7 @@ Click on "My Access" and then on "Identifiers" on the left of the following page
 
 ![Partner Center Identifiers](./media/mpc-identifiers.png)
 
-The NPM ID is shown as the Partner ID for your user. 
+The NPM ID, or Partner ID, is shown for your user. 
 
 ### Create or locate your Azure AD application registration
 In your company Azure AD tenant (i.e., go to the [Azure Portal](https://portal.azure.com) and sign-in with the tenant user you created above), create a registration for you web site and/or apps as indicated in Quick Authentication [Getting Starting guide](./quick-authentication-how-to.md#register-your-application). 
@@ -68,6 +68,6 @@ Go to you [app registration](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM
 
 Click on "Add MPN ID to verify publisher". A panel opens up from the right in which you can enter the MPN ID (a.k.a., Partner ID) obtained in the previous section.
 
-This will remove the "unverified" mention on the sharing consent screen and on [accounts.microsoft.com](https://accounts.microsoft.com).
+This will remove the "unverified" mention on the sharing consent screen and in other places such as on [accounts.live.com](https://account.live.com/consent/Manage?uaid=1a6b0f15cc3647ff8bb553c2733a1828&mkt=en-US&guat=1).
 
 
