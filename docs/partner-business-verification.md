@@ -1,0 +1,73 @@
+# Joining Partner Center and obtaining business verification
+
+Joining the Partner Center and obtaining verification of your business by Microsoft will allow your website or app to show as a verified business in the user consent dialog and on [account.microsoft.com](https://account.live.com/consent/Manage). 
+
+This not required for [Quick Authentication](../README.md) to work. If you do not wish to complete this process, Quick Authentication will still fully work, however the mention "unverified" will show in the consent dialog under "Let this app access your info?" and on [account.microsoft.com](https://account.live.com/consent/Manage).
+
+![User consent dialog with "unverified"](./media/user-consent-dialog.PNG)
+
+Replacing the "unverified" mention by your company's name requires to complete three main steps:
+1. If you do not have one already, create a new Azure AD tenant, associate that new tenant with your domain, and create an Admin user for that tenant.
+3. Register to the Microsoft Partner Center (formely, Microsoft Partner Network) and get your business vefirified by Microsoft to obtain an MPN number
+4. Associate the MPN number to your application registration in Azure.
+
+## Creating a new Azure Active Directory tenant
+To take advantage of business verification as a Microsoft partner, you will need to register your app in your tenant in Azure AD.
+
+### Creating a new tenant
+If your company does not already have one, you will need to create a new Azure ID tenant. To do that, follow the instructions here: [Create a new tenant in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant).
+
+### Adding your domain name
+Once your tenant is created, add your own domain name to it by following the steps on [Add your custom domain name using the Azure Active Directory portal](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain). 
+
+### Verifying your domain name
+To make sure that your domain has fully propagated to Azure AD and is valid on Azure AD, go through [these steps](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain#verify-your-custom-domain-name).
+
+### Adding a new user
+Create a new user with the Global Admin role following the instructions here: [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose your custom domain as the domain part of the user name. 
+
+## Enrolling in the Microsoft Cloud Partner Program and getting your business verified
+The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. 
+
+Verify prerequisites for enrolling on [What is the Microsoft Cloud Partner Program](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) and follow the enrollement instructions starting [here](https://partner.microsoft.com/en-us/dashboard/account/v3/enrollment/introduction/partnership). On the "Welcome to Partner Center" page, click "Sign in" and sign-in as the user you created above, for example, `someone@contoso.org`
+
+![Welcome to Partner Center](./media/Welcome-to-Partner-Center.PNG)
+
+In the page titled "Join a program to unlock new opportunities" chose "Microsoft Cloud Partner Program" and click next. 
+
+![Join a program to unlock new opportunities](./media/Join-a-program.PNG)
+
+On the next screen, enter your company legal business details on the next screen. The [What is the Microsoft Cloud Partner Program?](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) page provide additional help in the [Getting started](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account#get-started) section. 
+
+![Company Information](./media/Company-Information.PNG)
+
+[This page](https://learn.microsoft.com/en-us/partner-center/verification-responses) provides additional details on what is verified by Microsoft and what to expect next. Verification can take up to 5 business days.
+
+## Creating your application registration and associating it with an MPN number to attest of business verification
+
+### Obtain the MPN ID
+The Microsoft Partner Network (NPM) ID can be found by signing-in to the [Microsoft Partner Center dasboard](https://partner.microsoft.com/en-us/dashboard/home) as the Global Admin user you created in your tenant in section [Add a new user](#adding-a-new-user). 
+
+![Partner Center dashboard](./media/mpc-dashboard.PNG)
+
+Click on "My Access" and then on "Identifiers" on the left of the following page:
+
+![Partner Center Identifiers](./media/mpc-identifiers.png)
+
+The NPM ID is shown as the Partner ID for your user. 
+
+### Create or locate your Azure AD application registration
+In your company Azure AD tenant (i.e., go to the [Azure Portal](https://portal.azure.com) and sign-in with the tenant user you created above), create a registration for you web site and/or apps as indicated in Quick Authentication [Getting Starting guide](./quick-authentication-how-to.md#register-your-application). 
+
+If you create your application with the same personal account you used to create your company tenant, it should already be imported in the tenant, and you don't need to create it again. [**TODO**: Is this true?].
+
+### Enter the NPM ID in your app registration
+Go to you [app registration](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) in Azure AD, and click on "Branding & properties" on the left:
+
+![Branding & properties](./media/azure-ad-app-registration-npm.png)
+
+Click on "Add MPN ID to verify publisher". A panel opens up from the right in which you can enter the MPN ID (a.k.a., Partner ID) obtained in the previous section.
+
+This will remove the "unverified" mention on the sharing consent screen and on [accounts.microsoft.com](https://accounts.microsoft.com).
+
+
