@@ -15,16 +15,22 @@ Replacing the "unverified" mention by your company's name requires to complete t
 To take advantage of business verification as a Microsoft partner, you will need to register your app in your tenant in Azure AD.
 
 ### Creating a new tenant
-If your company does not already have one, you will need to create a new Azure ID tenant. To do that, follow the instructions here: [Create a new tenant in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant).
+If your company does not already have one, you will need to create a new Azure ID tenant. To do that, follow the instructions here: [Create a new tenant in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant). 
+
+When you create a new Azure AD tenant, you become the first user of that tenant. As the first user, you're automatically assigned the Global Admin role. Check out the user account created for you by navigating to the [Users](https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/MsGraphUsers) page. Copy the user id as you will need it in the next step.
+
+If your company alreaddy owns a tenant, you can use that one as long as you have access to that tenant as a Global Admin user. 
 
 ### Adding your domain name
 Once your tenant is created, add your own domain name to it by following the steps on [Add your custom domain name using the Azure Active Directory portal](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain). 
+
+In these steps, when asked to Sign in to the Azure portal using a Global administrator account for the directory, use the Global Admin user created for you in the previous step (or that you identified as already existing in your tenant).
 
 ### Verifying your domain name
 To make sure that your domain has fully propagated to Azure AD and is valid on Azure AD, go through [these steps](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain#verify-your-custom-domain-name).
 
 ### Adding a new user
-Create a new user with the Global Admin role following the instructions here: [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose your custom domain as the domain part of the user name. 
+Create a new user with the Global Admin role and a user name in your custom domain by following the instructions on this page: [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose the custom domain you added previously as the domain part of the user name.
 
 ## Enrolling in the Microsoft Cloud Partner Program and getting your business verified
 The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. Joining the Microsoft Could Partner Program gives you access to the Partner Center, where you can request verification of your business. 
