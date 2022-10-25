@@ -189,11 +189,11 @@ The [SignInAccountInfo](./quick-authentication-reference.md#data-type-signinacco
 - `username` - the user's email address or phone number
 - `email` - the user's email address
 - `photoUrl` - a base64-encoded dataURI representing the user's avatar
-- `id` - a GUID that is unique across all Microsoft accounts
+- `id` - an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)).
 - `homeAccountId` - the user's home account identifier which is used by MSAL
 - `idToken` - [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process
 
-We recommend using the `id` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
+We recommend using either `id` or `homeAccountId` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
 The callback on sign-in failure comes through for attempts to sign-in with a) button b) sign-in prompt c) [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin) API.
 
