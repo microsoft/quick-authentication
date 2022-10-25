@@ -17,20 +17,23 @@ To take advantage of business verification as a Microsoft partner, you will need
 ### Creating a new tenant
 If your company does not already have one, you will need to create a new Azure ID tenant. To do that, follow the instructions here: [Create a new tenant in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant). 
 
-When you create a new Azure AD tenant, you become the first user of that tenant. As the first user, you're automatically assigned the Global Admin role. Check out the user account created for you by navigating to the [Users](https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/MsGraphUsers) page. Copy the user id as you will need it in the next step.
+Once your tenant had been created, you can switch to it by using the [Manage Tenant](https://portal.azure.com/?feature.msaljs=false#view/Microsoft_AAD_IAM/DirectorySwitchBlade/subtitle/) page.
 
-If your company alreaddy owns a tenant, you can use that one as long as you have access to that tenant as a Global Admin user. 
+When you create a new Azure AD tenant, you become the first user of that tenant. As the first user, you're automatically assigned the Global Admin role. 
+
+Azure also creates a new user with Global Admin role in a subdomain of `onmicrosoft.com`. You can check that out by navigating to the [Users](https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/MsGraphUsers) page. From here on, you can use either the original account, or this new user account to access your new tenant.
+
+If your company already owns a tenant, you can use that one instead of creating a new one, as long as you have access to that tenant as a user with the Global Admin role. 
 
 ### Adding your domain name
 Once your tenant is created, add your own domain name to it by following the steps on [Add your custom domain name using the Azure Active Directory portal](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain). 
 
-In these steps, when asked to Sign in to the Azure portal using a Global administrator account for the directory, use the Global Admin user created for you in the previous step (or that you identified as already existing in your tenant).
+Note that this requires to add a TXT record to your domain with your domain registar, and that propagation of that information might take up to 3 days before you can verify that the domain has been added to your tenant in Azure AD.
 
-### Verifying your domain name
-To make sure that your domain has fully propagated to Azure AD and is valid on Azure AD, go through [these steps](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain#verify-your-custom-domain-name).
+To verify that your domain has fully propagated and is valid on Azure, refer back to [these steps](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain#verify-your-custom-domain-name).
 
 ### Adding a new user
-Create a new user with the Global Admin role and a user name in your custom domain by following the instructions on this page: [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose the custom domain you added previously as the domain part of the user name.
+To obtain verification of your business, you will need a user with a user name `@<your custom domain>`, and with the Global Admin role. Create such a user by following the instructions on [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose the custom domain you added previously as the domain part of the user name.
 
 ## Enrolling in the Microsoft Cloud Partner Program and getting your business verified
 The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. Joining the Microsoft Could Partner Program gives you access to the Partner Center, where you can request verification of your business. 
