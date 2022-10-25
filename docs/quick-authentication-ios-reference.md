@@ -1,6 +1,6 @@
 # Microsoft Quick Authentication for iOS configuration and Objective-C API reference
 
-| [Getting Started](./quick-authentication-iOs-how-to.md)| [*Reference*](./quick-authentication-iOs-reference.md) |
+| [Getting Started](./quick-authentication-ios-how-to.md)| [*Reference*](./quick-authentication-ios-reference.md) |
 |--|--|
 
 These settings and APIs allow you to customize the appearance and behavior of the UI provided by Microsoft Quick Authentication and to invoke functionality provided by MSAL for iOS, such as signing out or requesting an access token for user information in the Microsoft Graph.
