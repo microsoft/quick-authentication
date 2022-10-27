@@ -295,6 +295,15 @@ If `homeAccountId` isn't found, the `callback` will be called with `{result: 'fa
 
 Note, for the moment there is a fallback. `username` can also be passed instead of `homeAccountId` to this API. But that will be removed in future revisions.
 
+## Data Type: StartSignInOptions
+
+`StartSignInOptions` is an object which can be optionally passed into [ms.auth.startSignIn](#method-msauthstartsignin) method.
+
+| Property       | Value(s)                                                              | Default       | Required | More info |
+|----------------|-----------------------------------------------------------------------|---------------|----------|-----------|
+| `callback`       | JavaScript function that receives account information once sign-in completes with success or failure. | None  | No       | Behavior is same as `callback` member of [InitConfiguration](#data-type-initconfiguration). If this property is not specified, the `callback` member of [InitConfiguration](#data-type-initconfiguration) is called. |
+| `showAccountSelection` | boolean                                                         | false         | No | If this is set to `true`, then MSA account picker is shown like below. <br/>![MSA account picker](./media/msa-account-picker.png) <br/>Otherwise, for MSA profile in Edge, sign-in will complete without the user needing to enter credentials. And for other browsers, sign-in may or may not need credential input from user. |
+
 ## Method: ms.auth.startSignIn
 
 `ms.auth.startSignIn` can be used to begin sign-in process programmatically. See the following code example for understanding usage of this method:
@@ -305,11 +314,51 @@ button.addEventListener('click', function() {
 });
 ```
 
-Successful authentications will be routed into the [callback](#callback) defined when initializing the library.
+In above usage, successful or failed authentications will be routed into the [callback](#callback) defined when initializing the library.
 
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw an exception.
 
 In [redirect flow](./quick-authentication-how-to.md#msauthstartsignin-in-redirect-mode), the callback will not be called. Instead a full page redirection flow to MSA server will start.
+
+`ms.auth.startSignIn` also accepts an optional [StartSignInOptions](#data-type-startsigninoptions) argument.
+
+`showAccountSelection` member of [StartSignInOptions](#data-type-startsigninoptions) can be set to true to show MSA account picker prompt.
+<br/>![MSA account picker](./media/msa-account-picker.png)
+
+Here is some sample code showing that behavior:
+```javascript
+button.addEventListener('click', function() {
+  // To show account picker.
+  const startSignInOptions = {showAccountSelection: true};
+  ms.auth.startSignIn(startSignInOptions);
+});
+```
+
+`callback` member of [StartSignInOptions](#data-type-startsigninoptions) can be set to a JavaScript function to ensure that it gets called on sign-in success or failure. Here is some sample code showing that behavior:
+
+```javascript
+function startSignInCallback(signInAccountInfo, signInErrorInfo) {
+  console.log(signInAccountInfo);
+  if (!signInAccountInfo) {
+    // Sign in failed. signInErrorInfo will be non-null.
+    const errorCode = signInErrorInfo.errorCode; // Short string.
+    const errorMessage = signInErrorInfo.errorMessage; // Longer string.
+    console.log(`sign in failed: errorCode: ${errorCode}, errorMessage: ${errorMessage}`);
+    return;
+  }
+  // Sign-in succeeded. Use signInAccountInfo in sign in/up logic.
+}
+
+button.addEventListener('click', function() {
+  // To show account picker.
+  const startSignInOptions = {callback: startSignInCallback};
+  ms.auth.startSignIn(startSignInOptions);
+});
+```
+
+If `callback` is not `undefined` or `null` and is not a function, then this function will throw an exception.
+
+As mentioned above, in [redirect flow](./quick-authentication-how-to.md#msauthstartsignin-in-redirect-mode), the callback will not be called.
 
 ## Method: ms.auth.startGetCurrentAccount
 
