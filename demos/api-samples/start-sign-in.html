@@ -10,6 +10,12 @@
   <body>
     <h1><a href="../">Microsoft Quick Authentication samples</a></h1>
     <h2>Start sign-in example</h2>
+    <!-- This check box controls `callback` in `startSignInOptions` -->
+    <input type="checkbox" id="use-start-sign-in-callback" />
+    <label for="use-start-sign-in-callback">Use Javascript callback in API argument</label>
+    <!-- This check box controls `showAccountSelection` in `startSignInOptions` -->
+    <input type="checkbox" id="show-account-selection" />
+    <label for="show-account-selection">Show account selection</label>
 
     <div id="sample">
       <button class="custom-button">Sign-in</button>
@@ -22,6 +28,9 @@
       src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
     ></script>
     <script>
+      let useCallbackInStartSignInParam = false;
+      let showAccountSelectionInStartSignIn = false;
+
       function hideSignInButton() {
         document
             .querySelector(".custom-button")
@@ -33,6 +42,29 @@
             .querySelector(".custom-button")
             .classList.remove('make-invisible');
       }
+
+      function registerListenersForCheckboxes() {
+        document.getElementById('use-start-sign-in-callback').addEventListener(
+          'change', (event) => {
+            useCallbackInStartSignInParam = event.currentTarget.checked;
+          });
+        document.getElementById('show-account-selection').addEventListener(
+          'change', (event) => {
+            showAccountSelectionInStartSignIn = event.currentTarget.checked;
+          });
+      }
+
+      function getStartSignInOptions() {
+        if (!useCallbackInStartSignInParam && !showAccountSelectionInStartSignIn)
+          return undefined;
+        let startSignInOptions = {};
+        if (showAccountSelectionInStartSignIn)
+          startSignInOptions.showAccountSelection = true;
+        if (useCallbackInStartSignInParam)
+          startSignInOptions.callback = startSignInCallback;
+        return startSignInOptions;
+      }
+
       // This sample demonstrates how to programmatically start
       // the sign-in flow, with your own button.
       window.onload = function () {
@@ -49,11 +81,21 @@
               // Once the sign-in flow succeeds, the callback
               // defined during the initialization of the library
               // will be executed.
-              ms.auth.startSignIn();
+              const startSignInOptions = getStartSignInOptions();
+              if (!startSignInOptions)
+                ms.auth.startSignIn();
+              else
+                ms.auth.startSignIn(startSignInOptions);
               hideSignInButton();
             });
         }
+        registerListenersForCheckboxes();
       };
+
+      function startSignInCallback(signInAccountInfo, errorInfo) {
+        console.log("Inside startSignInCallback, calling userAuthenticated");
+        userAuthenticated(signInAccountInfo, errorInfo);
+      }
 
       function userAuthenticated(signInAccountInfo, errorInfo) {
         console.log(signInAccountInfo);
