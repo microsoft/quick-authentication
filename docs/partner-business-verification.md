@@ -33,7 +33,9 @@ Note that this requires to add a TXT record to your domain with your domain regi
 To verify that your domain has fully propagated and is valid on Azure, refer back to [these steps](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-custom-domain#verify-your-custom-domain-name).
 
 ### Adding a new user
-To obtain verification of your business, you will need a user with a user name `@<your custom domain>`, and with the Global Admin role. Create such a user by following the instructions on [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose the custom domain you added previously as the domain part of the user name.
+To join the Partner Center and obtain verification of your business, you will need a user in your custom domain and with the Global Admin role. Create such a user by following the instructions on [Add or delete users using Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). In step 4, when adding the new user, choose the custom domain you just added for the domain part of the user name.
+
+Using that new user, sign-in to Azure portal. This will ensure that you go through any 2FA creation and fully create your user account.
 
 ## Enrolling in the Microsoft Cloud Partner Program and getting your business verified
 The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. Joining the Microsoft Could Partner Program gives you access to the Partner Center, where you can request verification of your business. 
