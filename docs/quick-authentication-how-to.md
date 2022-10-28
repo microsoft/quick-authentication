@@ -256,6 +256,8 @@ button.addEventListener('click', function() {
 
 As with the previous examples, successful authentications will be routed into the callback you defined when initializing the library.
 
+`ms.auth.startSignIn` can also be called with additional parameters to change the callback behavior. Check [API documentation](./quick-authentication-reference.md#method-msauthstartsignin) for more info.
+
 ### Show the sign-in prompt
 
 If you want to control the display of the enhanced sign-in prompt in Microsoft Edge, use the `ms.auth.prompt()` method:
