@@ -63,7 +63,7 @@ Click on "My Access" and then on "Identifiers" on the left of the following page
 
 ![Partner Center Identifiers](./media/mpc-identifiers.png)
 
-The NPM ID, or Partner ID, is shown for your user. 
+The MPN ID, or Partner ID, is shown for your user. 
 
 ### Create or locate your Azure AD application registration
 In your company Azure AD tenant (i.e., go to the [Azure Portal](https://portal.azure.com) and sign-in with the tenant user you created above), create a registration for you web site and/or apps as indicated in Quick Authentication [Getting Starting guide](./quick-authentication-how-to.md#register-your-application). 
@@ -75,7 +75,9 @@ Go to you [app registration](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM
 
 ![Branding & properties](./media/azure-ad-app-registration-npm.png)
 
-Click on "Add MPN ID to verify publisher". A panel opens up from the right in which you can enter the MPN ID (a.k.a., Partner ID) obtained in the previous section.
+Make sure that the Publisher Domain is set to your custom domaing. 
+
+Click on "Add MPN ID to verify publisher". A panel will open up from the right in which you can enter the MPN ID (a.k.a., Partner ID) obtained in the previous section and click "Verify and save",
 
 This will remove the "unverified" mention on the sharing consent screen and in other places such as on [accounts.live.com](https://account.live.com/consent/Manage?uaid=1a6b0f15cc3647ff8bb553c2733a1828&mkt=en-US&guat=1).
 
