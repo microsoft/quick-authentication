@@ -167,19 +167,21 @@ Alternatively, you can also add the button programmatically at runtime with the 
 It is possible to customize the appearance of the button. Refer to the [reference guide](quick-authentication-ios-reference.md#customizing-the-appearance-of-the-sign-in-button) for details.
 
 ## Getting a call back after the user has signed-in
-To get a callback after the user has completed the sign-in flow, or an error has occurred, set the completion block to be called using the `setSignInCompletionBlock` method of `MSQASignInButton`:
+To get a callback after the user has completed the sign-in flow, or an error has occurred, set the completion block to be called using the `setSignInClient:viewController:completionBlock` method of `MSQASignInButton`, and return `YES` if setting the completion block is successful.
 
 ```objectivec
-[msSignButton setSignInCompletionBlock:^(MSQAAccountInfo *_Nullable account,
-                                         NSError *_Nullable error) {
-  if (account) {
-    // Use account
-  }
-  else if (error) {
-    // Handle errors, e.g., not initialized.
-    NSLog(@"%@", error.localizedDescription);
-  }
-}];
+BOOL success =
+    [msSignInButton setSignInClient:_msSignInClient
+                      viewController:self
+                     completionBlock:^(MSQAAccountInfo *_Nullable account,
+                                      NSError *_Nullable error) {
+                       if (account) {
+                         // Use account
+                       } else if (error) {
+                         // Handle errors, e.g., not initialized.
+                         NSLog(@"%@", error.localizedDescription);
+                       }
+                     }];
 ```
 
 On success, the completion block will be invoked with the `MSQAAccountInfo` containing the following information:
