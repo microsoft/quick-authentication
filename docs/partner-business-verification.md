@@ -67,20 +67,30 @@ Click on "My Access" and then on "Identifiers" on the left of the following page
 
 The MPN ID, or Partner ID, is shown for your user. 
 
-### Create or locate your Azure AD application registration
-In your company Azure AD tenant (i.e., go to the [Azure Portal](https://portal.azure.com) and sign-in with the tenant user you created above), create a registration for you web site and/or apps as indicated in Quick Authentication [Getting Starting guide](./quick-authentication-how-to.md#register-your-application). 
+### Create your Azure AD app registration
+In your company Azure AD tenant (i.e., go to the [Azure Portal](https://portal.azure.com) and sign-in with the tenant user you created above), create a registration for your website and/or apps as indicated in Quick Authentication [Getting Starting guide](./quick-authentication-how-to.md#register-your-application).
 
-If you create your application with the same personal account you used to create your company tenant, it should already be imported in the tenant, and you don't need to create it again. [**TODO**: Is this true?].
+Make sure to create your app registration for "Personal Microsoft accounts only". You won't be able to change that once the app registration is created. In the first screen when you create the app registration, look for the following choices and make sure to check "Personal Microsoft accounts only":
 
-### Enter the NPM ID in your app registration
-Go to you [app registration](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) in Azure AD, and click on "Branding & properties" on the left:
+![Register an application](./media/supported-account-types.PNG)
+
+### Enter the MPN ID in your app registration
+Once you have created your app registration and have your MPN ID (a.k.a., Partner ID) obtained in section [Obtain the MPN ID](#obtain-the-mpn-id) handy, go to your new [app registration](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) in Azure AD, and click on "Branding & properties" on the left:
 
 ![Branding & properties](./media/azure-ad-app-registration-npm.png)
 
-Make sure that the Publisher Domain is set to your custom domaing. 
+First, make sure that the Publisher domain is set to your custom domain and change it if not.
 
-Click on "Add MPN ID to verify publisher". A panel will open up from the right in which you can enter the MPN ID (a.k.a., Partner ID) obtained in the previous section and click "Verify and save",
+Then, click on "Add MPN ID to verify publisher". A panel titled "Publisher verification" will open up from the right in which you can enter the MPN ID and click "Verify and save". The verification might initially fail with the following error:
 
-This will remove the "unverified" mention on the sharing consent screen and in other places such as on [accounts.live.com](https://account.live.com/consent/Manage?uaid=1a6b0f15cc3647ff8bb553c2733a1828&mkt=en-US&guat=1).
+![Publisher verification error](./media/publisher-verification-error.PNG)
+
+If you get this error, verify that:
+1. The user you added in section [Adding a new user](#adding-a-new-user) and that you used to sign-in to your tenant with has the Global Administrator role, by going to your tenant page and clicking "Users" in the left pane.
+2. The custom domain you added in section [Adding your domain name](#adding-your-domain-name) shows as verified, by going to your tenant page and clicking on "Custom domain names" in the left pane.
+
+After checking the above, try verification again. If you get the same error, wait for a few hours and try again (the process of associating an MPN ID with an app registration can take some time). 
+
+Once verification succeeded, you will notice that when using this new app registration's Client ID in your website or app, the "unverified" mention on the sharing consent screen and in other places such as on [accounts.live.com](https://account.live.com/consent/Manage?uaid=1a6b0f15cc3647ff8bb553c2733a1828&mkt=en-US&guat=1) has been replaced by your organization name along with a small badge of verification. 
 
 
