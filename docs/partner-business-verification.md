@@ -8,7 +8,7 @@ This not required for [Quick Authentication](../README.md) to work. If you do no
 
 Replacing the "unverified" mention by your company's name requires to complete three main steps:
 1. If you do not have one already, create a new Azure AD tenant, associate that new tenant with your domain, and create an Admin user for that tenant.
-3. Register to the Microsoft Partner Center (formely, Microsoft Partner Network) and get your business vefirified by Microsoft to obtain an MPN number
+3. Register to the Microsoft Partner Center (formely, Microsoft Partner Network) and get your business verified by Microsoft to obtain an MPN number.
 4. Associate the MPN number to your application registration in Azure.
 
 ## Creating a new Azure Active Directory tenant
@@ -17,7 +17,7 @@ To take advantage of business verification as a Microsoft partner, you will need
 ### Creating a new tenant
 If your company does not already have one, you will need to create a new Azure ID tenant. To do that, follow the instructions here: [Create a new tenant in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant). 
 
-Once your tenant had been created, you can switch to it by using the [Manage Tenant](https://portal.azure.com/?feature.msaljs=false#view/Microsoft_AAD_IAM/DirectorySwitchBlade/subtitle/) page.
+Once your tenant has been created, you can switch to it by using the [Manage Tenant](https://portal.azure.com/?feature.msaljs=false#view/Microsoft_AAD_IAM/DirectorySwitchBlade/subtitle/) page.
 
 When you create a new Azure AD tenant, you become the first user of that tenant. As the first user, you're automatically assigned the Global Admin role. 
 
@@ -38,9 +38,9 @@ To join the Partner Center and obtain verification of your business, you will ne
 Using that new user, sign-in to Azure portal. This will ensure that you go through any 2FA creation and fully create your user account.
 
 ## Enrolling in the Microsoft Cloud Partner Program and getting your business verified
-The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. Joining the Microsoft Could Partner Program gives you access to the Partner Center, where you can request verification of your business. 
+The Microsoft Cloud Partner Program (formerly called the Microsoft Partner Network) is a hub of people, resources, and offerings brought together to give you everything you need to build and deliver successful solutions for your customers. Joining the Microsoft Cloud Partner Program gives you access to the Partner Center, where you can request verification of your business. 
 
-First, double check prerequisites for enrolling on [What is the Microsoft Cloud Partner Program](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account), then follow the enrollement instructions starting [here](https://partner.microsoft.com/en-us/dashboard/account/v3/enrollment/introduction/partnership). On the "Welcome to Partner Center" page, click "Sign in" and sign-in as the user you created above, for example, `somebody@contoso.org`
+First, double check prerequisites for enrolling on [What is the Microsoft Cloud Partner Program](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account), then follow the enrollment instructions starting [here](https://partner.microsoft.com/en-us/dashboard/account/v3/enrollment/introduction/partnership). On the "Welcome to Partner Center" page, click "Sign in" and sign-in as the user you created above, for example, `somebody@contoso.org`
 
 ![Welcome to Partner Center](./media/Welcome-to-Partner-Center.PNG)
 
@@ -48,7 +48,7 @@ On the page titled "Join a program to unlock new opportunities", choose "Microso
 
 ![Join a program to unlock new opportunities](./media/Join-a-program.PNG)
 
-On the next screen, enter your company legal business details. The [What is the Microsoft Cloud Partner Program?](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) page provide additional help in the [Getting started](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account#get-started) section. 
+On the next screen, enter your company legal business details. The [What is the Microsoft Cloud Partner Program?](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account) page provides additional help in the [Getting started](https://learn.microsoft.com/en-us/partner-center/mpn-create-a-partner-center-account#get-started) section. 
 
 ![Company Information](./media/Company-Information.PNG)
 
@@ -57,7 +57,7 @@ On the next screen, enter your company legal business details. The [What is the 
 ## Creating your application registration and associating it with an MPN number to attest of business verification
 
 ### Obtain the MPN ID
-The Microsoft Partner Network ID (NPM ID), also called Partner ID, can be found by signing-in to the [Microsoft Partner Center dasboard](https://partner.microsoft.com/en-us/dashboard/home) as the Global Admin user you created in your own tenant in section [Add a new user](#adding-a-new-user). 
+The Microsoft Partner Network ID (MPN ID), also called Partner ID, can be found by signing-in to the [Microsoft Partner Center dasboard](https://partner.microsoft.com/en-us/dashboard/home) as the Global Admin user you created in your own tenant in section [Add a new user](#adding-a-new-user). 
 
 ![Partner Center dashboard](./media/mpc-dashboard.PNG)
 
@@ -77,7 +77,7 @@ Make sure to create your app registration for "Personal Microsoft accounts only"
 ### Enter the MPN ID in your app registration
 Once you have created your app registration and have your MPN ID (a.k.a., Partner ID) obtained in section [Obtain the MPN ID](#obtain-the-mpn-id) handy, go to your new [app registration](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) in Azure AD, and click on "Branding & properties" on the left:
 
-![Branding & properties](./media/azure-ad-app-registration-npm.png)
+![Branding & properties](./media/azure-ad-app-registration-mpn.png)
 
 First, make sure that the Publisher domain is set to your custom domain and change it if not.
 
@@ -91,6 +91,6 @@ If you get this error, verify that:
 
 After checking the above, try verification again. If you get the same error, wait for a few hours and try again (the process of associating an MPN ID with an app registration can take some time). 
 
-Once verification succeeded, you will notice that when using this new app registration's Client ID in your website or app, the "unverified" mention on the sharing consent screen and in other places such as on [accounts.live.com](https://account.live.com/consent/Manage?uaid=1a6b0f15cc3647ff8bb553c2733a1828&mkt=en-US&guat=1) has been replaced by your organization name along with a small badge of verification. 
+Once verification succeeds, you will notice that when using this new app registration's Client ID in your website or app, the "unverified" mention on the sharing consent screen and in other places such as on [accounts.live.com](https://account.live.com/consent/Manage?uaid=1a6b0f15cc3647ff8bb553c2733a1828&mkt=en-US&guat=1) has been replaced by your organization name along with a small badge of verification. 
 
 
