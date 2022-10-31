@@ -551,9 +551,7 @@ Notice the `()` at the end, which causes the problem.
 
 ### Application showing up as "unverified".
 
-If your application shows up as "unverified" as in image below, please look at [this document](./partner-business-verification.md) on steps of how to resolve it.
-
-<br/> ![Application showing as unverified](./media/user-consent-dialog.PNG)
+If your application shows up as "unverified" as in the image below, please look at [this document](./partner-business-verification.md) on steps of how to resolve it.<br/> ![Application showing as unverified](./media/user-consent-dialog.PNG)
 
 ## Next steps
 

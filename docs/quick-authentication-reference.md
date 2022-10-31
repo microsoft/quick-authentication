@@ -170,7 +170,7 @@ This data type contains all the fields of [AccountInfo](#data-type-accountinfo) 
 | `username` | User's email or phone number | Not empty |
 | `email` | User's email address | Not empty |
 | `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`| Can be empty |
-| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). |
+| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). | Not empty |
 | `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL | Not empty |
 | `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process | Not empty |
 
