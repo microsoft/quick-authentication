@@ -146,33 +146,33 @@ This is an optional string value which can be configured using any of the follow
 ## Data Type: AccountInfo
 
 This data type contains following values.
-| Property | Description |
-|----------|---------|
-| `fullName` | User's full name |
-| `surname` | User's surname |
-| `givenName` | User's given name |
-| `username` | User's email or phone number |
-| `email` | User's email address |
-| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
-| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). |
-| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
+| Property | Description | More info |
+|----------|---------|---------------|
+| `fullName` | User's full name | Can be empty |
+| `surname` | User's surname | Can be empty |
+| `givenName` | User's given name | Can be empty |
+| `username` | User's email or phone number | Not empty |
+| `email` | User's email address | Not empty |
+| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`| Can be empty |
+| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). | Not empty |
+| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL | Not empty |
 
 We recommend using either `id` or `homeAccountId` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
 ## Data Type: SignInAccountInfo
 
 This data type contains all the fields of [AccountInfo](#data-type-accountinfo) and a new field `idToken`.
-| Property | Description |
-|----------|---------|
-| `fullName` | User's full name |
-| `surname` | the user's surname |
-| `givenName` | the user's given name |
-| `username` | User's email or phone number |
-| `email` | User's email address |
-| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
+| Property | Description | More info |
+|----------|---------|---------------|
+| `fullName` | User's full name | Can be empty |
+| `surname` | the user's surname | Can be empty |
+| `givenName` | the user's given name | Can be empty |
+| `username` | User's email or phone number | Not empty |
+| `email` | User's email address | Not empty |
+| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`| Can be empty |
 | `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). |
-| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
-| `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process |
+| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL | Not empty |
+| `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process | Not empty |
 
 We recommend using either `id` or `homeAccountId` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
