@@ -31,13 +31,13 @@ The `logMsalEvents` query parameter supports MSAL [log levels](https://azuread.g
 
 `autoLogEvents` needs to be set (can be any value) for `logMsalEvents` take effect.
 
-## Specifying the Quick Authenticaton initialization parameters
+## Specifying the Quick Authentication initialization parameters
 The following parameters can be used to initialize Quick Authentication. They are supplied as data attributes of the `ms-auth-initialize div` in your HTML. You can also choose to supply them programmatically in your Javascript (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
 
 | Property                     | Value(s)                                                                      | Default value                 | Required | More info                                                                                                   |
 |------------------------------|------------------------------------------------------------------------------|:-----------------------------:|----------|-------------------------------------------------------------------------------------------------------|
 | `data-client_id`             | **Application (client) ID**                                                   | (no default value)            | Yes      | See [Register your application](quick-authentication-how-to.md#register-your-application).   |
-| `data-login_uri`             | **Redirect URI for Single-page application**                                  | _https://&lt;domain&gt;/blank.html_ | Yes if `ux_mode == 'popup'`, else No | See [Register your application](quick-authentication-how-to.md#register-your-application). This URI is used when `ux_mode = 'popup'`.|
+| `data-login_uri`             | **Redirect URI for Single-page application**                                  | _https://&lt;domain&gt;/blank.html_ | Yes if `ux_mode == 'popup'`, else No | See [Register your application](quick-authentication-how-to.md#register-your-application). This URI is used when `ux_mode = 'popup'`. Check [this section](./quick-authentication-how-to.md#notes-on-redirect-uri-for-single-page-application-for-popup-mode) for some more details. |
 | `data-callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [SignInAccountInfo](#data-type-signinaccountinfo) object. <br/> On sign-in failure, it is called with second argument [SignInErrorInfo](#data-type-signinerrorinfo) containing the error. |
 | `data-locale`                | `Language ID` strings in [table below](#supported-locales). e.g., `"en-US"`, `"fr-FR"`, etc. | `"en-US"`      | No       | Check `Language ID` column in [this table](#supported-locales) for possible values.                   |
 | `data-ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
