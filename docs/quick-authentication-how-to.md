@@ -1,7 +1,7 @@
 # Sign in Microsoft account users to single-page apps with Microsoft Quick Authentication
 
-| [*Getting Started*](./quick-authentication-how-to.md)| [Reference](./quick-authentication-reference.md) |
-|--|--|
+| [*Getting Started*](./quick-authentication-how-to.md)| [Reference](./quick-authentication-reference.md) || [*Web*](./quick-authentication-how-to.md) | [Android](./quick-authentication-android-how-to.md) | [iOS](./quick-authentication-ios-how-to.md) |
+|--|--|--|--|--|--|
 
 Microsoft Quick Authentication is a lightweight JavaScript library that makes it easier to add **Sign in with Microsoft** support to a single-page app (SPA). Quick Authentication uses the  Microsoft Authentication Library for JavaScript (MSAL.js) to handle authentication and authorization for users with personal Microsoft accounts from Outlook, OneDrive, Xbox Live, and Microsoft 365.
 

@@ -1,7 +1,8 @@
 # Microsoft Quick Authentication for Android configuration and Java API reference
 
-| [Getting Started](./quick-authentication-android-how-to.md) | [*Reference*](./quick-authentication-android-reference.md) | [Library Reference](https://microsoft.github.io/quick-authentication/docs/android/javadocs/index.html) |
-|--|--|--|
+| [Getting Started](./quick-authentication-android-how-to.md) | [*Reference*](./quick-authentication-android-reference.md) | [Library Reference](https://microsoft.github.io/quick-authentication/docs/android/javadocs/index.html) || [Web](./quick-authentication-reference.md) | [*Android*](./quick-authentication-android-reference.md) | [iOS](./quick-authentication-ios-reference.md) |
+|--|--|--|--|--|--|--|
+
 
 These settings and APIs allow you to customize the appearance and behavior of the UI provided by Microsoft Quick Authentication and to invoke functionality provided by MSAL for Android, such as signing out or requesting an access token for user information in the Microsoft Graph.
 
