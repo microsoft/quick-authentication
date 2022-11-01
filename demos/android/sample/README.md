@@ -17,23 +17,13 @@ Open Android Studio, and select open an existing Android Studio project. Find th
 From menu, select Run > Run 'app'. Once the app launches.
 
 # How to integrate into your projects
-1. Copy the aar file to the root directory of your project.
-2. Add to your app's build.gradle:
+1. Add to your app's build.gradle:
 ```deps
-android {
-    ...
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-}
 dependencies {
-    implementation "com.microsoft.identity.client:msal:3.0.2"
-    implementation(name: 'quickauth-1.0.0', ext: 'aar')
+    implementation "com.microsoft:quickauth:0.2.0"
 }
 ```
-3. Please also add the following lines to your repositories section in your build.gradle:
+2. Please also add the following lines to your repositories section in your build.gradle:
 ```repositorys
 maven {
     url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'

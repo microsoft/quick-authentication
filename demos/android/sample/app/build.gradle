@@ -55,18 +55,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // libraries for quickauth sdk
-    implementation "com.microsoft.identity.client:msal:${rootProject.ext.msalSDKVersion}"
-    implementation(name: 'quickauth-1.0.0', ext: 'aar')
+    implementation "com.microsoft:quickauth:${rootProject.ext.quickauthSDKVersion}"
 
     // libraries for android
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"

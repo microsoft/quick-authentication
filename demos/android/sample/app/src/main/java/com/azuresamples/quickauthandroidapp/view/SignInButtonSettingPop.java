@@ -81,21 +81,21 @@ public class SignInButtonSettingPop extends PopupWindow {
         () -> {
           mSeekBar.setMax(mSeekBar.getMeasuredWidth());
           mSeekBar.setProgress(mSignInButton.getMeasuredWidth());
-        });
-    mSeekBar.setOnSeekBarChangeListener(
-        new SeekBar.OnSeekBarChangeListener() {
-          @Override
-          public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            ViewGroup.LayoutParams layoutParams = mSignInButton.getLayoutParams();
-            layoutParams.width = progress;
-            mSignInButton.setLayoutParams(layoutParams);
-          }
+          mSeekBar.setOnSeekBarChangeListener(
+              new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                  ViewGroup.LayoutParams layoutParams = mSignInButton.getLayoutParams();
+                  layoutParams.width = progress;
+                  mSignInButton.setLayoutParams(layoutParams);
+                }
 
-          @Override
-          public void onStartTrackingTouch(SeekBar seekBar) {}
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {}
 
-          @Override
-          public void onStopTrackingTouch(SeekBar seekBar) {}
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {}
+              });
         });
   }
 
