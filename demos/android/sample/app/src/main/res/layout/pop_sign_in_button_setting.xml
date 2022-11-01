@@ -331,7 +331,7 @@
                     android:text="button width setting"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <SeekBar
                     android:id="@+id/sign_button_width_progress"
@@ -343,7 +343,7 @@
                     android:minHeight="2dp"
                     android:progressDrawable="@drawable/bg_sign_in_progress"
                     android:thumb="@drawable/bg_shape_circle"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </LinearLayout>
 
         </ScrollView>

@@ -57,24 +57,14 @@ Now that you have created an application registration, you can extend it to Andr
 ![Click Configuration](./media/android-click-configure.png)
 
 ## Declaring a dependency on Quick Authentication
-1. Copy [SDK AAR File](https://github.com/microsoft/quick-authentication/tree/main/demos/android/library) into your app's libs folder.
-2. Add the following to your app's `build.gradle`
+1. Add the following to your app's `build.gradle`
 ```java
-android {
-    ...
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-}
 dependencies {
     ...
-    implementation "com.microsoft.identity.client:msal:3.0.2"
-    implementation(name: 'quickauth-1.0.0', ext: 'aar')
+    implementation "com.microsoft:quickauth:0.2.0"
 }
 ```
-3. Add the following to the *repositories* section in your `build.gradle`
+2. Add the following to the *repositories* section in your `build.gradle`
 ```java
 mavenCentral()
 maven { 
