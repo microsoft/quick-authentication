@@ -366,3 +366,22 @@ mSignInClient.acquireTokenSilent(scopes,
             }
         });
 ```
+## Supported locales
+
+| Language ID      |  Language name                             |
+|------------------|:-------------------------------------------|
+| `ar-SA`          | Arabic (Saudi Arabia)                      |
+| `de-DE`          | German (Germany)                           |
+| `en-GB`          | English (United Kingdom)                   |
+| `en-US`          | English (United States)                    |
+| `es-ES`          | Spanish (Spain, International Sort)        |
+| `fr-FR`          | French (France)                            |
+| `id-ID`          | Indonesian (Indonesia)                     |
+| `it-IT`          | Italian (Italy)                            |
+| `ja-JP`          | Japanese (Japan)                           |
+| `ko-KR`          | Korean (Korea)                             |
+| `pt-BR`          | Portuguese (Brazil)                        |
+| `pt-PT`          | Portuguese (Portugal)                      |
+| `ru-RU`          | Russian (Russia)                           |
+| `zh-CN`          | Chinese (Simplified, PRC)                  |
+| `zh-TW`          | Chinese (Traditional, Taiwan)              |
