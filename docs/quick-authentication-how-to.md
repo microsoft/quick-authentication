@@ -54,7 +54,7 @@ Use the following settings for your app registration. **Bold text** in the table
 | **Name**                    | `SPA with Quick Auth`                                                  | Suggested value. You can change the app name at any time. |
 | **Supported account types** | **Personal Microsoft Accounts Only**                                   | Required value for Microsoft Quick Authentication.        |
 | **Platform type**           | **Single-Page Application**                                            | Required value for Microsoft Quick Authentication.        |
-| **Redirect URI for Single-Page application (SPA)**      | `http://localhost:<port>/blank.html` or `https://<your-tenant-id>/blank.html` | Recommended for Microsoft Quick Authentication.           |
+| **Redirect URI for Single-Page application (SPA)**      | `http://localhost:<port>/blank.html` or `https://<your-domain>/blank.html` | Recommended for Microsoft Quick Authentication. Check [this section](#notes-on-redirect-uri-for-single-page-application-for-popup-mode) for more details. |
 
 Redirect flow will need additional steps. Check [this section](#enabling-application-for-redirection) for more details.
 
@@ -339,6 +339,17 @@ To also enable logging for MSAL.js, add the [`logMsalEvents`](./quick-authentica
         src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js?autoLogEvents=1&logMsalEvents=4"
         ></script>
 ```
+## Notes on Redirect URI for Single-Page application for popup mode
+
+If ux_mode is set to `'popup'` (which is the default), then on clicking the sign-in button or sign-in prompt, the credential / consent dialog opens up in a popup.
+
+The popup will be redirected by MSA server to redirect URI [registered above](#register-your-application) and specified in quick authentication configuration using [login_uri](./quick-authentication-reference.md#data-type-initconfiguration) or [data-login_uri](./quick-authentication-reference.md#specifying-the-quick-authentication-initialization-parameters), once the credential entry / consenting process is completed on the server side. The redirection URL will contain a fragment with info needed by quick authentication to complete the sign-in process in client side.
+
+Quick authentication **needs** the domain of the page which included our library to be the same as domain of the redirect URI specified.
+
+After server redirection, once quick authentication detects that the domain is same as the domain which loaded its Javascript library, it will close the popup and complete the sign-in process on the client side.
+
+This means that the user does not get an opportunity to see the redirect URI page. Hence we suggest using a blank.html page as redirect URI.
 
 ## Redirect mode
 
@@ -537,6 +548,10 @@ The following snippet is incorrect:
 ```
 
 Notice the `()` at the end, which causes the problem.
+
+### Application showing up as "unverified".
+
+If your application shows up as "unverified" as in the image below, please look at [this document](./partner-business-verification.md) on steps of how to resolve it.<br/> ![Application showing as unverified](./media/user-consent-dialog.PNG)
 
 ## Next steps
 

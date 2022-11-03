@@ -31,13 +31,13 @@ The `logMsalEvents` query parameter supports MSAL [log levels](https://azuread.g
 
 `autoLogEvents` needs to be set (can be any value) for `logMsalEvents` take effect.
 
-## Specifying the Quick Authenticaton initialization parameters
+## Specifying the Quick Authentication initialization parameters
 The following parameters can be used to initialize Quick Authentication. They are supplied as data attributes of the `ms-auth-initialize div` in your HTML. You can also choose to supply them programmatically in your Javascript (Refer to [Data Type: InitConfiguration](#data-type-initconfiguration)).
 
 | Property                     | Value(s)                                                                      | Default value                 | Required | More info                                                                                                   |
 |------------------------------|------------------------------------------------------------------------------|:-----------------------------:|----------|-------------------------------------------------------------------------------------------------------|
 | `data-client_id`             | **Application (client) ID**                                                   | (no default value)            | Yes      | See [Register your application](quick-authentication-how-to.md#register-your-application).   |
-| `data-login_uri`             | **Redirect URI for Single-page application**                                  | _https://&lt;domain&gt;/blank.html_ | Yes if `ux_mode == 'popup'`, else No | See [Register your application](quick-authentication-how-to.md#register-your-application). This URI is used when `ux_mode = 'popup'`.|
+| `data-login_uri`             | **Redirect URI for Single-page application**                                  | _https://&lt;domain&gt;/blank.html_ | Yes if `ux_mode == 'popup'`, else No | See [Register your application](quick-authentication-how-to.md#register-your-application). This URI is used when `ux_mode = 'popup'`. Check [this section](./quick-authentication-how-to.md#notes-on-redirect-uri-for-single-page-application-for-popup-mode) for some more details. |
 | `data-callback`              | JavaScript function that receives account information once sign-in completes. | (no default value)            | Yes      | On successful sign-in, this function is called with the [SignInAccountInfo](#data-type-signinaccountinfo) object. <br/> On sign-in failure, it is called with second argument [SignInErrorInfo](#data-type-signinerrorinfo) containing the error. |
 | `data-locale`                | `Language ID` strings in [table below](#supported-locales). e.g., `"en-US"`, `"fr-FR"`, etc. | `"en-US"`      | No       | Check `Language ID` column in [this table](#supported-locales) for possible values.                   |
 | `data-ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
@@ -146,33 +146,33 @@ This is an optional string value which can be configured using any of the follow
 ## Data Type: AccountInfo
 
 This data type contains following values.
-| Property | Description |
-|----------|---------|
-| `fullName` | User's full name |
-| `surname` | User's surname |
-| `givenName` | User's given name |
-| `username` | User's email or phone number |
-| `email` | User's email address |
-| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
-| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). |
-| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
+| Property | Description | More info |
+|----------|---------|---------------|
+| `fullName` | User's full name | Can be empty |
+| `surname` | User's surname | Can be empty |
+| `givenName` | User's given name | Can be empty |
+| `username` | User's email or phone number | Never empty |
+| `email` | User's email address | Never empty |
+| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`| Can be empty |
+| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). | Never empty |
+| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL | Never empty |
 
 We recommend using either `id` or `homeAccountId` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
 ## Data Type: SignInAccountInfo
 
 This data type contains all the fields of [AccountInfo](#data-type-accountinfo) and a new field `idToken`.
-| Property | Description |
-|----------|---------|
-| `fullName` | User's full name |
-| `surname` | the user's surname |
-| `givenName` | the user's given name |
-| `username` | User's email or phone number |
-| `email` | User's email address |
-| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`|
-| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). |
-| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL |
-| `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process |
+| Property | Description | More info |
+|----------|---------|---------------|
+| `fullName` | User's full name | Can be empty |
+| `surname` | the user's surname | Can be empty |
+| `givenName` | the user's given name | Can be empty |
+| `username` | User's email or phone number | Never empty |
+| `email` | User's email address | Never empty |
+| `photoUrl` | base64-encoded dataURI representing the user's avatar. If the user has set no avatar, its value will be `null`| Can be empty |
+| `id` | an ID that is unique across all Microsoft accounts. This id can be used for some Microsoft Graph APIs (e.g., [User GET](https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0&tabs=http)). | Never empty |
+| `homeAccountId` | User's [home account identifier](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#accountinfo) which is used by MSAL | Never empty |
+| `idToken` | [ID token](https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens) received during sign-in process | Never empty |
 
 We recommend using either `id` or `homeAccountId` as a key, rather than the email address, because an email address isn't a unique account identifier. It's possible for a user to use a Gmail address for a Microsoft Account, and to potentially create two different accounts (a Microsoft account and a Google account) with that same email address. It's also possible for a Microsoft Account user to change the primary email address on their account.
 
