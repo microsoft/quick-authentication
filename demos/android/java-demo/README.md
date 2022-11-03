@@ -11,7 +11,7 @@ To run this sample, you'll need:
 > https://github.com/microsoft/quick-authentication.git
 
 The following steps are for Android Studio. But you can choose and work with any editor of your choice.
-Open Android Studio, and select open an existing Android Studio project. Find the cloned project and open the sample file in demos/android/sample folder.
+Open Android Studio, and select open an existing Android Studio project. Find the cloned project and open the sample file in demos/android/java-demo folder.
 
 ### Step 2: Run the sample
 From menu, select Run > Run 'app'. Once the app launches.

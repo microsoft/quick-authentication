@@ -28,8 +28,4 @@
     <!-- quick auth config string -->
     <string name="ms_sign_in_host">com.azuresamples.quickauthandroidapp</string>
     <string name="ms_sign_in_path">/1wIqXSqBj7w+h11ZifsnqwgyKrY=</string>
-
-    <!--   quick auth sign status string -->
-    <string name="signed_in">Signed in</string>
-    <string name="signed_out">Signed out</string>
 </resources>
