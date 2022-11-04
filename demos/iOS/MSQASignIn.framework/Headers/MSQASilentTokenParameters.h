@@ -29,16 +29,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 /// Represents the parameter used when acquiring the token silently.
 @interface MSQASilentTokenParameters : NSObject
 
-
-/// Permissions you want to included in the token to be reveived.
+/// Permissions you want to include in the token to be received.
 @property(nonnull, readonly, nonatomic) NSArray<NSString *> *scopes;
 
 /// Initialize the `MSQASilentTokenParameters` object.
-/// - Parameter scopes: Permissions you want to included in the access token reveived.
+/// - Parameter scopes: Permissions you want to include in the access token
+/// received.
 - (instancetype)initWithScopes:(NSArray<NSString *> *)scopes;
 
 @end

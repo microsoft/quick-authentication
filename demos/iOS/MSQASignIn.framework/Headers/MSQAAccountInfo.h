@@ -23,24 +23,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-#import "MSQAAccountData.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+/// This class represents a MSA account.
+@interface MSQAAccountInfo : NSObject
 
-@interface MSQAAccountData ()
+/// MSA user's full name.
+@property(nonatomic, readonly, nullable) NSString *fullName;
 
-@property(nonatomic, readonly, nullable) NSString *accessToken;
+/// MSA user's email address or phone number.
+@property(nonatomic, readonly, nonnull) NSString *userName;
 
-- (instancetype)initWithFullName:(NSString *)fullName
-                        userName:(NSString *)userName
-                          userId:(NSString *)userId
-                         idToken:(nullable NSString *)idToken
-                     accessToken:(nullable NSString *)accessToken;
+/// CID for MSA account.
+@property(nonatomic, readonly, nonnull) NSString *userId;
 
-- (void)setPhoto:(NSString *)photo;
+/// The user's photo in Base64.
+@property(nonatomic, readonly, nullable) NSString *base64Photo;
+
+/// MSA account id token.
+@property(nonatomic, readonly, nullable) NSString *idToken;
+
+/// MSA user's surname.
+@property(nonatomic, readonly, nullable) NSString *surname;
+
+/// MSA user's given name.
+@property(nonatomic, readonly, nullable) NSString *givenName;
+
+/// MSA user's email.
+@property(nonatomic, readonly, nullable) NSString *email;
 
 @end
-
-NS_ASSUME_NONNULL_END

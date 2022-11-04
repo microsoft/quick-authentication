@@ -26,8 +26,8 @@
 //------------------------------------------------------------------------------
 
 #import <MSQASignIn/MSQAConfiguration.h>
-#import <MSQASignIn/MSQASignIn.h>
 #import <MSQASignIn/MSQASignInButton.h>
+#import <MSQASignIn/MSQASignInClient.h>
 
 #import "SampleAppDelegate.h"
 #import "SampleLoginViewController.h"
@@ -53,7 +53,7 @@
 @end
 
 @implementation SampleLoginViewController {
-  MSQASignIn *_msSignIn;
+  MSQASignInClient *_msSignInClient;
 }
 
 + (instancetype)sharedViewController {
@@ -101,23 +101,24 @@
   return self;
 }
 
-- (void)setMSQASignIn:(MSQASignIn *)msSignIn {
-  _msSignIn = msSignIn;
+- (void)setMSQASignInClient:(MSQASignInClient *)msSignInClient {
+  _msSignInClient = msSignInClient;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   // Switch to main view if already logged in.
-  [_msSignIn getCurrentAccountWithCompletionBlock:^(
-                 MSQAAccountData *_Nullable account, NSError *_Nullable error) {
-    if (account && !error) {
-      SampleMainViewController *controller =
-          [SampleMainViewController sharedViewController];
-      [controller setAccountInfo:account msSignIn:_msSignIn];
-      [SampleAppDelegate setCurrentViewController:controller];
-    }
-  }];
+  [_msSignInClient
+      getCurrentAccountWithCompletionBlock:^(MSQAAccountInfo *_Nullable account,
+                                             NSError *_Nullable error) {
+        if (account && !error) {
+          SampleMainViewController *controller =
+              [SampleMainViewController sharedViewController];
+          [controller setAccountInfo:account msSignInClient:_msSignInClient];
+          [SampleAppDelegate setCurrentViewController:controller];
+        }
+      }];
 
   // Padding View
   UIView *paddingView = [[UIView alloc] init];
@@ -164,24 +165,27 @@
 }
 
 - (IBAction)signIn:(id)sender {
-  [_msSignIn signInWithViewController:self
-                      completionBlock:^(MSQAAccountData *_Nonnull account,
-                                        NSError *_Nonnull error) {
-                        SampleMainViewController *controller =
-                            [SampleMainViewController sharedViewController];
-                        [controller setAccountInfo:account msSignIn:_msSignIn];
-                        [SampleAppDelegate setCurrentViewController:controller];
-                      }];
+  [_msSignInClient
+      signInWithViewController:self
+               completionBlock:^(MSQAAccountInfo *_Nonnull account,
+                                 NSError *_Nonnull error) {
+                 SampleMainViewController *controller =
+                     [SampleMainViewController sharedViewController];
+                 [controller setAccountInfo:account
+                             msSignInClient:_msSignInClient];
+                 [SampleAppDelegate setCurrentViewController:controller];
+               }];
 }
 
 - (IBAction)getCurrentButton:(id)sender {
-  [_msSignIn getCurrentAccountWithCompletionBlock:^(
-                 MSQAAccountData *_Nullable account, NSError *_Nullable error) {
-    SampleMainViewController *controller =
-        [SampleMainViewController sharedViewController];
-    [controller setAccountInfo:account msSignIn:_msSignIn];
-    [SampleAppDelegate setCurrentViewController:controller];
-  }];
+  [_msSignInClient
+      getCurrentAccountWithCompletionBlock:^(MSQAAccountInfo *_Nullable account,
+                                             NSError *_Nullable error) {
+        SampleMainViewController *controller =
+            [SampleMainViewController sharedViewController];
+        [controller setAccountInfo:account msSignInClient:_msSignInClient];
+        [SampleAppDelegate setCurrentViewController:controller];
+      }];
 }
 
 - (void)applyUserPreferences {
@@ -237,7 +241,7 @@
   UIAlertController *alertController = [UIAlertController
       alertControllerWithTitle:title
                        message:nil
-                preferredStyle:UIAlertControllerStyleActionSheet];
+                preferredStyle:UIAlertControllerStyleAlert];
   [alertController setValue:viewController forKey:@"contentViewController"];
   [alertController
       addAction:[UIAlertAction actionWithTitle:@"Done"

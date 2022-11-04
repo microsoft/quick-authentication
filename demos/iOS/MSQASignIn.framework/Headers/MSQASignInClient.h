@@ -29,16 +29,22 @@
 #import <MSAL/MSAL.h>
 #import <UIKit/UIKit.h>
 
-@class MSQAAccountData;
+@class MSQAAccountInfo;
 @class MSQAConfiguration;
 @class MSQASilentTokenParameters;
+@class MSQATokenResult;
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Represents a completion block that takes a  `MSQAAccountData` on success or
+/// Represents a completion block that takes a `MSQAAccountInfo` on success or
 /// an error if the operation fails.
-typedef void (^MSQACompletionBlock)(MSQAAccountData *_Nullable account,
+typedef void (^MSQACompletionBlock)(MSQAAccountInfo *_Nullable account,
                                     NSError *_Nullable error);
+
+/// Represents a completion block that takes a `MSQATokenResult` on success or
+/// an error if the operation fails.
+typedef void (^MSQATokenCompletionBlock)(MSQATokenResult *_Nullable tokenResult,
+                                         NSError *_Nullable error);
 
 /// The parameter provided when acquiring the token interactively.
 typedef MSALInteractiveTokenParameters MSQAInteractiveTokenParameters;
@@ -47,7 +53,7 @@ typedef MSALInteractiveTokenParameters MSQAInteractiveTokenParameters;
 typedef MSALWebviewParameters MSQAWebviewParameters;
 
 /// This class signs the user in with Microsoft MSA account.
-@interface MSQASignIn : NSObject
+@interface MSQASignInClient : NSObject
 
 /// Init the `MSQASignIn` with configuration.
 /// @param configuration The configuration used to init, which is type of
@@ -68,19 +74,20 @@ typedef MSALWebviewParameters MSQAWebviewParameters;
 /// Starts to acquire token interactively using the provided parameters.
 ///
 /// @param parameters Parameters used when acquiring the token interactively.
-/// @param completionBlock The `MSQACompletionBlock` block that is called
+/// @param completionBlock The `MSQATokenCompletionBlock` block that is called
 /// on completion, and the block will be called asynchronously on the main
 /// queue.
 - (void)acquireTokenWithParameters:(MSQAInteractiveTokenParameters *)parameters
-                   completionBlock:(MSQACompletionBlock)completionBlock;
+                   completionBlock:(MSQATokenCompletionBlock)completionBlock;
 
 /// Starts to acquire token silently using the provide parameters.
 /// @param parameters Parameters used when acquiring the token silently.
-/// @param completionBlock The `MSQACompletionBlock` block that is called
+/// @param completionBlock The `MSQATokenCompletionBlock` block that is called
 /// on completion, and the block will be called asynchronously on the main
 /// queue.
 - (void)acquireTokenSilentWithParameters:(MSQASilentTokenParameters *)parameters
-                         completionBlock:(MSQACompletionBlock)completionBlock;
+                         completionBlock:
+                             (MSQATokenCompletionBlock)completionBlock;
 
 /// Starts to get the current account if there is an account that has already
 /// signed in.
@@ -98,6 +105,10 @@ typedef MSALWebviewParameters MSQAWebviewParameters;
 
 // TODO(minggang): This declaration will be removed and use the one
 // in MSQASignIn_Private.h.
+
+/// Starts to sign user in.
+/// @param controller The view controller to present the authentication page.
+/// @param completionBlock The block that is called on completion.
 - (void)signInWithViewController:(UIViewController *)controller
                  completionBlock:(MSQACompletionBlock)completionBlock;
 

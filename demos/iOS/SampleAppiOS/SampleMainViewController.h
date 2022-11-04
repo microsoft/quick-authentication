@@ -27,8 +27,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class MSQAAccountData;
-@class MSQASignIn;
+@class MSQAAccountInfo;
+@class MSQASignInClient;
 
 @interface SampleMainViewController : UIViewController {
   IBOutlet UIImageView *_profileImageView;
@@ -43,7 +43,7 @@
 
 + (instancetype)sharedViewController;
 
-- (void)setAccountInfo:(MSQAAccountData *)accountData
-              msSignIn:(MSQASignIn *)msSignIn;
+- (void)setAccountInfo:(MSQAAccountInfo *)accountData
+        msSignInClient:(MSQASignInClient *)msSignInClient;
 
 @end
