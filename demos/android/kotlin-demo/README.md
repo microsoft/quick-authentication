@@ -20,7 +20,7 @@ From menu, select Run > Run 'app'. Once the app launches.
 1. Add to your app's build.gradle:
 ```deps
 dependencies {
-    implementation "com.microsoft:quickauth:0.2.0"
+    implementation "com.microsoft:quickauth:0.3.0"
 }
 ```
 2. Please also add the following lines to your repositories section in your build.gradle:
@@ -32,7 +32,7 @@ mavenCentral()
 ```
 4. Create your MSAL configuration file 
 The configuration file is a JSON file which can be saved from the portal website, more configuration information please refer to  [configuration file documentation](https://docs.microsoft.com/zh-cn/azure/active-directory/develop/msal-configuration).
-   
+
 Create this JSON file as a "raw" resource file in your project resources. You'll be able to refer to this using the generated resource identifier when initializing.
 Below the redirect URI please paste:
 ```single

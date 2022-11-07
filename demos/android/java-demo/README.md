@@ -20,7 +20,7 @@ From menu, select Run > Run 'app'. Once the app launches.
 1. Add to your app's build.gradle:
 ```deps
 dependencies {
-    implementation "com.microsoft:quickauth:0.2.0"
+    implementation "com.microsoft:quickauth:0.3.0"
 }
 ```
 2. Please also add the following lines to your repositories section in your build.gradle:

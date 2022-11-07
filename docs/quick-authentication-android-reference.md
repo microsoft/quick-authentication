@@ -1,6 +1,6 @@
 # Microsoft Quick Authentication for Android configuration and Java API reference
 
-| [Getting Started](./quick-authentication-android-how-to.md) | [*Reference*](./quick-authentication-android-reference.md) | [Library Reference](https://microsoft.github.io/quick-authentication/docs/android/javadocs/index.html) |
+| [Getting Started](./quick-authentication-android-how-to.md) | [*Reference*](./quick-authentication-android-reference.md) | [Library Reference](https://javadoc.io/doc/com.microsoft/quickauth/latest/index.html) |
 |--|--|--|
 
 These settings and APIs allow you to customize the appearance and behavior of the UI provided by Microsoft Quick Authentication and to invoke functionality provided by MSAL for Android, such as signing out or requesting an access token for user information in the Microsoft Graph.
@@ -10,7 +10,7 @@ For information about how to use Quick Authentication for Android, see the [Gett
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## Creating and configuring MSQASignInClient
-To create and configure [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html), construct an instance of  [MSQASignInOptions](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.html), set the desired options on it, and pass it to the static `create` method of [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html).
+To create and configure [MSQASignInClient](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInClient.html), construct an instance of  [MSQASignInOptions](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInOptions.html), set the desired options on it, and pass it to the static `create` method of [MSQASignInClient](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInClient.html).
 
 ```
 public static void create​(@NonNull android.content.Context context, 
@@ -22,13 +22,13 @@ public static void create​(@NonNull android.content.Context context,
 | -- | -- |
 | context | Application's Context. Cannot be null.
 | signInOptions | A configuration object for client initialization.
-| listener | A [ClientCreatedListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/ClientCreatedListener.html) defining callbacks to be invoked when the object is successfully created and when an error occurred. Cannot be null.
+| listener | A [ClientCreatedListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/ClientCreatedListener.html) defining callbacks to be invoked when the object is successfully created and when an error occurred. Cannot be null.
 
-The [MSQASignInOptions](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.html) instance can be created by calling the build method on an instance of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html):
+The [MSQASignInOptions](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInOptions.html) instance can be created by calling the build method on an instance of [MSQASignInOptions.Builder](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html):
 ```java
 public MSQASignInOptions build()
 ```
-And a set of "setter" methods can be used to set configuration options on [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html)
+And a set of "setter" methods can be used to set configuration options on [MSQASignInOptions.Builder](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html)
 
 Code example:
 ```
@@ -50,7 +50,7 @@ MSQASignInClient.create(context,
 ```
 
 ## Logging
-To facilitate debugging the following options are available to configure logging, using the following methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html). 
+To facilitate debugging the following options are available to configure logging, using the following methods of [MSQASignInOptions.Builder](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html).
 
 ```java
 public static void setLogLevel(@LogLevel int logLevel);
@@ -58,7 +58,7 @@ public static void setLogLevel(@LogLevel int logLevel);
 Sets the log level for diagnostic purposes. By default, the sdk sets the logging level to 'verbose'.
 | Parameter | Description | 
 |--|--|
-| logLevel| [Log level int enum](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/logger/LogLevel.html) |
+| logLevel| [Log level int enum](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/logger/LogLevel.html) |
 
 ```java
 public static void setEnableLogcatLog(boolean enableLogcatLog);
@@ -74,7 +74,7 @@ public static void setExternalLogger(@NonNull ILogger externalLogger);
 Configures external logging by providing a callback that the sdk will use to pass each log message.
 |Parameter | Description|
 |--|--|
-| externalLogger| The reference to the [ILogger](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/logger/ILogger.html) that can output the logs to the designated places.
+| externalLogger| The reference to the [ILogger](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/logger/ILogger.html) that can output the logs to the designated places.
 
 Here is a code example setting all three logging methods described above:
 ```java
@@ -89,7 +89,7 @@ MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
 ```
 
 ## Sign-in button customization
-[MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) provides attributes and APIs to customize the button style. 
+[MSQASignInButton](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/view/MSQASignInButton.html) provides attributes and APIs to customize the button style.
 
 ### Customizing the buttons type using parameters in the layout xml
 You can customize the look and feel of the sign-in button by using the following parameters on the `com.microsoft.quick.auth.signin.view.MSQASignInButton` element in your application's layout xml:
@@ -118,7 +118,7 @@ Code example:
 ```
 
 ### Customizing the button style programmatically:
-You can also customize the button programmatically by using the following setter methods of [MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html):
+You can also customize the button programmatically by using the following setter methods of [MSQASignInButton](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/view/MSQASignInButton.html):
 | Setter Method | Description | Parameter Values | Default Value
 | -- | -- | -- | -- |
 | setButtonType(ButtonType type) | Set the ButtonType | ButtonTyle.ICON <br> ButtonTyle.STANDARD | ButtonTyle.STANDARD |
@@ -141,7 +141,7 @@ signInButton.setButtonTheme(ButtonTheme.DARK)
 ```
 
 ## Setting the sign-in button callback
-This method of [MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) allows you to set a callback in your code to be invoked when the user is done with the sign-in flow.
+This method of [MSQASignInButton](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/view/MSQASignInButton.html) allows you to set a callback in your code to be invoked when the user is done with the sign-in flow.
 ```
 public void setSignInCallback (
         @NonNull Activity activity,
@@ -153,7 +153,7 @@ public void setSignInCallback (
 |--|--|
 | @NonNull  activity | Activity that is used as the parent activity for launching sign page. |
 | @NoNull client | A sign-in client object, provides sign-in, sign-out etc. |
-| @NoNull listener |  An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign-in completed, canceled or failed. |
+| @NoNull listener |  An [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign-in completed, canceled or failed. |
 | Returns | none |
 
 If sign-in succeeds, `listener` will be invoked, its first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) and its `error` parameter will be null. If sign-in fails, `listener` will be invoked with the `accountInfo` parameter being null and `error` will contain the error information.
@@ -191,7 +191,7 @@ signInButton.setSignInCallback(activity, client,
 | @Nullable String getEmail() | User email. |
 
 ## MSQASignInClient methods
-The following methods of [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html) offer programmatic triggering of the sign-in flow and additional functionality.
+The following methods of [MSQASignInClient](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInClient.html) offer programmatic triggering of the sign-in flow and additional functionality.
 
 | Method | Description |
 |--|--|
@@ -200,7 +200,7 @@ The following methods of [MSQASignInClient](https://microsoft.github.io/quick-au
 | getCurrentAccount() | Gets the current [MSQAAccountInfo](#MSQAAccountInfo) for the user. |
 | acquireTokenSilent() | Perform acquire token silent call. |
 | acquireToken() | Acquires an access token interactively, will pop-up web UI. |
-| create() | Static method to create an [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html) instance object. |
+| create() | Static method to create an [MSQASignInClient](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQASignInClient.html) instance object. |
 
 ## MSQASignInClient method: signIn
 This method allows to request sign-in programmatically instead of or in addition to having the button do it automatically. This will trigger the same user experience workflow as the user clicking the sign-in button.
@@ -212,7 +212,7 @@ void signIn(@NonNull Activity activity
 | Parameter | Description | 
 | -- | -- |
 | activity | The activity that will be used as the parent activity of the sign in activity. |
-| @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign in finishes, is cancelled or fails. It will return the [MSQAAccountInfo](#MSQAAccountInfo) if successful. If it fails, its `accountInfo` parameter will be null and `error` will contain error info.|
+| @NonNull listener | An [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign in finishes, is cancelled or fails. It will return the [MSQAAccountInfo](#MSQAAccountInfo) if successful. If it fails, its `accountInfo` parameter will be null and `error` will contain error info.|
 | Returns | none |
 
 If multiple sign-in requests are made one after the other they will queue up. Once a sign-in sequence is finished next sign-in request in queue will get handled.
@@ -270,10 +270,10 @@ void getCurrentAccount (@NonNull OnCompleteListener <MSQAAccountInfo> listener);
 
 | Parameter | Description |
 | -- | -- |
-| @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked on completion and will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account if one is retrieved. |
+| @NonNull listener | An [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked on completion and will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account if one is retrieved. |
 | Returns | none | 
 
-If there is no current sign-in, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first and second parameters both null. If sign-out succeeds, the first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account. The second parameter will return null.
+If there is no current sign-in, [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first and second parameters both null. If sign-out succeeds, the first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account. The second parameter will return null.
 
 Code example:
 ```java
@@ -303,12 +303,12 @@ void acquireToken (
 | -- | -- |  
 | @NonNull activity | Activity that is used as the parent activity for get token. |
 | @NonNull scopes | A non-null array of scopes to be requested for the access token. Some example scopes can be found in [Microsoft Graph permissions reference](https://learn.microsoft.com/en-us/graph/overview-major-services). |
-| @NonNull listener | A [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when the the token has been successfully acquired or after an error occurred. |
+| @NonNull listener | A [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when the the token has been successfully acquired or after an error occurred. |
 | Returns | none |
 
 If the `scopes` array is empty, then `listener` will be called with a non-null error.
 If there is no account in the cache, then `listener` will be called with non-null error.
-If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
+If acquiring the token succeeds, [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
 
 See next section for a code example.
 
@@ -324,12 +324,12 @@ void acquireTokenSilent (
 | Parameter | Description | 
 | -- | -- |
 | @NonNull scopes | A non-null and non-empty array of scopes to be requested for the access token. Some example scopes can be found in [Microsoft Graph permissions reference](https://learn.microsoft.com/en-us/graph/overview-major-services). |
-| @NonNull listener | A [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when the the token has been successfully acquired or after an error occurred.
+| @NonNull listener | A [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when the the token has been successfully acquired or after an error occurred.
 | Returns | none |
 
 If the `scopes` array is empty, then `listener` will be called with a non-null error. 
 If there is no account in the cache, then `listener` will be called with a non-null error.
-If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
+If acquiring the token succeeds, [OnCompleteListener](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://javadoc.io/doc/com.microsoft/quickauth/latest/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
 If a refresh token does not exist or fails the refresh, then an error is returned.
 
 Code example:
