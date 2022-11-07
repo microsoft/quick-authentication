@@ -52,14 +52,13 @@ Now that you have created an application registration, you can extend it to iOS 
   ![iOS MSAL configuration](./media/ios-msal-configuration.png)
 
 ## Installing Microsoft Quick Authentication SDK
-To install the Microsoft Quick Authentication SDK in your development environment, proceed as follows:
+To install the Microsoft Quick Authentication SDK in your development environment using CocoaPods, proceed as follows:
 1. Install CocoaPods following the instructions in the [Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
-2. Create a Podfile for your application and add the dependency on Microsoft Quick Authentication:
+2. Create a `Podfile` for your application and add `MicrosoftQuickAuth` under your target:
 ```
 use_frameworks!
  
 target 'your-target-here' do
-  pod 'MSAL'
   pod 'MicrosoftQuickAuth'
 end
 ```
@@ -67,18 +66,6 @@ end
 ```bash
   $ pod install
 ```
-> **IMPORTANT**:
-> the steps above are not yet operational. Currently, we only provide the Quick Authentication SDK for iOS as a binary framework. The package is located at [MSQASignIn.framework](../demos/iOS/MSQASignIn.framework). Please proceed as follows:
-> - Install [MSAL for iOS](https://github.com/AzureAD/microsoft-authentication-library-for-objc) by adding the following to your `Podfile` and running `pod install`:
->```
->    use_frameworks!
-> 
->    target 'your-target-here' do
->	   pod 'MSAL'
->    end
->```
-> - Follow [these instructions](https://developer.apple.com/library/archive/technotes/tn2435/_index.html#//apple_ref/doc/uid/DTS40017543-CH1-EMBED_SECTION) to embed the Quick Authentication SDK into your application.
-
 
 ## Initializing your application
 Create a `MSQAConfiguration` object to set the client ID for your application, which you will find in the Azure registration for your application. 
