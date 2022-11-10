@@ -1,7 +1,7 @@
 # Microsoft Quick Authentication
 
-| [Web](./docs/quick-authentication-how-to.md)| [Android](./docs/quick-authentication-android-how-to.md) | [iOS](./docs/quick-authentication-ios-how-to.md) | [Demo Code](./demos) | [Live Demos](https://quickauth.azurewebsites.net/)
-|--|--|--|--|--|
+| [Web](./docs/quick-authentication-how-to.md)| [Android](./docs/quick-authentication-android-how-to.md) | [iOS](./docs/quick-authentication-ios-how-to.md) | [Web Demo](./demos) | [Android Demo](https://github.com/microsoft/quick-authentication-mobile/tree/main/android/demoapps/) | [iOS Demo](https://github.com/microsoft/quick-authentication-mobile/tree/main/iOS/SampleApp) | [Web Live Demos](https://quickauth.azurewebsites.net/)
+|--|--|--|--|--|--|--|
 
 **Microsoft Quick Authentication** is a simple way for you to let your users sign up and sign in to your website using a Microsoft Account (MSA). You are likely familiar with similar offerings from other providers (e.g., “Sign in with ________”) and this offering provides that same capability to connect with people who use Microsoft products and cloud services, such as Outlook, OneDrive, Xbox LIVE, and Microsoft 365.
 
@@ -19,9 +19,11 @@ To learn more about **Microsoft Quick Authentication** for iOS, see [Sign-in use
 
 ## Sample Code
 
-This repository contains a collection of demos that you can use to start your integration of **Microsoft Quick Authentication**.
+[Click here to access the web live demos](https://quickauth.azurewebsites.net/), or browse the source code in the [web demos folder](./demos).
 
-[Click here to access the live demos](https://quickauth.azurewebsites.net/), or browse the source code in the [demos folder](./demos).
+[Click here to access the android demos](https://github.com/microsoft/quick-authentication-mobile/tree/main/android/demoapps)
+
+[Click here to access the ios demos](https://github.com/microsoft/quick-authentication-mobile/tree/main/iOS/SampleApp)
 
 ## Contributing
 
@@ -39,8 +41,8 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.

@@ -61,7 +61,7 @@ Now that you have created an application registration, you can extend it to Andr
 ```java
 dependencies {
     ...
-    implementation "com.microsoft:quickauth:0.2.0"
+    implementation "com.microsoft:quickauth:0.4.0"
 }
 ```
 2. Add the following to the *repositories* section in your `build.gradle`
