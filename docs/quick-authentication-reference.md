@@ -406,6 +406,7 @@ If this method is called before initialization has been done using [ms.auth.init
 - `type == "dismissed"`
   - "cancel_called"
   - "credential_returned"
+  - "credential_obtained_failed"
 
 ## Method: ms.auth.prompt
 
