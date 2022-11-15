@@ -368,17 +368,38 @@ As the Microsoft Quick Authentication SDK builds on top of [MSAL for iOS](https:
 | Language ID      |  Language name                             |
 |------------------|:-------------------------------------------|
 | `ar-SA`          | Arabic (Saudi Arabia)                      |
+| `ca-ES`          | Catalan (Catalan)                          |
+| `cs-CZ`          | Czech (Czech Republic)                     |
+| `da-DK`          | Danish (Denmark)                           |
 | `de-DE`          | German (Germany)                           |
+| `el-GR`          | Greek (Greece)                             |
 | `en-GB`          | English (United Kingdom)                   |
-| `en-US`          | English (United States)                    |
 | `es-ES`          | Spanish (Spain, International Sort)        |
+| `es-MX`          | Spanish (Mexico)                           |
+| `fi-FI`          | Finnish (Finland)                          |
+| `fr-CA`          | French (Canada)                            |
 | `fr-FR`          | French (France)                            |
+| `he-IL`          | Hebrew (Israel)                            |
+| `hi-IN`          | Hindi (India)                              |
+| `hr-HR`          | Croatian (Croatia)                         |
+| `hu-HU`          | Hungarian (Hungary)                        |
 | `id-ID`          | Indonesian (Indonesia)                     |
 | `it-IT`          | Italian (Italy)                            |
 | `ja-JP`          | Japanese (Japan)                           |
 | `ko-KR`          | Korean (Korea)                             |
+| `ms-MY`          | Malay (Malaysia)                           |
+| `nb-NO`          | Norwegian, Bokmål (Norway)                 |
+| `nl-NL`          | Dutch (Netherlands)                        |
+| `pl-PL`          | Polish (Poland)                            |
 | `pt-BR`          | Portuguese (Brazil)                        |
 | `pt-PT`          | Portuguese (Portugal)                      |
+| `ro-RO`          | Romanian (Romania)                         |
 | `ru-RU`          | Russian (Russia)                           |
+| `sk-SK`          | Slovak (Slovakia)                          |
+| `sv-SE`          | Swedish (Sweden)                           |
+| `th-TH`          | Thai (Thailand)                            |
+| `tr-TR`          | Turkish (Turkey)                           |
+| `uk-UA`          | Ukrainian (Ukraine)                        |
+| `vi-VN`          | Vietnamese (Vietnam)                       |
 | `zh-CN`          | Chinese (Simplified, PRC)                  |
 | `zh-TW`          | Chinese (Traditional, Taiwan)              |
