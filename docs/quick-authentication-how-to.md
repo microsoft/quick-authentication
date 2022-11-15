@@ -556,3 +556,5 @@ If your application shows up as "unverified" as in the image below, please look 
 ## Next steps
 
 For more details about prompt configuration and API reference, see [Microsoft Quick Authentication configuration](./quick-authentication-reference.md).
+
+For best practices for integration, see [this document](./quick-authentication-web-integration-best-practices.md).
