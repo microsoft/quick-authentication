@@ -13,8 +13,8 @@ For information about how to use Quick Authentication for Android, see the [Gett
 To create and configure [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html), construct an instance of  [MSQASignInOptions](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.html), set the desired options on it, and pass it to the static `create` method of [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html).
 
 ```
-public static void create​(@NonNull android.content.Context context, 
-                          @NonNull MSQASignInOptions signInOptions, 
+public static void create​(@NonNull android.content.Context context,
+                          @NonNull MSQASignInOptions signInOptions,
                           @NonNull ClientCreatedListener listener)
 ```
 
@@ -50,13 +50,13 @@ MSQASignInClient.create(context,
 ```
 
 ## Logging
-To facilitate debugging the following options are available to configure logging, using the following methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html). 
+To facilitate debugging the following options are available to configure logging, using the following methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html).
 
 ```java
 public static void setLogLevel(@LogLevel int logLevel);
 ```
 Sets the log level for diagnostic purposes. By default, the sdk sets the logging level to 'verbose'.
-| Parameter | Description | 
+| Parameter | Description |
 |--|--|
 | logLevel| [Log level int enum](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/logger/LogLevel.html) |
 
@@ -89,17 +89,17 @@ MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
 ```
 
 ## Sign-in button customization
-[MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) provides attributes and APIs to customize the button style. 
+[MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) provides attributes and APIs to customize the button style.
 
 ### Customizing the buttons type using parameters in the layout xml
 You can customize the look and feel of the sign-in button by using the following parameters on the `com.microsoft.quick.auth.signin.view.MSQASignInButton` element in your application's layout xml:
 
 
-| XML Parameter | Description | Values | Default Value |          
+| XML Parameter | Description | Values | Default Value |
 |--|--|--|--|
 | msqa_button_type |The button type, either a simple icon or a standard button with text.  |	icon <br> standard | standard |
 | msqa_ button_theme | The button visual theme. | light <br> dark |dark |
-| msqa_ button_size	| Predefined sizes. If width or height are specified, they override this setting. <br> **Large**:<br>&nbsp;&nbsp;width: 280px<br>&nbsp;&nbsp;height: 42px<br>&nbsp;&nbsp;textSize: 16px<br>&nbsp;&nbsp;iconSize: 20px<br> **Medium**:<br>&nbsp;&nbsp;width: 280px<br>&nbsp;&nbsp;height: 36px<br>&nbsp;&nbsp;textSize: 14px<br>&nbsp;&nbsp;iconSize: 16px <br> **Small**:<br>&nbsp;&nbsp;width: 280px<br>&nbsp;&nbsp;height: 28px<br>&nbsp;&nbsp;textSize: 12px<br>&nbsp;&nbsp;iconSize: 12px | small <br>medium<br>large | large 
+| msqa_ button_size	| Predefined sizes. If width or height are specified, they override this setting. <br> **Large**:<br>&nbsp;&nbsp;width: 280px<br>&nbsp;&nbsp;height: 42px<br>&nbsp;&nbsp;textSize: 16px<br>&nbsp;&nbsp;iconSize: 20px<br> **Medium**:<br>&nbsp;&nbsp;width: 280px<br>&nbsp;&nbsp;height: 36px<br>&nbsp;&nbsp;textSize: 14px<br>&nbsp;&nbsp;iconSize: 16px <br> **Small**:<br>&nbsp;&nbsp;width: 280px<br>&nbsp;&nbsp;height: 28px<br>&nbsp;&nbsp;textSize: 12px<br>&nbsp;&nbsp;iconSize: 12px | small <br>medium<br>large | large
 | msqa_button_text | The text shown in the button.	| signin_with<br>signup_with<br>signin<br>continue_with |	signin_with<br> |
 | msqa_button_shape	| The shape of the button. | rectangular<br>pill<br>rounded | rectangular |
 | msqa_button_logo_alignment| Where the Microsoft logo should be in the button. |	left<br>center | left
@@ -128,7 +128,7 @@ You can also customize the button programmatically by using the following setter
 | setButtonShape(ButtonShape shape) | Set the ButtonShape | ButtonShape.RECTANGULAR <br> ButtonShape.PILL <br> ButtonShape.ROUNDED |ButtonShape.RECTANGULAR |
 | setButtonLogoAlignment(ButtonLogoAlignment alignment) | Where the Microsoft logo should be in the button |	ButtonLogoAlignment.LEFT <br> ButtonLogoAlignment.CENTER |ButtonLogoAlignment.LEFT |
 
-Code example:  
+Code example:
 ```java
 MSQASignInButton signInButton = findViewById(R.id.sign_in_button);
 
@@ -158,7 +158,7 @@ public void setSignInCallback (
 
 If sign-in succeeds, `listener` will be invoked, its first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) and its `error` parameter will be null. If sign-in fails, `listener` will be invoked with the `accountInfo` parameter being null and `error` will contain the error information.
 
-Code example:  
+Code example:
 ```java
 MSQASignInButton signInButton = findViewById(R.id.sign_in_button);
 
@@ -183,7 +183,7 @@ signInButton.setSignInCallback(activity, client,
 | -- | -- |
 | @Nullable String getFullName() | return full name. |
 | @Nullable String getUsername() |  return user email or phone.
-| @Nullable String getId() | CID for MSA.| 
+| @Nullable String getId() | CID for MSA.|
 | @Nullable String getIdToken() | MSA account id token. |
 | @Nullable String getBase64Photo() | User jpeg / png, etc. as base64 encoded string. |
 | @Nullable String getGivenName() | User given name. |
@@ -209,7 +209,7 @@ This method allows to request sign-in programmatically instead of or in addition
 void signIn(@NonNull Activity activity
             @NonNull OnCompleteListener<MSQAAccountInfo> listener);
 ```
-| Parameter | Description | 
+| Parameter | Description |
 | -- | -- |
 | activity | The activity that will be used as the parent activity of the sign in activity. |
 | @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when sign in finishes, is cancelled or fails. It will return the [MSQAAccountInfo](#MSQAAccountInfo) if successful. If it fails, its `accountInfo` parameter will be null and `error` will contain error info.|
@@ -217,7 +217,7 @@ void signIn(@NonNull Activity activity
 
 If multiple sign-in requests are made one after the other they will queue up. Once a sign-in sequence is finished next sign-in request in queue will get handled.
 
-Code example:  
+Code example:
 ```java
 mSignInClient.signIn(activity, new OnCompleteListener<MSQAAccountInfo>() {
     @Override
@@ -239,7 +239,7 @@ This method requests to sign the user out.
 void signOut(@NonNull OnCompleteListener<Boolean> listener);
 ```
 
-| Parameters | Description |  
+| Parameters | Description |
 | -- | -- |
 | @NonNull listener | A callback to be invoked when sign out finishes and returns sign-out result. |
 | Returns | none |
@@ -271,7 +271,7 @@ void getCurrentAccount (@NonNull OnCompleteListener <MSQAAccountInfo> listener);
 | Parameter | Description |
 | -- | -- |
 | @NonNull listener | An [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked on completion and will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account if one is retrieved. |
-| Returns | none | 
+| Returns | none |
 
 If there is no current sign-in, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first and second parameters both null. If sign-out succeeds, the first parameter will return the [MSQAAccountInfo](#MSQAAccountInfo) for the current account. The second parameter will return null.
 
@@ -300,7 +300,7 @@ void acquireToken (
         @NonNull OnCompleteListener<MSQATokenResult> listener);
 ```
 | Parameter | Description |
-| -- | -- |  
+| -- | -- |
 | @NonNull activity | Activity that is used as the parent activity for get token. |
 | @NonNull scopes | A non-null array of scopes to be requested for the access token. Some example scopes can be found in [Microsoft Graph permissions reference](https://learn.microsoft.com/en-us/graph/overview-major-services). |
 | @NonNull listener | A [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when the the token has been successfully acquired or after an error occurred. |
@@ -321,13 +321,13 @@ void acquireTokenSilent (
                 @NonNull OnCompleteListener <MSQATokenResult> listener);
 ```
 
-| Parameter | Description | 
+| Parameter | Description |
 | -- | -- |
 | @NonNull scopes | A non-null and non-empty array of scopes to be requested for the access token. Some example scopes can be found in [Microsoft Graph permissions reference](https://learn.microsoft.com/en-us/graph/overview-major-services). |
 | @NonNull listener | A [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) callback to be invoked when the the token has been successfully acquired or after an error occurred.
 | Returns | none |
 
-If the `scopes` array is empty, then `listener` will be called with a non-null error. 
+If the `scopes` array is empty, then `listener` will be called with a non-null error.
 If there is no account in the cache, then `listener` will be called with a non-null error.
 If acquiring the token succeeds, [OnCompleteListener](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/callback/OnCompleteListener.html) will be invoked with its first parameter returning a [MSQATokenResult](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQATokenResult.html), and its second parameter returning null.
 If a refresh token does not exist or fails the refresh, then an error is returned.
@@ -355,7 +355,7 @@ mSignInClient.acquireTokenSilent(scopes,
                 if (token != null) {
                     // success: use token
                 } else if (error instanceof MSQAUiRequiredException) {
-                    // If acquireTokenSilent() returns an 
+                    // If acquireTokenSilent() returns an
                     // MSQAUiRequiredException,invoke acquireToken()
                     // to have the user resolve the interrupt interactively
                     mSignInClient.acquireToken(
@@ -370,18 +370,69 @@ mSignInClient.acquireTokenSilent(scopes,
 
 | Language ID      |  Language name                             |
 |------------------|:-------------------------------------------|
+| `af-ZA`          | Afrikaans (South Africa)                   |
 | `ar-SA`          | Arabic (Saudi Arabia)                      |
+| `az-Latn-AZ`     | Azerbaijani (Latin, Azerbaijan)            |
+| `bg-BG`          | Bulgarian (Bulgaria)                       |
+| `bs-Latn-BA`     | Bosnian (Latin, Bosnia and Herzegovina)    |
+| `ca-ES`          | Catalan (Catalan)                          |
+| `cs-CZ`          | Czech (Czech Republic)                     |
+| `cy-GB`          | Welsh (United Kingdom)                     |
+| `da-DK`          | Danish (Denmark)                           |
 | `de-DE`          | German (Germany)                           |
+| `el-GR`          | Greek (Greece)                             |
 | `en-GB`          | English (United Kingdom)                   |
 | `en-US`          | English (United States)                    |
 | `es-ES`          | Spanish (Spain, International Sort)        |
+| `es-MX`          | Spanish (Mexico)                           |
+| `et-EE`          | Estonian (Estonia)                         |
+| `eu-ES`          | Basque (Basque)                            |
+| `fa-IR`          | Persian                                    |
+| `fi-FI`          | Finnish (Finland)                          |
+| `fil-PH`         | Filipino (Philippines)                     |
+| `fr-CA`          | French (Canada)                            |
 | `fr-FR`          | French (France)                            |
+| `gl-ES`          | Galician (Galician)                        |
+| `gu-IN`          | Gujarati (India)                           |
+| `he-IL`          | Hebrew (Israel)                            |
+| `hi-IN`          | Hindi (India)                              |
+| `hr-HR`          | Croatian (Croatia)                         |
+| `hu-HU`          | Hungarian (Hungary)                        |
 | `id-ID`          | Indonesian (Indonesia)                     |
+| `is-IS`          | Icelandic (Iceland)                        |
 | `it-IT`          | Italian (Italy)                            |
 | `ja-JP`          | Japanese (Japan)                           |
+| `ka-GE`          | Georgian (Georgia)                         |
+| `kk-KZ`          | Kazakh (Kazakhstan)                        |
+| `km-KH`          | Khmer (Cambodia)                           |
+| `kn-IN`          | Kannada (India)                            |
 | `ko-KR`          | Korean (Korea)                             |
+| `lo-LA`          | Lao (Laos P.D.R.)                          |
+| `lt-LT`          | Lithuanian (Lithuania)                     |
+| `lv-LV`          | Latvian (Latvia)                           |
+| `mk-MK`          | Macedonian (North Macedonia)               |
+| `mr-IN`          | Marathi (India)                            |
+| `ms-MY`          | Malay (Malaysia)                           |
+| `nb-NO`          | Norwegian, Bokmål (Norway)                 |
+| `nl-NL`          | Dutch (Netherlands)                        |
+| `nn-NO`          | Norwegian, Nynorsk (Norway)                |
+| `pl-PL`          | Polish (Poland)                            |
 | `pt-BR`          | Portuguese (Brazil)                        |
 | `pt-PT`          | Portuguese (Portugal)                      |
+| `ro-RO`          | Romanian (Romania)                         |
 | `ru-RU`          | Russian (Russia)                           |
+| `sk-SK`          | Slovak (Slovakia)                          |
+| `sl-SI`          | Slovenian (Slovenia)                       |
+| `sq-AL`          | Albanian (Albania)                         |
+| `sr-Cyrl-RS`     | Serbian (Cyrillic, Serbia)                 |
+| `sr-Latn-RS`     | Serbian (Latin, Serbia)                    |
+| `sv-SE`          | Swedish (Sweden)                           |
+| `ta-IN`          | Tamil (India)                              |
+| `te-IN`          | Telugu (India)                             |
+| `th-TH`          | Thai (Thailand)                            |
+| `tr-TR`          | Turkish (Turkey)                           |
+| `uk-UA`          | Ukrainian (Ukraine)                        |
+| `uz-Latn-UZ`     | Uzbek (Latin, Uzbekistan)                  |
+| `vi-VN`          | Vietnamese (Vietnam)                       |
 | `zh-CN`          | Chinese (Simplified, PRC)                  |
 | `zh-TW`          | Chinese (Traditional, Taiwan)              |
