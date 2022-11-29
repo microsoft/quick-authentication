@@ -214,3 +214,9 @@ To allow the user to sign out, in your application, connect a button to a method
       }];
 }
 ```
+
+## Troubleshoot specific errors
+
+### Application showing up as "unverified".
+
+If your application shows up as "unverified" as in the image below, please look at [this document](./partner-business-verification.md) on steps of how to resolve it, you can also reference [Publisher verification](https://learn.microsoft.com/en-us/azure/active-directory/develop/publisher-verification-overview).<br/> ![Application showing as unverified](./media/mobile-user-consent-dialog.png)
