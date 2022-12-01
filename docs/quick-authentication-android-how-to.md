@@ -285,6 +285,12 @@ setLogLevel(@LogLevel int logLevel) | Sets the log level for diagnostic purpose.
 | setEnableLogcatLog(boolean enableLogcatLog)	| True: enable the Android logcat logging. <br>False: disable the Android logcat logging. |
 | setExternalLogger(@NonNull  ILogger externalLogger)	| Configures external logging to configure a callback that the sdk will use to pass each log message. |
 
+## Troubleshoot specific errors
+
+### Application showing up as "unverified".
+
+If your application shows up as "unverified" as in the image below, please look at [this document](./partner-business-verification.md) on steps of how to resolve it, you can also reference [Publisher verification](https://learn.microsoft.com/en-us/azure/active-directory/develop/publisher-verification-overview).<br/> ![Application showing as unverified](./media/mobile-user-consent-dialog.png)
+
 ## Next steps
 
 For more details about button configuration and API reference, see [Microsoft Quick Authentication for Android configuration and Java API reference](./quick-authentication-android-reference.md).
