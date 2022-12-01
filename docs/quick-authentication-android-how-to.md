@@ -9,12 +9,13 @@ On Android, Microsoft Quick Authentication offers a library that makes it easier
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## How it works
+
 Microsoft Quick Authentication allows you to easily add a fully functioning sign-in button to your Android application that will take the user through the sign-in workflow with a Microsoft Account (MSA). Additionally, Quick Authentication allows you to sign-in your users silently whenever possible, to let them sign out of your application, and to perform more advanced tasks such as requesting an access token to retrieve additional user/account information accessible via the [Microsoft Graph APIs](https://learn.microsoft.com/en-us/graph/overview#whats-in-microsoft-graph)
 
-To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document. 
-- First register your application for Android on Azure (you can reuse the same Azure registration as for your web site). 
+To enable Quick Authentication in your application, you will need to follow these high level steps. Each step is further detailed in the rest of this document.
+- First register your application for Android on Azure (you can reuse the same Azure registration as for your web site).
 - Declare a dependency on the Quick Authentication SDK.
-- Add an intent filter for Quick Authentication to your app manifest. 
+- Add an intent filter for Quick Authentication to your app manifest.
 - Create a Quick Authentication sign-in client object ([MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html)) with the proper configuration.
 - Add a Quick Authentication sign-in button somewhere in your application's layout xml or instantiate it programmatically.
 - Set a callback on the sign-in button to be notified when the user has completed the sign-in workflow.
@@ -27,6 +28,7 @@ Quick Authentication will show a fully functioning sign-in button, looking as fo
 Note that at this time, the personalization of the user experience available with Quick Authentication for the web is not available to Android native apps. However, your users will still be able to sign-in using the button shown above, and benefit from SSO in some circumstances.
 
 ## Registering your application
+
 If you have already registered a single-page web application, you can reuse the same application registration. To find that registration go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration in the list. This will open a page describing your application registration.
 
  If you have not yet registered an application or wish to use a new registration, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register your application.
@@ -57,21 +59,27 @@ Now that you have created an application registration, you can extend it to Andr
 ![Click Configuration](./media/android-click-configure.png)
 
 ## Declaring a dependency on Quick Authentication
+
 1. Add the following to your app's `build.gradle`
-```java
+
+```groovy
 dependencies {
     ...
     implementation "com.microsoft:quickauth:0.4.0"
 }
 ```
+
 2. Add the following to the *repositories* section in your `build.gradle`
-```java
+
+```groovy
 mavenCentral()
-maven { 
+maven {
     url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
 }
 ```
-## Creating a configuration file 
+
+## Creating a configuration file
+
 The configuration file is necessary to initialize the Quick Authentication SDK and underlying MSAL library. Details on this file can be found here: [MSAL Configuration](https://docs.microsoft.com/azure/active-directory/develop/msal-configuration).
 
 It is a JSON file which can be obtained from the Azure Portal with a few additions. Go to [Microsoft | App registrations](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/RegisteredApps) and select your existing application registration in the list. On the page for your application registration, click *Authentication* on the left bar".
@@ -87,7 +95,8 @@ Copy the MSAL Configuration JSON script and below `redirect_uri` please add the 
  "account_mode" : "SINGLE",
  ```
 Your configuration JSON script should resemble this example:
-```json 
+
+```json
 {
   "client_id": "<YOUR_CLIENT_ID>",
   "authorization_user_agent": "DEFAULT",
@@ -109,7 +118,9 @@ Your configuration JSON script should resemble this example:
 Then, save this JSON script as a "raw" resource file in your project resources. You will be able to refer to it using the generated resource identifier. You will need it to initialize [MSQASignInClient](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInClient.html).
 
 ## Configuring an intent filter
+
 Next, configure an intent filter in the Android Manifest for your application, using the same redirect URI you used for the Configuration JSON script above:
+
 ```xml
 <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
     <intent-filter>
@@ -124,19 +135,33 @@ Next, configure an intent filter in the Android Manifest for your application, u
 </activity>
 ```
 ## Creating MSQASignInClient
+
 `MSQASignInClient` is the main object in the Quick Authentication SDK. It gives you access to all functionality. To create it, you must first create a instance of [MSQASignInOptions](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.html), which holds specific options you want to use to create `MSQASignInClient`. The example below creates an instance of `MSQASignInOptions` holding the JSON configuration file you created above. Put this code in your sign-in activity's `onCreate` method.
+
+Java:
+
 ```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
-        .setConfigResourceId(R.raw.auth_config_single_account)
-        .build();
+    .setConfigResourceId(R.raw.auth_config_single_account)
+    .build();
 ```
+
+Kotlin:
+
+```kotlin
+var signInOptions : MSQASignInOptions = MSQASignInOptions.Builder()
+    .setConfigResourceId(R.raw.auth_config_single_account)
+    .build()
+```
+
 | Option setter | Description |
 |---|---|
 | setConfigResourceId |	Sets the resource id of the configuration file you created in section [Create a configuration file](#creating-a-configuration-file). |
 
-Other options can be used, for example to configure logging. Refer to the [reference documentation](./quick-authentication-android-reference.md#logging) for additional options. 
+Other options can be used, for example to configure logging. Refer to the [reference documentation](./quick-authentication-android-reference.md#logging) for additional options.
 
-Then to create `MSQASignClient`, use its static `Create` method:
+Then to create `MSQASignClient`, use its static `create` method:
+
 ```java
 public static void create(@NonNull Context context,
                           @NonNull MQASignInOptions options,
@@ -153,31 +178,46 @@ Note that if the "raw" resource file does not exist, listener’s onError will g
 If the creation completes successfully, `listener.onCreated` will get called and return the newly created instance of `MSQASignInClient`.
 
 Here is an example of calling the `create` method:
+
+Java:
+
 ```java
-MSQASignInClient.create(context,
-        new MQASignInOptions.Builder()
-                .setConfigResourceId(R.raw.auth_config_single_account)
-                .build(),
-        new ClientCreatedListener() {
-            @Override
-            public void onCreated(@NonNull MSQASignInClient client) {
-                // use client
-            }
- 
-            @Override
-            public void onError(@NonNull MSQAException error) {
-                // handle error
-            }
-        });
+MSQASignInClient.create(context, signInOptions, new ClientCreatedListener() {
+    @Override
+    public void onCreated(@NonNull MSQASignInClient client) {
+        // use client
+    }
+
+    @Override
+    public void onError(@NonNull MSQAException error) {
+        // handle error
+    }
+});
+```
+
+Kotlin:
+
+```kotlin
+MSQASignInClient.create(context, signInOptions, object : ClientCreatedListener {
+    override fun onCreated(client: MSQASignInClient) {
+        // use client
+    }
+
+    override fun onError(error: MSQAException) {
+        // handle error
+    }
+})
 ```
 
 ## Using a Sign-in Button
-The easiest way to implement the sign-in flow with Quick Authentication is to use a pre-build Sign-in Button. Simply insert the following in your application's layout xml in the desired place: 
+
+The easiest way to implement the sign-in flow with Quick Authentication is to use a pre-build Sign-in Button. Simply insert the following in your application's layout xml in the desired place:
 
 ```java
 <com.microsoft.quick.auth.signin.view.MSQASignInButton
-  android:id="@+id/sign_in_button" />
+  android:id="@+id/ms_sign_button" />
 ```
+
 This will create a fully functional button looking like this:
 
 ![Large Sign-in button](./media/large.png)
@@ -186,11 +226,20 @@ The look and feel of this button can be modified in a variety of ways by either 
 
 To programmatically set specific attributes on the button or to set the callback to be called when sign-in completes (see next section), you will need to retrieve the `MSQASignInButton` view object. The easiest is to assign an id to your button in the layout xml and find its view by id as follows:
 
+Java:
+
 ```java
-MSQASignInButton signInButton = findViewById(R.id.sign_in_button);
+MSQASignInButton signInButton = findViewById(R.id.ms_sign_button);
+```
+
+Kotlin:
+
+```kotlin
+var signInButton: MSQASignInButton = findViewById(R.id.ms_sign_button)
 ```
 
 ## Handling the authentication events
+
 As described above, the Sign-in Button is functional and clicking it will run the sign-in user experience. However, in your application you need a way to know that sign-in completed successfully and to retrieve properties of the account, such as username, email address, full name, given name, surname, unique id, idtoken and photo. The following method of [MSQASignInButton](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/view/MSQASignInButton.html) allows to set that callback:
 
 ```java
@@ -209,6 +258,9 @@ public void setSignInCallback (
 If sign-in succeeds, `listener` will be invoked, and first parameter will return the account info and the `error` parameter will be null. If it fails, `accountInfo` will be null and `error` will contain the error.
 
 Code example:
+
+Java:
+
 ```java
 signInButton.setSignInCallback(activity, client,
         new OnCompleteListener<MSQAAccountInfo>() {
@@ -223,6 +275,20 @@ signInButton.setSignInCallback(activity, client,
             }
         });
 ```
+
+Kotlin:
+
+```kotlin
+signInButton.setSignInCallback(activity, client) {
+        accountInfo: MSQAAccountInfo?, error: MSQAException? ->
+    if (accountInfo != null) {
+        // successful sign-in: use account
+    } else {
+        // unsuccessful sign-in: handle error
+    }
+}
+```
+
 The returned `MSQAAccountInfo` interface, returned by the listener, provides the following methods for getting at the returned user account information:
 
 | Method | Description
@@ -237,6 +303,7 @@ The returned `MSQAAccountInfo` interface, returned by the listener, provides the
 
 
 ## Signing out
+
 You can request to sign the user out using the following method of MSQASignInClient
 
 ```java
@@ -251,6 +318,9 @@ void signOut(@NonNull OnCompleteListener<Boolean> listener);
 If sign-out succeeds, `listener` will be invoked and the first parameter will return true, the second parameter will return null. If it fails, the first parameter will be false and `error` will contain the error.
 
 Code example:
+
+Java:
+
 ```java
 signInClient.signOut(new OnCompleteListener<Boolean>() {
     @Override
@@ -265,18 +335,46 @@ signInClient.signOut(new OnCompleteListener<Boolean>() {
 });
 ```
 
-Use these as follows
+Kotlin:
+
+```kotlin
+signInClient.signOut { signOutSuccess: Boolean?, error: MSQAException? ->
+    if (signOutSuccess) {
+        // sign out success
+    } else {
+        // handle error
+    }
+}
+```
+
 ## Logging
+
 To facilitate debugging you have the following options to configure logging using "setter" methods of [MSQASignInOptions.Builder](https://microsoft.github.io/quick-authentication/docs/android/javadocs/com/microsoft/quickauth/signin/MSQASignInOptions.Builder.html) that can be chained in the manner showed in the example below when creating an instance of `MSQASignInOptions`:
+
+Java:
+
 ```java
 MSQASignInOptions signInOptions = new MSQASignInOptions.Builder()
-        .setConfigResourceId(R.raw.auth_config_single_account)
-        .setEnableLogcatLog(true)
-        .setLogLevel(LogLevel.VERBOSE)
-        .setExternalLogger((logLevel, message) -> {
-            // get log message here
-        })
-        .build();
+    .setConfigResourceId(R.raw.auth_config_single_account)
+    .setEnableLogcatLog(true)
+    .setLogLevel(LogLevel.VERBOSE)
+    .setExternalLogger((logLevel, message) -> {
+        // handle log message here
+    })
+    .build();
+```
+
+Kotlin:
+
+```kotlin
+var signInOptions : MSQASignInOptions = MSQASignInOptions.Builder()
+    .setConfigResourceId(R.raw.auth_config_single_account)
+    .setEnableLogcatLog(true)
+    .setLogLevel(LogLevel.VERBOSE)
+    .setExternalLogger { logLevel: Int, message: String? ->
+        // handle log message here
+    }
+    .build()
 ```
 
 | Option setter | Description |
