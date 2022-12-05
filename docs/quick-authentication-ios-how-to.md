@@ -54,12 +54,23 @@ Now that you have created an application registration, you can extend it to iOS 
 ## Installing Microsoft Quick Authentication SDK
 To install the Microsoft Quick Authentication SDK in your development environment using CocoaPods, proceed as follows:
 1. Install CocoaPods following the instructions in the [Getting Started guide](https://guides.cocoapods.org/using/getting-started.html)
-2. Create a `Podfile` for your application and add `MicrosoftQuickAuth` under your target:
+2. Create a `Podfile` for your application and add `MicrosoftQuickAuth` or `MicrosoftQuickAuthSwiftSupport` under your target:
+
+Objective-C:
 ```
 use_frameworks!
  
 target 'your-target-here' do
   pod 'MicrosoftQuickAuth'
+end
+```
+
+Swift:
+```
+use_frameworks!
+
+target 'your-target-here' do
+  pod 'MicrosoftQuickAuthSwiftSupport'
 end
 ```
 3. Install the dependency:
@@ -70,18 +81,30 @@ end
 ## Initializing your application
 Create a `MSQAConfiguration` object to set the client ID for your application, which you will find in the Azure registration for your application. 
 
+Objective-C:
 ```objectivec
 #import <MSQA/MSQASignInClient.h>
 
 MSQAConfiguration *config = [[MSQAConfiguration alloc]
       initWithClientID:@"YOUR_IOS_CLIENT_ID"];
 ```
+Swift:
+```swift
+let config = MSQAConfiguration(clientID: "YOUR_IOS_CLIENT_ID")
+```
 and initialize a new instance of `MSQASignInClient` as follows:
+
+Objective-C:
 ```objectivec
 NSError *error = nil;
 MSQASignInClient *msSignInClient = [[MSQASignInClient alloc] initWithConfiguration:config
                                                                              error:&error];
 ```                                                           
+Swift:
+```swift
+if let client = try? MSQASignInClient(configuration: config) {
+})
+```
 If an error occured, `msSignInClient` returned will be nil and the `error` parameter will contain the error details.
 
 If the client ID is invalid, a later attempt to sign-in or acquire an access token will fail. The error will be reported to the user as follows:
@@ -119,6 +142,7 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to
 
 4.	To handle the sign-in callback, implement the following AppDelegate method to call `MSQASignInClient`’s `handleURL` to open a resource specified by the URL, and returns `YES` if the `MSQASignInClient` successfully handled the request
 
+Objective-C:
 ```objectivec
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
@@ -127,6 +151,13 @@ Because Microsoft Quick Auth SDK builds on top of MSAL library, you will need to
               handleURL:url
       sourceApplication:
           options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+}
+```
+Swift:
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    return client.handle(url, sourceApplication:
+       options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String)
 }
 ```
 
@@ -141,6 +172,8 @@ This will generate a sign-in button in your application as follows:
 ![Sign-in button](media/ios-sign-in-with.png)
 
 Alternatively, you can also add the button programmatically at runtime with the following code:
+
+Objective-C:
 ```objectivec
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -151,11 +184,26 @@ Alternatively, you can also add the button programmatically at runtime with the 
   [self.view addSubview:button];
 }
 ```
+Swift:
+```swift
+struct SignInView: View {
+  var body: some View {
+    Spacer()
+    MSQASignInButton(
+      viewModel: signInButtonViewModel,
+      action: { (accountInfo) -> Void in
+        // Handle account info here.
+      }
+    )
+  }
+}
+```
 It is possible to customize the appearance of the button. Refer to the [reference guide](quick-authentication-ios-reference.md#customizing-the-appearance-of-the-sign-in-button) for details.
 
 ## Getting a call back after the user has signed-in
 To get a callback after the user has completed the sign-in flow, or an error has occurred, set the completion block to be called using the `setSignInClient:viewController:completionBlock` method of `MSQASignInButton`, and return `YES` if setting the completion block is successful.
 
+Objective-C:
 ```objectivec
 BOOL success =
     [msSignInButton setSignInClient:_msSignInClient
@@ -205,6 +253,8 @@ On success, the completion block will be invoked with the `MSQAAccountInfo` cont
 
 ## Handling sign out
 To allow the user to sign out, in your application, connect a button to a method in the `ViewController` (called `signOut` in the example below) and call `MSQASignInClient`'s method `signOutWithCompletionBlock`:
+
+Objective-C:
 ```objectivec
 - (IBAction)signOut:(id)sender {
   [_msSignInClient
@@ -215,6 +265,14 @@ To allow the user to sign out, in your application, connect a button to a method
 }
 ```
 
+Swift:
+```swift
+client.signOut(completionBlock: {(error) in
+    if (error != nil) {
+        print(error.debugDescription)
+    }
+})
+```
 ## Troubleshoot specific errors
 
 ### Application showing up as "unverified".
