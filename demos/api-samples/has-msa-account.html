@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
+    <link rel="stylesheet" href="../common.css" />
+    <title>Microsoft Quick Authentication demo</title>
+  </head>
+  <body>
+    <h1><a href="../">Microsoft Quick Authentication samples</a></h1>
+    <h2>Detect MSA account example</h2>
+
+    <div id="sample">
+      <div class="msa-account-status"></div>
+      <div class="user-info"></div>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://edge-auth.microsoft.com/js/ms_auth_client.min.js"
+    ></script>
+    <script>
+      // This sample demonstrates how to programmatically detect
+      // whether there is a profile signed in with MSA account in
+      // Microsoft Edge, without asking the user to sign-in again.
+      window.onload = function () {
+        const result = ms.auth.initialize({
+          client_id: "da83df46-4cf9-4b9c-8df7-ad10bbea9793",
+          callback: userAuthenticated,
+          auto_prompt: false
+        });
+        if (result.result !== "success") {
+          console.error("ms.auth.initialize failed: ", result);
+        } else {
+          // As soon as the page loads and the library is initialized,
+          // we start to detect the MSA account.
+          const outputEl = document.querySelector(".msa-account-status");
+          ms.auth.hasMSAAccount((hasMSAAccount) => {
+            if (hasMSAAccount) {
+              outputEl.textContent = "This profile has MSA account in Microsoft Edge";
+              return;
+            }
+            outputEl.textContent = "This profile does not have MSA accountt";
+          });
+        }
+      };
+
+      function userAuthenticated(signInAccountInfo) {
+        console.log(signInAccountInfo);
+        if (!signInAccountInfo) {
+          console.log("Sign in failed with error: ", errorInfo);
+          document.querySelector(".user-info").innerHTML = `
+            <div class='error-info'>
+              <p><span>Sign in failed:</span></p>
+              <p>errorCode: <span>${errorInfo.errorCode}</span></p>
+              <p>errorMessage: <span>${errorInfo.errorMessage}</span></p>
+            </div>
+          `;
+          return;
+        }
+
+        document.querySelector(".user-info").innerHTML = `
+          <p>User's avatar: <img src="${signInAccountInfo.photoUrl}" alt="User avatar"></p>
+          <p>User's full name: <span>${signInAccountInfo.fullName}</span></p>
+          <p>User's given name: <span>${signInAccountInfo.givenName}</span></p>
+          <p>User's surname: <span>${signInAccountInfo.surname}</span></p>
+          <p>User's email address or phone number: <span>${signInAccountInfo.username}</span></p>
+          <p>User's email address: <span>${signInAccountInfo.email}</span></p>
+          <p>User's unique ID: <span>${signInAccountInfo.id}</span></p>
+          <p>User's home account ID: <span>${signInAccountInfo.homeAccountId}</span></p>
+          <p>ID Token: <span>${signInAccountInfo.idToken}</span></p>
+          `;
+      }
+    </script>
+  </body>
+</html>
