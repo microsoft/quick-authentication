@@ -572,6 +572,8 @@ ms.auth.hasMSAAccount(function(hasMSAAccount) {
 });
 ```
 
+If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-preview-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+
 ## Supported locales
 
 | Language ID      |  Language name                             |
