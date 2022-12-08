@@ -308,6 +308,11 @@ If the user closes the sign-in prompt manually, the sign-in prompt is suppressed
 
 The cool-down status will reset after a successful sign-in.
 
+### Prompt's interaction with other sign-in methods
+
+When prompt is open and sign-in is initiated using button or calling [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin), then the prompt will close.
+If [PromptMomentNotification](./quick-authentication-reference.md#data-type-promptmomentnotification) callback is used, then the callback will be invoked with `{type: 'dismissed', reason: 'flow_restarted'}`.
+
 ## Working with access tokens
 
 Quick Authentication surfaces the access token request APIs in MSAL.js. For details and example code for calling these methods, see [Microsoft Quick Authentication configuration and JavaScript API reference](./quick-authentication-reference.md).
