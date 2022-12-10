@@ -407,6 +407,7 @@ If this method is called before initialization has been done using [ms.auth.init
   - "cancel_called"
   - "credential_returned"
   - "credential_obtained_failed"
+  - "flow_restarted"
 
 ## Method: ms.auth.prompt
 
@@ -552,6 +553,22 @@ ms.auth.setRedirectState('some-unique-string-that-is-known-by-your-server');
 ```
 
 Check [this section](#redirect_state) for more info on redirect state.
+
+If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
+
+## Method: ms.auth.hasMSAAccount
+
+`ms.auth.hasMSAAccount` method can be used to check whether there is a profile signed in with MSA account in Microsoft Edge. See the following code example for understanding usage of this method:
+
+```javascript
+ms.auth.hasMSAAccount(function(hasMSAAccount) {
+  if (hasMSAAccount) {
+    // There is a MSA account in the profile.
+  } else {
+    // No MSA account in the profile.
+  }
+});
+```
 
 If this method is called before initialization has been done using [ms.auth.initialize](#method-msauthinitialize) or using div ["ms-auth-initialize"](./quick-authentication-how-to.md#option-1-add-sign-in-button-via-html), then it will throw exception.
 
