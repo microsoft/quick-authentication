@@ -56,7 +56,10 @@ MSQASignInClient.create(context,
 Kotlin:
 
 ```kotlin
-MSQASignInClient.create(context, signInOptions,
+MSQASignInClient.create(context,
+    MSQASignInOptions.Builder()
+        .setConfigResourceId(R.raw.auth_config_single_account)
+        .build(),
     object : ClientCreatedListener {
         override fun onCreated(client: MSQASignInClient) {
             // success: use client
