@@ -25,12 +25,20 @@ For SwiftUI, you can create as the following:
 
 Code example (Swift):
 ```swift
-MSQASignInButton(
-  viewModel: signInButtonViewModel,
-  action: { (accountInfo) -> Void in
-    // Handle accountInfo here.
-  }
-)
+var signInButtonViewModel = MSQASignInButtonViewModel(
+  signInClient: MSQASignInClient(
+    configuration: MSQAConfiguration(clientID: "YOUR_IOS_CLIENT_ID"), error: nil
+  ), presentingViewController: self,
+  completionBlock: { (account, error) in
+    if (account != nil) {
+      // Use account.
+    }
+    if (error != nil) {
+      // Handle errors.
+    }
+  })
+
+MSQASignInButton(viewModel: signInButtonViewModel)
 ```
 
  ## Customizing the appearance of the sign-in button

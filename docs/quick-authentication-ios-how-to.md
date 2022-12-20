@@ -239,6 +239,7 @@ BOOL success =
                        }
                      }];
 ```
+
 On success, the completion block will be invoked with the `MSQAAccountInfo` containing the following information:
 
 ```objectivec
