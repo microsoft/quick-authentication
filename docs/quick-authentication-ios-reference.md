@@ -254,10 +254,10 @@ For example, use an `IBAction` and the code (Objective-C):
 
 Code example (Swift):
 ```swift
-client.signOut(completionBlock: {(error) in
-    if (error != nil) {
-        print(error.debugDescription)
-    }
+client.signOut(completionBlock: { (error) in
+  if let error = error as? NSError {
+    print(error.description)
+  }
 })
 ```
 ### MSQATokenCompletionBlock and MSQATokenResult

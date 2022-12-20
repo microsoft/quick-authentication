@@ -102,8 +102,8 @@ MSQASignInClient *msSignInClient = [[MSQASignInClient alloc] initWithConfigurati
 ```                                                           
 Swift:
 ```swift
-if let client = try? MSQASignInClient(configuration: config) {
-})
+var error: NSError?
+let client = MSQASignInClient(configuration: config, error: &error)
 ```
 If an error occured, `msSignInClient` returned will be nil and the `error` parameter will contain the error details.
 
@@ -155,9 +155,15 @@ Objective-C:
 ```
 Swift:
 ```swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    return client.handle(url, sourceApplication:
-       options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String)
+func application(
+  _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+) -> Bool {
+  let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+  if sourceApplication != nil {
+    return client.handle(
+      url, sourceApplication: sourceApplication!)
+  }
+  return false
 }
 ```
 
@@ -184,21 +190,36 @@ Objective-C:
   [self.view addSubview:button];
 }
 ```
-Swift:
+
+It is possible to customize the appearance of the button. Refer to the [reference guide](quick-authentication-ios-reference.md#customizing-the-appearance-of-the-sign-in-button) for details.
+
+For SwiftUI, you should create a `MSQASignInButtonViewModel` object first, setting the completion block to be called after sign-in flow is done as below:
+
 ```swift
-struct SignInView: View {
-  var body: some View {
-    Spacer()
-    MSQASignInButton(
-      viewModel: signInButtonViewModel,
-      action: { (accountInfo) -> Void in
-        // Handle account info here.
-      }
-    )
-  }
+var signInButtonViewModel = MSQASignInButtonViewModel(
+  signInClient: MSQASignInClient(
+    configuration: MSQAConfiguration(clientID: "YOUR_IOS_CLIENT_ID"), error: nil
+  ), presentingViewController: self,
+  completionBlock: { (account, error) in
+    if (account != nil) {
+      // Use account.
+    }
+    if (error != nil) {
+      // Handle errors.
+    }
+  })
+```
+
+then add the button with the following code:
+
+```swift
+var body: some View {
+  Spacer()
+  MSQASignInButton(viewModel: signInButtonViewModel)
+    .accessibilityIdentifier("MSQASignInButton")
+    .padding()
 }
 ```
-It is possible to customize the appearance of the button. Refer to the [reference guide](quick-authentication-ios-reference.md#customizing-the-appearance-of-the-sign-in-button) for details.
 
 ## Getting a call back after the user has signed-in
 To get a callback after the user has completed the sign-in flow, or an error has occurred, set the completion block to be called using the `setSignInClient:viewController:completionBlock` method of `MSQASignInButton`, and return `YES` if setting the completion block is successful.
@@ -218,7 +239,6 @@ BOOL success =
                        }
                      }];
 ```
-
 On success, the completion block will be invoked with the `MSQAAccountInfo` containing the following information:
 
 ```objectivec
@@ -250,6 +270,8 @@ On success, the completion block will be invoked with the `MSQAAccountInfo` cont
 
 @end
 ```
+
+For swift, please refer to [Adding a sign-in button to your application](#adding-a-sign-in-button-to-your-application) to check how to create a `MSQASignInButtonViewModel` object to set the completion block.
 
 ## Handling sign out
 To allow the user to sign out, in your application, connect a button to a method in the `ViewController` (called `signOut` in the example below) and call `MSQASignInClient`'s method `signOutWithCompletionBlock`:
