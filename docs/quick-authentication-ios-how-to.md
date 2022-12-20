@@ -290,10 +290,10 @@ Objective-C:
 
 Swift:
 ```swift
-client.signOut(completionBlock: {(error) in
-    if (error != nil) {
-        print(error.debugDescription)
-    }
+client.signOut(completionBlock: { (error) in
+  if let error = error as? NSError {
+    print(error.description)
+  }
 })
 ```
 ## Troubleshoot specific errors
