@@ -1,8 +1,8 @@
 # Sign-in users with a Microsoft Account to Android apps using Microsoft Quick Authentication
 
 
-| [*Getting Started*](./quick-authentication-android-how-to.md) | [Reference](./quick-authentication-android-reference.md) | [Library Reference](https://microsoft.github.io/quick-authentication/docs/android/javadocs/index.html) |
-|--|--|--|
+| [*Getting Started*](./quick-authentication-android-how-to.md) | [Reference](./quick-authentication-android-reference.md) | [Library Reference](https://microsoft.github.io/quick-authentication/docs/android/javadocs/index.html) || [Web](./quick-authentication-how-to.md) | [*Android*](./quick-authentication-android-how-to.md) | [iOS](./quick-authentication-ios-how-to.md) |
+|--|--|--|--|--|--|--|
 
 On Android, Microsoft Quick Authentication offers a library that makes it easier to add **Sign in with Microsoft** support to native mobile apps. Quick Authentication uses the Microsoft Authentication Library (MSAL) for Android to handle authentication and authorization for users with personal Microsoft accounts.
 

@@ -1,7 +1,8 @@
 # Microsoft Quick Authentication configuration and JavaScript API reference
 
-| [Getting Started](./quick-authentication-how-to.md)| [*Reference*](./quick-authentication-reference.md) |
-|--|--|
+| [Getting Started](./quick-authentication-how-to.md)| [*Reference*](./quick-authentication-reference.md) || [*Web*](./quick-authentication-reference.md) | [Android](./quick-authentication-android-reference.md) | [iOS](./quick-authentication-ios-reference.md) |
+|--|--|--|--|--|--|
+
 
 These settings and APIs allow you to customize the appearance and behavior of the UI provided by Microsoft Quick Authentication.
 
