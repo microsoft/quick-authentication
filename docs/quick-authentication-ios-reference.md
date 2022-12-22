@@ -125,6 +125,37 @@ where `MSQAConfiguration` is defined as:
 @end
 ```
 
+Code example (Objective-C):
+
+```objectivec
+#import <MSQA/MSQASignInClient.h>
+
+MSQAConfiguration *config = [[MSQAConfiguration alloc]
+      initWithClientID:@"YOUR_IOS_CLIENT_ID"];
+```
+
+Swift:
+
+```swift
+let config = MSQAConfiguration(clientID: "YOUR_IOS_CLIENT_ID")
+```
+and initialize a new instance of `MSQASignInClient` as follows:
+
+Objective-C:
+
+```objectivec
+NSError *error = nil;
+MSQASignInClient *msSignInClient = [[MSQASignInClient alloc] initWithConfiguration:config
+                                                                             error:&error];
+```
+
+Swift:
+
+```swift
+var error: NSError?
+let client = MSQASignInClient(configuration: config, error: &error)
+```
+
 ### MSQACompletionBlock and MSQAAccountInfo
 
 `MSQASignInClient` methods that return account information do so by invoking an `MSQACompletionBlock` 
@@ -335,7 +366,7 @@ MSQASilentTokenParameters *parameters =
     MSQAWebviewParameters *webParameters = [[MSQAWebviewParameters alloc]
         initWithAuthPresentationViewController:self];
     MSQAInteractiveTokenParameters *params =
-        [[MSALInteractiveTokenParameters alloc]
+        [[MSQAInteractiveTokenParameters alloc]
              initWithScopes:@[ @"User.Read" ]
           webviewParameters:webParameters];
 
@@ -358,8 +389,8 @@ Code example (Swift):
 let parameters = MSQASilentTokenParameters(scopes: ["User.Read"])
 client.acquireTokenSilent(with: parameters, completionBlock: {(result, error) in
     if (error != nil) {
-        let webParams = MSALWebviewParameters(authPresentationViewController: self)
-        let interactiveParams = MSALInteractiveTokenParameters(scopes: ["User.Read"],webviewParameters: webParams)
+        let webParams = MSQAWebviewParameters(authPresentationViewController: self)
+        let interactiveParams = MSQAInteractiveTokenParameters(scopes: ["User.Read"],webviewParameters: webParams)
         client.acquireToken(with: interactiveParams, completionBlock: {(result, error) in
             if (error == nil) {
                 // Use access token.

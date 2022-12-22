@@ -65,7 +65,7 @@ target 'your-target-here' do
 end
 ```
 
-Swift:
+SwiftUI:
 ```
 use_frameworks!
 
