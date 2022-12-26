@@ -10,9 +10,10 @@ For information about how to use Quick Authentication for iOS, see [Sign-in user
 > Microsoft Quick Authentication is in public preview. This preview is provided without a service-level agreement and isn't recommended for production workloads. Some features might be unsupported or have constrained capabilities. For more information, see [Supplemental terms of use for Microsoft Azure previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).
 
 ## Creating a sign-in button
+
 Refer to the [how to guide](quick-authentication-ios-how-to.md#adding-a-sign-in-button-to-your-application) to learn how to create a sign-in button declaratively in a storyboard or XIB file.
 
-You can also create the sign-in button programmatically using: 
+For UIKit, you can also create the sign-in button programmatically using:
 ```objectivec
 - (instancetype)initWithFrame:(CGRect)frame
 ```
@@ -20,8 +21,28 @@ Code example (Objective-C):
 ```
 MSQASignInButton* msSignInButton = [[MSQASignInButton alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
 ```
+For SwiftUI, you can create as the following:
+
+Code example (Swift):
+```swift
+var signInButtonViewModel = MSQASignInButtonViewModel(
+  signInClient: MSQASignInClient(
+    configuration: MSQAConfiguration(clientID: "YOUR_IOS_CLIENT_ID"), error: nil
+  ), presentingViewController: self,
+  completionBlock: { (account, error) in
+    if (account != nil) {
+      // Use account.
+    }
+    if (error != nil) {
+      // Handle errors.
+    }
+  })
+
+MSQASignInButton(viewModel: signInButtonViewModel)
+```
 
  ## Customizing the appearance of the sign-in button
+ ### UIKit
 To customize the appearance of the button, you can set the following properties on the `MSQASignInButton` instance:
 
 | Properties |  Description | Values | Default value |
@@ -37,10 +58,27 @@ Example code:
 ```objectivec
 msSignInButton.theme = kMSQASignInButtonThemeDark;
 msSignInButton.type = kMSQASignInButtonTypeStandard;
-```
 
+```
 You can connect the button to a `IBOutlet MSQASignInButton*` member in your ViewController.
 
+### SwiftUI
+
+For SwiftUI, to customize the appearance of the button, you can set the following properties on `MSQASignInButtonViewModel` object passed to the `MSQASignInButton`.
+| Properties |  Description | Values | Default value |
+| -- | -- | -- | -- |
+| type | The button type | standard<br> icon|standard |
+| theme | The button visual theme | dark<br>  light |	dark |
+| size | Predefined sizes. If width or height are specified, they override this setting.<br> **Large**:<br>&nbsp; width: 280px<br>&nbsp; height: 42px<br>&nbsp; textSize: 16px<br>&nbsp; iconSize: 20px<br> **Medium**:<br>&nbsp; width: 280px<br>&nbsp; height: 36px<br>&nbsp; textSize: 14px<br>&nbsp; iconSize: 16px<br> **Small**:<br>&nbsp; width: 280px<br>&nbsp; height: 28px<br>&nbsp; textSize: 12px<br>&nbsp; iconSize: 12px | small<br> medium<br> large | large |
+| text |	Button text	| signInWith<br> signUpWith <br> signIn<br> continueWith | signInWith |
+| shape | Shape of button corners. | rectangular<br> pill<br>rounded |rectangular |
+| logoAlignment | Where the Microsoft logo should be in the button | logoTextLeft<br> logoLeftTextCenter | logoTextLeft |
+
+Example code:
+```swift
+signInButtonViewModel.theme = .dark
+signInButtonViewModel.text = .signInWith;
+```
 ## MSQASignInClient Methods
 The following methods of `MSQASignInClient` offer programmatic triggering of the sign-in flow and additional functionality. Note that these methods are asynchronous and internally dispatch their work to another thread. As a result, they can be called on the main thread and their completion block will be called back asynchronously on the same thread. 
 
@@ -85,6 +123,37 @@ where `MSQAConfiguration` is defined as:
 - (instancetype)initWithClientID:(NSString *)clientID;
 
 @end
+```
+
+Code example (Objective-C):
+
+```objectivec
+#import <MSQA/MSQASignInClient.h>
+
+MSQAConfiguration *config = [[MSQAConfiguration alloc]
+      initWithClientID:@"YOUR_IOS_CLIENT_ID"];
+```
+
+Swift:
+
+```swift
+let config = MSQAConfiguration(clientID: "YOUR_IOS_CLIENT_ID")
+```
+and initialize a new instance of `MSQASignInClient` as follows:
+
+Objective-C:
+
+```objectivec
+NSError *error = nil;
+MSQASignInClient *msSignInClient = [[MSQASignInClient alloc] initWithConfiguration:config
+                                                                             error:&error];
+```
+
+Swift:
+
+```swift
+var error: NSError?
+let client = MSQASignInClient(configuration: config, error: &error)
 ```
 
 ### MSQACompletionBlock and MSQAAccountInfo
@@ -151,6 +220,17 @@ Code example (Objective-C):
   }
 }];
 ```
+Code example (Swift):
+```swift
+client.getCurrentAccount(completionBlock: {(account, error) in
+    if (account != nil) {
+      // Use account
+    }
+    if (error != nil) {
+     // Handle the error
+    }
+})
+```
 ### MSQASignInClient method: signInWithViewController:completionBlock
 Interactively signs-in the user into your site and returns the account asynchronously through the callback.
 ```objectivec
@@ -182,6 +262,18 @@ Code example (Objective-C):
       // Use these values in UX.
     }];
 ```
+Code example (Swift):
+```swift
+client.signIn(with: self, completionBlock:  {(account, error) in
+    if (account == nil) {
+        return
+    }
+    let fullName = account?.fullName
+    let userName = account?.userName
+    let photo = UIImage(data: Data(base64Encoded:(account?.base64Photo!)!)!)
+    // Use these values in UX.
+})
+```
 
 ### MSQASignInClient method: signOutWithCompletionBlock
 Add a sign-out button to your app and connect the button to a method in your ViewController that calls:
@@ -199,6 +291,14 @@ For example, use an `IBAction` and the code (Objective-C):
 }
 ```
 
+Code example (Swift):
+```swift
+client.signOut(completionBlock: { (error) in
+  if let error = error as? NSError {
+    print(error.description)
+  }
+})
+```
 ### MSQATokenCompletionBlock and MSQATokenResult
 
 `MSQASignInClient` methods that return token information do so by invoking an `MSQATokenCompletionBlock` 
@@ -266,7 +366,7 @@ MSQASilentTokenParameters *parameters =
     MSQAWebviewParameters *webParameters = [[MSQAWebviewParameters alloc]
         initWithAuthPresentationViewController:self];
     MSQAInteractiveTokenParameters *params =
-        [[MSALInteractiveTokenParameters alloc]
+        [[MSQAInteractiveTokenParameters alloc]
              initWithScopes:@[ @"User.Read" ]
           webviewParameters:webParameters];
 
@@ -284,6 +384,25 @@ MSQASilentTokenParameters *parameters =
   }}];
 ```
 
+Code example (Swift):
+```swift
+let parameters = MSQASilentTokenParameters(scopes: ["User.Read"])
+client.acquireTokenSilent(with: parameters, completionBlock: {(result, error) in
+    if (error != nil) {
+        let webParams = MSQAWebviewParameters(authPresentationViewController: self)
+        let interactiveParams = MSQAInteractiveTokenParameters(scopes: ["User.Read"],webviewParameters: webParams)
+        client.acquireToken(with: interactiveParams, completionBlock: {(result, error) in
+            if (error == nil) {
+                // Use access token.
+            } else {
+                // Check the error
+            }
+        })
+    } else {
+        let token = result?.accessToken
+    }
+})
+```
 ### MSQASignInClient method: acquireTokenSilentWithParameters:completionBlock
 Attempt to acquires an access token to access additional account information about the user without interaction with the user. Fails if it is not possible.
 ```objectivec
@@ -311,6 +430,17 @@ MSQASilentTokenParameters *parameters =
                               // Check the error
                             }
                           }];
+```
+Code example (Swift):
+```swift
+let parameters = MSQASilentTokenParameters(scopes: ["User.Read"])
+client.acquireTokenSilent(with: parameters, completionBlock: {(result, error) in
+    if (error == nil) {
+      // Use access token.
+    } else {
+      // Check the error
+    }
+})
 ```
 
 ##	Logging
