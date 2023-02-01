@@ -88,9 +88,9 @@ You can customize the look and feel of the sign-in button using a handful of opt
 
 ### `size`
 
-| small (28 px) | medium (36 px) | large (42 px - default) |
+| small (20 px) | medium (32 px) | large (40 px - default) |
 |---------|---------|---------|
-| ![The small button is 28 px high](./media/small.png)<br/> ![The small version of the known user button does not include the user's email](./media/small-known.png) | ![The small button is 36 px high](./media/standard.png)<br/> ![The medium version of the known user button](./media/standard-known.png) | ![The large button is 42 px high](./media/large.png)<br/> ![The large version of the known user button includes larger text and avatar](./media/large-known.png) |
+| ![The small button is 20 px high](./media/preview-small.png)<br/> ![The small version of the known user button does not include the user's email](./media/preview-small-known.png) | ![The small button is 32 px high](./media/preview-standard.png)<br/> ![The medium version of the known user button](./media/preview-standard-known.png) | ![The large button is 40 px high](./media/preview-large.png)<br/> ![The large version of the known user button includes larger text and avatar](./media/preview-large-known.png) |
 
 ### `text`
 
