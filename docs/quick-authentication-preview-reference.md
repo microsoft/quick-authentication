@@ -73,7 +73,7 @@ You can customize the look and feel of the sign-in button using a handful of opt
 | `data-width`          | number in CSS pixels<br/> 200–600                                   |               |
 | `data-height`         | number in CSS pixels<br/> 24–100                                    |               |
 | `data-logo_alignment` | "left"<br/> "center"                                                | "left"        |
-| `data-force_account_selection_for_non_msa` | `true` or `false`                              | `false`       |
+| `data-show_account_selection_for_non_msa` | `true` or `false`                               | `false`       |
 
 ### `type`
 
@@ -118,13 +118,13 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 |---------|---------|
 | ![The left logo alignment has the logo and text aligned to the left of the button](./media/left.png) | ![The center logo alignment has the logo and text aligned to the center of the button](./media/standard.png) |
 
-### `force_account_selection_for_non_msa`
+### `show_account_selection_for_non_msa`
 
 If it shows the _standard_ sign-in button to users not signed in to Microsoft Edge or that are using a another browser.
 
 ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
 
-The `force_account_selection_for_non_msa` property governs whether the MSA account picker will be shown after clicking the button. If this is set to `true`, it's shown like below. <br/>![MSA account picker](./media/msa-account-picker.png) <br/>
+The `show_account_selection_for_non_msa` property governs whether the MSA account picker will be shown after clicking the button. If this is set to `true`, it's shown like below. <br/>![MSA account picker](./media/msa-account-picker.png) <br/>
 
 ## JavaScript API reference - Microsoft Quick Authentication
 
@@ -255,7 +255,7 @@ This configuration object needs to be passed as argument to [ms.auth.renderSignI
 | `width`                           | number in CSS pixels<br/> 200–600                                   |               | No       |
 | `height`                          | number in CSS pixels<br/> 24–100                                    |               | No       |
 | [logo_alignment](#logo_alignment) | "left"<br/> "center"                                                | "left"        | No       |
-| [force_account_selection_for_non_msa](#force_account_selection_for_non_msa) | `true` or `false`         | `false`       | No       |
+| [show_account_selection_for_non_msa](#show_account_selection_for_non_msa) | `true` or `false`           | `false`       | No       |
 
 ## Method: ms.auth.renderSignInButton
 
