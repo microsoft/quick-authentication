@@ -33,3 +33,19 @@ If [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstarts
 This will ensure that sign-in events originating from [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin) will be routed to that callback.
 
 If there are multiple sign-in options on a page, e.g., prompt, sign-in button, etc., then this allows developer to detect that the sign-in attempt was started using [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin).
+
+### Use ms.auth.hasMSAAccount to optimize for MSA
+
+[ms.auth.hasMSAAccount](https://github.com/microsoft/quick-authentication/blob/main/docs/quick-authentication-reference.md#method-msauthhasmsaaccount) can be used to determine whether the website is opened in MSA profile in Edge. This is the scenario for which Quick Auth is most optimized. So, if this returns `true` then consider prioritizing Microsoft sign-in in your UX.
+```javascript
+ms.auth.hasMSAAccount(function(hasMSAAccount) {
+  if (hasMSAAccount) {
+    // There is a MSA account in the profile.
+    // Make MSA button more prominent.
+    // Stop showing prompts for other providers.
+  } else {
+    // No MSA account in the profile.
+    // Show prompts from other providers.
+  }
+});
+```
