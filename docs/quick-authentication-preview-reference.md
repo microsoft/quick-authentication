@@ -120,11 +120,12 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 
 ### `show_account_selection_for_non_msa`
 
-If it shows the _standard_ sign-in button to users not signed in to Microsoft Edge or that are using a another browser.
-
+This property is applicable only to sign-in buttons, like in the image below, for MSA profile in Edge.
 ![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
 
-The `show_account_selection_for_non_msa` property governs whether the MSA account picker will be shown after clicking the button. If this is set to `true`, it's shown like below. <br/>![MSA account picker](./media/msa-account-picker.png) <br/>
+This property is `false` by default.
+
+It is set to `true`, it ensures that MSA account picker will be shown after clicking the button. See the image below: <br/>![MSA account picker](./media/msa-account-picker.png) <br/>
 
 ## JavaScript API reference - Microsoft Quick Authentication
 
