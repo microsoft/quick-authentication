@@ -73,6 +73,7 @@ You can customize the look and feel of the sign-in button using a handful of opt
 | `data-width`          | number in CSS pixels<br/> 200–600                                   |               |
 | `data-height`         | number in CSS pixels<br/> 24–100                                    |               |
 | `data-logo_alignment` | "left"<br/> "center"                                                | "left"        |
+| `data-show_account_selection_for_non_msa` | `true` or `false`                               | `false`       |
 
 ### `type`
 
@@ -116,6 +117,15 @@ In above table, we assume "Grant Zander" is user signed into MSA profile in Micr
 | left | center (default) |
 |---------|---------|
 | ![The left logo alignment has the logo and text aligned to the left of the button](./media/left.png) | ![The center logo alignment has the logo and text aligned to the center of the button](./media/standard.png) |
+
+### `show_account_selection_for_non_msa`
+
+This property is applicable only to sign-in buttons, like in the image below, for MSA profile in Edge.
+![Standard sign-in button showing the Sign in with Microsoft text label](./media/large.png)
+
+This property is `false` by default.
+
+It is set to `true`, it ensures that MSA account picker will be shown after clicking the button. See the image below: <br/>![MSA account picker](./media/msa-account-picker.png) <br/>
 
 ## JavaScript API reference - Microsoft Quick Authentication
 
@@ -246,6 +256,7 @@ This configuration object needs to be passed as argument to [ms.auth.renderSignI
 | `width`                           | number in CSS pixels<br/> 200–600                                   |               | No       |
 | `height`                          | number in CSS pixels<br/> 24–100                                    |               | No       |
 | [logo_alignment](#logo_alignment) | "left"<br/> "center"                                                | "left"        | No       |
+| [show_account_selection_for_non_msa](#show_account_selection_for_non_msa) | `true` or `false`           | `false`       | No       |
 
 ## Method: ms.auth.renderSignInButton
 
