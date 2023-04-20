@@ -8,7 +8,7 @@ In redirect mode, while signing in, the quick authentication does a full page re
 
 Compared with redirection mode, the basic OpenID Connect sign-in flow is below: <br/> ![Application showing as unverified](./media/convergence-scenarios-webapp.svg)
 
-In the first step, the user will be navigated to the the Microsoft identity platform's */authorize* endpoint by the web server, while in quick authentication redirection mode, this is done by the Quick Authentication library and the remaining steps are the same. So in redirection mode, the browser will be navigated to:
+In the first step, the user will be redirected to the Microsoft identity platform's */authorize* endpoint by the web server, while in quick authentication redirection mode, this is done by the Quick Authentication library and the remaining steps are the same. So in redirection mode, the browser will be navigated to:
 
 `https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize` with the following parameters:
 
