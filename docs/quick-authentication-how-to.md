@@ -56,6 +56,26 @@ Use the following settings for your app registration. **Bold text** in the table
 
 Redirect flow will need additional steps. Check [this section](#enabling-application-for-redirection) for more details.
 
+## Change your application name
+
+After [registering](#register-your-application) a new application with Microsoft identity platform, you can change its display name later to make it more meaningful.
+
+For example, your application name is "Quick Auth Demo" and it will be shown in the consent dialog as below:
+
+![User consent dialog with "unverified"](./media/user-consent-dialog.PNG)
+
+Changing the name, you should:
+
+1. Open the overview of your application on Azure portal.
+
+![Application overview](./media/application-overview.png)
+
+2. Click the display name "Quick Auth Demo" and input the new one.
+
+![Input name](./media/input-new-name.png)
+
+3. Save the change.
+
 ## Add the Quick Authentication script
 
 Next, add a `script` element that adds the Quick Authentication library reference (_ms\_auth\_client.min.js_) to your application. It's safe to add the `defer` attribute to load the script asynchronously.
