@@ -376,7 +376,7 @@ This means that the user does not get an opportunity to see the redirect URI pag
 
 ## Redirect mode
 
-In redirect mode, on clicking button or calling [ms.auth.startSignIn](./quick-authentication-reference.md#method-msauthstartsignin), quick authentication does a full page redirection to MSA sign-in page.
+In redirect mode, quick authentication does a full page redirection to MSA sign-in page.
 
 If this MSA webpage sign-in is successful, a POST request will be sent to your server, as opposed to calling the Javascript callback in your web application.
 
@@ -442,8 +442,8 @@ window.onload = function () {
 
 ### Sign-in prompt in redirect mode
 
-- Sign-in prompt is not affected by redirect mode.
-- It keeps working in MSA profile in Edge and calls the Javascript callback on sign-in success / failure.
+- On clicking on "Continus as" button, the Javascript callback is not called.
+- Quick authentication does a full page redirection to MSA server. Check [this section](#redirect-mode-flow-of-control) for more details.
 
 ### Sign-in button in redirect mode
 
