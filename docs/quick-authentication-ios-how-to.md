@@ -156,7 +156,7 @@ Objective-C:
 Swift:
 ```swift
 func application(
-  _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+  _ app: UIApplication, openURL: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]
 ) -> Bool {
   let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
   if sourceApplication != nil {
