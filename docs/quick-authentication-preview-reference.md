@@ -57,6 +57,7 @@ You can customize the setup of the Quick Authentication sign-in prompt using a h
 | `data-context`               | "signin"<br/> "signup"<br/> "use"  | "signin" | Defines the text variant to be used in the prompt.<br> - "signin" = "Sign in with Microsoft" (default)<br> - "signup" = "Sign up with Microsoft" <br>- "use" = "Use Microsoft" |
 | `data-cancel_on_tap_outside` | `true` or `false`                  | `true`   | Whether to close the prompt when a user moves focus out of the prompt. |
 | `data-prompt_position`       | "left"<br/> "center"<br/> "right"  | "left"   | Prompt position with respect to the width of the web page |
+| `data-partner_name`        | A string which represents the partner's name shown on sign-in prompt.         | (no default value)            | No       | If not set, the host name will be used, e.g., abc.com. |
 
 
 ## Customizing the sign-in button
@@ -147,6 +148,7 @@ It is set to `true`, it ensures that MSA account picker will be shown after clic
 | `ux_mode`               | "popup"<br/> "redirect"                                                       | "popup"                       | No       | If "redirect" is set then button sign-in and [ms.auth.startSignIn](#method-msauthstartsignin) calls will use redirect flow |
 | `redirect_uri`          | **Redirect URI for Web**                                                      | (no default value)            | Yes if `ux_mode == 'redirect'`, else No |  Check [this section](./quick-authentication-preview-how-to.md#1-add-redirect-uri-in-application-registration) for more info. |
 | `redirect_state`        | A string which will be passed as `state` parameter for redirect flow.         | (no default value)            | No       | Only used if `ux_mode == 'redirect'`. Also check [ms.auth.setRedirectState](#method-msauthsetredirectstate) API and [redirect_state](#redirect_state). |
+| `partner_name`        | A string which represents the partner's name shown on sign-in prompt.         | (no default value)            | No       | If not set, the host name will be used, e.g., abc.com. |
 
 ### `redirect_state`
 
