@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2" />
+    <link rel="stylesheet" href="../common.css" />
+    <title>Microsoft Quick Authentication demo</title>
+  </head>
+  <body>
+    <h1><a href="../">Microsoft Quick Authentication samples</a></h1>
+    <h2>HTML sign-in with account picker shown for non MSA profile example</h2>
+
+    <div id="sample">
+      <!--
+        This sample demonstrates how to initialize the
+        library and render the sign-in button with HTML
+        and show the MSA account picker while signing in
+      -->
+      <div
+        id="ms-auth-initialize"
+        data-client_id="da83df46-4cf9-4b9c-8df7-ad10bbea9793"
+        data-callback="userAuthenticated"
+      ></div>
+      <div class="ms-auth-button" data-show_account_selection_for_non_msa="true"></div>
+      <div class="user-info"></div>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://edge-auth.microsoft.com/preview/js/ms_auth_client.min.js"
+    ></script>
+    <script>
+      function userAuthenticated(signInAccountInfo, errorInfo) {
+        console.log(signInAccountInfo);
+        if (!signInAccountInfo) {
+          console.log("Sign in failed with error: ", errorInfo);
+          document.querySelector(".user-info").innerHTML = `
+            <div class='error-info'>
+              <p><span>Sign in failed:</span></p>
+              <p>errorCode: <span>${errorInfo.errorCode}</span></p>
+              <p>errorMessage: <span>${errorInfo.errorMessage}</span></p>
+            </div>
+          `;
+          return;
+        }
+
+        document.querySelector(".user-info").innerHTML =
+          `
+          <p>User's avatar: <img src="${signInAccountInfo.photoUrl}" alt="User avatar"></p>
+          <p>User's full name: <span>${signInAccountInfo.fullName}</span></p>
+          <p>User's given name: <span>${signInAccountInfo.givenName}</span></p>
+          <p>User's surname: <span>${signInAccountInfo.surname}</span></p>
+          <p>User's email address or phone number: <span>${signInAccountInfo.username}</span></p>
+          <p>User's email address: <span>${signInAccountInfo.email}</span></p>
+          <p>User's unique ID: <span>${signInAccountInfo.id}</span></p>
+          <p>User's home account ID: <span>${signInAccountInfo.homeAccountId}</span></p>
+          <p>ID Token: <span>${signInAccountInfo.idToken}</span></p>
+          `;
+      }
+    </script>
+  </body>
+</html>
